@@ -21,16 +21,14 @@
 <stringAttribute key="modelBehaviorVars" value="x, y, pc, x0, y0"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
-<listAttribute key="modelCorrectnessInvariants">
-<listEntry value="1PartialCorrectness"/>
-</listAttribute>
+<listAttribute key="modelCorrectnessInvariants"/>
 <listAttribute key="modelCorrectnessProperties">
-<listEntry value="0Termination"/>
+<listEntry value="1Termination"/>
 </listAttribute>
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="N;;18;0;0"/>
+<listEntry value="N;;10;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions"/>

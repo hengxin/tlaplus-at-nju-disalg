@@ -2,18 +2,18 @@
 EXTENDS Euclid, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0N
-const_146625497525987000 == 
-18
+const_146633801668935000 == 
+10
 ----
 
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_146625497526988000 ==
+spec_146633801669936000 ==
 Spec
 ----
-\* INVARIANT definition @modelCorrectnessInvariants:0
-inv_146625497527989000 ==
-PartialCorrectness
+\* PROPERTY definition @modelCorrectnessProperties:0
+prop_146633801670937000 ==
+Termination
 ----
 =============================================================================
 \* Modification History
-\* Created Sat Jun 18 21:02:55 CST 2016 by hengxin
+\* Created Sun Jun 19 20:06:56 CST 2016 by hengxin
