@@ -1,0 +1,4 @@
+*.aux
+*.log
+tla-hyperbook-note/errata.out
+*.synctex
