@@ -10,7 +10,7 @@ ASSUME /\ Goal \in Nat
 
 (***************************************************************************
 --algorithm DieHarder {
-  variable injug = [j \in Jugs |-> 0] ;
+  variable injug; \* = [j \in Jugs |-> 0] ;
   { while (TRUE)
      { either with (j \in Jugs) \* fill jug j
                 { injug[j] := Capacity[j] }

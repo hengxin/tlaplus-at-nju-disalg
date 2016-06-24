@@ -16,7 +16,7 @@ Get(s) == Tail(s)
           }
     }
     
-  process ( Consumer = 1 )
+  fair process ( Consumer = 1 )
     { p1: while ( TRUE )
           { await b = 1;
             box := Get(box);
@@ -47,8 +47,7 @@ Consumer == /\ b = 1
 
 Next == Producer \/ Consumer
 
-Spec == /\ Init /\ [][Next]_vars
-        /\ WF_vars(Producer)
+Spec == Init /\ [][Next]_vars
 
 \* END TRANSLATION
 ============================================================================== 
