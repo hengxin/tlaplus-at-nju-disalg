@@ -43,4 +43,4 @@ High-level TLA+ specifications can catch design errors that are now found only b
 
 - [Leslie Lamport at the 2015 21st Century Computing Conference](https://youtu.be/oIwdN-irLqs)
 
-- [Math Park - 01/10/2016 - Leslie LAMPORT, COMMENT ¨¦CRIRE UNE D¨¦MONSTRATION AU 21¨¨ME SI¨¨CLE]()
+- [Math Park - 01/10/2016 - Leslie LAMPORT, COMMENT ¨¦CRIRE UNE D¨¦MONSTRATION AU 21¨¨ME SI¨¨CLE](https://youtu.be/k-i7y0R_-KE)

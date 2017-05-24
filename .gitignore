@@ -3,3 +3,5 @@
 tla-hyperbook-note/errata.out
 *.synctex
 *.~
+*.swp
+*~

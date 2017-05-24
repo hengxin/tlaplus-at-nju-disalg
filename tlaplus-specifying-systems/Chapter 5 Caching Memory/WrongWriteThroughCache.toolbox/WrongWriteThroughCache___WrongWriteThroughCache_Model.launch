@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
 <stringAttribute key="TLCCmdLineParameters" value=""/>
-<stringAttribute key="configurationName" value="WriteThroughCache_Model"/>
+<stringAttribute key="configurationName" value="WrongWriteThroughCache_Model"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
@@ -31,7 +31,7 @@
 <listEntry value="InitMemInt;;{0};0;0"/>
 <listEntry value="Adr;;{&quot;a1&quot;, &quot;a2&quot;};0;0"/>
 <listEntry value="QLen;;3;0;0"/>
-<listEntry value="Val;;{1,2};0;0"/>
+<listEntry value="Val;;{1, 2};0;0"/>
 <listEntry value="Proc;;{&quot;p1&quot;, &quot;p2&quot;};0;0"/>
 <listEntry value="Reply;p:d:miOld:miNew:;/\ p \in Proc&#13;&#10;/\ miOld \in InitMemInt&#13;&#10;/\ miNew \in InitMemInt&#13;&#10;/\ miNew = miOld;0;0"/>
 <listEntry value="Send;p:d:miOld:miNew:;/\ p \in Proc&#13;&#10;/\ miOld \in InitMemInt&#13;&#10;/\ miNew \in InitMemInt&#13;&#10;/\ miNew = miOld;0;0"/>
@@ -51,6 +51,6 @@
 <intAttribute key="simuAril" value="-1"/>
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
-<stringAttribute key="specName" value="WriteThroughCache"/>
+<stringAttribute key="specName" value="WrongWriteThroughCache"/>
 <stringAttribute key="view" value=""/>
 </launchConfiguration>
