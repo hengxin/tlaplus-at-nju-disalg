@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
+<stringAttribute key="TLCCmdLineParameters" value=""/>
+<stringAttribute key="configurationName" value="InternalMemory"/>
+<intAttribute key="dfidDepth" value="100"/>
+<booleanAttribute key="dfidMode" value="false"/>
+<intAttribute key="distributedFPSetCount" value="0"/>
+<stringAttribute key="distributedNetworkInterface" value="172.28.20.5"/>
+<intAttribute key="distributedNodesCount" value="1"/>
+<stringAttribute key="distributedTLC" value="off"/>
+<stringAttribute key="distributedTLCVMArgs" value=""/>
+<intAttribute key="fpBits" value="1"/>
+<intAttribute key="fpIndex" value="1"/>
+<intAttribute key="maxHeapSize" value="25"/>
+<intAttribute key="maxSetSize" value="1000000"/>
+<booleanAttribute key="mcMode" value="true"/>
+<stringAttribute key="modelBehaviorInit" value="IInit"/>
+<stringAttribute key="modelBehaviorNext" value="INext"/>
+<stringAttribute key="modelBehaviorSpec" value=""/>
+<intAttribute key="modelBehaviorSpecType" value="2"/>
+<stringAttribute key="modelBehaviorVars" value="mem, ctl, buf, memInt"/>
+<stringAttribute key="modelComments" value=""/>
+<booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
+<listAttribute key="modelCorrectnessInvariants"/>
+<listAttribute key="modelCorrectnessProperties"/>
+<stringAttribute key="modelExpressionEval" value=""/>
+<stringAttribute key="modelParameterActionConstraint" value=""/>
+<listAttribute key="modelParameterConstants">
+<listEntry value="Val;;{1,2,3,4};0;0"/>
+<listEntry value="Proc;;{&quot;p1&quot;, &quot;p2&quot;, &quot;p3&quot;};0;0"/>
+<listEntry value="InitMemInt;;{0};0;0"/>
+<listEntry value="Adr;;{&quot;a1&quot;, &quot;a2&quot;, &quot;a3&quot;};0;0"/>
+<listEntry value="Send;p:d:miOld:miNew:;/\ p \in Proc&#13;&#10;/\ miOld \in InitMemInt&#13;&#10;/\ miNew \in InitMemInt&#13;&#10;/\ miNew = miOld;0;0"/>
+<listEntry value="Reply;p:d:miOld:miNew:;/\ p \in Proc&#13;&#10;/\ miOld \in InitMemInt&#13;&#10;/\ miNew \in InitMemInt&#13;&#10;/\ miNew = miOld;0;0"/>
+</listAttribute>
+<stringAttribute key="modelParameterContraint" value=""/>
+<listAttribute key="modelParameterDefinitions">
+<listEntry value="NoVal;;NoVal;1;0"/>
+</listAttribute>
+<stringAttribute key="modelParameterModelValues" value="{}"/>
+<stringAttribute key="modelParameterNewDefinitions" value=""/>
+<intAttribute key="numberOfWorkers" value="2"/>
+<booleanAttribute key="recover" value="false"/>
+<stringAttribute key="result.mail.address" value=""/>
+<intAttribute key="simuAril" value="-1"/>
+<intAttribute key="simuDepth" value="100"/>
+<intAttribute key="simuSeed" value="-1"/>
+<stringAttribute key="specName" value="InternalMemory"/>
+<stringAttribute key="view" value=""/>
+</launchConfiguration>

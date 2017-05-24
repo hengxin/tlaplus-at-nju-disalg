@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>WriteThroughCache</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>toolbox.builder.TLAParserBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>toolbox.builder.PCalAlgorithmSearchingBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>toolbox.natures.TLANature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>InternalMemory.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/InternalMemory.tla</locationURI>
+		</link>
+		<link>
+			<name>Memory.tla</name>
+			<type>1</type>
+			<location>D:/GitHub/tlaplus-lamport-projects/tlaplus-specifying-systems/Chapter 5 Caching Memory/Memory.tla</location>
+		</link>
+		<link>
+			<name>MemoryInterface.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/MemoryInterface.tla</locationURI>
+		</link>
+		<link>
+			<name>WriteThroughCache.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/WriteThroughCache.tla</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
