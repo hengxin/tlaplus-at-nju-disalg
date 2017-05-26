@@ -9,7 +9,7 @@ This is a work in progress that consists of the beginning of a series of video l
 how to write their own TLA+ specifications. 
 ```
 
-- [Leslie Lamport: Thinking for Programmers (2014)](https://youtu.be/4nhFqf_46ZQ)
+- [Leslie Lamport: Thinking for Programmers (Microsoft Build, 2014)](https://youtu.be/4nhFqf_46ZQ)
 
 ```
 Leslie Lamport inventor of Paxos and developer of LaTeX introduces techniques and tools that help programmers 
@@ -17,7 +17,7 @@ think above the code level to determine what applications and services should do
 Depending on the task, the appropriate tools can range from simple prose to formal, tool-checked models written in TLA+ or PlusCal.
 ```
 
-- [Leslie Lamport: Thinking Above the Code (2014)](https://youtu.be/-4Yp3j_jk8Q)
+- [Leslie Lamport: Thinking Above the Code (Microsoft Research, 2014)](https://youtu.be/-4Yp3j_jk8Q)
 
 ```
 Architects draw detailed blueprints before a brick is laid or a nail is hammered. 
@@ -44,3 +44,19 @@ High-level TLA+ specifications can catch design errors that are now found only b
 - [Leslie Lamport at the 2015 21st Century Computing Conference](https://youtu.be/oIwdN-irLqs)
 
 - [Math Park - 01/10/2016 - Leslie LAMPORT, COMMENT ¨¦CRIRE UNE D¨¦MONSTRATION AU 21¨¨ME SI¨¨CLE](https://youtu.be/k-i7y0R_-KE)
+
+- [Leslie Lamport, 2014: How to write a 21st Century Proof](http://www.heidelberg-laureate-forum.org/blog/video/lecture-tuesday-september-23-2014-leslie-lamport/)
+
+```
+Unfortunately, the link is broken.
+```
+
+- [Leslie Lamport, 2015: A Mathematical View of Computer Systems](http://www.heidelberg-laureate-forum.org/blog/video/lecture-monday-august-24-2015-leslie-lamport/)
+
+```
+Unfortunately, the link is broken.
+``
+
+## Dr. TLA+ Series
+
+- [Andrew Helwer: Dr. TLA+ Series](https://www.youtube.com/watch?v=zCaJSrTmUFA&feature=youtu.be)
