@@ -1,6 +1,8 @@
 ------------------ MODULE InternalMemory ---------------------
 EXTENDS MemoryInterface
 VARIABLES mem, ctl, buf
+
+vars == <<memInt, mem, ctl, buf>>
 --------------------------------------------------------------
 IInit == /\ mem \in [Adr->Val]
          /\ ctl = [p \in Proc |-> "rdy"] 
@@ -37,7 +39,10 @@ Rsp(p) == /\ ctl[p] = "done"
 
 INext == \E p \in Proc: Req(p) \/ Do(p) \/ Rsp(p) 
 
-ISpec == IInit  /\  [][INext]_<<memInt, mem, ctl, buf>>
+(* Liveness: Every request must receive a response. *)
+Liveness == \A p \in Proc: WF_vars(Do(p)) /\ WF_vars(Rsp(p))
+
+ISpec == IInit  /\  [][INext]_vars /\ Liveness
 --------------------------------------------------------------
 THEOREM ISpec => []TypeInvariant
 ==============================================================

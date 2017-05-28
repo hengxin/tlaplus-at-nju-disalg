@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
 <stringAttribute key="TLCCmdLineParameters" value=""/>
-<stringAttribute key="configurationName" value="WriteThroughCache_Model"/>
+<stringAttribute key="configurationName" value="Channel_Model"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
@@ -18,31 +18,20 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="ctl, memInt, wmem, buf, memQ, cache"/>
+<stringAttribute key="modelBehaviorVars" value="chan"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
 <listAttribute key="modelCorrectnessInvariants">
-<listEntry value="1Coherence"/>
+<listEntry value="1TypeInvariant"/>
 </listAttribute>
 <listAttribute key="modelCorrectnessProperties"/>
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="InitMemInt;;{0};0;0"/>
-<listEntry value="Adr;;{&quot;a1&quot;, &quot;a2&quot;};0;0"/>
-<listEntry value="Val;;{1,2};0;0"/>
-<listEntry value="Proc;;{&quot;p1&quot;, &quot;p2&quot;};0;0"/>
-<listEntry value="Reply;p:d:miOld:miNew:;/\ p \in Proc&#13;&#10;/\ miOld \in InitMemInt&#13;&#10;/\ miNew \in InitMemInt&#13;&#10;/\ miNew = miOld;0;0"/>
-<listEntry value="Send;p:d:miOld:miNew:;/\ p \in Proc&#13;&#10;/\ miOld \in InitMemInt&#13;&#10;/\ miNew \in InitMemInt&#13;&#10;/\ miNew = miOld;0;0"/>
-<listEntry value="QLen;;3;0;0"/>
+<listEntry value="Data;;(1..100);0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
-<listAttribute key="modelParameterDefinitions">
-<listEntry value="NoVal;;NoVal;1;0"/>
-<listEntry value="M!NoVal;;M!NoVal;1;0"/>
-<listEntry value="LM!NoVal;;LM!NoVal;1;0"/>
-<listEntry value="LM!Inner!NoVal;;LM!Inner!NoVal;1;0"/>
-</listAttribute>
+<listAttribute key="modelParameterDefinitions"/>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
 <intAttribute key="numberOfWorkers" value="2"/>
@@ -51,6 +40,6 @@
 <intAttribute key="simuAril" value="-1"/>
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
-<stringAttribute key="specName" value="WriteThroughCache"/>
+<stringAttribute key="specName" value="Channel"/>
 <stringAttribute key="view" value=""/>
 </launchConfiguration>

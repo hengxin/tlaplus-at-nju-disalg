@@ -11,13 +11,13 @@
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
 <intAttribute key="fpIndex" value="1"/>
-<intAttribute key="maxHeapSize" value="25"/>
+<intAttribute key="maxHeapSize" value="48"/>
 <intAttribute key="maxSetSize" value="1000000"/>
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value="IInit"/>
 <stringAttribute key="modelBehaviorNext" value="INext"/>
-<stringAttribute key="modelBehaviorSpec" value=""/>
-<intAttribute key="modelBehaviorSpecType" value="2"/>
+<stringAttribute key="modelBehaviorSpec" value="ISpec"/>
+<intAttribute key="modelBehaviorSpecType" value="1"/>
 <stringAttribute key="modelBehaviorVars" value="mem, ctl, buf, memInt"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
@@ -26,7 +26,7 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Val;;{1,2,3,4};0;0"/>
+<listEntry value="Val;;{1,2,3};0;0"/>
 <listEntry value="Proc;;{&quot;p1&quot;, &quot;p2&quot;, &quot;p3&quot;};0;0"/>
 <listEntry value="InitMemInt;;{0};0;0"/>
 <listEntry value="Adr;;{&quot;a1&quot;, &quot;a2&quot;, &quot;a3&quot;};0;0"/>
@@ -39,7 +39,7 @@
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
-<intAttribute key="numberOfWorkers" value="2"/>
+<intAttribute key="numberOfWorkers" value="4"/>
 <booleanAttribute key="recover" value="false"/>
 <stringAttribute key="result.mail.address" value=""/>
 <intAttribute key="simuAril" value="-1"/>

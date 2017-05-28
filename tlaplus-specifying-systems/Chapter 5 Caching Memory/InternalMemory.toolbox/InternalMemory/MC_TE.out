@@ -2,7 +2,7 @@
 TLC2 Version 2.09 of 10 March 2017
 @!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running in Model-Checking mode with 2 workers.
+Running in Model-Checking mode with 4 workers.
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
@@ -23,141 +23,81 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2017-05-24 15:42:52)
+Starting... (2017-05-26 19:50:14)
 @!@!@ENDMSG 2185 @!@!@
 @!@!@STARTMSG 2189:0 @!@!@
 Computing initial states...
 @!@!@ENDMSG 2189 @!@!@
 @!@!@STARTMSG 2190:0 @!@!@
-Finished computing initial states: 216 distinct states generated.
+Finished computing initial states: 27 distinct states generated.
 @!@!@ENDMSG 2190 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(3) at 2017-05-24 15:42:56: 454553 states generated (454,553 s/min), 231747 distinct states found (231,747 ds/min), 221319 states left on queue.
-@!@!@ENDMSG 2200 @!@!@
-@!@!@STARTMSG 2200:0 @!@!@
-Progress(7) at 2017-05-24 15:43:56: 26269517 states generated (25,814,964 s/min), 4702823 distinct states found (4,471,076 ds/min), 905167 states left on queue.
-@!@!@ENDMSG 2200 @!@!@
-@!@!@STARTMSG 2200:0 @!@!@
-Progress(9) at 2017-05-24 15:44:56: 58978770 states generated (32,709,253 s/min), 7223103 distinct states found (2,520,280 ds/min), 1332470 states left on queue.
-@!@!@ENDMSG 2200 @!@!@
-@!@!@STARTMSG 2200:0 @!@!@
-Progress(11) at 2017-05-24 15:45:56: 91949630 states generated (32,970,860 s/min), 8211517 distinct states found (988,414 ds/min), 552184 states left on queue.
-@!@!@ENDMSG 2200 @!@!@
-@!@!@STARTMSG 2201:0 @!@!@
-The coverage statistics at 2017-05-24 15:45:56
-@!@!@ENDMSG 2201 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 18, col 20 to line 18, col 49 of module InternalMemory: 72421546
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 19, col 20 to line 19, col 52 of module InternalMemory: 72421503
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 20, col 24 to line 20, col 26 of module InternalMemory: 72421524
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 24, col 6 to line 26, col 22 of module InternalMemory: 15463741
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 27, col 6 to line 29, col 55 of module InternalMemory: 15463744
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 28, col 4 to line 28, col 23 of module MC: 72421555
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 29, col 4 to line 29, col 16 of module MC: 0
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 30, col 6 to line 30, col 38 of module InternalMemory: 15463743
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 31, col 16 to line 31, col 21 of module InternalMemory: 15463744
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 35, col 14 to line 35, col 44 of module InternalMemory: 4065766
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 36, col 26 to line 36, col 28 of module InternalMemory: 4065766
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 36, col 31 to line 36, col 33 of module InternalMemory: 4065766
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 36, col 4 to line 36, col 23 of module MC: 4065764
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 37, col 4 to line 37, col 16 of module MC: 0
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2202:0 @!@!@
-End of statistics.
-@!@!@ENDMSG 2202 @!@!@
-@!@!@STARTMSG 2200:0 @!@!@
-Progress(14) at 2017-05-24 15:46:56: 127348140 states generated (35,398,510 s/min), 9125958 distinct states found (914,441 ds/min), 166114 states left on queue.
+Progress(7) at 2017-05-26 19:50:18: 657881 states generated (657,881 s/min), 145228 distinct states found (145,228 ds/min), 37183 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2193:0 @!@!@
 Model checking completed. No error has been found.
   Estimates of the probability that TLC did not check all reachable states
   because two distinct states had the same fingerprint:
-  calculated (optimistic):  val = 6.3E-5
-  based on the actual fingerprints:  val = 2.7E-6
+  calculated (optimistic):  val = 2.2E-8
+  based on the actual fingerprints:  val = 3.0E-9
 @!@!@ENDMSG 2193 @!@!@
 @!@!@STARTMSG 2201:0 @!@!@
-The coverage statistics at 2017-05-24 15:47:12
+The coverage statistics at 2017-05-26 19:50:21
 @!@!@ENDMSG 2201 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 18, col 20 to line 18, col 49 of module InternalMemory: 114231600
+  line 20, col 20 to line 20, col 49 of module InternalMemory: 1549152
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 19, col 20 to line 19, col 52 of module InternalMemory: 114231600
+  line 21, col 20 to line 21, col 52 of module InternalMemory: 1549152
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 20, col 24 to line 20, col 26 of module InternalMemory: 114231600
+  line 22, col 24 to line 22, col 26 of module InternalMemory: 1549152
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 24, col 6 to line 26, col 22 of module InternalMemory: 16669800
+  line 26, col 6 to line 28, col 22 of module InternalMemory: 388800
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 27, col 6 to line 29, col 55 of module InternalMemory: 16669800
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 28, col 4 to line 28, col 23 of module MC: 114231600
+  line 28, col 4 to line 28, col 23 of module MC: 1549152
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
   line 29, col 4 to line 29, col 16 of module MC: 0
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 30, col 6 to line 30, col 38 of module InternalMemory: 16669800
+  line 29, col 6 to line 31, col 55 of module InternalMemory: 388800
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 31, col 16 to line 31, col 21 of module InternalMemory: 16669800
+  line 32, col 6 to line 32, col 38 of module InternalMemory: 388800
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 35, col 14 to line 35, col 44 of module InternalMemory: 5439600
+  line 33, col 16 to line 33, col 21 of module InternalMemory: 388800
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 36, col 26 to line 36, col 28 of module InternalMemory: 5439600
+  line 36, col 4 to line 36, col 23 of module MC: 129096
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 36, col 31 to line 36, col 33 of module InternalMemory: 5439600
-@!@!@ENDMSG 2221 @!@!@
-@!@!@STARTMSG 2221:0 @!@!@
-  line 36, col 4 to line 36, col 23 of module MC: 5439600
+  line 37, col 14 to line 37, col 44 of module InternalMemory: 129096
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
   line 37, col 4 to line 37, col 16 of module MC: 0
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 38, col 26 to line 38, col 28 of module InternalMemory: 129096
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 38, col 31 to line 38, col 33 of module InternalMemory: 129096
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2202:0 @!@!@
 End of statistics.
 @!@!@ENDMSG 2202 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(16) at 2017-05-24 15:47:12: 136341216 states generated (31,441,952 s/min), 9183000 distinct states found (2,117,712 ds/min), 0 states left on queue.
+Progress(16) at 2017-05-26 19:50:21: 2067075 states generated (19,183,990 s/min), 215664 distinct states found (2,001,522 ds/min), 0 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2199:0 @!@!@
-136341216 states generated, 9183000 distinct states found, 0 states left on queue.
+2067075 states generated, 215664 distinct states found, 0 states left on queue.
 @!@!@ENDMSG 2199 @!@!@
 @!@!@STARTMSG 2194:0 @!@!@
 The depth of the complete state graph search is 16.
 @!@!@ENDMSG 2194 @!@!@
 @!@!@STARTMSG 2186:0 @!@!@
-Finished in 04min 20s at (2017-05-24 15:47:12)
+Finished in 06s at (2017-05-26 19:50:21)
 @!@!@ENDMSG 2186 @!@!@
