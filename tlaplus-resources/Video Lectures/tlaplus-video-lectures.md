@@ -15,6 +15,9 @@ how to write their own TLA+ specifications.
 Leslie Lamport inventor of Paxos and developer of LaTeX introduces techniques and tools that help programmers 
 think above the code level to determine what applications and services should do and ensure that they do it. 
 Depending on the task, the appropriate tools can range from simple prose to formal, tool-checked models written in TLA+ or PlusCal.
+
+[A discussion about this video on the "Lambda the Ultimate"
+blog](http://lambda-the-ultimate.org/node/4922#comment-79370).
 ```
 
 - [Leslie Lamport: Thinking Above the Code (Microsoft Research, 2014)](https://youtu.be/-4Yp3j_jk8Q)
