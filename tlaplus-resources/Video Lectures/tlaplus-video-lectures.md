@@ -9,6 +9,15 @@ This is a work in progress that consists of the beginning of a series of video l
 how to write their own TLA+ specifications. 
 ```
 
+- [Leslie Lamport: Programing Should Be More Than Coding (Stanford Seminar)](https://www.youtube.com/watch?v=6QsTfL-uXd8&t=18s)
+
+- [Leslie Lamport at the 2015 21st Century Computing Conference](https://youtu.be/oIwdN-irLqs)
+
+- [Leslie Lamport, 2015: A Mathematical View of Computer Systems](http://www.heidelberg-laureate-forum.org/blog/video/lecture-monday-august-24-2015-leslie-lamport/)
+
+```
+Unfortunately, the link is broken.
+``
 - [Leslie Lamport: Thinking for Programmers (Microsoft Build, 2014)](https://youtu.be/4nhFqf_46ZQ)
 
 ```
@@ -16,9 +25,7 @@ Leslie Lamport inventor of Paxos and developer of LaTeX introduces techniques an
 think above the code level to determine what applications and services should do and ensure that they do it. 
 Depending on the task, the appropriate tools can range from simple prose to formal, tool-checked models written in TLA+ or PlusCal.
 
-[A discussion about this video on the "Lambda the Ultimate"
-blog](http://lambda-the-ultimate.org/node/4922#comment-79370).
-```
+  - [A discussion about this video on the "Lambda the Ultimate" blog](http://lambda-the-ultimate.org/node/4922#comment-79370)
 
 - [Leslie Lamport: Thinking Above the Code (Microsoft Research, 2014)](https://youtu.be/-4Yp3j_jk8Q)
 
@@ -42,10 +49,6 @@ A blueprint for software is called a specification. TLA+ specifications have bee
 High-level TLA+ specifications can catch design errors that are now found only by examining the rubble after a system has collapsed.
 ```
 
-- [Leslie Lamport: Programing Should Be More Than Coding (Stanford Seminar)](https://www.youtube.com/watch?v=6QsTfL-uXd8&t=18s)
-
-- [Leslie Lamport at the 2015 21st Century Computing Conference](https://youtu.be/oIwdN-irLqs)
-
 - [Math Park - 01/10/2016 - Leslie LAMPORT, COMMENT ¨¦CRIRE UNE D¨¦MONSTRATION AU 21¨¨ME SI¨¨CLE](https://youtu.be/k-i7y0R_-KE)
 
 - [Leslie Lamport, 2014: How to write a 21st Century Proof](http://www.heidelberg-laureate-forum.org/blog/video/lecture-tuesday-september-23-2014-leslie-lamport/)
@@ -54,11 +57,9 @@ High-level TLA+ specifications can catch design errors that are now found only b
 Unfortunately, the link is broken.
 ```
 
-- [Leslie Lamport, 2015: A Mathematical View of Computer Systems](http://www.heidelberg-laureate-forum.org/blog/video/lecture-monday-august-24-2015-leslie-lamport/)
+- [What is Computation -- Dr. Leslie Lamport, Microsoft, 2011](https://www.youtube.com/watch?v=BDPHfRuAFnU&t=3468s)
 
-```
-Unfortunately, the link is broken.
-``
+- [Leslie Lamport at Silicon Valley Leaders Symposium, 2011](https://www.youtube.com/watch?v=FRLFrZdTkuI)
 
 ## Dr. TLA+ Series
 
