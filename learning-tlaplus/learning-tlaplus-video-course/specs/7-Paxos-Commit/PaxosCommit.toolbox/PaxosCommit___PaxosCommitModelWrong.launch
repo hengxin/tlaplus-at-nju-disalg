@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
 <stringAttribute key="TLCCmdLineParameters" value=""/>
-<stringAttribute key="configurationName" value="PaxosCommitModel"/>
+<stringAttribute key="configurationName" value="PaxosCommitModelWrong"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="192.168.1.102"/>
+<stringAttribute key="distributedNetworkInterface" value="172.28.24.254"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
 <intAttribute key="fpIndex" value="1"/>
 <intAttribute key="maxHeapSize" value="25"/>
-<intAttribute key="maxSetSize" value="10000000"/>
+<intAttribute key="maxSetSize" value="1000000"/>
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value="PCInit"/>
 <stringAttribute key="modelBehaviorNext" value="PCNext"/>
 <stringAttribute key="modelBehaviorSpec" value=""/>
 <intAttribute key="modelBehaviorSpecType" value="2"/>
 <stringAttribute key="modelBehaviorVars" value="msgs, rmState, aState"/>
-<stringAttribute key="modelComments" value="WARNING: Checking the model with &quot;Ballot = {0,1,2}&quot; will take much loooooooooooooooooooooger time than checking that with &quot;Ballot = {0,1}&quot;."/>
+<stringAttribute key="modelComments" value="You should also comment out the assumption &quot;\A MS1, MS2 \in Majority : MS1 \cap MS2 # {}&quot;."/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1PCTypeOK"/>
@@ -30,15 +30,15 @@
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Ballot;;{0,1};0;0"/>
-<listEntry value="Acceptor;;{a1, a2, a3};1;1"/>
-<listEntry value="Majority;;{{a1, a2}, {a2, a3}, {a1, a3}};0;0"/>
+<listEntry value="Acceptor;;{a1, a2, a3};1;0"/>
+<listEntry value="Majority;;{{a1, a2}, {a2, a3}, {a3}};0;0"/>
 <listEntry value="RM;;{r1, r2};1;1"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions"/>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
-<intAttribute key="numberOfWorkers" value="4"/>
+<intAttribute key="numberOfWorkers" value="2"/>
 <booleanAttribute key="recover" value="false"/>
 <stringAttribute key="result.mail.address" value=""/>
 <intAttribute key="simuAril" value="-1"/>

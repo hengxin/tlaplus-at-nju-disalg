@@ -50,6 +50,7 @@ ASSUME
   /\ 0 \in Ballot
   /\ Majority \subseteq SUBSET Acceptor
   /\ \A MS1, MS2 \in Majority : MS1 \cap MS2 # {}
+  \* Comment out the last assumption when run on the model PaxosCommitModelWrong.
        (********************************************************************)
        (* All we assume about the set Majority of majorities is that any   *)
        (* two majorities have non-empty intersection.                      *)
