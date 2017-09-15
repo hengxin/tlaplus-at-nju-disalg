@@ -939,149 +939,84 @@
 \begin{document}
 \tlatex
 \setboolean{shading}{true}
-\@x{}\moduleLeftDash\@xx{ {\MODULE} JupiterOT}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Naturals ,\, FiniteSets ,\, Sequences}%
+\@x{}\moduleLeftDash\@xx{ {\MODULE} OT}\moduleRightDash\@xx{}%
+\@x{ {\EXTENDS} Naturals}%
 \@pvspace{8.0pt}%
 \@x{ {\CONSTANTS}}%
 \@x{\@s{16.4} CH ,\,}%
+\@x{\@s{16.4} POS ,\,}%
+\@x{\@s{16.4} PR}%
+\@x{\@s{16.4}}%
 \@y{\@s{0}%
- the characters allowed
+ \ensuremath{LOP}, \ensuremath{\.{\,\backslash\,}}* for test only
 }%
 \@xx{}%
-\@x{\@s{16.4} NODE}%
-\@x{ {\VARIABLES}}%
-\@x{\@s{16.4} myMsgs ,\,}%
-\@x{\@s{16.4} otherMsgs ,\,}%
-\@x{\@s{16.4} outgoing ,\,\@s{2.55}}%
+\@x{\@s{16.4}}%
 \@y{\@s{0}%
- \ensuremath{outgoing[c]} and \ensuremath{outgoing[s]
-}}%
-\@xx{}%
-\@x{\@s{16.4} incoming ,\,}%
-\@y{\@s{0}%
- \ensuremath{incoming[c]} and \ensuremath{incoming[s]
-}}%
-\@xx{}%
-\@x{\@s{16.4} str\@s{33.64}}%
-\@y{\@s{0}%
- \ensuremath{str[c]} and \ensuremath{str[s]}: the string (sequence of
- characters)
+ \ensuremath{ROP \.{\,\backslash\,}}* for test only
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{ OP \.{\defeq} [ type \.{:} \{\@w{Ins} ,\,\@w{Del} \} ,\, pos \.{:} Nat
- ,\, ch \.{:} CH ]\@s{8.2}}%
-\@y{\@s{0}%
- set of all possible operations; ignoring READ now
-}%
-\@xx{}%
- \@x{ MSG \.{\defeq} [ op \.{:} OP ,\, my \.{:} Nat ,\, other \.{:} Nat
- ]\@s{12.29}}%
-\@y{\@s{0}%
- set of all possible messages
-}%
-\@xx{}%
+ \@x{ OP \.{\defeq} [ type \.{:} \{\@w{ins} ,\,\@w{del} \} ,\, pos \.{:} POS
+ ,\, ch \.{:} CH ,\, pr \.{:} PR ]}%
+\@x{ NOP \.{\defeq} {\CHOOSE} v \.{:} v \.{\notin} OP}%
 \@pvspace{8.0pt}%
-\@x{ TypeInvariant \.{\defeq}}%
-\@x{\@s{16.4} {\FALSE}}%
-\@x{}\midbar\@xx{}%
-\@x{ Init \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} {\FALSE}}%
-\@x{}\midbar\@xx{}%
-\@x{ Apply ( o ) \.{\defeq}}%
+\@x{ XformII ( lins ,\, rins ) \.{\defeq}}%
 \@y{\@s{0}%
- \ensuremath{TODO}: \ensuremath{pos}\.{?} (starting from 1 \.{??}\.{?})
+ the left insertion transformed against the right insertion
 }%
 \@xx{}%
-\@x{\@s{16.4} \.{\land} \.{\lor} \.{\land} o . type \.{=}\@w{Ins}}%
- \@x{\@s{38.62} \.{\land} str \.{'} \.{=} Append ( SubSeq ( str ,\, 1 ,\, o .
- pos \.{-} 1 ) ,\, o . ch ) \.{\circ} SubSeq ( str ,\, o . pos ,\, Len ( str
- ) )}%
-\@x{\@s{27.51} \.{\lor} \.{\land} o . type \.{=}\@w{Del}}%
- \@x{\@s{38.62} \.{\land} str \.{'} \.{=} SubSeq ( str ,\, 1 ,\, o . pos \.{-}
- 1 ) \.{\circ} SubSeq ( str ,\, o . pos ,\, Len ( str ) )}%
- \@x{\@s{16.4} \.{\land} {\UNCHANGED} {\langle} myMsgs ,\, otherMsgs ,\,
- outgoing ,\, incoming {\rangle}}%
+\@x{\@s{16.4} {\IF} lins . pos \.{<} rins . pos}%
+\@x{\@s{16.4} \.{\THEN} lins}%
+\@x{\@s{16.4} \.{\ELSE} {\IF} lins . pos \.{>} rins . pos}%
+\@x{\@s{32.8} \.{\THEN} [ lins {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+\@x{\@s{32.8} \.{\ELSE} {\IF} lins . ch \.{=} rins . ch}%
+\@x{\@s{49.19} \.{\THEN} NOP}%
+\@x{\@s{49.19} \.{\ELSE} {\IF} lins . pr \.{>} rins . pr}%
+\@x{\@s{65.6} \.{\THEN} [ lins {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+\@x{\@s{65.6} \.{\ELSE} lins}%
 \@pvspace{8.0pt}%
-\@x{ Xform ( o ) \.{\defeq}}%
-\@x{\@s{16.4} \.{\land} {\FALSE}}%
-\@pvspace{8.0pt}%
-\@x{ Issue ( node ,\, o ) \.{\defeq}}%
+\@x{ XformID ( ins ,\, del ) \.{\defeq}}%
 \@y{\@s{0}%
- A node issues an operation
+ the left insertion transformed against the right deletion
 }%
 \@xx{}%
-\@x{\@s{16.4} \.{\land} Apply ( o )}%
- \@x{\@s{16.4} \.{\land} incoming \.{'} \.{=} [ incoming {\EXCEPT} {\bang} [ 1
- \.{-} node ] \.{=} Append ( @ ,\, [ op \.{\mapsto} o ,\, my \.{\mapsto}
- myMsgs ,\, other \.{\mapsto} otherMsgs ] ) ]}%
- \@x{\@s{16.4} \.{\land} outgoing \.{'}\@s{2.55} \.{=} [ outgoing {\EXCEPT}
- {\bang} [ node ] \.{=} Append ( @ ,\, [ op \.{\mapsto} o ,\, my \.{\mapsto}
- myMsgs ,\, other \.{\mapsto} otherMsgs ] ) ]}%
-\@x{\@s{16.4} \.{\land} myMsgs \.{'} \.{=} myMsgs \.{+} 1}%
-\@x{\@s{16.4} \.{\land} {\UNCHANGED} otherMsgs}%
+\@x{\@s{16.4} {\IF} ins . pos \.{<} del . pos}%
+\@x{\@s{16.4} \.{\THEN} ins}%
+\@x{\@s{16.4} \.{\ELSE} [ ins {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
 \@pvspace{8.0pt}%
-\@x{ Receive ( node ,\, msg ) \.{\defeq}}%
+\@x{ XformDI ( del ,\, ins ) \.{\defeq}}%
 \@y{\@s{0}%
- A node receives an message
+ the first deletion transformed against the right insertion
 }%
 \@xx{}%
- \@x{\@s{16.4} \.{\land}\@s{5.06} incoming [ node ] \.{\neq} {\langle}
- {\rangle}}%
-\@x{\@s{16.4} \.{\land}\@s{5.06} msg \.{=} Head ( incoming [ node ] )}%
- \@x{\@s{16.4} \.{\land}\@s{5.06} incoming \.{'} \.{=} [ incoming {\EXCEPT}
- {\bang} [ node ] \.{=} Tail ( @ ) ]\@s{4.1}}%
+\@x{\@s{16.4} {\IF} del . pos \.{<} ins . pos}%
+\@x{\@s{16.4} \.{\THEN} del}%
+\@x{\@s{16.4} \.{\ELSE} [ del {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+\@pvspace{8.0pt}%
+\@x{ XformDD ( ldel ,\, rdel ) \.{\defeq}}%
 \@y{\@s{0}%
- removing this \ensuremath{msg} from incoming; won\mbox{'}t receive it again
+ the first deletion transformed against the right deletion
 }%
 \@xx{}%
- \@x{\@s{16.4} \.{\land}\@s{5.06} outgoing \.{'}\@s{2.55} \.{=} [ outgoing
- {\EXCEPT} {\bang} [ node ]\@s{2.55} \.{=} SelectSeq ( @ ,\, {\LAMBDA} m
- \.{:} m . my \.{<} msg . other ) ]}%
-\@x{\@s{16.4} \.{\land}\@s{5.06} Xform ( msg . op )}%
-\@x{\@s{16.4} \.{\land}\@s{5.06} otherMsgs \.{'} \.{=} otherMsgs \.{+} 1}%
-\@x{\@s{16.4} \.{\land}\@s{5.06} {\UNCHANGED} myMsgs}%
-\@x{\@s{16.4} \.{\land}\@s{5.06} {\FALSE}}%
+\@x{\@s{16.4} {\IF} ldel . pos \.{<} rdel . pos}%
+\@x{\@s{16.4} \.{\THEN} ldel}%
+\@x{\@s{16.4} \.{\ELSE} {\IF} ldel . pos \.{>} rdel . pos}%
+\@x{\@s{32.8} \.{\THEN} [ ldel {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
+\@x{\@s{32.8} \.{\ELSE} NOP}%
 \@pvspace{8.0pt}%
-\@x{ Next \.{\defeq}}%
-\@x{\@s{16.4} \E\, n \.{\in} NODE ,\, o \.{\in} OP ,\, m \.{\in} MSG \.{:}}%
-\@x{\@s{16.4} \.{\lor} Issue ( n ,\, o )}%
-\@x{\@s{16.4} \.{\lor} Receive ( n ,\, m )}%
+\@x{ Xform ( lop ,\, rop ) \.{\defeq}}%
+\@y{\@s{0}%
+ the left operation is transformed against the right operation
+}%
+\@xx{}%
+ \@x{\@s{16.4} {\CASE} lop . type \.{=}\@w{ins} \.{\land} rop . type
+ \.{=}\@w{ins} \.{\rightarrow} XformII ( lop ,\, rop )}%
+ \@x{\@s{16.4} {\Box}\@s{4.1} lop . type \.{=}\@w{ins}\@s{0.61} \.{\land} rop
+ . type \.{=}\@w{del} \.{\rightarrow} XformID ( lop ,\, rop )}%
+ \@x{\@s{16.4} {\Box}\@s{4.10} lop . type \.{=}\@w{del} \.{\land} rop . type
+ \.{=}\@w{ins}\@s{0.61} \.{\rightarrow} XformDI ( lop ,\, rop )}%
+ \@x{\@s{16.4} {\Box}\@s{4.10} lop . type \.{=}\@w{del} \.{\land} rop . type
+ \.{=}\@w{del} \.{\rightarrow} XformDD ( lop ,\, rop )}%
 \@x{}\bottombar\@xx{}%
-\setboolean{shading}{false}
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{\.{\,\backslash\,}}* Modification History
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Fri}
- \ensuremath{Sep} 15 17:42:34 \ensuremath{CST} 2017 by \ensuremath{hengxin
-}%
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jun} 03
- 19:24:10 \ensuremath{CST} 2017 by ics-ant
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Wed} May 31 11:13:18
- \ensuremath{CST} 2017 by ics-ant
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Specification of the \ensuremath{Jupiter}
- protocol described in the papers
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* ``High-Latency, Low-Bandwidth
- \ensuremath{Windowing} in the \ensuremath{Jupiter} Collaboration System''
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* (\ensuremath{UIST} 1995) and ``Achieving
- Convergence in Operational Transformation:
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Conditions, Mechanisms, and Systems''
- (\ensuremath{CSCW} 2014).
-\end{cpar}%
-\end{lcom}%
 \end{document}
