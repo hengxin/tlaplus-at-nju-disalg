@@ -25,14 +25,15 @@
 <listEntry value="0TypeOK"/>
 </listAttribute>
 <listAttribute key="modelCorrectnessProperties"/>
-<stringAttribute key="modelExpressionEval" value="Xform(LOP, ROP)"/>
+<stringAttribute key="modelExpressionEval" value="XformOpOps(ROP, LOPS)"/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="CH;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
 <listEntry value="POS;;0 .. 5;0;0"/>
-<listEntry value="LOP;;[type |-&gt; &quot;del&quot;, pos |-&gt; 1, ch |-&gt; &quot;a&quot;, pr |-&gt; 0];0;0"/>
-<listEntry value="ROP;;[type |-&gt; &quot;del&quot;, pos |-&gt; 0, ch |-&gt; &quot;b&quot;, pr |-&gt; 1];0;0"/>
 <listEntry value="PR;;{0,1};0;0"/>
+<listEntry value="ROP;;[type |-&gt; &quot;ins&quot;, pos |-&gt; 1, ch |-&gt; &quot;a&quot;, pr |-&gt; 0];0;0"/>
+<listEntry value="LOPS;;&lt;&lt;[type |-&gt; &quot;ins&quot;, pos |-&gt; 1, ch |-&gt; &quot;b&quot;, pr |-&gt; 1], [type |-&gt; &quot;del&quot;, pos |-&gt; 1, ch |-&gt; &quot;a&quot;, pr |-&gt; 1]&gt;&gt;;0;0"/>
+<listEntry value="LOP;;[type |-&gt; &quot;ins&quot;, pos |-&gt; 1, ch |-&gt; &quot;b&quot;, pr |-&gt; 1];0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

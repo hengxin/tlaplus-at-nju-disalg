@@ -940,20 +940,25 @@
 \tlatex
 \setboolean{shading}{true}
 \@x{}\moduleLeftDash\@xx{ {\MODULE} OT}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Naturals}%
+\@x{ {\EXTENDS} Naturals ,\, Sequences}%
 \@pvspace{8.0pt}%
 \@x{ {\CONSTANTS}}%
 \@x{\@s{16.4} CH ,\,}%
 \@x{\@s{16.4} POS ,\,}%
-\@x{\@s{16.4} PR}%
-\@x{\@s{16.4}}%
+\@x{\@s{16.4} PR ,\,}%
+\@x{\@s{16.4} LOP ,\,}%
 \@y{\@s{0}%
- \ensuremath{LOP}, \ensuremath{\.{\,\backslash\,}}* for test only
+ for test only
 }%
 \@xx{}%
-\@x{\@s{16.4}}%
+\@x{\@s{16.4} LOPS ,\,\@s{8.2}}%
 \@y{\@s{0}%
- \ensuremath{ROP \.{\,\backslash\,}}* for test only
+ for test only
+}%
+\@xx{}%
+\@x{\@s{16.4} ROP\@s{4.1}}%
+\@y{\@s{0}%
+ for test only
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
@@ -1018,5 +1023,31 @@
  \.{=}\@w{ins}\@s{0.61} \.{\rightarrow} XformDI ( lop ,\, rop )}%
  \@x{\@s{16.4} {\Box}\@s{4.10} lop . type \.{=}\@w{del} \.{\land} rop . type
  \.{=}\@w{del} \.{\rightarrow} XformDD ( lop ,\, rop )}%
+\@pvspace{8.0pt}%
+\@x{ XformOpOps ( op ,\, ops ) \.{\defeq}}%
+\@y{\@s{0}%
+ the left operation is transformed against the right operation sequence
+}%
+\@xx{}%
+ \@x{\@s{16.4} \.{\LET} X [ j \.{\in} 1 \.{\dotdot} Len ( ops ) \.{+} 1 ]
+ \.{\defeq}}%
+\@x{\@s{36.79} {\IF} j \.{=} 1}%
+\@x{\@s{36.79} \.{\THEN} {\langle} op {\rangle}}%
+ \@x{\@s{36.79} \.{\ELSE} Append ( X [ j \.{-} 1 ] ,\, Xform ( X [ j \.{-} 1 ]
+ [ j \.{-} 1 ] ,\, ops [ j \.{-} 1 ] ) )}%
+\@x{\@s{16.4} \.{\IN} X [ Len ( ops ) \.{+} 1 ]}%
+\@pvspace{8.0pt}%
+\@x{ XformOpsOp ( ops ,\, op ) \.{\defeq}}%
+\@y{\@s{0}%
+ the left operation sequence is transformed against the right single operation
+}%
+\@xx{}%
+\@x{\@s{16.4} \.{\LET} T [ i \.{\in} 0 \.{\dotdot} Len ( ops ) ] \.{\defeq}}%
+\@x{\@s{36.79} {\IF} i \.{=} 0}%
+\@x{\@s{36.79} \.{\THEN} {\langle} {\rangle}}%
+\@x{\@s{36.79} \.{\ELSE} \.{\LET} X \.{\defeq} XformOpOps ( op ,\, ops )}%
+ \@x{\@s{68.11} \.{\IN} Append ( T [ i \.{-} 1 ] ,\, Xform ( ops [ i ] ,\, X [
+ i ] ) )}%
+\@x{\@s{16.4} \.{\IN} T [ Len ( ops ) ]}%
 \@x{}\bottombar\@xx{}%
 \end{document}

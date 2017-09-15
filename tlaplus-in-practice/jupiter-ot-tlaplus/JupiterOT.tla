@@ -15,7 +15,8 @@ OP == [type : {"Ins", "Del"}, pos : Nat, ch : CH]   \* set of all possible opera
 MSG == [op: OP, my: Nat, other: Nat]    \* set of all possible messages
 
 TypeInvariant ==
-    FALSE
+    str \in STRING
+    
 -----------------------------------------------------------------------------
 Init ==
     /\ FALSE
@@ -53,7 +54,7 @@ Next ==
     \/ Receive(n, m) 
 =============================================================================
 \* Modification History
-\* Last modified Fri Sep 15 17:42:34 CST 2017 by hengxin
+\* Last modified Fri Sep 15 21:20:12 CST 2017 by hengxin
 \* Last modified Sat Jun 03 19:24:10 CST 2017 by ics-ant
 \* Created Wed May 31 11:13:18 CST 2017 by ics-ant
 

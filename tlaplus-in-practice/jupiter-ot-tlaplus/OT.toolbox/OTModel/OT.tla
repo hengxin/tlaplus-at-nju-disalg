@@ -1,12 +1,13 @@
 ----------------------------- MODULE OT -----------------------------
-EXTENDS Naturals
+EXTENDS Naturals, Sequences
 
 CONSTANTS 
     CH, 
     POS,
     PR,
-    LOP,
-    ROP
+    LOP, \* for test only
+    LOPS,   \* for test only
+    ROP  \* for test only
 
 OP == [type: {"ins", "del"}, pos: POS, ch: CH, pr: PR]
 NOP == CHOOSE v: v \notin OP
@@ -44,4 +45,19 @@ Xform(lop, rop) == \* the left operation is transformed against the right operat
     []  lop.type = "ins" /\ rop.type = "del" -> XformID(lop, rop)
     []  lop.type = "del" /\ rop.type = "ins" -> XformDI(lop, rop)
     []  lop.type = "del" /\ rop.type = "del" -> XformDD(lop, rop)
+    
+XformOpOps(op, ops) == \* the left operation is transformed against the right operation sequence
+    LET X[j \in 1 .. Len(ops) + 1] ==
+        IF j = 1
+        THEN <<op>>
+        ELSE Append(X[j-1], Xform(X[j-1][j-1], ops[j-1]))
+    IN X[Len(ops) + 1]
+
+XformOpsOp(ops, op) == \* the left operation sequence is transformed against the right single operation    
+    LET T[i \in 0 .. Len(ops)] ==
+        IF i = 0 
+        THEN <<>>
+        ELSE LET X == XformOpOps(op, ops)
+             IN Append(T[i-1], Xform(ops[i], X[i]))
+    IN T[Len(ops)]
 ============================================================================
