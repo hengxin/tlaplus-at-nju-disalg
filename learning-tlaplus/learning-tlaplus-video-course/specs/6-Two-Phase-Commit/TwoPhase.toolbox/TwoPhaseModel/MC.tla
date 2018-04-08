@@ -3,35 +3,35 @@ EXTENDS TwoPhase, TLC
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-r1, r2, r3, r4, r5
+r1, r2, r3, r4, r5, r6, r7, r8, r9
 ----
 
 \* MV CONSTANT definitions RM
-const_1505213861633124000 == 
-{r1, r2, r3, r4, r5}
+const_152316918285276000 == 
+{r1, r2, r3, r4, r5, r6, r7, r8, r9}
 ----
 
 \* SYMMETRY definition
-symm_1505213861633125000 == 
-Permutations(const_1505213861633124000)
+symm_152316918285277000 == 
+Permutations(const_152316918285276000)
 ----
 
 \* INIT definition @modelBehaviorInit:0
-init_1505213861633126000 ==
+init_152316918285278000 ==
 TPInit
 ----
 \* NEXT definition @modelBehaviorNext:0
-next_1505213861633127000 ==
+next_152316918285279000 ==
 TPNext
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_1505213861633128000 ==
+inv_152316918285280000 ==
 TPTypeOK
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:1
-inv_1505213861633129000 ==
+inv_152316918285281000 ==
 TCConsistent
 ----
 =============================================================================
 \* Modification History
-\* Created Tue Sep 12 18:57:41 CST 2017 by hengxin
+\* Created Sun Apr 08 14:33:02 CST 2018 by hengxin

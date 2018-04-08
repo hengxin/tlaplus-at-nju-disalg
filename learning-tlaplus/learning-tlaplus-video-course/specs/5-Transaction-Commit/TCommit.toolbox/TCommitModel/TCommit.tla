@@ -5,7 +5,7 @@
 (***************************************************************************)
 CONSTANT RM       \* The set of participating resource managers
 
-VARIABLE rmState  \* rmState[rm] is the state of resource manager r.
+VARIABLE rmState  \* rmState[rm] is the state of resource manager rm.
 -----------------------------------------------------------------------------
 TCTypeOK == 
   (*************************************************************************)
@@ -77,5 +77,5 @@ THEOREM TCSpec => [](TCTypeOK /\ TCConsistent)
 
 =============================================================================
 \* Modification History
-\* Last modified Tue Sep 12 16:59:33 CST 2017 by hengxin
+\* Last modified Sun Apr 08 13:32:15 CST 2018 by hengxin
 \* Created Tue Sep 12 16:27:41 CST 2017 by hengxin
