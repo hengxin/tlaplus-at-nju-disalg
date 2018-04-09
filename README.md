@@ -14,8 +14,8 @@ It includes:
 - [tlaplus-resources](https://github.com/Disalg-ICS-NJU/tlaplus-lamport-projects/tree/master/tlaplus-resources)
   - Books
   - Tutorials
-  - Video lectures
-  - Use cases
+  - Video Lectures
+  - Use Cases
 - [learning-tlaplus](https://github.com/Disalg-ICS-NJU/tlaplus-lamport-projects/tree/master/learning-tlaplus): Code and notes for self-learning
 - [other-formal-methods](https://github.com/Disalg-ICS-NJU/tlaplus-lamport-projects/tree/master/other-formal-methods): Other formal methods
 - [tlaplus-in-practice](https://github.com/Disalg-ICS-NJU/tlaplus-lamport-projects/tree/master/tlaplus-in-practice): Our use of TLA+
