@@ -1,5 +1,19 @@
 # Use Cases of TLA+
 
+## Blogs
+
+- [Modeling REDUX with TLA+](https://www.hillelwayne.com/post/tla-redux/)
+
+```
+Redux is a Javascript library for managing global state.
+```
+
+- [Modeling Zero-Downtime Deployments with TLA+](https://www.hillelwayne.com/post/modeling-deployments/)
+
+```
+Deploying code to a set of servers is tricky.
+```
+
 ## Video Talks
 
 - [InfoQ: The Evolution of Testing Methodology at AWS: From Status Quo to Formal Methods with
