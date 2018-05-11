@@ -8,6 +8,7 @@ CONSTANTS
     LOP, \* for test only
     LOPS,   \* for test only
     ROP  \* for test only
+    
 
 OP == [type: {"ins", "del"}, pos: POS, ch: CH, pr: PR]
 NOP == CHOOSE v: v \notin OP
