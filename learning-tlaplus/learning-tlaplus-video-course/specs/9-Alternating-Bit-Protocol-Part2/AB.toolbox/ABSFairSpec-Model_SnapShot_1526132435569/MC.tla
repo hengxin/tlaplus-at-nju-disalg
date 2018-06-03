@@ -7,27 +7,27 @@ d1, d2, d3
 ----
 
 \* MV CONSTANT definitions Data
-const_1526132433540227000 == 
+const_15266340623452000 == 
 {d1, d2, d3}
 ----
 
 \* CONSTRAINT definition @modelParameterContraint:0
-constr_1526132433540228000 ==
+constr_15266340623453000 ==
 /\ Len(AtoB) =< 3
 /\ Len(BtoA) =< 3
 ----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_1526132433540229000 ==
+spec_15266340623454000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_1526132433540230000 ==
+inv_15266340623455000 ==
 TypeOK
 ----
 \* PROPERTY definition @modelCorrectnessProperties:0
-prop_1526132433540231000 ==
+prop_15266340623456000 ==
 ABS!FairSpec
 ----
 =============================================================================
 \* Modification History
-\* Created Sat May 12 21:40:33 CST 2018 by hengxin
+\* Created Fri May 18 17:01:02 CST 2018 by hengxin

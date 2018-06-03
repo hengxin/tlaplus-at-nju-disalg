@@ -939,115 +939,173 @@
 \begin{document}
 \tlatex
 \setboolean{shading}{true}
-\@x{}\moduleLeftDash\@xx{ {\MODULE} OT}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Naturals ,\, Sequences}%
+ \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
+ {\MODULE} Counter}\moduleRightDash\@xx{}%
 \@pvspace{8.0pt}%
-\@x{ {\CONSTANTS}}%
-\@x{\@s{16.4} CH ,\,}%
-\@x{\@s{16.4} POS ,\,}%
-\@x{\@s{16.4} PR ,\,}%
-\@x{\@s{16.4} LOP ,\,}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+TLA+ module for Op-based \ensuremath{Counter}.
+ See its implementation in paper
+ \ensuremath{Burckhardt}@\ensuremath{POPL\.{'}}2014.
+\end{cpar}%
+\end{lcom}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\EXTENDS} Naturals ,\,
+ Sequences}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}} {\CONSTANTS}}%
+\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} Replica}%
 \@y{\@s{0}%
- for test only
-}%
-\@xx{}%
-\@x{\@s{16.4} LOPS ,\,\@s{8.2}}%
-\@y{\@s{0}%
- for test only
-}%
-\@xx{}%
-\@x{\@s{16.4} ROP\@s{4.1}}%
-\@y{\@s{0}%
- for test only
+ the set of replicas
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{ OP \.{\defeq} [ type \.{:} \{\@w{ins} ,\,\@w{del} \} ,\, pos \.{:} POS
- ,\, ch \.{:} CH ,\, pr \.{:} PR ]}%
-\@x{ NOP \.{\defeq} {\CHOOSE} v \.{:} v \.{\notin} OP}%
-\@pvspace{8.0pt}%
-\@x{ XformII ( lins ,\, rins ) \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} {\VARIABLES}}%
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} counter
+ ,\,\@s{0.72}}%
 \@y{\@s{0}%
- the left insertion transformed against the right insertion
+ \ensuremath{counter[r]}: the current value of the counter at replica
+ \ensuremath{r \.{\in} Replica
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} acc ,\,\@s{19.76}}%
+\@y{\@s{0}%
+ \ensuremath{acc[r]}: the number of increments performed since the last
+ broadcast at replica \ensuremath{r \.{\in} Replica
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} incoming}%
+\@y{\@s{0}%
+ \ensuremath{incoming[r]}: incoming messages at replica \ensuremath{r \.{\in}
+ Replica
+}}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} TypeOK \.{\defeq} \.{\land}
+ counter \.{\in} [ Replica \.{\rightarrow} Nat ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{56.14} \.{\land} acc
+ \.{\in} [ Replica \.{\rightarrow} Nat ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{56.14} \.{\land} incoming
+ \.{\in} [ Replica \.{\rightarrow} Seq ( Nat ) ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} Init \.{\defeq} \.{\land}
+ counter \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{35.70} \.{\land} acc
+ \.{=} [ r\@s{4.47} \.{\in} Replica \.{\mapsto} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{35.70} \.{\land} incoming
+ \.{=} [ r \.{\in} Replica \.{\mapsto} {\langle} {\rangle} ]}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+\ensuremath{Inc()} at replica \ensuremath{r \.{\in} Replica
+}%
+\end{cpar}%
+\end{lcom}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} Inc ( r ) \.{\defeq}
+ \.{\land} {\TRUE}\@s{8.2}}%
+\@y{\@s{0}%
+ no pre-cond
 }%
 \@xx{}%
-\@x{\@s{16.4} {\IF} lins . pos \.{<} rins . pos}%
-\@x{\@s{16.4} \.{\THEN} lins}%
-\@x{\@s{16.4} \.{\ELSE} {\IF} lins . pos \.{>} rins . pos}%
-\@x{\@s{32.8} \.{\THEN} [ lins {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
-\@x{\@s{32.8} \.{\ELSE} {\IF} lins . ch \.{=} rins . ch}%
-\@x{\@s{49.19} \.{\THEN} NOP}%
-\@x{\@s{49.19} \.{\ELSE} {\IF} lins . pr \.{>} rins . pr}%
-\@x{\@s{65.6} \.{\THEN} [ lins {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
-\@x{\@s{65.6} \.{\ELSE} lins}%
-\@pvspace{8.0pt}%
-\@x{ XformID ( ins ,\, del ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{46.60} \.{\land} counter
+ \.{'} \.{=} [ counter {\EXCEPT} {\bang} [ r ] \.{=} @ \.{+} 1 ]\@s{12.29}}%
 \@y{\@s{0}%
- the left insertion transformed against the right deletion
-}%
+ current \ensuremath{counter \.{+} 1
+}}%
 \@xx{}%
-\@x{\@s{16.4} {\IF} ins . pos \.{<} del . pos}%
-\@x{\@s{16.4} \.{\THEN} ins}%
-\@x{\@s{16.4} \.{\ELSE} [ ins {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\@pvspace{8.0pt}%
-\@x{ XformDI ( del ,\, ins ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{46.60} \.{\land} acc
+ \.{'} \.{=} [ acc {\EXCEPT} {\bang} [ r ] \.{=} @ \.{+} 1 ]\@s{8.2}}%
 \@y{\@s{0}%
- the first deletion transformed against the right insertion
-}%
+ \# of increments \ensuremath{\.{+} 1
+}}%
 \@xx{}%
-\@x{\@s{16.4} {\IF} del . pos \.{<} ins . pos}%
-\@x{\@s{16.4} \.{\THEN} del}%
-\@x{\@s{16.4} \.{\ELSE} [ del {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{46.60} \.{\land}
+ {\UNCHANGED} {\langle} incoming {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{ XformDD ( ldel ,\, rdel ) \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}}%
 \@y{\@s{0}%
- the first deletion transformed against the right deletion
-}%
+ broadcast a message to all replicas except the sender \ensuremath{s
+}}%
 \@xx{}%
-\@x{\@s{16.4} {\IF} ldel . pos \.{<} rdel . pos}%
-\@x{\@s{16.4} \.{\THEN} ldel}%
-\@x{\@s{16.4} \.{\ELSE} {\IF} ldel . pos \.{>} rdel . pos}%
-\@x{\@s{32.8} \.{\THEN} [ ldel {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\@x{\@s{32.8} \.{\ELSE} NOP}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} Broadcast ( s ,\, m )
+ \.{\defeq} [ r \.{\in} Replica \.{\mapsto}}%
+\@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{106.02} {\IF} s \.{=} r}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{106.02} \.{\THEN}
+ incoming [ s ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{106.02} \.{\ELSE} Append
+ ( incoming [ r ] ,\, m ) ]}%
 \@pvspace{8.0pt}%
-\@x{ Xform ( lop ,\, rop ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} Send ( r ) \.{\defeq}
+ \.{\land} acc [ r ] \.{\neq} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{53.94} \.{\land} acc
+ \.{'} \.{=} [ acc {\EXCEPT} {\bang} [ r ] \.{=} 0 ]\@s{4.1}}%
 \@y{\@s{0}%
- the left operation is transformed against the right operation
-}%
+ reset \ensuremath{acc[r]
+}}%
 \@xx{}%
- \@x{\@s{16.4} {\CASE} lop . type \.{=}\@w{ins} \.{\land} rop . type
- \.{=}\@w{ins} \.{\rightarrow} XformII ( lop ,\, rop )}%
- \@x{\@s{16.4} {\Box}\@s{4.1} lop . type \.{=}\@w{ins}\@s{0.61} \.{\land} rop
- . type \.{=}\@w{del} \.{\rightarrow} XformID ( lop ,\, rop )}%
- \@x{\@s{16.4} {\Box}\@s{4.10} lop . type \.{=}\@w{del} \.{\land} rop . type
- \.{=}\@w{ins}\@s{0.61} \.{\rightarrow} XformDI ( lop ,\, rop )}%
- \@x{\@s{16.4} {\Box}\@s{4.10} lop . type \.{=}\@w{del} \.{\land} rop . type
- \.{=}\@w{del} \.{\rightarrow} XformDD ( lop ,\, rop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{53.94} \.{\land}
+ Broadcast ( r ,\, acc [ r ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{53.94} \.{\land}
+ {\UNCHANGED} {\langle} counter {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{ XformOpOps ( op ,\, ops ) \.{\defeq}}%
-\@y{\@s{0}%
- the left operation is transformed against the right operation sequence
-}%
-\@xx{}%
- \@x{\@s{16.4} \.{\LET} X [ j \.{\in} 1 \.{\dotdot} Len ( ops ) \.{+} 1 ]
- \.{\defeq}}%
-\@x{\@s{36.79} {\IF} j \.{=} 1}%
-\@x{\@s{36.79} \.{\THEN} {\langle} op {\rangle}}%
- \@x{\@s{36.79} \.{\ELSE} Append ( X [ j \.{-} 1 ] ,\, Xform ( X [ j \.{-} 1 ]
- [ j \.{-} 1 ] ,\, ops [ j \.{-} 1 ] ) )}%
-\@x{\@s{16.4} \.{\IN} X [ Len ( ops ) \.{+} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} Receive ( r ) \.{\defeq}
+ \.{\land} incoming [ r ] \.{\neq} {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{64.53} \.{\land} \.{\LET}
+ m \.{=} Head ( incoming [ r ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{75.64} \.{\IN} counter
+ \.{'} \.{=} [ counter {\EXCEPT} {\bang} [ r ] \.{=} @ \.{+} m ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{64.53} \.{\land} incoming
+ \.{'} \.{=} [ incoming {\EXCEPT} {\bang} [ r ] \.{=} Tail ( @ ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{64.53} \.{\land}
+ {\UNCHANGED} {\langle} acc {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{ XformOpsOp ( ops ,\, op ) \.{\defeq}}%
-\@y{\@s{0}%
- the left operation sequence is transformed against the right single operation
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} Next \.{\defeq} \E\, r
+ \.{\in} Replica \.{:} Inc ( r ) \.{\lor} Send ( r ) \.{\lor} Receive ( r )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}} vars \.{=} {\langle} counter
+ ,\, acc ,\, incoming {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}} Spec \.{\defeq} Init
+ \.{\land} {\Box} [ Next ]_{ vars}}%
+\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}}\bottombar\@xx{}%
+\setboolean{shading}{false}
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+\ensuremath{\.{\,\backslash\,}}* Modification History
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jun} 03
+ 21:55:15 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
-\@xx{}%
-\@x{\@s{16.4} \.{\LET} T [ i \.{\in} 0 \.{\dotdot} Len ( ops ) ] \.{\defeq}}%
-\@x{\@s{36.79} {\IF} i \.{=} 0}%
-\@x{\@s{36.79} \.{\THEN} {\langle} {\rangle}}%
-\@x{\@s{36.79} \.{\ELSE} \.{\LET} X \.{\defeq} XformOpOps ( op ,\, ops )}%
- \@x{\@s{68.11} \.{\IN} Append ( T [ i \.{-} 1 ] ,\, Xform ( ops [ i ] ,\, X [
- i ] ) )}%
-\@x{\@s{16.4} \.{\IN} T [ Len ( ops ) ]}%
-\@x{}\bottombar\@xx{}%
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jun} 03 20:08:57
+ \ensuremath{CST} 2018 by \ensuremath{hengxin
+}%
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{T}{F}{10.0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}*
+ \ensuremath{oid},\@s{12.5}\ensuremath{\.{\,\backslash\,}}*
+ \ensuremath{oid[r]}: the (local) \ensuremath{id} of the increment operation
+ issued by the replica \ensuremath{r \.{\in} Replica
+}%
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{oids},
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{oids[r]}: the set of ids of the
+ increment operations performed by the replica \ensuremath{r \.{\in} Replica
+}%
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{1}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Oid \.{\defeq}} [\ensuremath{r}:
+ \ensuremath{Replica}, \ensuremath{id}: \ensuremath{Nat}]
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Msg \.{\defeq}} [a:
+ \ensuremath{Nat}, \ensuremath{r}: \ensuremath{Replica}, \ensuremath{id}:
+ \ensuremath{Nat}] \ensuremath{\.{\,\backslash\,}}* message to send
+\end{cpar}%
+\end{lcom}%
 \end{document}
