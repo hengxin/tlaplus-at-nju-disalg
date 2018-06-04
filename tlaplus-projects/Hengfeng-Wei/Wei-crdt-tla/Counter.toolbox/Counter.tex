@@ -947,165 +947,291 @@
 TLA+ module for Op-based \ensuremath{Counter}.
  See its implementation in paper
  \ensuremath{Burckhardt}@\ensuremath{POPL\.{'}}2014.
+ We check that the Op-based \ensuremath{Counter} satisfies the
+ strong eventual convergence property (\ensuremath{SEC})
 \end{cpar}%
 \end{lcom}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\EXTENDS} Naturals ,\,
- Sequences}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}} {\EXTENDS} Naturals ,\,
+ Sequences ,\, Bags ,\, TLC}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}} {\CONSTANTS}}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} Replica}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} {\CONSTANTS}}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{16.4} Replica ,\,}%
 \@y{\@s{0}%
  the set of replicas
 }%
 \@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} Max\@s{18.27}}%
+\@y{\@s{0}%
+ \ensuremath{Max[r]}: the maximum number of the \ensuremath{Inc()} event
+ replica \ensuremath{r \.{\in} Replica} can issue
+}%
+\@xx{}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} {\VARIABLES}}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} counter
- ,\,\@s{0.72}}%
+\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} {\VARIABLES}}%
+\begin{lcom}{16.4}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Protocol variables.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} counter
+ ,\,\@s{15.03}}%
 \@y{\@s{0}%
  \ensuremath{counter[r]}: the current value of the counter at replica
  \ensuremath{r \.{\in} Replica
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} acc ,\,\@s{19.76}}%
+\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} acc ,\,\@s{34.07}}%
 \@y{\@s{0}%
  \ensuremath{acc[r]}: the number of increments performed since the last
  broadcast at replica \ensuremath{r \.{\in} Replica
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} incoming}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} incoming
+ ,\,\@s{8.2}}%
 \@y{\@s{0}%
  \ensuremath{incoming[r]}: incoming messages at replica \ensuremath{r \.{\in}
  Replica
 }}%
 \@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} TypeOK \.{\defeq} \.{\land}
- counter \.{\in} [ Replica \.{\rightarrow} Nat ]}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{56.14} \.{\land} acc
- \.{\in} [ Replica \.{\rightarrow} Nat ]}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{56.14} \.{\land} incoming
- \.{\in} [ Replica \.{\rightarrow} Seq ( Nat ) ]}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} Init \.{\defeq} \.{\land}
- counter \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{35.70} \.{\land} acc
- \.{=} [ r\@s{4.47} \.{\in} Replica \.{\mapsto} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{35.70} \.{\land} incoming
- \.{=} [ r \.{\in} Replica \.{\mapsto} {\langle} {\rangle} ]}%
+\begin{lcom}{16.4}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Auxiliary variables for model checking.
+\end{cpar}%
+\end{lcom}%
+\@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} inc\@s{40.69}}%
+\@y{\@s{0}%
+ \ensuremath{inc[r]}: the number of \ensuremath{Inc()} events issued by the
+ replica \ensuremath{r \.{\in} Replica}; for finite-state model checking
+}%
+\@xx{}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{Inc()} at replica \ensuremath{r \.{\in} Replica
-}%
+The type correctness predicate.
 \end{cpar}%
 \end{lcom}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} Inc ( r ) \.{\defeq}
- \.{\land} {\TRUE}\@s{8.2}}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}} TypeOK \.{\defeq} \.{\land}
+ counter \.{\in} [ Replica \.{\rightarrow} Nat ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{56.14} \.{\land} acc
+ \.{\in} [ Replica \.{\rightarrow} Nat ]}%
+\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{56.14}}%
 \@y{\@s{0}%
- no pre-cond
+ \ensuremath{\.{\land} incoming \.{\in}} [\ensuremath{Replica \.{\rightarrow}
+ SubBag(SetToBag(Nat))}] \ensuremath{\.{\,\backslash\,}}* message ordering is
+ not important; using bag (\ensuremath{i.e}., multiset)
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{46.60} \.{\land} counter
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{56.14} \.{\land} inc
+ \.{\in} [ Replica \.{\rightarrow} Nat ]}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}}\midbar\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+The initial state predicate.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} Init \.{\defeq} \.{\land}
+ counter \.{=} [ r \.{\in} Replica \.{\mapsto} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{35.70} \.{\land} acc
+ \.{=} [ r\@s{4.47} \.{\in} Replica \.{\mapsto} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{35.70} \.{\land} incoming
+ \.{=} [ r \.{\in} Replica \.{\mapsto} EmptyBag ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{35.70} \.{\land} inc
+ \.{=} [ r\@s{4.98} \.{\in} Replica \.{\mapsto} 0 ]}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}}\midbar\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Replica \ensuremath{r \.{\in} Replica} issues an \ensuremath{Inc()} event.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}} Inc ( r ) \.{\defeq}
+ \.{\land} {\TRUE}\@s{8.2}}%
+\@y{\@s{0}%
+ no pre-condition
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{46.60} \.{\land} counter
  \.{'} \.{=} [ counter {\EXCEPT} {\bang} [ r ] \.{=} @ \.{+} 1 ]\@s{12.29}}%
 \@y{\@s{0}%
  current \ensuremath{counter \.{+} 1
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{46.60} \.{\land} acc
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{46.60} \.{\land} acc
  \.{'} \.{=} [ acc {\EXCEPT} {\bang} [ r ] \.{=} @ \.{+} 1 ]\@s{8.2}}%
+\@y{\@s{0}%
+ \# of accumulated increments \ensuremath{\.{+} 1
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{46.60} \.{\land} inc
+ \.{'}\@s{0.51} \.{=} [ inc {\EXCEPT} {\bang} [ r ]\@s{0.51} \.{=} @ \.{+} 1
+ ]\@s{8.19}}%
 \@y{\@s{0}%
  \# of increments \ensuremath{\.{+} 1
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{46.60} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{46.60} \.{\land}
  {\UNCHANGED} {\langle} incoming {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}}%
-\@y{\@s{0}%
- broadcast a message to all replicas except the sender \ensuremath{s
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} Broadcast ( s ,\, m )
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ Broadcast a message \ensuremath{m} to all replicas except the sender
+ \ensuremath{s}.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}} Broadcast ( s ,\, m )
  \.{\defeq} [ r \.{\in} Replica \.{\mapsto}}%
-\@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{106.02} {\IF} s \.{=} r}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{106.02} \.{\THEN}
+\@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{106.02} {\IF} s \.{=} r}%
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{106.02} \.{\THEN}
  incoming [ s ]}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{106.02} \.{\ELSE} Append
- ( incoming [ r ] ,\, m ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{106.02} \.{\ELSE}
+ incoming [ r ] \.{\oplus} SetToBag ( \{ m \} ) ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} Send ( r ) \.{\defeq}
- \.{\land} acc [ r ] \.{\neq} 0}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{53.94} \.{\land} acc
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ Replica \ensuremath{r} issues a \ensuremath{Send()} event, sending an update
+ message.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}} Send ( r ) \.{\defeq}
+ \.{\land} acc [ r ] \.{\neq} 0\@s{12.29}}%
+\@y{\@s{0}%
+ there are accumulated increments
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{53.94} \.{\land} acc
  \.{'} \.{=} [ acc {\EXCEPT} {\bang} [ r ] \.{=} 0 ]\@s{4.1}}%
 \@y{\@s{0}%
  reset \ensuremath{acc[r]
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{53.94} \.{\land}
- Broadcast ( r ,\, acc [ r ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{53.94} \.{\land}
- {\UNCHANGED} {\langle} counter {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{53.94} \.{\land} incoming
+ \.{'} \.{=} Broadcast ( r ,\, acc [ r ] )\@s{4.1}}%
+\@y{\@s{0}%
+ broadcast \ensuremath{acc[r]} to other replicas
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{53.94} \.{\land}
+ {\UNCHANGED} {\langle} counter ,\, inc {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} Receive ( r ) \.{\defeq}
- \.{\land} incoming [ r ] \.{\neq} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{64.53} \.{\land} \.{\LET}
- m \.{=} Head ( incoming [ r ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{75.64} \.{\IN} counter
- \.{'} \.{=} [ counter {\EXCEPT} {\bang} [ r ] \.{=} @ \.{+} m ]}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{64.53} \.{\land} incoming
- \.{'} \.{=} [ incoming {\EXCEPT} {\bang} [ r ] \.{=} Tail ( @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{64.53} \.{\land}
- {\UNCHANGED} {\langle} acc {\rangle}}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ Replica \ensuremath{r} issues a \ensuremath{Receive()} event, receiving an
+ update message.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}} Receive ( r ) \.{\defeq}
+ \.{\land} incoming [ r ] \.{\neq} EmptyBag}%
+\@y{\@s{0}%
+ there are accumulated increments from other replicas
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{64.53} \.{\land} \E\, m
+ \.{\in} BagToSet ( incoming [ r ] ) \.{:}}%
+\@y{\@s{0}%
+ message reordering can be tolerant
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}\@s{82.87} ( \.{\land}
+ counter \.{'} \.{=} [ counter {\EXCEPT} {\bang} [ r ] \.{=} @ \.{+} m ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{86.97} \.{\land} incoming
+ \.{'} \.{=} [ incoming {\EXCEPT} {\bang} [ r ] \.{=} @ \.{\ominus} SetToBag
+ ( \{ m \} ) ] )\@s{4.1}}%
+\@y{\@s{0}%
+ each message is delivered exactly once
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{64.53} \.{\land}
+ {\UNCHANGED} {\langle} acc ,\, inc {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} Next \.{\defeq} \E\, r
- \.{\in} Replica \.{:} Inc ( r ) \.{\lor} Send ( r ) \.{\lor} Receive ( r )}%
+\@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}}\midbar\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+The Next-state relation.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}} Next \.{\defeq} \.{\land}
+ \E\, r \.{\in} Replica \.{:} Inc ( r ) \.{\lor} Send ( r ) \.{\lor} Receive
+ ( r )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}} vars \.{=} {\langle} counter
- ,\, acc ,\, incoming {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}} Spec \.{\defeq} Init
- \.{\land} {\Box} [ Next ]_{ vars}}%
-\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}}\bottombar\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+The specification.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}} vars\@s{0.63} \.{\defeq}
+ {\langle} counter ,\, acc ,\, incoming ,\, inc {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}} Spec \.{\defeq} Init
+ \.{\land} {\Box} [ Next ]_{ vars} \.{\land} {\WF}_{ vars} ( Next )}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}}\midbar\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+A state constraint that is useful for validating the specification
+ using finite-state model checking:
+ each replica \ensuremath{r \.{\in} Replica} can issue at most
+ \ensuremath{Max[r] Inc()} events.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}} IncConstraint \.{\defeq}
+ \A\, r \.{\in} Replica \.{:} inc [ r ] \.{\leq} Max [ r ]}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}}\midbar\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+The correctness of counter:
+ eventual convergence (\ensuremath{EC}) and strong eventual convergence
+ (\ensuremath{SEC}).
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}} Convergence \.{\defeq} \A\,
+ r ,\, s \.{\in} Replica \.{:} ( counter [ r ] \.{=} counter [ s ] \.{\land}
+ counter [ r ] \.{\neq} 0 )}%
+\@y{\@s{0}%
+ \ensuremath{counter[r] \.{\neq} 0}: excluding the initial state
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 106\hspace{1em}} EC \.{\defeq} {\Diamond}
+ Convergence}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}} AccBroadcast \.{\defeq}
+ \A\, r \.{\in} Replica \.{:} acc [ r ] \.{=} 0\@s{12.29}}%
+\@y{\@s{0}%
+ all accumulated increments have been broadcast
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}} MessageDelivery \.{\defeq}
+ \A\, r \.{\in} Replica \.{:} incoming [ r ] \.{=} {\langle} {\rangle}}%
+\@y{\@s{0}%
+ all messages have been delivered
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}} SConvergence \.{\defeq}
+ \A\, r ,\, s\@s{1.28} \.{\in} Replica \.{:} counter [ r ] \.{=} counter [ s
+ ]}%
+\@y{\@s{0}%
+ no \ensuremath{counter[r] \.{\neq} 0
+}}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 112\hspace{1em}} SEC \.{\defeq} {\Box} ( (
+ AccBroadcast \.{\land} MessageDelivery ) \.{\implies} SConvergence )}%
+\@x{\makebox[0pt][r]{\scriptsize 113\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jun} 03
- 21:55:15 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Jun} 04 19:52:43 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jun} 03 20:08:57
  \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{T}{F}{10.0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}*
- \ensuremath{oid},\@s{12.5}\ensuremath{\.{\,\backslash\,}}*
- \ensuremath{oid[r]}: the (local) \ensuremath{id} of the increment operation
- issued by the replica \ensuremath{r \.{\in} Replica
-}%
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{oids},
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{oids[r]}: the set of ids of the
- increment operations performed by the replica \ensuremath{r \.{\in} Replica
-}%
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Oid \.{\defeq}} [\ensuremath{r}:
- \ensuremath{Replica}, \ensuremath{id}: \ensuremath{Nat}]
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Msg \.{\defeq}} [a:
- \ensuremath{Nat}, \ensuremath{r}: \ensuremath{Replica}, \ensuremath{id}:
- \ensuremath{Nat}] \ensuremath{\.{\,\backslash\,}}* message to send
 \end{cpar}%
 \end{lcom}%
 \end{document}
