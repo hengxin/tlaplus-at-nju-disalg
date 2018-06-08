@@ -100,17 +100,30 @@ IncConstraint == \A r \in Replica: inc[r] <= Max[r]
 --------------------------------------------------------------------------------
 (**********************************************************************)
 (* The correctness of counter:                                        *)
-(* eventual convergence (EC) and strong eventual convergence (SEC).   *)
+(* Eventual Convergence (EC), Quiescent Consistency (QC),             *)
+(* and Strong Eventual Convergence (SEC).                             *)
+(**********************************************************************)
+
+
+(**********************************************************************)
+(* Eventual Consistency (EC)                                          *)
 (**********************************************************************)
 Convergence == \A r, s \in Replica: (counter[r] = counter[s] /\ counter[r] # 0) \* counter[r] # 0: excluding the initial state
 EC == <>Convergence
 
+(**********************************************************************)
+(* Quiescent Consistency (QC)                                         *)
+(**********************************************************************)
 AccBroadcast == \A r \in Replica: acc[r] = 0    \* all accumulated increments have been broadcast
-MessageDelivery == \A r \in Replica: incoming[r] = <<>> \* all messages have been delivered
-SConvergence == \A r, s \in Replica: counter[r] = counter[s] \* no counter[r] # 0
+MessageDelivery == \A r \in Replica: incoming[r] = EmptyBag \* all messages have been delivered
+QConvergence == \A r, s \in Replica: counter[r] = counter[s] \* no counter[r] # 0
 
-SEC == []((AccBroadcast /\ MessageDelivery) => SConvergence)
+QC == []((AccBroadcast /\ MessageDelivery) => QConvergence)
+
+(**********************************************************************)
+(* Strong Eventual Consistency (SEC)                                         *)
+(**********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Mon Jun 04 19:52:43 CST 2018 by hengxin
+\* Last modified Fri Jun 08 11:13:13 CST 2018 by hengxin
 \* Created Sun Jun 03 20:08:57 CST 2018 by hengxin

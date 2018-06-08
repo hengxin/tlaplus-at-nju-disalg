@@ -1181,51 +1181,68 @@ A state constraint that is useful for validating the specification
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The correctness of counter:
- eventual convergence (\ensuremath{EC}) and strong eventual convergence
- (\ensuremath{SEC}).
+ Eventual \ensuremath{Convergence} (\ensuremath{EC}), Quiescent Consistency
+ (\ensuremath{QC}),
+ and Strong Eventual \ensuremath{Convergence} (\ensuremath{SEC}).
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}} Convergence \.{\defeq} \A\,
+\@pvspace{16.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Eventual Consistency (\ensuremath{EC})
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}} Convergence \.{\defeq} \A\,
  r ,\, s \.{\in} Replica \.{:} ( counter [ r ] \.{=} counter [ s ] \.{\land}
  counter [ r ] \.{\neq} 0 )}%
 \@y{\@s{0}%
  \ensuremath{counter[r] \.{\neq} 0}: excluding the initial state
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 106\hspace{1em}} EC \.{\defeq} {\Diamond}
+ \@x{\makebox[0pt][r]{\scriptsize 112\hspace{1em}} EC \.{\defeq} {\Diamond}
  Convergence}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}} AccBroadcast \.{\defeq}
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Quiescent Consistency (\ensuremath{QC})
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}} AccBroadcast \.{\defeq}
  \A\, r \.{\in} Replica \.{:} acc [ r ] \.{=} 0\@s{12.29}}%
 \@y{\@s{0}%
  all accumulated increments have been broadcast
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}} MessageDelivery \.{\defeq}
- \A\, r \.{\in} Replica \.{:} incoming [ r ] \.{=} {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}} MessageDelivery \.{\defeq}
+ \A\, r\@s{0.75} \.{\in} Replica \.{:} incoming [ r ] \.{=} EmptyBag}%
 \@y{\@s{0}%
  all messages have been delivered
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}} SConvergence \.{\defeq}
- \A\, r ,\, s\@s{1.28} \.{\in} Replica \.{:} counter [ r ] \.{=} counter [ s
- ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}} QConvergence \.{\defeq}
+ \A\, r ,\, s \.{\in} Replica \.{:} counter [ r ] \.{=} counter [ s ]}%
 \@y{\@s{0}%
  no \ensuremath{counter[r] \.{\neq} 0
 }}%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 112\hspace{1em}} SEC \.{\defeq} {\Box} ( (
- AccBroadcast \.{\land} MessageDelivery ) \.{\implies} SConvergence )}%
-\@x{\makebox[0pt][r]{\scriptsize 113\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 121\hspace{1em}} QC \.{\defeq} {\Box} ( (
+ AccBroadcast \.{\land} MessageDelivery ) \.{\implies} QConvergence )}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Strong Eventual Consistency (\ensuremath{SEC})
+\end{cpar}%
+\end{lcom}%
+\@x{\makebox[0pt][r]{\scriptsize 126\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Jun} 04 19:52:43 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Fri}
+ \ensuremath{Jun} 08 11:13:13 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
