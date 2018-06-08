@@ -10,8 +10,14 @@
 EXTENDS Naturals, Sequences, Bags, TLC
 
 CONSTANTS
+    (**********************************************************************)
+    (* Protocol variables.                                                *)
+    (**********************************************************************)
     Replica, \* the set of replicas
-    Max      \* Max[r]: the maximum number of the Inc() event replica r \in Replica can issue
+    (**********************************************************************)
+    (* Auxiliary variables for model checking.                            *)
+    (**********************************************************************)
+    Max      \* Max[r]: the maximum number of the Inc() event replica r \in Replica can issue; for finite-state model checking
     
 VARIABLES
     (**********************************************************************)
@@ -125,5 +131,5 @@ QC == []((AccBroadcast /\ MessageDelivery) => QConvergence)
 (**********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Fri Jun 08 11:13:13 CST 2018 by hengxin
+\* Last modified Fri Jun 08 13:47:57 CST 2018 by hengxin
 \* Created Sun Jun 03 20:08:57 CST 2018 by hengxin

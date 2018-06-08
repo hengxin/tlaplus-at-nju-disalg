@@ -23,7 +23,7 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2018-06-08 11:27:42)
+Starting... (2018-06-08 16:29:26)
 @!@!@ENDMSG 2185 @!@!@
 @!@!@STARTMSG 2212:0 @!@!@
 Implied-temporal checking--satisfiability problem has 1 branches.
@@ -35,88 +35,94 @@ Computing initial states...
 Finished computing initial states: 1 distinct state generated.
 @!@!@ENDMSG 2190 @!@!@
 @!@!@STARTMSG 2192:0 @!@!@
-Checking temporal properties for the current state space with 33595 total distinct states at (2018-06-08 11:27:48)
+Checking temporal properties for the current state space with 36502 total distinct states at (2018-06-08 16:29:31)
 @!@!@ENDMSG 2192 @!@!@
 @!@!@STARTMSG 2267:0 @!@!@
-Finished checking temporal properties in 00s at 2018-06-08 11:27:49
+Finished checking temporal properties in 00s at 2018-06-08 16:29:32
 @!@!@ENDMSG 2267 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(11) at 2018-06-08 11:27:49: 146370 states generated (146,370 s/min), 33987 distinct states found (33,987 ds/min), 17656 states left on queue.
+Progress(11) at 2018-06-08 16:29:32: 162073 states generated (162,073 s/min), 37274 distinct states found (37,274 ds/min), 19285 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2192:0 @!@!@
-Checking temporal properties for the current state space with 1667928 total distinct states at (2018-06-08 11:28:49)
+Checking temporal properties for the current state space with 1597060 total distinct states at (2018-06-08 16:30:32)
 @!@!@ENDMSG 2192 @!@!@
 @!@!@STARTMSG 2267:0 @!@!@
-Finished checking temporal properties in 16s at 2018-06-08 11:29:05
+Finished checking temporal properties in 13s at 2018-06-08 16:30:45
 @!@!@ENDMSG 2267 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(19) at 2018-06-08 11:29:05: 12351145 states generated (12,204,775 s/min), 1669920 distinct states found (1,635,933 ds/min), 462262 states left on queue.
-@!@!@ENDMSG 2200 @!@!@
-@!@!@STARTMSG 2200:0 @!@!@
-Progress(22) at 2018-06-08 11:30:05: 25240567 states generated (12,889,422 s/min), 3062169 distinct states found (1,392,249 ds/min), 609455 states left on queue.
+Progress(20) at 2018-06-08 16:30:46: 11702693 states generated (11,540,620 s/min), 1599061 distinct states found (1,561,787 ds/min), 458199 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2192:0 @!@!@
-Checking temporal properties for the current state space with 4267419 total distinct states at (2018-06-08 11:31:05)
+Checking temporal properties for the current state space with 2864535 total distinct states at (2018-06-08 16:31:46)
 @!@!@ENDMSG 2192 @!@!@
 @!@!@STARTMSG 2267:0 @!@!@
-Finished checking temporal properties in 54s at 2018-06-08 11:31:59
+Finished checking temporal properties in 30s at 2018-06-08 16:32:16
 @!@!@ENDMSG 2267 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(24) at 2018-06-08 11:31:59: 38148049 states generated (12,907,482 s/min), 4269043 distinct states found (1,206,874 ds/min), 556253 states left on queue.
+Progress(22) at 2018-06-08 16:32:16: 23317031 states generated (11,614,338 s/min), 2866927 distinct states found (1,267,866 ds/min), 611280 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(24) at 2018-06-08 16:33:16: 35681757 states generated (12,364,726 s/min), 4048980 distinct states found (1,182,053 ds/min), 588322 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2201:0 @!@!@
-The coverage statistics at 2018-06-08 11:31:59
+The coverage statistics at 2018-06-08 16:33:16
 @!@!@ENDMSG 2201 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 50, col 14 to line 50, col 53 of module Counter: 14852244
+  line 56, col 14 to line 56, col 53 of module Counter: 13842964
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 51, col 14 to line 51, col 45 of module Counter: 14852276
+  line 57, col 14 to line 57, col 45 of module Counter: 13842964
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 52, col 14 to line 52, col 45 of module Counter: 14852276
+  line 58, col 14 to line 58, col 45 of module Counter: 13842964
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 53, col 26 to line 53, col 33 of module Counter: 14852276
+  line 59, col 26 to line 59, col 33 of module Counter: 13842964
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 67, col 15 to line 67, col 42 of module Counter: 4688673
+  line 73, col 15 to line 73, col 42 of module Counter: 4455824
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 68, col 15 to line 68, col 46 of module Counter: 4688673
+  line 74, col 15 to line 74, col 46 of module Counter: 4455824
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 69, col 27 to line 69, col 33 of module Counter: 4688673
+  line 75, col 27 to line 75, col 33 of module Counter: 4455824
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 69, col 36 to line 69, col 38 of module Counter: 4688673
+  line 75, col 36 to line 75, col 38 of module Counter: 4455819
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 76, col 25 to line 76, col 64 of module Counter: 18610114
+  line 82, col 25 to line 82, col 64 of module Counter: 17384024
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 77, col 25 to line 77, col 80 of module Counter: 18610114
+  line 83, col 25 to line 83, col 80 of module Counter: 17384024
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 78, col 30 to line 78, col 32 of module Counter: 18610114
+  line 84, col 30 to line 84, col 32 of module Counter: 17384024
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 78, col 35 to line 78, col 37 of module Counter: 18610114
+  line 84, col 35 to line 84, col 37 of module Counter: 17384024
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2202:0 @!@!@
 End of statistics.
 @!@!@ENDMSG 2202 @!@!@
-@!@!@STARTMSG 2200:0 @!@!@
-Progress(27) at 2018-06-08 11:32:59: 50315508 states generated (12,167,459 s/min), 5258653 distinct states found (989,610 ds/min), 326901 states left on queue.
-@!@!@ENDMSG 2200 @!@!@
-@!@!@STARTMSG 2200:0 @!@!@
-Progress(43) at 2018-06-08 11:33:38: 59286109 states generated, 5886396 distinct states found, 0 states left on queue.
-@!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2192:0 @!@!@
-Checking temporal properties for the complete state space with 5886396 total distinct states at (2018-06-08 11:33:38)
+Checking temporal properties for the current state space with 5100447 total distinct states at (2018-06-08 16:34:16)
 @!@!@ENDMSG 2192 @!@!@
 @!@!@STARTMSG 2267:0 @!@!@
-Finished checking temporal properties in 01min 17s at 2018-06-08 11:34:55
+Finished checking temporal properties in 01min 02s at 2018-06-08 16:35:18
+@!@!@ENDMSG 2267 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(25) at 2018-06-08 16:35:18: 48189765 states generated (12,508,008 s/min), 5101434 distinct states found (1,052,454 ds/min), 388240 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(43) at 2018-06-08 16:36:07: 59286109 states generated, 5886396 distinct states found, 0 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2192:0 @!@!@
+Checking temporal properties for the complete state space with 5886396 total distinct states at (2018-06-08 16:36:07)
+@!@!@ENDMSG 2192 @!@!@
+@!@!@STARTMSG 2267:0 @!@!@
+Finished checking temporal properties in 01min 36s at 2018-06-08 16:37:44
 @!@!@ENDMSG 2267 @!@!@
 @!@!@STARTMSG 2193:0 @!@!@
 Model checking completed. No error has been found.
@@ -126,49 +132,49 @@ Model checking completed. No error has been found.
   based on the actual fingerprints:  val = 8.9E-6
 @!@!@ENDMSG 2193 @!@!@
 @!@!@STARTMSG 2201:0 @!@!@
-The coverage statistics at 2018-06-08 11:34:59
+The coverage statistics at 2018-06-08 16:37:48
 @!@!@ENDMSG 2201 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 50, col 14 to line 50, col 53 of module Counter: 23545584
+  line 56, col 14 to line 56, col 53 of module Counter: 23545584
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 51, col 14 to line 51, col 45 of module Counter: 23545584
+  line 57, col 14 to line 57, col 45 of module Counter: 23545584
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 52, col 14 to line 52, col 45 of module Counter: 23545584
+  line 58, col 14 to line 58, col 45 of module Counter: 23545584
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 53, col 26 to line 53, col 33 of module Counter: 23545584
+  line 59, col 26 to line 59, col 33 of module Counter: 23545584
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 67, col 15 to line 67, col 42 of module Counter: 6748797
+  line 73, col 15 to line 73, col 42 of module Counter: 6748797
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 68, col 15 to line 68, col 46 of module Counter: 6748797
+  line 74, col 15 to line 74, col 46 of module Counter: 6748797
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 69, col 27 to line 69, col 33 of module Counter: 6748797
+  line 75, col 27 to line 75, col 33 of module Counter: 6748797
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 69, col 36 to line 69, col 38 of module Counter: 6748797
+  line 75, col 36 to line 75, col 38 of module Counter: 6748797
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 76, col 25 to line 76, col 64 of module Counter: 28991727
+  line 82, col 25 to line 82, col 64 of module Counter: 28991727
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 77, col 25 to line 77, col 80 of module Counter: 28991727
+  line 83, col 25 to line 83, col 80 of module Counter: 28991727
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 78, col 30 to line 78, col 32 of module Counter: 28991727
+  line 84, col 30 to line 84, col 32 of module Counter: 28991727
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2221:0 @!@!@
-  line 78, col 35 to line 78, col 37 of module Counter: 28991727
+  line 84, col 35 to line 84, col 37 of module Counter: 28991727
 @!@!@ENDMSG 2221 @!@!@
 @!@!@STARTMSG 2202:0 @!@!@
 End of statistics.
 @!@!@ENDMSG 2202 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(43) at 2018-06-08 11:34:59: 59286109 states generated (8,148,770 s/min), 5886396 distinct states found (809,074 ds/min), 0 states left on queue.
+Progress(43) at 2018-06-08 16:37:48: 59286109 states generated (7,097,200 s/min), 5886396 distinct states found (704,666 ds/min), 0 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2199:0 @!@!@
 59286109 states generated, 5886396 distinct states found, 0 states left on queue.
@@ -180,5 +186,5 @@ The depth of the complete state graph search is 43.
 The average outdegree of the complete state graph is 1 (minimum is 0, the maximum 8 and the 95th percentile is 3).
 @!@!@ENDMSG 2268 @!@!@
 @!@!@STARTMSG 2186:0 @!@!@
-Finished in 436978ms at (2018-06-08 11:34:59)
+Finished in 501690ms at (2018-06-08 16:37:48)
 @!@!@ENDMSG 2186 @!@!@

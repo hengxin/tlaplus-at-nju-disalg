@@ -939,115 +939,54 @@
 \begin{document}
 \tlatex
 \setboolean{shading}{true}
-\@x{}\moduleLeftDash\@xx{ {\MODULE} OT}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Naturals ,\, Sequences}%
+ \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
+ {\MODULE} CJupiter}\moduleRightDash\@xx{}%
 \@pvspace{8.0pt}%
-\@x{ {\CONSTANTS}}%
-\@x{\@s{16.4} CH ,\,}%
-\@x{\@s{16.4} POS ,\,}%
-\@x{\@s{16.4} PR ,\,}%
-\@x{\@s{16.4} LOP ,\,}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Model checking our own \ensuremath{CJupiter} protocol.
+\end{cpar}%
+\end{lcom}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\CONSTANTS}}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} Server ,\,}%
 \@y{\@s{0}%
- for test only
+ the server replica
 }%
 \@xx{}%
-\@x{\@s{16.4} LOPS ,\,\@s{8.2}}%
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Client\@s{7.77}}%
 \@y{\@s{0}%
- for test only
-}%
-\@xx{}%
-\@x{\@s{16.4} ROP\@s{4.1}}%
-\@y{\@s{0}%
- for test only
+ the set of client replicas
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{ OP \.{\defeq} [ type \.{:} \{\@w{ins} ,\,\@w{del} \} ,\, pos \.{:} POS
- ,\, ch \.{:} CH ,\, pr \.{:} PR ]}%
-\@x{ NOP \.{\defeq} {\CHOOSE} v \.{:} v \.{\notin} OP}%
-\@pvspace{8.0pt}%
-\@x{ XformII ( lins ,\, rins ) \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}} {\VARIABLES}}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4} cin ,\,}%
 \@y{\@s{0}%
- the left insertion transformed against the right insertion
-}%
+ \ensuremath{cin[c]}: incoming channel of \ensuremath{c \.{\in} Client
+}}%
 \@xx{}%
-\@x{\@s{16.4} {\IF} lins . pos \.{<} rins . pos}%
-\@x{\@s{16.4} \.{\THEN} lins}%
-\@x{\@s{16.4} \.{\ELSE} {\IF} lins . pos \.{>} rins . pos}%
-\@x{\@s{32.8} \.{\THEN} [ lins {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
-\@x{\@s{32.8} \.{\ELSE} {\IF} lins . ch \.{=} rins . ch}%
-\@x{\@s{49.19} \.{\THEN} NOP}%
-\@x{\@s{49.19} \.{\ELSE} {\IF} lins . pr \.{>} rins . pr}%
-\@x{\@s{65.6} \.{\THEN} [ lins {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
-\@x{\@s{65.6} \.{\ELSE} lins}%
-\@pvspace{8.0pt}%
-\@x{ XformID ( ins ,\, del ) \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{16.4} sin\@s{6.62}}%
 \@y{\@s{0}%
- the left insertion transformed against the right deletion
-}%
+ \ensuremath{sin[c]}: incoming channel for \ensuremath{c \.{\in} Client} at
+ the \ensuremath{Server
+}}%
 \@xx{}%
-\@x{\@s{16.4} {\IF} ins . pos \.{<} del . pos}%
-\@x{\@s{16.4} \.{\THEN} ins}%
-\@x{\@s{16.4} \.{\ELSE} [ ins {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\@pvspace{8.0pt}%
-\@x{ XformDI ( del ,\, ins ) \.{\defeq}}%
-\@y{\@s{0}%
- the first deletion transformed against the right insertion
+\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}}\bottombar\@xx{}%
+\setboolean{shading}{false}
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+\ensuremath{\.{\,\backslash\,}}* Modification History
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jun} 09
+ 00:46:54 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
-\@xx{}%
-\@x{\@s{16.4} {\IF} del . pos \.{<} ins . pos}%
-\@x{\@s{16.4} \.{\THEN} del}%
-\@x{\@s{16.4} \.{\ELSE} [ del {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
-\@pvspace{8.0pt}%
-\@x{ XformDD ( ldel ,\, rdel ) \.{\defeq}}%
-\@y{\@s{0}%
- the first deletion transformed against the right deletion
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* Created Sat \ensuremath{Jun} 09 00:42:52
+ \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
-\@xx{}%
-\@x{\@s{16.4} {\IF} ldel . pos \.{<} rdel . pos}%
-\@x{\@s{16.4} \.{\THEN} ldel}%
-\@x{\@s{16.4} \.{\ELSE} {\IF} ldel . pos \.{>} rdel . pos}%
-\@x{\@s{32.8} \.{\THEN} [ ldel {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\@x{\@s{32.8} \.{\ELSE} NOP}%
-\@pvspace{8.0pt}%
-\@x{ Xform ( lop ,\, rop ) \.{\defeq}}%
-\@y{\@s{0}%
- the left operation is transformed against the right operation
-}%
-\@xx{}%
- \@x{\@s{16.4} {\CASE} lop . type \.{=}\@w{ins} \.{\land} rop . type
- \.{=}\@w{ins} \.{\rightarrow} XformII ( lop ,\, rop )}%
- \@x{\@s{16.4} {\Box}\@s{4.1} lop . type \.{=}\@w{ins}\@s{0.61} \.{\land} rop
- . type \.{=}\@w{del} \.{\rightarrow} XformID ( lop ,\, rop )}%
- \@x{\@s{16.4} {\Box}\@s{4.10} lop . type \.{=}\@w{del} \.{\land} rop . type
- \.{=}\@w{ins}\@s{0.61} \.{\rightarrow} XformDI ( lop ,\, rop )}%
- \@x{\@s{16.4} {\Box}\@s{4.10} lop . type \.{=}\@w{del} \.{\land} rop . type
- \.{=}\@w{del} \.{\rightarrow} XformDD ( lop ,\, rop )}%
-\@pvspace{8.0pt}%
-\@x{ XformOpOps ( op ,\, ops ) \.{\defeq}}%
-\@y{\@s{0}%
- the left operation is transformed against the right operation sequence
-}%
-\@xx{}%
- \@x{\@s{16.4} \.{\LET} X [ j \.{\in} 1 \.{\dotdot} Len ( ops ) \.{+} 1 ]
- \.{\defeq}}%
-\@x{\@s{36.79} {\IF} j \.{=} 1}%
-\@x{\@s{36.79} \.{\THEN} {\langle} op {\rangle}}%
- \@x{\@s{36.79} \.{\ELSE} Append ( X [ j \.{-} 1 ] ,\, Xform ( X [ j \.{-} 1 ]
- [ j \.{-} 1 ] ,\, ops [ j \.{-} 1 ] ) )}%
-\@x{\@s{16.4} \.{\IN} X [ Len ( ops ) \.{+} 1 ]}%
-\@pvspace{8.0pt}%
-\@x{ XformOpsOp ( ops ,\, op ) \.{\defeq}}%
-\@y{\@s{0}%
- the left operation sequence is transformed against the right single operation
-}%
-\@xx{}%
-\@x{\@s{16.4} \.{\LET} T [ i \.{\in} 0 \.{\dotdot} Len ( ops ) ] \.{\defeq}}%
-\@x{\@s{36.79} {\IF} i \.{=} 0}%
-\@x{\@s{36.79} \.{\THEN} {\langle} {\rangle}}%
-\@x{\@s{36.79} \.{\ELSE} \.{\LET} X \.{\defeq} XformOpOps ( op ,\, ops )}%
- \@x{\@s{68.11} \.{\IN} Append ( T [ i \.{-} 1 ] ,\, Xform ( ops [ i ] ,\, X [
- i ] ) )}%
-\@x{\@s{16.4} \.{\IN} T [ Len ( ops ) ]}%
-\@x{}\bottombar\@xx{}%
+\end{cpar}%
+\end{lcom}%
 \end{document}
