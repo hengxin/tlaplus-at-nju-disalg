@@ -2,10 +2,109 @@
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  \fignocaption{width = 0.50\textwidth}{figs/counter}
 \end{frame}
 %%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%
 \begin{frame}{}
+  \[
+    \begin{array}{lcl}
+      \Sigma &=& \mathbb{N}_0 \times \mathbb{N}_0 \\
+      M &=& \mathbb{N}_0 \\
+      \sigma_0 &=& \pair{0,0} \\[10pt]
+    \end{array}
+  \]
+
+  \pause
+  \[
+    \red{\pair{a, d} \quad:\quad \pair{\text{current value, \# of \inc{}s since the last \send{}}}}
+  \]
+
+  \pause
+  \[
+    \begin{array}{lcl}
+      \rd(\pair{a, d}) &=& \pair{a, d} \\[5pt]
+      \inc(\pair{a, d}) &=& \pair{a+1, d+1} \\[10pt]
+      \send(\pair{a, d}) &=& (\pair{a, 0}, d) \\[5pt]
+      \rcv(\pair{a, d}, \red{d'}) &=& \pair{a+d', d}
+    \end{array}
+  \]
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \fignocaption{width = 0.50\textwidth}{figs/specification-checked}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \centerline{\large \teal{EC: Eventual Consistency/Convergence}}
+
+  \vspace{0.60cm}
+  \begin{quote}
+    \begin{center}
+      ``if clients stop issuing \textsc{Inc}s, \\
+      then the counters at all replicas will be eventually the same.''
+    \end{center}
+  \end{quote}
+
+  \pause
+  \[
+    \Diamond (\forall r_i, r_j \in \mathcal{R}: c_i@r_i = c_j@r_j \land \red{c_i@r_i \neq 0})
+  \]
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \centerline{\large \teal{QC: Quiescent Consistency}}
+
+  \vspace{0.60cm}
+  \begin{quote}
+    \begin{center}
+      ``if the system is at quiescent, \\
+      then the counters at all replicas must be the same.''
+    \end{center}
+  \end{quote}
+
+  \pause
+  \begin{align*}
+    \Box \Big(\big(&\forall r_i \in \mathcal{R}: \red{d@r_i = 0 \land incoming@r = \emptyset}\big) \\
+      &\implies \big(\forall r_i, r_j \in \mathcal{R}: c_i@r_i = c_j@r_j\big) \Big)
+  \end{align*}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \centerline{\large \teal{SEC: Strong Eventual Consistency/Convergence}}
+
+  \vspace{0.60cm}
+  \begin{quote}
+    \begin{center}
+      ``if two replicas have processed the same set of \textsc{Inc}s, \\
+      then the counters at these two replicas must be the same.''
+    \end{center}
+  \end{quote}
+
+  \pause
+  \[
+    \Box \Big(\forall r_i, r_j \in \mathcal{R}: (\red{\set{C_i}@r_i = \set{C_j}@r_j}) \implies (c_i@r_i = c_j@r_j) \Big)
+  \]
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \fignocaption{width = 0.60\textwidth}{figs/communication-channel}
+
+  \begin{description}[Cannot:]
+    \centering
+    \item[Cannot:] loss, duplication
+    \item[Can:] reordering \teal{($\set{}$ vs. ${\pair{\pair{}}}$)}
+  \end{description}
 \end{frame}
 %%%%%%%%%%%%%%%

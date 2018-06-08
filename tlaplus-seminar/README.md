@@ -21,5 +21,6 @@
 | 8 		| TLA+ on Paxos		|	易星辰  	| 2018-05-04 (周五)  	|  			| 本科毕业设计相关		|
 | 9 		| Instance&Implementation	|  王芷芙  	| 2018-05-11 (周五)  	|  Video 8; SS Chapters 3, 4 |		|
 | 10 		| The Alternating Bit Protocol  |  唐瑞泽	| 2018-05-18 (周五)  	|  Video 9		|		|
+| 11 		| Op-based Counter	|  魏恒峰		| 2018-06-08 (周五)  	|  RDT paper		| RDT Project   |
 | | The TLA+ Language	|	| 2018-05-XX (周五)  	|  Paper |		|
 | | Checking TLA+ |	| 2018-05-XX (周五)  	|  Paper |		|
