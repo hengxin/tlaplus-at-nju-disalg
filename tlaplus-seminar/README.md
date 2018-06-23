@@ -22,5 +22,8 @@
 | 9 		| Instance&Implementation	|  王芷芙  	| 2018-05-11 (周五)  	|  Video 8; SS Chapters 3, 4 |		|
 | 10 		| The Alternating Bit Protocol  |  唐瑞泽	| 2018-05-18 (周五)  	|  Video 9		|		|
 | 11 		| Op-based Counter	|  魏恒峰		| 2018-06-08 (周五)  	|  RDT paper		| RDT Project   |
-| | The TLA+ Language	|	| 2018-05-XX (周五)  	|  Paper |		|
-| | Checking TLA+ |	| 2018-05-XX (周五)  	|  Paper |		|
+| | The TLA+ Language	|	| 2018-06-XX   	|  Paper |		|
+| | Checking TLA+ (Safty\&Liveness) |	| 2018-06-XX   	|  Paper |		|
+| | Refinement (1) |	| 2018-06-XX   	|  Paper |		|
+| | Refinement (2) |	| 2018-06-XX   	|  Paper |		|
+| | PlusCal |	| 2018-06-XX   	|  Paper |		|
