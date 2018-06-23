@@ -2,7 +2,7 @@
 TLC2 Version 2.12 of 29 January 2018
 @!@!@ENDMSG 2262 @!@!@
 @!@!@STARTMSG 2187:0 @!@!@
-Running breadth-first search Model-Checking with 2 workers on 4 cores with 574MB heap and 1289MB offheap memory (Linux 4.13.0-37-generic amd64, Oracle Corporation 1.8.0_161 x86_64).
+Running breadth-first search Model-Checking with 2 workers on 4 cores with 574MB heap and 1289MB offheap memory (Linux 4.13.0-43-generic amd64, Oracle Corporation 1.8.0_171 x86_64).
 @!@!@ENDMSG 2187 @!@!@
 @!@!@STARTMSG 2220:0 @!@!@
 Starting SANY...
@@ -23,7 +23,7 @@ Semantic processing of module MC
 SANY finished.
 @!@!@ENDMSG 2219 @!@!@
 @!@!@STARTMSG 2185:0 @!@!@
-Starting... (2018-04-13 15:38:01)
+Starting... (2018-06-23 21:10:57)
 @!@!@ENDMSG 2185 @!@!@
 <<"$!@$!@$!@$!@$!", 1503>>
 @!@!@STARTMSG 2189:0 @!@!@
@@ -40,7 +40,7 @@ Model checking completed. No error has been found.
   based on the actual fingerprints:  val = 1.8E308
 @!@!@ENDMSG 2193 @!@!@
 @!@!@STARTMSG 2200:0 @!@!@
-Progress(0) at 2018-04-13 15:38:03: 0 states generated (0 s/min), 0 distinct states found (0 ds/min), 0 states left on queue.
+Progress(0) at 2018-06-23 21:10:59: 0 states generated (0 s/min), 0 distinct states found (0 ds/min), 0 states left on queue.
 @!@!@ENDMSG 2200 @!@!@
 @!@!@STARTMSG 2199:0 @!@!@
 0 states generated, 0 distinct states found, 0 states left on queue.
@@ -49,5 +49,5 @@ Progress(0) at 2018-04-13 15:38:03: 0 states generated (0 s/min), 0 distinct sta
 The depth of the complete state graph search is 0.
 @!@!@ENDMSG 2194 @!@!@
 @!@!@STARTMSG 2186:0 @!@!@
-Finished in 2086ms at (2018-04-13 15:38:03)
+Finished in 1847ms at (2018-06-23 21:10:59)
 @!@!@ENDMSG 2186 @!@!@
