@@ -1,14 +1,17 @@
 --------------------------------- MODULE OT ---------------------------------
 (***************************************************************************)
 (* Specification of OT (Operational Transformation) functions.             *)
+(* It consists of the basic OT functions for two operations and            *)
+(* more general ones involving operation sequences.                        *)
 (***************************************************************************)
 EXTENDS Op
-
+-----------------------------------------------------------------------------
 (***************************************************************************)
 (* OT (Operational Transformation) functions.                              *)
 (* Naming convention: I for "Ins" and D for "Del".                         *)
 (***************************************************************************)
-XformII(lins, rins) == \* the left "Ins" lins transformed against the right "Ins" rins 
+\* The left "Ins" lins transformed against the right "Ins" rins. 
+XformII(lins, rins) == 
     IF lins.pos < rins.pos
     THEN lins
     ELSE IF lins.pos > rins.pos
@@ -18,23 +21,24 @@ XformII(lins, rins) == \* the left "Ins" lins transformed against the right "Ins
               ELSE IF lins.pr > rins.pr
                    THEN [lins EXCEPT !.pos = @+1]
                    ELSE lins
-
-XformID(ins, del) == \* the left "Ins" lins transformed against the right "Del" rdel
+\* The left "Ins" lins transformed against the right "Del" rdel.
+XformID(ins, del) == 
     IF ins.pos < del.pos
     THEN ins
     ELSE [ins EXCEPT !.pos = @-1]
-                
-XformDI(del, ins) == \* the left "Del" ldel transformed against the right "Ins" rins
+\* The left "Del" ldel transformed against the right "Ins" rins.
+XformDI(del, ins) == 
     IF del.pos < ins.pos
     THEN del
     ELSE [del EXCEPT !.pos = @+1]
-    
-XformDD(ldel, rdel) == \* the left "Del" ldel transformed against the right "Del" rdel
+\* The left "Del" ldel transformed against the right "Del" rdel.
+XformDD(ldel, rdel) == 
     IF ldel.pos < rdel.pos
     THEN ldel
     ELSE IF ldel.pos > rdel.pos
          THEN [ldel EXCEPT !.pos = @-1]
          ELSE Nop
+-----------------------------------------------------------------------------
 (***************************************************************************)
 (* Transform the left operation lop against the right operation rop        *)
 (* with appropriate OT function.                                           *)
@@ -45,6 +49,7 @@ Xform(lop, rop) ==
        []  lop.type = "Ins" /\ rop.type = "Del" -> XformID(lop, rop)
        []  lop.type = "Del" /\ rop.type = "Ins" -> XformDI(lop, rop)
        []  lop.type = "Del" /\ rop.type = "Del" -> XformDD(lop, rop)
+-----------------------------------------------------------------------------
 (***************************************************************************)
 (* Iteratively/recursively transforms the operation op                     *)
 (* against an operation sequence ops.                                      *)
@@ -74,5 +79,5 @@ XformOpsOp(ops, op) ==
     IN  [i \in 1 .. Len(ops) |-> Xform(ops[i], opX[i])]
 ======================================================]=======================
 \* Modification History
-\* Last modified Sun Jun 24 18:01:06 CST 2018 by hengxin
+\* Last modified Sun Jun 24 18:09:53 CST 2018 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin

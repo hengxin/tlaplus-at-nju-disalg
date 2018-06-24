@@ -1,10 +1,8 @@
 ------------------------------ MODULE AJupiter ------------------------------
-
 (***************************************************************************)
 (* Model checking the Jupiter protocol presented by Attiya and others.     *)
 (***************************************************************************)
-
-EXTENDS Op
+EXTENDS OT
 -----------------------------------------------------------------------------
 CONSTANTS
     Client,    \* the set of client replicas
@@ -89,16 +87,6 @@ Init ==
 (* A client sends a message msg to the Server.                       *)
 (*********************************************************************)
 CSend(msg) == /\ sincoming' = Append(sincoming, msg)
-
-(*********************************************************************)
-(* The Server broadcast a message msg to the Clients                 *)
-(* other than c \in Client.                                          *)
-(*********************************************************************)
-SBoradcast(c, msg) == 
-    /\ cincoming' = [cl \in Client |->
-                        IF cl = c
-                        THEN cincoming[cl]
-                        ELSE Append(cincoming[cl], msg)]
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* Client c \in Client generates and performs an operation op.       *)
@@ -112,47 +100,61 @@ Do(c, op) ==
     /\ UNCHANGED (sVars \o <<cincoming>>)
 -----------------------------------------------------------------------------
 (*********************************************************************)
-(* Client c \in Client receives a message msg from the Server.       *)
+(* Client c \in Client receives a message from the Server.           *)
 (*********************************************************************)
-CRev(c, msg) == 
+CRev(c) == 
     /\ cincoming[c] # <<>>   \* there are messages to handle with
     /\ crec' = [crec EXCEPT ![c] = @ + 1]
     /\ LET m == Head(cincoming[c]) 
-        IN /\ cbuf' = [cbuf EXCEPT ![c] = SubSeq(@, m.ack + 1, Len(@))]
-           /\ cincoming' = [cincoming EXCEPT ![c] = Tail(@)]
-    /\ FALSE \* TODO: (buf, o) = xform(buf, o)
-    \* /\ cstate' = [cstate EXCEPT ![c] = Apply(m.op, @)] \* using o above
+           cBuf == cbuf[c]  \* the buffer at client c \in Client
+           cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))  \* buffer shifted
+           xop == XformOpOps(m.op, cShiftedBuf) \* transform op vs. shifted buffer
+           xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
+        IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
+           /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
+    /\ cincoming' = [cincoming EXCEPT ![c] = Tail(@)]
     /\ UNCHANGED (sVars \o <<sincoming>>)
 -----------------------------------------------------------------------------
 (*********************************************************************)
-(* The Server receives a message msg.                                *)
+(* The Server receives a message.                                    *)
 (*********************************************************************)
-SRev(msg) == 
+SRev == 
     /\ sincoming # <<>>    \* there are messages for the Server to handle with
     /\ LET m == Head(sincoming) \* the message to handle with
            c == m.c             \* the client c \in Client that sends this message
            cBuf == sbuf[c]      \* the buffer at the Server for client c \in Client
-           cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))
-           (xop, xcBuf) == xForm(m.op, cShiftedBuf)
+           cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf)) \* buffer shifted
+           xop == XformOpOps(m.op, cShiftedBuf) \* transform op vs. shifted buffer
+           xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
         IN /\ srec' = [cl \in Client |-> 
                             IF cl = c
-                            THEN srec[cl] + 1
-                            ELSE 0]
+                            THEN srec[cl] + 1 \* receive one more operation from client c \in Client
+                            ELSE 0] \* reset srec for other clients than c \in Client
            /\ sbuf' = [cl \in Client |->
                             IF cl = c
-                            THEN xcBuf
-                            ELSE Append(sbuf[cl], xop)]
-    /\ sincoming' = Tail(sincoming)
-    /\ FALSE \* TODO: (o, buf[c]) = xform(o, buf[c])
-    \* /\ sstate' = Apply(m.op, sstate) \* using o above
-    /\ FALSE \* for all other clients
+                            THEN xcBuf  \* transformed buffer for client c \in Client
+                            ELSE Append(sbuf[cl], xop)] \* store transformed xop into other clients' bufs
+           /\ cincoming' = [cl \in Client |->
+                            IF cl = c
+                            THEN cincoming[cl]
+                            \* broadcast the transformed operation to clients other than c \in Client
+                            ELSE Append(cincoming[cl], [ack |-> srec[cl], op |-> xop])] 
+           /\ sstate' = Apply(xop, sstate)  \* apply the transformed operation
+    /\ sincoming' = Tail(sincoming) \* consume a message
     /\ UNCHANGED cVars
 -----------------------------------------------------------------------------
 (*********************************************************************)
-(* The next state relation.                                          *)
+(* The Next state relation.                                          *)
 (*********************************************************************)
-Next == FALSE
+Next == 
+    \/ \E c \in Client, op \in Op: Do(c, op)
+    \/ \E c \in Client: CRev(c)
+    \/ SRev
+(*********************************************************************)
+(* The Spec.                                                         *)
+(*********************************************************************)
+Spec == Init /\ [][Next]_vars
 =============================================================================
 \* Modification History
-\* Last modified Sun Jun 24 15:44:36 CST 2018 by hengxin
+\* Last modified Sun Jun 24 22:26:35 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin
