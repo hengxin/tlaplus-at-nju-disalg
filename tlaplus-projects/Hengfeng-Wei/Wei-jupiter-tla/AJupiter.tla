@@ -32,17 +32,17 @@ VARIABLES
     cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
     sincoming   \* incoming channel at the Server
 -----------------------------------------------------------------------------
-cvars == <<cbuf, crec, cstate>>
-svars == <<sbuf, srec, sstate>>
-commvars == <<cincoming, sincoming>>
-vars == cvars \o svars \o commvars
+cVars == <<cbuf, crec, cstate>>
+sVars == <<sbuf, srec, sstate>>
+commVars == <<cincoming, sincoming>>
+vars == cVars \o sVars \o commVars
 -----------------------------------------------------------------------------
 (***************************************************************************)
 (* Messages between the Server and the Clients.                            *)
 (* There are two kinds of messages according to their destinations.        *)
 (***************************************************************************)
-Msg == [c: Client, ack: Nat, op: Op] \cup \* messages sent to the Server from a client c \in Client
-       [ack: Nat, op: Op] \* messages broadcast to Clients from the Server
+Msg ==  [c: Client, ack: Nat, op: Op] \* messages sent to the Server from a client c \in Client
+       \cup [ack: Nat, op: Op] \* messages broadcast to Clients from the Server
 -----------------------------------------------------------------------------
 TypeOK == 
     (*****************************************************************)
@@ -103,29 +103,56 @@ SBoradcast(c, msg) ==
 (*********************************************************************)
 (* Client c \in Client generates and performs an operation op.       *)
 (*********************************************************************)
-Do(c, op) == /\ TRUE    \* no pre-condition
-             /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)]
-             /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
-             /\ CSend([c |-> c, ack |-> crec[c], op |-> op])
-             /\ crec' = [crec EXCEPT ![c] = 0]
-             /\ UNCHANGED svars
+Do(c, op) == 
+    /\ TRUE    \* no pre-condition
+    /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)]
+    /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
+    /\ CSend([c |-> c, ack |-> crec[c], op |-> op])
+    /\ crec' = [crec EXCEPT ![c] = 0]
+    /\ UNCHANGED (sVars \o <<cincoming>>)
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* Client c \in Client receives a message msg from the Server.       *)
 (*********************************************************************)
-CRev(c, msg) == /\ cincoming[c] # <<>>   \* there are messages to handle with
-               /\ crec' = [crec EXCEPT ![c] = @ + 1]
-               /\ LET m == Head(cincoming[c])
-                  IN  /\ cbuf' = [cbuf EXCEPT ![c] = SubSeq(@, m.ack + 1, Len(@))]
-                      /\ cstate' = [cstate EXCEPT ![c] = Apply(m.op, @)]
-               /\ FALSE \* TODO: (buf, o) = xform(buf, o)
-               /\ UNCHANGED (svars \o commvars)
+CRev(c, msg) == 
+    /\ cincoming[c] # <<>>   \* there are messages to handle with
+    /\ crec' = [crec EXCEPT ![c] = @ + 1]
+    /\ LET m == Head(cincoming[c]) 
+        IN /\ cbuf' = [cbuf EXCEPT ![c] = SubSeq(@, m.ack + 1, Len(@))]
+           /\ cincoming' = [cincoming EXCEPT ![c] = Tail(@)]
+    /\ FALSE \* TODO: (buf, o) = xform(buf, o)
+    \* /\ cstate' = [cstate EXCEPT ![c] = Apply(m.op, @)] \* using o above
+    /\ UNCHANGED (sVars \o <<sincoming>>)
 -----------------------------------------------------------------------------
 (*********************************************************************)
-(* The next state relation                                           *)
+(* The Server receives a message msg.                                *)
+(*********************************************************************)
+SRev(msg) == 
+    /\ sincoming # <<>>    \* there are messages for the Server to handle with
+    /\ LET m == Head(sincoming) \* the message to handle with
+           c == m.c             \* the client c \in Client that sends this message
+           cBuf == sbuf[c]      \* the buffer at the Server for client c \in Client
+           cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))
+           (xop, xcBuf) == xForm(m.op, cShiftedBuf)
+        IN /\ srec' = [cl \in Client |-> 
+                            IF cl = c
+                            THEN srec[cl] + 1
+                            ELSE 0]
+           /\ sbuf' = [cl \in Client |->
+                            IF cl = c
+                            THEN xcBuf
+                            ELSE Append(sbuf[cl], xop)]
+    /\ sincoming' = Tail(sincoming)
+    /\ FALSE \* TODO: (o, buf[c]) = xform(o, buf[c])
+    \* /\ sstate' = Apply(m.op, sstate) \* using o above
+    /\ FALSE \* for all other clients
+    /\ UNCHANGED cVars
+-----------------------------------------------------------------------------
+(*********************************************************************)
+(* The next state relation.                                          *)
 (*********************************************************************)
 Next == FALSE
 =============================================================================
 \* Modification History
-\* Last modified Sun Jun 24 11:09:58 CST 2018 by hengxin
+\* Last modified Sun Jun 24 15:44:36 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin
