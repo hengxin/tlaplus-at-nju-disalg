@@ -2,37 +2,37 @@
 EXTENDS AJupiter, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0Client
-const_15297584414322000 == 
+const_15299304737218000 == 
 {a, b, c}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1Server
-const_15297584414323000 == 
+const_15299304737219000 == 
 s
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2Char
-const_15297584414324000 == 
+const_152993047372110000 == 
 {'a', 'b', 'c', 'd'}
 ----
 
 \* Constant expression definition @modelExpressionEval
-const_expr_15297584414336000 == 
+const_expr_152993047372112000 == 
 Apply([type |-> "Del", pos |-> 2], <<'a', 'b', 'c'>>)
 ----
 
 \* Constant expression ASSUME statement @modelExpressionEval
-ASSUME PrintT(<<"$!@$!@$!@$!@$!",const_expr_15297584414336000>>)
+ASSUME PrintT(<<"$!@$!@$!@$!@$!",const_expr_152993047372112000>>)
 ----
 
 \* INIT definition @modelBehaviorNoSpec:0
-init_15297584414337000 ==
+init_152993047372113000 ==
 FALSE/\cbuf = 0
 ----
 \* NEXT definition @modelBehaviorNoSpec:0
-next_15297584414338000 ==
+next_152993047372114000 ==
 FALSE/\cbuf' = cbuf
 ----
 =============================================================================
 \* Modification History
-\* Created Sat Jun 23 20:54:01 CST 2018 by hengxin
+\* Created Mon Jun 25 20:41:13 CST 2018 by hengxin
