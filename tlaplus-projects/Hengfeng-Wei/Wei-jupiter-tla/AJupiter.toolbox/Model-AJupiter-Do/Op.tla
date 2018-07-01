@@ -39,5 +39,5 @@ Apply(op, l) ==
         []  op.type = "Ins" -> Append(SubSeq(l, 1, pos - 1), op.ch) \o SubSeq(l, pos, len)
 =============================================================================
 \* Modification History
-\* Last modified Sun Jun 24 17:27:11 CST 2018 by hengxin
+\* Last modified Sun Jul 01 16:34:55 CST 2018 by hengxin
 \* Created Sat Jun 23 20:56:53 CST 2018 by hengxin

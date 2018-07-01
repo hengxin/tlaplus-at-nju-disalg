@@ -10,10 +10,6 @@ CONSTANTS
     State,     \* the initial state of each replica
     Cop        \* Cop[c]: operations issued by the client c \in Client
 
-ASSUME 
-    /\ State \in List
-    /\ Cop \in [Client -> Seq(Op)]
-
 VARIABLES
     cop,       \* cop[c]: operations issued by the client c \in Client
     (*****************************************************************)
@@ -149,5 +145,5 @@ Next ==
 Spec == Init /\ [][Next]_vars
 =============================================================================
 \* Modification History
-\* Last modified Sun Jul 01 20:29:10 CST 2018 by hengxin
+\* Last modified Sun Jul 01 17:45:55 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

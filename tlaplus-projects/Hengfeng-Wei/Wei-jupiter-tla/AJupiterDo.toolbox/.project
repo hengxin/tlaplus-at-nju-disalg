@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AJupiter</name>
+	<name>AJupiterDo</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -21,14 +21,19 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>AJupiter.tla</name>
+			<name>AJupiterDo.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AJupiter.tla</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/AJupiterDo.tla</locationURI>
 		</link>
 		<link>
 			<name>CSComm.tla</name>
 			<type>1</type>
 			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/CSComm.tla</location>
+		</link>
+		<link>
+			<name>OT.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/OT.tla</location>
 		</link>
 		<link>
 			<name>Op.tla</name>

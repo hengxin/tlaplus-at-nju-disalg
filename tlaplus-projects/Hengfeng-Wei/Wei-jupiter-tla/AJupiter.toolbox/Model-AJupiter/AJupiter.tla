@@ -2,13 +2,14 @@
 (***************************************************************************)
 (* Model checking the Jupiter protocol presented by Attiya and others.     *)
 (***************************************************************************)
-EXTENDS OT
+EXTENDS OT, TLC
 -----------------------------------------------------------------------------
 CONSTANTS
     Client,    \* the set of client replicas
-    Server     \* the (unique) server replica
-    
+    Server,    \* the (unique) server replica
+    Cop        \* Cop[c]: operations issued by the client c \in Client
 VARIABLES
+    cop,       \* cop[c]: operations issued by the client c \in Client
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -30,19 +31,14 @@ VARIABLES
     cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
     sincoming   \* incoming channel at the Server
 -----------------------------------------------------------------------------
-cVars == <<cbuf, crec, cstate>>
-sVars == <<sbuf, srec, sstate>>
-commVars == <<cincoming, sincoming>>
-vars == cVars \o sVars \o commVars
+comm == INSTANCE CSComm
 -----------------------------------------------------------------------------
-(***************************************************************************)
-(* Messages between the Server and the Clients.                            *)
-(* There are two kinds of messages according to their destinations.        *)
-(***************************************************************************)
-Msg ==  [c: Client, ack: Nat, op: Op] \* messages sent to the Server from a client c \in Client
-       \cup [ack: Nat, op: Op] \* messages broadcast to Clients from the Server
+cVars == <<cop, cbuf, crec, cstate>>
+sVars == <<sbuf, srec, sstate>>
+vars == cVars \o sVars \o comm!vars
 -----------------------------------------------------------------------------
 TypeOK == 
+    /\ cop \in [Client -> Seq(Op)]
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -58,13 +54,13 @@ TypeOK ==
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
-    /\ cincoming \in [Client -> Seq(Msg)]
-    /\ sincoming \in Seq(Msg)
+    /\ comm!TypeOK
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Init predicate.                                               *)
 (*********************************************************************)
 Init == 
+    /\ cop = Cop
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -80,30 +76,27 @@ Init ==
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
-    /\ cincoming = [c \in Client |-> <<>>]
-    /\ sincoming = <<>>
+    /\ comm!Init
 -----------------------------------------------------------------------------
 (*********************************************************************)
-(* A client sends a message msg to the Server.                       *)
+(* Client c \in Client issues an operation op.                       *)
 (*********************************************************************)
-CSend(msg) == /\ sincoming' = Append(sincoming, msg)
------------------------------------------------------------------------------
-(*********************************************************************)
-(* Client c \in Client generates and performs an operation op.       *)
-(*********************************************************************)
-Do(c, op) == 
-    /\ TRUE    \* no pre-condition
-    /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)]
-    /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
-    /\ CSend([c |-> c, ack |-> crec[c], op |-> op])
+Do(c) == 
+    /\ cop[c] # <<>>
+    /\ LET op == Head(cop[c])
+        IN /\ Print(op, TRUE)
+           /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
+           /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
+           /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
     /\ crec' = [crec EXCEPT ![c] = 0]
-    /\ UNCHANGED (sVars \o <<cincoming>>)
+    /\ cop' = [cop EXCEPT ![c] = Tail(@)]
+    /\ UNCHANGED sVars
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* Client c \in Client receives a message from the Server.           *)
 (*********************************************************************)
 CRev(c) == 
-    /\ cincoming[c] # <<>>   \* there are messages to handle with
+    /\ comm!CRev(c)
     /\ crec' = [crec EXCEPT ![c] = @ + 1]
     /\ LET m == Head(cincoming[c]) 
            cBuf == cbuf[c]  \* the buffer at client c \in Client
@@ -112,14 +105,13 @@ CRev(c) ==
            xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
            /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
-    /\ cincoming' = [cincoming EXCEPT ![c] = Tail(@)]
-    /\ UNCHANGED (sVars \o <<sincoming>>)
+    /\ UNCHANGED (sVars \o <<cop>>)
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Server receives a message.                                    *)
 (*********************************************************************)
 SRev == 
-    /\ sincoming # <<>>    \* there are messages for the Server to handle with
+    /\ comm!SRev
     /\ LET m == Head(sincoming) \* the message to handle with
            c == m.c             \* the client c \in Client that sends this message
            cBuf == sbuf[c]      \* the buffer at the Server for client c \in Client
@@ -134,20 +126,15 @@ SRev ==
                             IF cl = c
                             THEN xcBuf  \* transformed buffer for client c \in Client
                             ELSE Append(sbuf[cl], xop)] \* store transformed xop into other clients' bufs
-           /\ cincoming' = [cl \in Client |->
-                            IF cl = c
-                            THEN cincoming[cl]
-                            \* broadcast the transformed operation to clients other than c \in Client
-                            ELSE Append(cincoming[cl], [ack |-> srec[cl], op |-> xop])] 
            /\ sstate' = Apply(xop, sstate)  \* apply the transformed operation
-    /\ sincoming' = Tail(sincoming) \* consume a message
+           /\ comm!SSend(c, srec, xop)
     /\ UNCHANGED cVars
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Next state relation.                                          *)
 (*********************************************************************)
 Next == 
-    \/ \E c \in Client, op \in Op: Do(c, op)
+    \/ \E c \in Client: Do(c)
     \/ \E c \in Client: CRev(c)
     \/ SRev
 (*********************************************************************)
@@ -156,5 +143,5 @@ Next ==
 Spec == Init /\ [][Next]_vars
 =============================================================================
 \* Modification History
-\* Last modified Sun Jun 24 22:26:35 CST 2018 by hengxin
+\* Last modified Sun Jul 01 17:09:13 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin
