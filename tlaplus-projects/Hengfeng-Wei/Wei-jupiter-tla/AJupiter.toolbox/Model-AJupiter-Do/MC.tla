@@ -2,47 +2,41 @@
 EXTENDS AJupiter, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0Client
-const_1530447955885113000 == 
+const_153045174139246000 == 
 {"c1", "c2", "c3"}
 ----
 
-\* CONSTANT definitions @modelParameterConstants:1Cop
-const_1530447955885114000 == 
-[c1 |-> <<Ins1>>, c2 |-> <<>>, c3 |-> <<>>]
-----
-
-\* CONSTANT definitions @modelParameterConstants:2Char
-const_1530447955885115000 == 
-{"a", "b", "c"}
-----
-
-\* CONSTANT definitions @modelParameterConstants:3Server
-const_1530447955885116000 == 
-"s"
-----
-
-\* CONSTANT definitions @modelParameterConstants:4State
-const_1530447955885117000 == 
+\* CONSTANT definitions @modelParameterConstants:1State
+const_153045174139247000 == 
 <<"a", "b", "c">>
 ----
 
-\* Constant expression definition @modelExpressionEval
-const_expr_1530447955886118000 == 
-Cop
+\* CONSTANT definitions @modelParameterConstants:2Cop
+const_153045174139248000 == 
+[c1 |-> <<Ins1>>, c2 |-> <<>>, c3 |-> <<>>]
 ----
 
-\* Constant expression ASSUME statement @modelExpressionEval
-ASSUME PrintT(<<"$!@$!@$!@$!@$!",const_expr_1530447955886118000>>)
+\* CONSTANT definitions @modelParameterConstants:3Char
+const_153045174139249000 == 
+{"a", "b", "c"}
 ----
 
+\* CONSTANT definitions @modelParameterConstants:4Server
+const_153045174139250000 == 
+"s"
+----
+
+\* CONSTANT definition @modelParameterDefinitions:1
+CONSTANT def_ov_153045174139252000
+----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_1530447955886119000 ==
+spec_153045174139253000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_1530447955886120000 ==
+inv_153045174139254000 ==
 TypeOK
 ----
 =============================================================================
 \* Modification History
-\* Created Sun Jul 01 20:25:55 CST 2018 by hengxin
+\* Created Sun Jul 01 21:29:01 CST 2018 by hengxin

@@ -20,23 +20,26 @@
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
 <stringAttribute key="modelBehaviorVars" value="crec, cbuf, sincoming, cincoming, srec, cop, sstate, sbuf, cstate"/>
-<stringAttribute key="modelComments" value=""/>
+<stringAttribute key="modelComments" value="Test the &quot;Do&quot; method of AJupiter."/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOK"/>
 </listAttribute>
 <listAttribute key="modelCorrectnessProperties"/>
-<stringAttribute key="modelExpressionEval" value="Cop"/>
+<stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
+<listEntry value="State;;&lt;&lt;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&gt;&gt;;0;0"/>
 <listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;&gt;&gt;, c3 |-&gt; &lt;&lt;&gt;&gt;];0;0"/>
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
-<listEntry value="State;;&lt;&lt;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&gt;&gt;;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
-<listAttribute key="modelParameterDefinitions"/>
+<listAttribute key="modelParameterDefinitions">
+<listEntry value="Nop;;Nop;1;0"/>
+<listEntry value="comm!Nop;;comm!Nop;1;0"/>
+</listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
 <intAttribute key="numberOfWorkers" value="2"/>
