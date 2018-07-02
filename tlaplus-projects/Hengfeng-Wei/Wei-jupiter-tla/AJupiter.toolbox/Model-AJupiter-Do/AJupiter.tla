@@ -15,7 +15,11 @@ ASSUME
     /\ Cop \in [Client -> Seq(Op)]
 
 VARIABLES
+    (*****************************************************************)
+    (* For model checking:                                           *)
+    (*****************************************************************)
     cop,       \* cop[c]: operations issued by the client c \in Client
+
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -56,7 +60,7 @@ TypeOK ==
     (*****************************************************************)
     /\ sbuf \in [Client -> Seq(Op)]
     /\ srec \in [Client -> Nat]
-    /\ sstate \in [Client -> List]
+    /\ sstate \in List
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
@@ -78,7 +82,7 @@ Init ==
     (*****************************************************************)
     /\ sbuf = [c \in Client |-> <<>>]
     /\ srec = [c \in Client |-> 0]
-    /\ sstate = [c \in Client |-> State]
+    /\ sstate = State
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
@@ -90,24 +94,64 @@ Init ==
 Do(c) == 
     /\ cop[c] # <<>>
     /\ LET op == Head(cop[c])
-        IN /\ Print(op, TRUE)
+        IN /\ Print(c, TRUE)
+           /\ Print(op, TRUE)
            /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
            /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
            /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
     /\ crec' = [crec EXCEPT ![c] = 0]
     /\ cop' = [cop EXCEPT ![c] = Tail(@)]
     /\ UNCHANGED sVars
+
+(*********************************************************************)
+(* Client c \in Client receives a message from the Server.           *)
+(*********************************************************************)
+\*CRev(c) == 
+\*    /\ comm!CRev(c)
+\*    /\ crec' = [crec EXCEPT ![c] = @ + 1]
+\*    /\ LET m == Head(cincoming[c]) 
+\*           cBuf == cbuf[c]  \* the buffer at client c \in Client
+\*           cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))  \* buffer shifted
+\*           xop == XformOpOps(m.op, cShiftedBuf) \* transform op vs. shifted buffer
+\*           xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
+\*        IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
+\*           /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
+\*    /\ UNCHANGED (sVars \o <<cop>>)
 -----------------------------------------------------------------------------
 (*********************************************************************)
-(* The Next state relation.                                          *)
+(* The Server receives a message.                                    *)
+(*********************************************************************)
+SRev == 
+    /\ comm!SRev
+    /\ LET m == Head(sincoming) \* the message to handle with
+           c == m.c             \* the client c \in Client that sends this message
+           cBuf == sbuf[c]      \* the buffer at the Server for client c \in Client
+           cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf)) \* buffer shifted
+           xop == XformOpOps(m.op, cShiftedBuf) \* transform op vs. shifted buffer
+           xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
+        IN /\ srec' = [cl \in Client |-> 
+                            IF cl = c
+                            THEN srec[cl] + 1 \* receive one more operation from client c \in Client
+                            ELSE 0] \* reset srec for other clients than c \in Client
+           /\ sbuf' = [cl \in Client |->
+                            IF cl = c
+                            THEN xcBuf  \* transformed buffer for client c \in Client
+                            ELSE Append(sbuf[cl], xop)] \* store transformed xop into other clients' bufs
+           /\ sstate' = Apply(xop, sstate)  \* apply the transformed operation
+           /\ comm!SSend(c, srec, xop)
+    /\ UNCHANGED cVars
+-----------------------------------------------------------------------------
+(*********************************************************************)
+(* The next-state relation.                                          *)
 (*********************************************************************)
 Next == 
     \/ \E c \in Client: Do(c)
+    \/ SRev
 (*********************************************************************)
 (* The Spec.                                                         *)
 (*********************************************************************)
 Spec == Init /\ [][Next]_vars
 =============================================================================
 \* Modification History
-\* Last modified Sun Jul 01 21:28:57 CST 2018 by hengxin
+\* Last modified Mon Jul 02 11:04:50 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

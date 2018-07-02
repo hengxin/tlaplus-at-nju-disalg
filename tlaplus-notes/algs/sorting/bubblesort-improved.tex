@@ -1,0 +1,20 @@
+% file: algs/bubblesort-improved.tex
+
+\begin{algorithm}[H]
+  \caption{Bubblesort (An improved version; from wiki).}
+  \label{alg:bubblesort-imporoved}
+  \begin{algorithmic}[1]
+    \Procedure{Bubblesort}{$A[1 \cdots n]$}
+      \Repeat
+	\State $newn \gets 0$
+	\For{$i \gets 1 \;\text{\bf to } n-1$}
+	  \If{$A[i-1] > A[i]$}
+	    \State $\Call{Swap}{A[i-1], A[i]}$
+	    \State $newn \gets i$
+	  \EndIf
+	\EndFor
+	\State $n \gets newn$
+      \Until{$n = 0$}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}

@@ -21,7 +21,7 @@
 <intAttribute key="modelBehaviorSpecType" value="1"/>
 <stringAttribute key="modelBehaviorVars" value="crec, cbuf, sincoming, cincoming, srec, cop, sstate, sbuf, cstate"/>
 <stringAttribute key="modelComments" value="Test the &quot;Do&quot; method of AJupiter."/>
-<booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
+<booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOK"/>
 </listAttribute>
@@ -31,7 +31,7 @@
 <listAttribute key="modelParameterConstants">
 <listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
 <listEntry value="State;;&lt;&lt;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&gt;&gt;;0;0"/>
-<listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;&gt;&gt;, c3 |-&gt; &lt;&lt;&gt;&gt;];0;0"/>
+<listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;Ins2&gt;&gt;, c3 |-&gt; &lt;&lt;&gt;&gt;];0;0"/>
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
 </listAttribute>

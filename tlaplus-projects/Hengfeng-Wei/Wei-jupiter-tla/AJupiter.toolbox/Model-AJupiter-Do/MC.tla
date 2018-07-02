@@ -2,41 +2,41 @@
 EXTENDS AJupiter, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0Client
-const_153045174139246000 == 
+const_1530501098021136000 == 
 {"c1", "c2", "c3"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1State
-const_153045174139247000 == 
+const_1530501098021137000 == 
 <<"a", "b", "c">>
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2Cop
-const_153045174139248000 == 
-[c1 |-> <<Ins1>>, c2 |-> <<>>, c3 |-> <<>>]
+const_1530501098021138000 == 
+[c1 |-> <<Ins1>>, c2 |-> <<Ins2>>, c3 |-> <<>>]
 ----
 
 \* CONSTANT definitions @modelParameterConstants:3Char
-const_153045174139249000 == 
+const_1530501098021139000 == 
 {"a", "b", "c"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:4Server
-const_153045174139250000 == 
+const_1530501098021140000 == 
 "s"
 ----
 
 \* CONSTANT definition @modelParameterDefinitions:1
-CONSTANT def_ov_153045174139252000
+CONSTANT def_ov_1530501098021142000
 ----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_153045174139253000 ==
+spec_1530501098021143000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_153045174139254000 ==
+inv_1530501098021144000 ==
 TypeOK
 ----
 =============================================================================
 \* Modification History
-\* Created Sun Jul 01 21:29:01 CST 2018 by hengxin
+\* Created Mon Jul 02 11:11:38 CST 2018 by hengxin
