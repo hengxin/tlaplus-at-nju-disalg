@@ -1,0 +1,43 @@
+% file: algs/stack-queue/circular-queue.tex
+% See CLRS 10.1, 3rd edition
+
+\begin{algorithm}[H]
+  \caption{Circular queue.}
+  \begin{algorithmic}[]
+    \Procedure{Enqueue}{$Q, x$}
+      \If{$Q.head = Q.tail + 1$}
+	\State \Return ``OVERFLOW''
+      \EndIf
+      
+      \Statex
+      \State $Q[Q.tail] = x$
+
+      \Statex
+      \If{$Q.tail = Q.length$}
+        \State $Q.tail = 1$
+      \Else 
+        \State $Q.tail = Q.tail + 1$
+      \EndIf
+    \EndProcedure
+
+    \Statex
+    \Procedure{Dequeue}{$Q$}
+      \If{$Q.head = Q.tail$}
+	\State \Return ``UNDERFLOW''
+      \EndIf
+
+      \Statex
+      \State $x = Q[Q.head]$
+      
+      \Statex
+      \If{$Q.head = Q.length$}
+        \State $Q.head = 1$
+      \Else
+        \State $Q.head = Q.head + 1$
+      \EndIf
+
+      \Statex
+      \State \Return $x$
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}

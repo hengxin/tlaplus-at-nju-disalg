@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>MinMax2H</name>
+	<name>PaxosCommit</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -21,19 +21,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>MinMax1.tla</name>
+			<name>PaxosCommit.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax1.tla</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/PaxosCommit.tla</locationURI>
 		</link>
 		<link>
-			<name>MinMax2.tla</name>
+			<name>TCommit.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax2.tla</locationURI>
-		</link>
-		<link>
-			<name>MinMax2H.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax2H.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/learning-tlaplus/learning-tlaplus-video-course/specs/7-Paxos-Commit/TCommit.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>

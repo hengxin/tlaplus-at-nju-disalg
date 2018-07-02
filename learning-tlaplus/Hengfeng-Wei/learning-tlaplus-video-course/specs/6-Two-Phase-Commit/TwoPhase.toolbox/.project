@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>MinMax2H</name>
+	<name>TwoPhase</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -21,19 +21,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>MinMax1.tla</name>
+			<name>TCommit.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax1.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/learning-tlaplus/learning-tlaplus-video-course/specs/6-Two-Phase-Commit/TCommit.tla</location>
 		</link>
 		<link>
-			<name>MinMax2.tla</name>
+			<name>TwoPhase.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax2.tla</locationURI>
-		</link>
-		<link>
-			<name>MinMax2H.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax2H.tla</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/TwoPhase.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

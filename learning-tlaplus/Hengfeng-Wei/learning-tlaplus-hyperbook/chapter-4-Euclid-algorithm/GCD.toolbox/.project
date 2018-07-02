@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>MinMax2H</name>
+	<name>GCD</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -21,19 +21,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>MinMax1.tla</name>
+			<name>GCD.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax1.tla</locationURI>
-		</link>
-		<link>
-			<name>MinMax2.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax2.tla</locationURI>
-		</link>
-		<link>
-			<name>MinMax2H.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax2H.tla</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/GCD.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

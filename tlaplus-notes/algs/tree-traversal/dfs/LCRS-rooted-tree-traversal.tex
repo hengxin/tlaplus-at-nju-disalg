@@ -1,0 +1,22 @@
+% file: algs/tree-traversal/dfs/LCRS-rooted-tree-traversal.tex
+
+\begin{algorithm}[H]
+  \caption{Recursive DFS traversal on a rooted tree stored using the ``left-child, right-sibling'' representation.}
+  \begin{algorithmic}[]
+    \Procedure{Recursive-DFS}{$t$}
+      \State print $t.key$
+
+      \Statex
+      \If{$t.left\text{-}child \neq \textsf{NIL}$}
+	\State \Call{Recursive-DFS}{$t.left\text{-}child$}
+      \EndIf
+      
+      \If{$t.right\text{-}sibling \neq \textsf{NIL}$}
+	\State \Call{Recursive-DFS}{$t.right\text{-}sibling$}
+      \EndIf
+    \EndProcedure
+
+    \Statex
+    \State \Call{Recursive-DFS}{$T.root$}
+  \end{algorithmic}
+\end{algorithm}

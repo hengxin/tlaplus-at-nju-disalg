@@ -1,0 +1,10 @@
+% file: algs/max-subarray-verbatim.tex
+
+\begin{verbatim}
+  mss = 0
+  MSS = 0
+  For i = 1 to n
+    MSS = max{MSS + A[i], 0}
+    mss = max{mss, MSS}
+  return mss
+\end{verbatim}
