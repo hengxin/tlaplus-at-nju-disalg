@@ -24,10 +24,13 @@
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
 <listAttribute key="modelCorrectnessInvariants"/>
 <listAttribute key="modelCorrectnessProperties"/>
-<stringAttribute key="modelExpressionEval" value="XformOpsOp(Ops, Del3)"/>
+<stringAttribute key="modelExpressionEval" value="CP1"/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
+<listEntry value="MaxPos;;3;0;0"/>
+<listEntry value="MaxPr;;2;0;0"/>
+<listEntry value="MaxLen;;4;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

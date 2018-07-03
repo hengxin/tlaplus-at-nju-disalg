@@ -19,8 +19,8 @@ vars == <<cincoming, sincoming>>
 (* There are two kinds of messages according to their destinations.        *)
 (* TODO: Abstraction from the concrete representation of messages.         *)
 (***************************************************************************)
-Msg == [c: Client, ack: Nat, op: Op] \cup \* messages sent to the Server from a client c \in Client
-       [ack: Nat, op: Op] \* messages broadcast to Clients from the Server
+Msg == [c: Client, ack: Nat, op: Op \cup {Nop}] \cup \* messages sent to the Server from a client c \in Client
+       [ack: Nat, op: Op \cup {Nop}] \* messages broadcast to Clients from the Server
 -----------------------------------------------------------------------------
 TypeOK == /\ cincoming \in [Client -> Seq(Msg)]
           /\ sincoming \in Seq(Msg)
@@ -70,5 +70,5 @@ SSend(c, acks, xop) ==
 -----------------------------------------------------------------------------
 =============================================================================
 \* Modification History
-\* Last modified Sun Jul 01 16:12:04 CST 2018 by hengxin
+\* Last modified Tue Jul 03 13:55:53 CST 2018 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

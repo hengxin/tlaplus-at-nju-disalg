@@ -1086,7 +1086,7 @@ For the client replicas:
 \end{cpar}%
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{16.4} \.{\land} cbuf
- \.{\in} [ Client \.{\rightarrow} Seq ( Op ) ]}%
+ \.{\in} [ Client \.{\rightarrow} Seq ( Op \.{\cup} \{ Nop \} ) ]}%
  \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{16.4} \.{\land}
  crec\@s{2.19} \.{\in} [ Client \.{\rightarrow} Nat ]}%
  \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{16.4} \.{\land} cstate
@@ -1097,7 +1097,7 @@ For the server replica:
 \end{cpar}%
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{16.4} \.{\land} sbuf
- \.{\in} [ Client \.{\rightarrow} Seq ( Op ) ]}%
+ \.{\in} [ Client \.{\rightarrow} Seq ( Op \.{\cup} \{ Nop \} ) ]}%
  \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \.{\land}
  srec\@s{2.19} \.{\in} [ Client \.{\rightarrow} Nat ]}%
  \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{16.4} \.{\land} sstate
@@ -1159,21 +1159,19 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  \@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}}\@s{22.34} \.{\land} \.{\LET}
  op \.{\defeq} Head ( cop [ c ] )}%
  \@x{\makebox[0pt][r]{\scriptsize 97\hspace{1em}}\@s{37.55} \.{\IN} \.{\land}
- Print ( c ,\, {\TRUE} )}%
- \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}}\@s{57.95} \.{\land} Print (
- op ,\, {\TRUE} )}%
- \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{57.95} \.{\land} cstate
+ PrintT ( c \.{\circ}\@w{:\ Do\ } \.{\circ} ToString ( op ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}}\@s{57.95} \.{\land} cstate
  \.{'} \.{=} [ cstate {\EXCEPT} {\bang} [ c ] \.{=} Apply ( op ,\, @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{57.95} \.{\land} cbuf
+ \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{57.95} \.{\land} cbuf
  \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} Append ( @ ,\, op ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}}\@s{57.95} \.{\land} comm
+ \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{57.95} \.{\land} comm
  {\bang} CSend ( [ c \.{\mapsto} c ,\, ack \.{\mapsto} crec [ c ] ,\, op
  \.{\mapsto} op ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}}\@s{22.34} \.{\land} crec
+ \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}}\@s{22.34} \.{\land} crec
  \.{'} \.{=} [ crec {\EXCEPT} {\bang} [ c ] \.{=} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}}\@s{22.34} \.{\land} cop
+ \@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}}\@s{22.34} \.{\land} cop
  \.{'} \.{=} [ cop {\EXCEPT} {\bang} [ c ] \.{=} Tail ( @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 104\hspace{1em}}\@s{22.34} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}}\@s{22.34} \.{\land}
  {\UNCHANGED} sVars}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
@@ -1182,58 +1180,58 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  \ensuremath{Server}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}}}%
 \@y{%
  \ensuremath{CRev(c) \.{\defeq}
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}}}%
 \@y{\@s{7.5}%
  \ensuremath{\.{\land} comm{\bang}CRev(c)
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}}}%
 \@y{\@s{7.5}%
  \ensuremath{\.{\land} crec\.{'} \.{=}} [\ensuremath{crec}
  \ensuremath{{\EXCEPT} {\bang}[c] \.{=} @ \.{+} 1}]
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 112\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}}}%
 \@y{\@s{7.5}%
  \ensuremath{\.{\land} \.{\LET} m \.{\defeq} Head(cincoming[c])
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 113\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 112\hspace{1em}}}%
 \@y{\@s{25.0}%
  \ensuremath{cBuf \.{\defeq} cbuf[c] \.{\,\backslash\,}}* the buffer at
  client \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 114\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 113\hspace{1em}}}%
 \@y{\@s{25.0}%
  \ensuremath{cShiftedBuf \.{\defeq} SubSeq(cBuf,\, m.ack \.{+} 1,\,
  Len(cBuf)) \.{\,\backslash\,}}* buffer shifted
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 115\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 114\hspace{1em}}}%
 \@y{\@s{25.0}%
  \ensuremath{xop \.{\defeq} XformOpOps(m.op,\, cShiftedBuf)
  \.{\,\backslash\,}}* transform \ensuremath{op} vs. shifted buffer
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 116\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 115\hspace{1em}}}%
 \@y{\@s{25.0}%
  \ensuremath{xcBuf \.{\defeq} XformOpsOp(cShiftedBuf,\, m.op)
  \.{\,\backslash\,}}* transform shifted buffer vs. \ensuremath{op
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 116\hspace{1em}}}%
 \@y{\@s{17.5}%
  \ensuremath{\.{\IN} \.{\land} cbuf\.{'} \.{=}} [\ensuremath{cbuf}
  \ensuremath{{\EXCEPT} {\bang}[c] \.{=} xcBuf}]
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}}}%
 \@y{\@s{25.0}%
  \ensuremath{\.{\land} cstate\.{'} \.{=}} [\ensuremath{cstate}
  \ensuremath{{\EXCEPT} {\bang}[c] \.{=} Apply(xop,\, @)}]
@@ -1241,124 +1239,124 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  \ensuremath{xop
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}}%
 \@y{\@s{7.5}%
  \ensuremath{\.{\land} {\UNCHANGED}} (\ensuremath{sVars \.{\circ}
  {\langle}cop{\rangle}})
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 120\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The \ensuremath{Server} receives a message.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 124\hspace{1em}} SRev \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 125\hspace{1em}}\@s{16.4} \.{\land} comm
+\@x{\makebox[0pt][r]{\scriptsize 123\hspace{1em}} SRev \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 124\hspace{1em}}\@s{16.4} \.{\land} comm
  {\bang} SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 126\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
+ \@x{\makebox[0pt][r]{\scriptsize 125\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
  m \.{\defeq} Head ( sincoming )}%
 \@y{\@s{0}%
  the message to handle with
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 127\hspace{1em}}\@s{47.91} c\@s{3.77}
+ \@x{\makebox[0pt][r]{\scriptsize 126\hspace{1em}}\@s{47.91} c\@s{3.77}
  \.{\defeq} m . c\@s{57.99}}%
 \@y{\@s{0}%
  the client \ensuremath{c \.{\in} Client} that sends this message
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 128\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 127\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
  sbuf [ c ]\@s{31.67}}%
 \@y{\@s{0}%
  the buffer at the \ensuremath{Server} for client \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 129\hspace{1em}}\@s{47.91} cShiftedBuf
+ \@x{\makebox[0pt][r]{\scriptsize 128\hspace{1em}}\@s{47.91} cShiftedBuf
  \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
 \@y{\@s{0}%
  buffer shifted
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 130\hspace{1em}}\@s{47.91} xop \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 129\hspace{1em}}\@s{47.91} xop \.{\defeq}
  XformOpOps ( m . op ,\, cShiftedBuf )}%
 \@y{\@s{0}%
  transform \ensuremath{op} vs. shifted buffer
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 131\hspace{1em}}\@s{52.01} xcBuf \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 130\hspace{1em}}\@s{52.01} xcBuf \.{\defeq}
  XformOpsOp ( cShiftedBuf ,\, m . op )}%
 \@y{\@s{0}%
  transform shifted buffer vs. \ensuremath{op
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 132\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 131\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
  srec \.{'}\@s{2.19} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 133\hspace{1em}}\@s{117.66} {\IF} cl \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 132\hspace{1em}}\@s{117.66} {\IF} cl \.{=}
  c}%
- \@x{\makebox[0pt][r]{\scriptsize 134\hspace{1em}}\@s{117.66} \.{\THEN} srec [
+ \@x{\makebox[0pt][r]{\scriptsize 133\hspace{1em}}\@s{117.66} \.{\THEN} srec [
  cl ] \.{+} 1}%
 \@y{\@s{0}%
  receive one more operation from client \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 135\hspace{1em}}\@s{117.66} \.{\ELSE} 0 ]}%
+\@x{\makebox[0pt][r]{\scriptsize 134\hspace{1em}}\@s{117.66} \.{\ELSE} 0 ]}%
 \@y{\@s{0}%
  reset \ensuremath{srec} for other clients than \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 136\hspace{1em}}\@s{52.01} \.{\land} sbuf
+ \@x{\makebox[0pt][r]{\scriptsize 135\hspace{1em}}\@s{52.01} \.{\land} sbuf
  \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 137\hspace{1em}}\@s{117.66} {\IF} cl \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 136\hspace{1em}}\@s{117.66} {\IF} cl \.{=}
  c}%
- \@x{\makebox[0pt][r]{\scriptsize 138\hspace{1em}}\@s{117.66} \.{\THEN}
+ \@x{\makebox[0pt][r]{\scriptsize 137\hspace{1em}}\@s{117.66} \.{\THEN}
  xcBuf\@s{4.1}}%
 \@y{\@s{0}%
  transformed buffer for client \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 139\hspace{1em}}\@s{117.66} \.{\ELSE} Append
+ \@x{\makebox[0pt][r]{\scriptsize 138\hspace{1em}}\@s{117.66} \.{\ELSE} Append
  ( sbuf [ cl ] ,\, xop ) ]}%
 \@y{\@s{0}%
  store transformed \ensuremath{xop} into other clients\mbox{'} bufs
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 140\hspace{1em}}\@s{52.01} \.{\land} sstate
+ \@x{\makebox[0pt][r]{\scriptsize 139\hspace{1em}}\@s{52.01} \.{\land} sstate
  \.{'} \.{=} Apply ( xop ,\, sstate )\@s{4.1}}%
 \@y{\@s{0}%
  apply the transformed operation
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 141\hspace{1em}}\@s{52.01} \.{\land} comm
+ \@x{\makebox[0pt][r]{\scriptsize 140\hspace{1em}}\@s{52.01} \.{\land} comm
  {\bang} SSend ( c ,\, srec ,\, xop )}%
- \@x{\makebox[0pt][r]{\scriptsize 142\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 141\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} cVars}%
-\@x{\makebox[0pt][r]{\scriptsize 143\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 142\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The next-state relation.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}} Next \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
+\@x{\makebox[0pt][r]{\scriptsize 146\hspace{1em}} Next \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
  \.{\in} Client \.{:} Do ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 149\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
+\@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The \ensuremath{Spec}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 153\hspace{1em}} Spec \.{\defeq} Init
+ \@x{\makebox[0pt][r]{\scriptsize 152\hspace{1em}} Spec \.{\defeq} Init
  \.{\land} {\Box} [ Next ]_{ vars}}%
-\@x{\makebox[0pt][r]{\scriptsize 154\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 153\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Jul} 02 11:04:50 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Tue}
+ \ensuremath{Jul} 03 13:57:27 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

@@ -52,13 +52,13 @@ TypeOK ==
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
-    /\ cbuf \in [Client -> Seq(Op)]
+    /\ cbuf \in [Client -> Seq(Op \cup {Nop})]
     /\ crec \in [Client -> Nat]
     /\ cstate \in [Client -> List]
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
-    /\ sbuf \in [Client -> Seq(Op)]
+    /\ sbuf \in [Client -> Seq(Op \cup {Nop})]
     /\ srec \in [Client -> Nat]
     /\ sstate \in List
     (*****************************************************************)
@@ -94,8 +94,7 @@ Init ==
 Do(c) == 
     /\ cop[c] # <<>>
     /\ LET op == Head(cop[c])
-        IN /\ Print(c, TRUE)
-           /\ Print(op, TRUE)
+        IN /\ PrintT(c \o ": Do " \o ToString(op))
            /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
            /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
            /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
@@ -153,5 +152,5 @@ Next ==
 Spec == Init /\ [][Next]_vars
 =============================================================================
 \* Modification History
-\* Last modified Mon Jul 02 11:04:50 CST 2018 by hengxin
+\* Last modified Tue Jul 03 13:57:27 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

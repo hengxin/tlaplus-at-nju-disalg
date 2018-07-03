@@ -8,9 +8,13 @@ EXTENDS Op
 -----------------------------------------------------------------------------
 (***************************************************************************)
 (* OT (Operational Transformation) functions.                              *)
+(*                                                                         *)
 (* Naming convention: I for "Ins" and D for "Del".                         *)
 (***************************************************************************)
-\* The left "Ins" lins transformed against the right "Ins" rins. 
+
+(***************************************************************************)
+(* The left "Ins" lins transformed against the right "Ins" rins.           *)
+(***************************************************************************)
 XformII(lins, rins) == 
     IF lins.pos < rins.pos
     THEN lins
@@ -21,17 +25,26 @@ XformII(lins, rins) ==
               ELSE IF lins.pr > rins.pr
                    THEN [lins EXCEPT !.pos = @+1]
                    ELSE lins
-\* The left "Ins" lins transformed against the right "Del" rdel.
+
+(***************************************************************************)
+(* The left "Ins" lins transformed against the right "Del" rdel.           *)
+(***************************************************************************)
 XformID(ins, del) == 
     IF ins.pos < del.pos
     THEN ins
     ELSE [ins EXCEPT !.pos = @-1]
-\* The left "Del" ldel transformed against the right "Ins" rins.
+
+(***************************************************************************)
+(* The left "Del" ldel transformed against the right "Ins" rins.           *)
+(***************************************************************************)
 XformDI(del, ins) == 
     IF del.pos < ins.pos
     THEN del
     ELSE [del EXCEPT !.pos = @+1]
-\* The left "Del" ldel transformed against the right "Del" rdel.
+
+(***************************************************************************)
+(* The left "Del" ldel transformed against the right "Del" rdel.           *)
+(***************************************************************************)
 XformDD(ldel, rdel) == 
     IF ldel.pos < rdel.pos
     THEN ldel
@@ -51,6 +64,10 @@ Xform(lop, rop) ==
        []  lop.type = "Del" /\ rop.type = "Del" -> XformDD(lop, rop)
 -----------------------------------------------------------------------------
 (***************************************************************************)
+(* Generalized OT functions on operation sequences.                        *)
+(***************************************************************************)
+
+(***************************************************************************)
 (* Iteratively/recursively transforms the operation op                     *)
 (* against an operation sequence ops.                                      *)
 (***************************************************************************)
@@ -59,6 +76,7 @@ XformOpOps(op, ops) ==
     IF ops = <<>>
         THEN op
         ELSE XformOpOps(Xform(op, Head(ops)), Tail(ops))
+
 (***************************************************************************)
 (* Iteratively/recursively transforms the operation op                     *)
 (* against an operation sequence ops.                                      *)
@@ -70,6 +88,7 @@ XformOpOpsX(op, ops) ==
     IF ops = <<>>
         THEN <<op>>
         ELSE <<op>> \o XformOpOpsX(Xform(op, Head(ops)), Tail(ops))
+
 (***************************************************************************)
 (* Iteratively/recursively transforms the operation sequence ops           *)
 (* against an operation op.                                                *)
@@ -77,7 +96,13 @@ XformOpOpsX(op, ops) ==
 XformOpsOp(ops, op) == 
     LET opX == XformOpOpsX(op, ops)
     IN  [i \in 1 .. Len(ops) |-> Xform(ops[i], opX[i])]
-======================================================]=======================
+-----------------------------------------------------------------------------
+(***************************************************************************)
+(* The CP1 (Convergence) Property.                                         *)
+(***************************************************************************)
+CP1 == \A l \in List, op1 \in Op, op2 \in Op: 
+    ApplyOps(<<op1, Xform(op2, op1)>>, l) = ApplyOps(<<op2, Xform(op1, op2)>>, l)
+=============================================================================
 \* Modification History
-\* Last modified Sun Jun 24 18:09:53 CST 2018 by hengxin
+\* Last modified Tue Jul 03 16:02:09 CST 2018 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin

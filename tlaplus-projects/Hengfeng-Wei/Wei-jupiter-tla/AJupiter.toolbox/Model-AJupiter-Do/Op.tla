@@ -35,9 +35,10 @@ Ops == <<Ins2, Del3, Ins1, Del2, Ins3, Del1>>
 Apply(op, l) == 
     LET len == Len(l) 
         pos == op.pos
-    IN CASE op.type = "Del" -> SubSeq(l, 1, pos - 1) \o SubSeq(l, pos + 1, len) 
+    IN CASE op = Nop -> l
+        []  op.type = "Del" -> SubSeq(l, 1, pos - 1) \o SubSeq(l, pos + 1, len) 
         []  op.type = "Ins" -> Append(SubSeq(l, 1, pos - 1), op.ch) \o SubSeq(l, pos, len)
 =============================================================================
 \* Modification History
-\* Last modified Sun Jul 01 16:34:55 CST 2018 by hengxin
+\* Last modified Tue Jul 03 13:50:31 CST 2018 by hengxin
 \* Created Sat Jun 23 20:56:53 CST 2018 by hengxin

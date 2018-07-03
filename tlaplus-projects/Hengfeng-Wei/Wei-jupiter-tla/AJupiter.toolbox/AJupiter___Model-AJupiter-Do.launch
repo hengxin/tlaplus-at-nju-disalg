@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
-<stringAttribute key="TLCCmdLineParameters" value=""/>
+<stringAttribute key="TLCCmdLineParameters" value="-dump model-ajupiter-do-state"/>
 <stringAttribute key="configurationName" value="Model-AJupiter-Do"/>
 <booleanAttribute key="deferLiveness" value="false"/>
 <intAttribute key="dfidDepth" value="100"/>
@@ -12,7 +12,7 @@
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
 <intAttribute key="fpIndex" value="1"/>
-<intAttribute key="maxHeapSize" value="25"/>
+<intAttribute key="maxHeapSize" value="32"/>
 <intAttribute key="maxSetSize" value="1000000"/>
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value=""/>
@@ -31,7 +31,7 @@
 <listAttribute key="modelParameterConstants">
 <listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
 <listEntry value="State;;&lt;&lt;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&gt;&gt;;0;0"/>
-<listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;Ins2&gt;&gt;, c3 |-&gt; &lt;&lt;&gt;&gt;];0;0"/>
+<listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;&gt;&gt;, c3 |-&gt; &lt;&lt;&gt;&gt;];0;0"/>
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
 </listAttribute>
@@ -42,7 +42,7 @@
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
-<intAttribute key="numberOfWorkers" value="2"/>
+<intAttribute key="numberOfWorkers" value="1"/>
 <booleanAttribute key="recover" value="false"/>
 <stringAttribute key="result.mail.address" value=""/>
 <intAttribute key="simuAril" value="-1"/>
@@ -50,5 +50,5 @@
 <intAttribute key="simuSeed" value="-1"/>
 <stringAttribute key="specName" value="AJupiter"/>
 <stringAttribute key="view" value=""/>
-<booleanAttribute key="visualizeStateGraph" value="false"/>
+<booleanAttribute key="visualizeStateGraph" value="true"/>
 </launchConfiguration>
