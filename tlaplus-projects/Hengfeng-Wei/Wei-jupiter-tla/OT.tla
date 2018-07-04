@@ -30,7 +30,7 @@ XformII(lins, rins) ==
 (* The left "Ins" lins transformed against the right "Del" rdel.           *)
 (***************************************************************************)
 XformID(ins, del) == 
-    IF ins.pos < del.pos
+    IF ins.pos <= del.pos
     THEN ins
     ELSE [ins EXCEPT !.pos = @-1]
 
@@ -104,5 +104,5 @@ CP1 == \A l \in List, op1 \in Op, op2 \in Op:
     ApplyOps(<<op1, Xform(op2, op1)>>, l) = ApplyOps(<<op2, Xform(op1, op2)>>, l)
 =============================================================================
 \* Modification History
-\* Last modified Tue Jul 03 16:02:09 CST 2018 by hengxin
+\* Last modified Wed Jul 04 15:16:53 CST 2018 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin

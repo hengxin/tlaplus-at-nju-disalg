@@ -28,6 +28,9 @@
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
+<listEntry value="MaxPos;;3;0;0"/>
+<listEntry value="MaxPr;;3;0;0"/>
+<listEntry value="MaxLen;;4;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

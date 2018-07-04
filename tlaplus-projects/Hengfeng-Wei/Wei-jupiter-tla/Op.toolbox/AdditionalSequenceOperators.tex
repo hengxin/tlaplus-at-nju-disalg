@@ -1083,86 +1083,50 @@ This module also provides several additional operators on sequences:
  \.{\dotdot} ( Len ( seq ) \.{-} 1 ) \.{\mapsto} {\IF} i \.{<} index
  \.{\THEN} seq [ i ] \.{\ELSE} seq [ ( i \.{+} 1 ) ] ]}%
 \@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-It requires that \ensuremath{index \.{\geq} 1}.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- If \ensuremath{index \.{>} Len(seq) \.{+} 1}, then it appends the element to
- \ensuremath{seq}.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-(ADDED by hengxin; \ensuremath{July} 04, 2018)
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}}%
-\@z{%
- Defn
-}%
-\@xx{\@s{32.8} InsertElement ( seq ,\, elem ,\, index ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{8.2} [ i \.{\in} 1
- \.{\dotdot} ( Len ( seq ) \.{+} 1 ) \.{\mapsto} {\IF} i \.{<} index}%
- \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{124.92} \.{\THEN} {\IF} i
- \.{=} ( Len ( seq ) \.{+} 1 )}%
-\@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{156.23} \.{\THEN} elem}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{156.23} \.{\ELSE} seq [ i
- ]}%
- \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{124.92} \.{\ELSE} {\IF} i
- \.{=} index}%
-\@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{156.23} \.{\THEN} elem}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{156.23} \.{\ELSE} seq [ (
- i \.{-} 1 ) ] ]}%
-\@y{\@s{0}%
- \ensuremath{i \.{>} index
-}}%
-\@xx{}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}}%
 \@z{%
  Defn
 }%
 \@xx{\@s{27.36} IsSorted2Partition ( n ,\, seq1 ,\, seq2 ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{8.2} \.{\land} seq1
+ \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{8.2} \.{\land} seq1
  \.{\in} Seq ( 1 \.{\dotdot} n )}%
- \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{8.2} \.{\land} seq2
+ \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{8.2} \.{\land} seq2
  \.{\in} Seq ( 1 \.{\dotdot} n )}%
- \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{8.2} \.{\land} n \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{8.2} \.{\land} n \.{=}
  Len ( seq1 ) \.{+} Len ( seq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} seq1 ,\, j \.{\in} {\DOMAIN} seq1 \.{:} i \.{<} j
  \.{\implies} seq1 [ i ] \.{<} seq1 [ j ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} seq2 ,\, j \.{\in} {\DOMAIN} seq2 \.{:} i \.{<} j
  \.{\implies} seq2 [ i ] \.{<} seq2 [ j ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} seq1 ,\, j \.{\in} {\DOMAIN} seq2 \.{:} seq1 [ i ]
  \.{\neq} seq2 [ j ] )}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}}%
+\@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}}%
 \@z{%
  Defn
 }%
  \@xx{\@s{27.29} IsSequenceInterleaving ( seq ,\, subSeq1 ,\, subSeq2 ,\,
  indSeq1 ,\, indSeq2 ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{8.2} \.{\land} indSeq1
+ \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{8.2} \.{\land} indSeq1
  \.{\in} Seq ( Nat )}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{8.2} \.{\land} indSeq2
+ \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{8.2} \.{\land} indSeq2
  \.{\in} Seq ( Nat )}%
- \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{8.2} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{8.2} \.{\land}
  IsSorted2Partition ( Len ( seq ) ,\, indSeq1 ,\, indSeq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{8.2} \.{\land} Len (
+ \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{8.2} \.{\land} Len (
  indSeq1 ) \.{=} Len ( subSeq1 )}%
- \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{8.2} \.{\land} Len (
+ \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{8.2} \.{\land} Len (
  indSeq2 ) \.{=} Len ( subSeq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} indSeq1 \.{:} seq [ ( indSeq1 [ i ] ) ] \.{=} subSeq1 [ i
  ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} indSeq2 \.{:} seq [ ( indSeq2 [ i ] ) ] \.{=} subSeq2 [ i
  ] )}%
-\@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}}\bottombar\@xx{}%
 \@pvspace{8.0pt}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -1173,8 +1137,8 @@ It requires that \ensuremath{index \.{\geq} 1}.
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Wed}
- \ensuremath{Jul} 04 11:21:54 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Tue}
+ \ensuremath{Jul} 03 15:22:02 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

@@ -5,10 +5,10 @@
 (*********************************************************************)
 EXTENDS Naturals, Sequences, AdditionalSequenceOperators
 ----------------------------------------------------------------------
-CONSTANTS   Char,
-            MaxPos,
-            MaxPr,
-            MaxLen
+CONSTANTS   Char,   \* set of characters allowed
+            MaxPos, \* max position to insert into or delete
+            MaxPr,  \* max priority
+            MaxLen  \* max length of list
             
 ASSUME /\ MaxPos \in Nat \ {0}  \* WARNING: index from 1
        /\ MaxPr \in Nat \ {0}
@@ -41,13 +41,14 @@ Ops == <<Ins2, Del3, Ins1, Del2, Ins3, Del1>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The "Apply" operator which applies an operation op on the list l. *)
+(* Del: If pos > Len(l), the last element of l is deleted.           *)
+(*      This is realized by the DeleteElement operator.              *)
+(* Ins: If pos > Len(l), the new element is appended to l.           *)
+(*      This is realized by the InsertElement operator.              *)
 (*********************************************************************)
-Apply(op, l) == 
-    LET len == Len(l) 
-        pos == op.pos
-    IN CASE op = Nop -> l
-        []  op.type = "Del" -> SubSeq(l, 1, pos - 1) \o SubSeq(l, pos + 1, len) 
-        []  op.type = "Ins" -> Append(SubSeq(l, 1, pos - 1), op.ch) \o SubSeq(l, pos, len)
+Apply(op, l) == CASE op = Nop -> l 
+                 []  op.type = "Del" -> DeleteElement(l, op.pos)
+                 []  op.type = "Ins" -> InsertElement(l, op.ch, op.pos)
 
 (*********************************************************************)
 (* The "ApplyOps" operator which applies an operation sequence ops   *)
@@ -60,5 +61,5 @@ ApplyOps(ops, l) ==
     ELSE Apply(Last(ops), ApplyOps(AllButLast(ops), l))
 =============================================================================
 \* Modification History
-\* Last modified Tue Jul 03 16:03:00 CST 2018 by hengxin
+\* Last modified Wed Jul 04 11:37:16 CST 2018 by hengxin
 \* Created Sat Jun 23 20:56:53 CST 2018 by hengxin

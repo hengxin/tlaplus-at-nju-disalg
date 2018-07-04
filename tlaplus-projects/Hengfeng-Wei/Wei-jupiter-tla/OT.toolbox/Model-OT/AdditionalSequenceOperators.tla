@@ -56,7 +56,23 @@ EXTENDS Naturals,Sequences,FiniteSets
 
 (*Defn*)DeleteElement(seq,index)==
   [i \in 1..(Len(seq)-1)|->IF i<index THEN seq[i]ELSE seq[(i+1)]]
-
+  
+(****************************************************************)
+(* It requires that index >= 1.                                 *)
+(*                                                              *)
+(* If index > Len(seq) + 1, then it appends the element to seq. *)
+(*                                                              *)
+(* (ADDED by hengxin; July 04, 2018)                            *)
+(****************************************************************)
+(*Defn*)InsertElement(seq, elem, index) ==
+  [i \in 1 .. (Len(seq) + 1) |-> IF i < index
+                                 THEN IF i = (Len(seq) + 1)
+                                      THEN elem
+                                      ELSE seq[i]
+                                 ELSE IF i = index
+                                      THEN elem
+                                      ELSE seq[(i-1)]] \* i > index
+  
 (*Defn*)IsSorted2Partition(n,seq1,seq2)==
   /\ seq1 \in Seq(1..n)
   /\ seq2 \in Seq(1..n)
@@ -77,5 +93,5 @@ EXTENDS Naturals,Sequences,FiniteSets
 
 =============================================================================
 \* Modification History
-\* Last modified Tue Jul 03 15:22:02 CST 2018 by hengxin
+\* Last modified Wed Jul 04 11:21:54 CST 2018 by hengxin
 \* Created Tue Jul 03 15:21:02 CST 2018 by hengxin
