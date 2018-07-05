@@ -12,8 +12,8 @@
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
 <intAttribute key="fpIndex" value="1"/>
-<intAttribute key="maxHeapSize" value="50"/>
-<intAttribute key="maxSetSize" value="1000000"/>
+<intAttribute key="maxHeapSize" value="61"/>
+<intAttribute key="maxSetSize" value="10000000"/>
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value=""/>
 <stringAttribute key="modelBehaviorNext" value=""/>
@@ -24,13 +24,13 @@
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
 <listAttribute key="modelCorrectnessInvariants"/>
 <listAttribute key="modelCorrectnessProperties"/>
-<stringAttribute key="modelExpressionEval" value="ApplyOps(&lt;&lt;Del1, Xform(Ins1, Del1)&gt;&gt;, &lt;&lt;&gt;&gt;)"/>
+<stringAttribute key="modelExpressionEval" value="CP1"/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Char;;{&quot;a&quot;};0;0"/>
-<listEntry value="MaxPos;;1;0;0"/>
-<listEntry value="MaxPr;;1;0;0"/>
-<listEntry value="MaxLen;;1;0;0"/>
+<listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;};0;0"/>
+<listEntry value="MaxPos;;8;0;0"/>
+<listEntry value="MaxPr;;6;0;0"/>
+<listEntry value="MaxLen;;6;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
@@ -38,7 +38,7 @@
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
-<intAttribute key="numberOfWorkers" value="2"/>
+<intAttribute key="numberOfWorkers" value="4"/>
 <booleanAttribute key="recover" value="false"/>
 <stringAttribute key="result.mail.address" value=""/>
 <intAttribute key="simuAril" value="-1"/>

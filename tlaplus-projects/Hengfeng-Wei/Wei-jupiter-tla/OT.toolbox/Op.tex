@@ -951,10 +951,27 @@ Model checking basic operations on strings
  Sequences ,\, AdditionalSequenceOperators}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\CONSTANTS}\@s{8.2} Char
- ,\,}%
+ ,\,\@s{12.84}}%
+\@y{\@s{0}%
+ set of characters allowed
+}%
+\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{62.95} MaxPos ,\,}%
-\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{62.95} MaxPr ,\,}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{62.95} MaxLen}%
+\@y{\@s{0}%
+ max position to insert into or delete
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{62.95} MaxPr
+ ,\,\@s{4.72}}%
+\@y{\@s{0}%
+ max priority
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{62.95} MaxLen\@s{6.16}}%
+\@y{\@s{0}%
+ max length of list
+}%
+\@xx{}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} {\ASSUME} \.{\land} MaxPos
  \.{\in} Nat \.{\,\backslash\,} \{ 0 \}\@s{4.1}}%
@@ -1040,21 +1057,26 @@ Some operations for test.
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  The ``Apply'' operator which applies an operation \ensuremath{op} on the list
  \ensuremath{l}.
+ \ensuremath{Del}: If \ensuremath{pos \.{>} Len(l)}, the last element of
+ \ensuremath{l} is deleted.
+\end{cpar}%
+\begin{cpar}{0}{T}{F}{12.5}{0}{}%
+This is realized by the \ensuremath{DeleteElement} operator.
+\end{cpar}%
+\begin{cpar}{1}{T}{T}{0}{2.5}{%
+\ensuremath{Ins}:}%
+ If \ensuremath{pos \.{>} Len(l)}, the new element is appended to
+ \ensuremath{l}.
+ This is realized by the \ensuremath{InsertElement} operator.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} Apply ( op ,\, l )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} \.{\LET}
- len\@s{1.07} \.{\defeq} Len ( l )}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{36.79} pos \.{\defeq} op
- . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\IN} {\CASE} op
- \.{=} Nop \.{\rightarrow} l}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{40.89} {\Box}\@s{14.40}
- op . type \.{=}\@w{Del} \.{\rightarrow} DeleteElement ( l ,\, pos )}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{40.89} {\Box}\@s{14.40}
- op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} Append ( SubSeq ( l ,\, 1
- ,\, pos \.{-} 1 ) ,\, op . ch ) \.{\circ} SubSeq ( l ,\, pos ,\, len )}%
+ \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}} Apply ( op ,\, l )
+ \.{\defeq} {\CASE} op \.{=} Nop \.{\rightarrow} l}%
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
+ op . type \.{=}\@w{Del} \.{\rightarrow} DeleteElement ( l ,\, op . pos )}%
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
+ op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} InsertElement ( l ,\, op .
+ ch ,\, op . pos )}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1063,16 +1085,16 @@ Some operations for test.
 } on the list \ensuremath{l}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}} {\RECURSIVE} ApplyOps ( \_
+ \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} {\RECURSIVE} ApplyOps ( \_
  ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} ApplyOps ( ops ,\, l )
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}} ApplyOps ( ops ,\, l )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
  {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{16.4} \.{\THEN} l}%
- \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{16.4} \.{\ELSE} Apply (
+\@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{16.4} \.{\THEN} l}%
+ \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{16.4} \.{\ELSE} Apply (
  Last ( ops ) ,\, ApplyOps ( AllButLast ( ops ) ,\, l ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1080,7 +1102,7 @@ Some operations for test.
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Wed}
- \ensuremath{Jul} 04 10:06:58 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{Jul} 04 11:37:16 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
