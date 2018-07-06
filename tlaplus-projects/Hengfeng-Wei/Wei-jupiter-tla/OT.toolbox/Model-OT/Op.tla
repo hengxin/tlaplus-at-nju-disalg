@@ -3,29 +3,31 @@
 (* Model checking basic operations on strings                        *)
 (* (i.e., list of characters).                                       *)
 (*********************************************************************)
-EXTENDS Naturals, Sequences, AdditionalSequenceOperators
+EXTENDS Naturals, Sequences, 
+    AdditionalMathOperators, AdditionalSetOperators, AdditionalSequenceOperators
 ----------------------------------------------------------------------
 CONSTANTS   Char,   \* set of characters allowed
             MaxPos, \* max position to insert into or delete
             MaxPr,  \* max priority
             MaxLen  \* max length of list
             
-ASSUME /\ MaxPos \in Nat \ {0}  \* WARNING: index from 1
-       /\ MaxPr \in Nat \ {0}
-       /\ MaxLen \in Nat \ {0}
+ASSUME /\ MaxPos \in PosInt  \* WARNING: index from 1
+       /\ MaxPr \in PosInt
+       /\ MaxLen \in PosInt
 ----------------------------------------------------------------------
-\* List == Seq(Char)   \* The set of all lists.
-List == UNION {[1 .. m -> Char] : m \in 0 .. MaxLen}
+List == SeqMaxLen(Char, MaxLen)
 
 (*********************************************************************)
 (* The set of all operations.                                        *)
 (* In this specification, we will focus on "Ins" and "Del".          *)
 (*********************************************************************)
-Op == \* [type: {"Rd"}] \cup \* a read specifies no arguments
-      [type: {"Del"}, pos: 1 .. MaxPos] \cup \* a deletion specifies a position 
-      [type: {"Ins"}, pos: 1 .. MaxPos, ch: Char, pr: 1 .. MaxPr] \* an insertion specifies a position, a character, and a priority
+Rd == [type: {"Rd"}] \* a read specifies no arguments
+Ins == [type: {"Del"}, pos: 1 .. MaxPos] \* a deletion specifies a position 
+Del == [type: {"Ins"}, pos: 1 .. MaxPos, ch: Char, pr: 1 .. MaxPr] \* an insertion specifies a position, a character, and a priority
 
-Nop == CHOOSE v : v \notin Op  \* Nop: an operation representing "doing nothing"
+Op == Ins \cup Del
+      
+Nop == PickNone(Op)  \* Nop: an operation representing "doing nothing"
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* Some operations for test.                                         *)
@@ -38,6 +40,13 @@ Ins1 == [type |-> "Ins", pos |-> 1, ch |-> "a", pr |-> 1]
 Ins2 == [type |-> "Ins", pos |-> 2, ch |-> "b", pr |-> 2]
 Ins3 == [type |-> "Ins", pos |-> 3, ch |-> "c", pr |-> 3]
 Ops == <<Ins2, Del3, Ins1, Del2, Ins3, Del1>>
+
+(*********************************************************************)
+(* Legal operations with respect to a list l.                        *)
+(*********************************************************************)
+InsOp(l) == {op \in Ins: op.pos <= Len(l) + 1} \* Position of an insertion cannot be too large.
+DelOp(l) == {op \in Del: op.pos <= Len(l)} \* Position of a deletion cannot be too large.
+OpOnList(l) == InsOp(l) \cup DelOp(l)
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The "Apply" operator which applies an operation op on the list l. *)
@@ -61,5 +70,5 @@ ApplyOps(ops, l) ==
     ELSE Apply(Last(ops), ApplyOps(AllButLast(ops), l))
 =============================================================================
 \* Modification History
-\* Last modified Wed Jul 04 11:37:16 CST 2018 by hengxin
+\* Last modified Fri Jul 06 15:35:34 CST 2018 by hengxin
 \* Created Sat Jun 23 20:56:53 CST 2018 by hengxin

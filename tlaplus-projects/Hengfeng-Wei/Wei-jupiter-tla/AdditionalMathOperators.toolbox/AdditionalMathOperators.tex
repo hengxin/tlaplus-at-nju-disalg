@@ -940,189 +940,49 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} Op}\moduleRightDash\@xx{}%
+ {\MODULE} AdditionalMathOperators}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Model checking basic operations on strings
- (\ensuremath{i.e}., list of characters).
+Copyright: https:\ensuremath{\.{\slsl}github.com}/bringhurst/tlaplus/blob/master/\ensuremath{org.lamport.tla.toolbox.uitest}/farsite/\ensuremath{AdditionalSequenceOperators.tla
+}%
 \end{cpar}%
 \end{lcom}%
+\@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} Naturals ,\,
- Sequences ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}\@s{16.4}
- AdditionalMathOperators ,\, AdditionalSetOperators ,\,
- AdditionalSequenceOperators}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} {\CONSTANTS}\@s{8.2} Char
- ,\,\@s{12.84}}%
-\@y{\@s{0}%
- set of characters allowed
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{62.95} MaxPos ,\,}%
-\@y{\@s{0}%
- \ensuremath{max} position to insert into or delete
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{62.95} MaxPr
- ,\,\@s{4.72}}%
-\@y{\@s{0}%
- \ensuremath{max} priority
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{62.95} MaxLen\@s{6.16}}%
-\@y{\@s{0}%
- \ensuremath{max} length of list
-}%
-\@xx{}%
+ Sequences ,\, TLC}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} {\ASSUME} \.{\land} MaxPos
- \.{\in} PosInt\@s{4.1}}%
-\@y{\@s{0}%
- WARNING: index from 1
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{38.24} \.{\land} MaxPr
- \.{\in} PosInt}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{38.24} \.{\land} MaxLen
- \.{\in} PosInt}%
-\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} List \.{\defeq} SeqMaxLen (
- Char ,\, MaxLen )}%
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} PosInt \.{\defeq} Nat
+ \.{\,\backslash\,} \{ 0 \}}%
 \@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The set of all operations.
- In this specification, we will focus on \ensuremath{\@w{Ins}} and
- \ensuremath{\@w{Del}}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} Rd \.{\defeq} [ type \.{:}
- \{\@w{Rd} \} ]}%
-\@y{\@s{0}%
- a read specifies no arguments
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} Ins\@s{1.35} \.{\defeq} [
- type \.{:} \{\@w{Del} \} ,\, pos \.{:} 1 \.{\dotdot} MaxPos ]}%
-\@y{\@s{0}%
- a deletion specifies a position
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}} Del \.{\defeq} [ type \.{:}
- \{\@w{Ins} \} ,\, pos\@s{2.27} \.{:} 1 \.{\dotdot} MaxPos ,\, ch \.{:} Char
- ,\, pr \.{:} 1 \.{\dotdot} MaxPr ]}%
-\@y{\@s{0}%
- an insertion specifies a position, a character, and a priority
-}%
-\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}} {\CONSTANT} Nil}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} Op \.{\defeq} Ins \.{\cup}
- Del}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} NilSet \.{\defeq} \{ Nil \}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} Nop \.{\defeq} PickNone ( Op
- )\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{Nop}: an operation representing ``doing nothing''
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Some operations for test.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} Del1 \.{\defeq} [ type
- \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} Del2 \.{\defeq} [ type
- \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 2 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}} Del3 \.{\defeq} [ type
- \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 3 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}} Del4 \.{\defeq} [ type
- \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 4 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}} Ins1\@s{1.35} \.{\defeq} [
- type \.{\mapsto}\@w{Ins} ,\, pos\@s{2.27} \.{\mapsto} 1 ,\, ch
- \.{\mapsto}\@w{a} ,\, pr\@s{0.36} \.{\mapsto} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} Ins2\@s{1.35} \.{\defeq} [
- type \.{\mapsto}\@w{Ins} ,\, pos\@s{2.27} \.{\mapsto} 2 ,\, ch
- \.{\mapsto}\@w{b} ,\, pr \.{\mapsto} 2 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} Ins3\@s{1.35} \.{\defeq} [
- type \.{\mapsto}\@w{Ins} ,\, pos\@s{2.27} \.{\mapsto} 3 ,\, ch
- \.{\mapsto}\@w{c} ,\, pr\@s{0.72} \.{\mapsto} 3 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} Ops \.{\defeq} {\langle}
- Ins2 ,\, Del3 ,\, Ins1 ,\, Del2 ,\, Ins3 ,\, Del1 {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} NilOr ( set ) \.{\defeq} \{
+ Nil \} \.{\cup} set}%
 \@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Legal operations with respect to a list \ensuremath{l}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}} InsOp ( l )\@s{1.13}
- \.{\defeq} \{ op \.{\in} Ins \.{:} op . pos \.{\leq} Len ( l ) \.{+} 1 \}}%
-\@y{\@s{0}%
- Position of an insertion cannot be too large.
-}%
-\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} SetHasMinElement ( set ,\,
+ min ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{8.2} \.{\land} min
+ \.{\in} set}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{8.2} \.{\land} ( \A\, el
+ \.{\in} set \.{:} min \.{\leq} el )}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}} DelOp ( l ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} {\IF} l \.{=}
- {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\THEN} \{ \}}%
-\@y{\@s{0}%
- Not allowed to delete elements from an empty list.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{16.4} \.{\ELSE} \{ op
- \.{\in} Del \.{:} op . pos \.{\leq} Len ( l ) \}}%
-\@y{\@s{0}%
- Position of a deletion cannot be too large.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}} OpOnList ( l ) \.{\defeq}
- InsOp ( l ) \.{\cup} DelOp ( l )}%
-\@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The ``Apply'' operator which applies an operation \ensuremath{op} on the list
- \ensuremath{l}.
- \ensuremath{Del}: If \ensuremath{pos \.{>} Len(l)}, the last element of
- \ensuremath{l} is deleted.
-\end{cpar}%
-\begin{cpar}{0}{T}{F}{12.5}{0}{}%
-This is realized by the \ensuremath{DeleteElement} operator.
-\end{cpar}%
-\begin{cpar}{1}{T}{T}{0}{2.5}{%
-\ensuremath{Ins}:}%
- If \ensuremath{pos \.{>} Len(l)}, the new element is appended to
- \ensuremath{l}.
- This is realized by the \ensuremath{InsertElement} operator.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}} Apply ( op ,\, l )
- \.{\defeq} {\CASE} op \.{=} Nop \.{\rightarrow} l}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
- op . type \.{=}\@w{Del} \.{\rightarrow} DeleteElement ( l ,\, op . pos )}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
- op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} InsertElement ( l ,\, op .
- ch ,\, op . pos )}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} SetHasMaxElement ( set ,\,
+ max ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{8.2} \.{\land} max
+ \.{\in} set}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{8.2} \.{\land} ( \A\, el
+ \.{\in} set \.{:} max \.{\geq} el )}%
 \@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The ``\ensuremath{ApplyOps}'' operator which applies an operation sequence
- \ensuremath{ops
-} on the list \ensuremath{l}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}} {\RECURSIVE} ApplyOps ( \_
- ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}} ApplyOps ( ops ,\, l )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
- {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{16.4} \.{\THEN} l}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{16.4} \.{\ELSE} Apply (
- Last ( ops ) ,\, ApplyOps ( AllButLast ( ops ) ,\, l ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} MinElement ( set )\@s{1.06}
+ \.{\defeq} {\CHOOSE} min\@s{1.49} \.{\in} set \.{:} ( \A\, el \.{\in} set
+ \.{:} min \.{\leq} el )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}} MaxElement ( set )
+ \.{\defeq} {\CHOOSE} max \.{\in} set \.{:} ( \A\, el \.{\in} set \.{:} max
+ \.{\geq} el )}%
+\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1130,12 +990,12 @@ This is realized by the \ensuremath{DeleteElement} operator.
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Fri}
- \ensuremath{Jul} 06 16:25:29 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{Jul} 06 13:15:21 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created Sat \ensuremath{Jun} 23 20:56:53
- \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Fri} \ensuremath{Jul} 06
+ 13:08:50 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%

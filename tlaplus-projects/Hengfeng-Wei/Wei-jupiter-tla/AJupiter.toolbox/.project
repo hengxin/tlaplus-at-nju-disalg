@@ -26,9 +26,19 @@
 			<locationURI>PARENT-1-PROJECT_LOC/AJupiter.tla</locationURI>
 		</link>
 		<link>
+			<name>AdditionalMathOperators.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalMathOperators.tla</location>
+		</link>
+		<link>
 			<name>AdditionalSequenceOperators.tla</name>
 			<type>1</type>
 			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-resources/tlaplus-3rd-library/AdditionalSequenceOperators.tla</location>
+		</link>
+		<link>
+			<name>AdditionalSetOperators.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSetOperators.tla</location>
 		</link>
 		<link>
 			<name>CSComm.tla</name>
