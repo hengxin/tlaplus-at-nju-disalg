@@ -95,7 +95,7 @@ IsSequenceInterleaving(seq,subSeq1,subSeq2,indSeq1,indSeq2)==
 (*                                                              *)
 (* Copyright: https://www.learntla.com/libraries/sequences/     *)
 (****************************************************************)
-SeqMaxLen(S, n) ==  UNION {[1..m -> S] : m \in 0..n}
+SeqMaxLen(S, n) ==  UNION {[1 .. m -> S] : m \in 0 .. n}
 
 (****************************************************************)
 (* Map on a sequence.                                           *)
@@ -105,5 +105,5 @@ SeqMaxLen(S, n) ==  UNION {[1..m -> S] : m \in 0..n}
 SeqMap(Op(_), seq) == [x \in DOMAIN seq |-> Op(seq[x])]
 =============================================================================
 \* Modification History
-\* Last modified Fri Jul 06 13:43:17 CST 2018 by hengxin
+\* Last modified Sat Jul 07 12:12:37 CST 2018 by hengxin
 \* Created Tue Jul 03 15:21:02 CST 2018 by hengxin

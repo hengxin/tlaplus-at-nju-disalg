@@ -2,38 +2,53 @@
 EXTENDS AJupiterDo, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0Client
-const_153044927085110000 == 
+const_1530893211135161000 == 
 {"c1", "c2", "c3"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1State
-const_153044927085211000 == 
+const_1530893211135162000 == 
 <<"a", "b", "c">>
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2Cop
-const_153044927085212000 == 
+const_1530893211135163000 == 
 [c1 |-> <<Ins1>>, c2 |-> <<>>, c3 |-> <<>>]
 ----
 
 \* CONSTANT definitions @modelParameterConstants:3Char
-const_153044927085213000 == 
+const_1530893211135164000 == 
 {"a", "b", "c"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:4Server
-const_153044927085214000 == 
+const_1530893211135165000 == 
 "s"
 ----
 
+\* CONSTANT definitions @modelParameterConstants:5MaxPos
+const_1530893211135166000 == 
+3
+----
+
+\* CONSTANT definitions @modelParameterConstants:6MaxPr
+const_1530893211135167000 == 
+3
+----
+
+\* CONSTANT definitions @modelParameterConstants:7MaxLen
+const_1530893211135168000 == 
+3
+----
+
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_153044927085215000 ==
+spec_1530893211136170000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_153044927085216000 ==
+inv_1530893211136171000 ==
 TypeOK
 ----
 =============================================================================
 \* Modification History
-\* Created Sun Jul 01 20:47:50 CST 2018 by hengxin
+\* Created Sat Jul 07 00:06:51 CST 2018 by hengxin

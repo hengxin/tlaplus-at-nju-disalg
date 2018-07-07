@@ -24,13 +24,10 @@
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
 <listAttribute key="modelCorrectnessInvariants"/>
 <listAttribute key="modelCorrectnessProperties"/>
-<stringAttribute key="modelExpressionEval" value="Apply([type |-&gt; &quot;Ins&quot;, pos |-&gt; 1, ch |-&gt; &quot;x&quot;, pr |-&gt; 1], &lt;&lt;&gt;&gt;)"/>
+<stringAttribute key="modelExpressionEval" value="Apply([type |-&gt; &quot;Ins&quot;, pos |-&gt; 2, ch |-&gt; &quot;x&quot;, pr |-&gt; 1], &lt;&lt;&gt;&gt;)"/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
-<listEntry value="MaxPos;;3;0;0"/>
-<listEntry value="MaxPr;;3;0;0"/>
-<listEntry value="MaxLen;;4;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

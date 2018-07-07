@@ -949,7 +949,32 @@ Specification of \ensuremath{OT} (Operational Transformation) functions.
 \end{cpar}%
 \end{lcom}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\EXTENDS} Op ,\, TLC}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\midbar\@xx{}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Constants for finite/bounded model checking.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} {\CONSTANTS}\@s{4.1} MaxPr
+ ,\,\@s{4.1}}%
+\@y{\@s{0}%
+ max priority
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{58.85} MaxLen\@s{5.53}}%
+\@y{\@s{0}%
+ max length of list
+}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} {\ASSUME} \.{\land} MaxPr
+ \.{\in} PosInt}%
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{38.24} \.{\land} MaxLen
+ \.{\in} Nat}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} ListMaxLen \.{\defeq}
+ SeqMaxLen ( Char ,\, MaxLen )}%
+\@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{OT} (Operational Transformation) functions.
@@ -967,23 +992,23 @@ Specification of \ensuremath{OT} (Operational Transformation) functions.
  right \ensuremath{\@w{Ins}} \ensuremath{rins}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} XformII ( lins ,\, rins )
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} XformII ( lins ,\, rins )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} {\IF} lins . pos
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} {\IF} lins . pos
  \.{<} rins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} \.{\THEN} lins}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\ELSE} {\IF}
+\@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\THEN} lins}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{16.4} \.{\ELSE} {\IF}
  lins . pos \.{>} rins . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{47.71} \.{\THEN} [ lins
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{47.71} \.{\THEN} [ lins
  {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{47.71} \.{\ELSE} {\IF}
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{47.71} \.{\ELSE} {\IF}
  lins . ch \.{=} rins . ch}%
-\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{79.02} \.{\THEN} Nop}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{79.02} \.{\ELSE} {\IF}
+\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{79.02} \.{\THEN} Nop}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{79.02} \.{\ELSE} {\IF}
  lins . pr \.{>} rins . pr}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{110.33} \.{\THEN} [ lins
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{110.33} \.{\THEN} [ lins
  {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
-\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{110.33} \.{\ELSE} lins}%
+\@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{110.33} \.{\ELSE} lins}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -991,12 +1016,12 @@ Specification of \ensuremath{OT} (Operational Transformation) functions.
  \ensuremath{\@w{Del}} \ensuremath{del}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} XformID ( ins ,\, del )
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}} XformID ( ins ,\, del )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} {\IF} ins . pos
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} {\IF} ins . pos
  \.{\leq} del . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\THEN} ins}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{16.4} \.{\ELSE} [ ins
+\@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{16.4} \.{\THEN} ins}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} \.{\ELSE} [ ins
  {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
@@ -1005,12 +1030,12 @@ Specification of \ensuremath{OT} (Operational Transformation) functions.
  \ensuremath{\@w{Ins}} \ensuremath{ins}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} XformDI ( del ,\, ins )
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}} XformDI ( del ,\, ins )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} {\IF} del . pos
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{16.4} {\IF} del . pos
  \.{<} ins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\THEN} del}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\ELSE} [ del
+\@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{16.4} \.{\THEN} del}%
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{16.4} \.{\ELSE} [ del
  {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
@@ -1019,17 +1044,17 @@ Specification of \ensuremath{OT} (Operational Transformation) functions.
  right \ensuremath{\@w{Del}} \ensuremath{rdel}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}} XformDD ( ldel ,\, rdel )
+ \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}} XformDD ( ldel ,\, rdel )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{16.4} {\IF} ldel . pos
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{16.4} {\IF} ldel . pos
  \.{<} rdel . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} \.{\THEN} ldel}%
- \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\ELSE} {\IF}
+\@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{16.4} \.{\THEN} ldel}%
+ \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \.{\ELSE} {\IF}
  ldel . pos \.{>} rdel . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{47.71} \.{\THEN} [ ldel
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{47.71} \.{\THEN} [ ldel
  {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{47.71} \.{\ELSE} Nop}%
-\@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{47.71} \.{\ELSE} Nop}%
+\@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  Transform the left operation \ensuremath{lop} against the right operation
@@ -1037,23 +1062,23 @@ Specification of \ensuremath{OT} (Operational Transformation) functions.
 } with appropriate \ensuremath{OT} function.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}} Xform ( lop ,\, rop )
+ \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}} Xform ( lop ,\, rop )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{16.4} {\CASE} lop \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{16.4} {\CASE} lop \.{=}
  Nop \.{\lor} rop \.{=} Nop \.{\rightarrow} lop}%
- \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{28.69} {\Box}\@s{4.1} lop
+ \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{28.69} {\Box}\@s{4.1} lop
  . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
  \.{\rightarrow} XformII ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
+ \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
  lop . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Del}
  \.{\rightarrow} XformID ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
+ \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
  lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
  \.{\rightarrow} XformDI ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
+ \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
  lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Del} \.{\rightarrow}
  XformDD ( lop ,\, rop )}%
-\@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 Generalized \ensuremath{OT} functions on operation sequences.
@@ -1066,14 +1091,14 @@ Iteratively/recursively transforms the operation \ensuremath{op
 } against an operation sequence \ensuremath{ops}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}} {\RECURSIVE} XformOpOps ( \_
+ \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}} {\RECURSIVE} XformOpOps ( \_
  ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}} XformOpOps ( op ,\, ops )
+ \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}} XformOpOps ( op ,\, ops )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
  {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{32.65} \.{\THEN} op}%
- \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{32.65} \.{\ELSE}
+\@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{32.65} \.{\THEN} op}%
+ \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{32.65} \.{\ELSE}
  XformOpOps ( Xform ( op ,\, Head ( ops ) ) ,\, Tail ( ops ) )}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
@@ -1084,15 +1109,15 @@ Iteratively/recursively transforms the operation \ensuremath{op
  \ensuremath{XformOpOpsX} maintains the intermediate transformed operation
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}} {\RECURSIVE} XformOpOpsX (
+ \@x{\makebox[0pt][r]{\scriptsize 97\hspace{1em}} {\RECURSIVE} XformOpOpsX (
  \_ ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}} XformOpOpsX ( op ,\, ops )
+ \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}} XformOpOpsX ( op ,\, ops )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
  {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{32.65} \.{\THEN}
+ \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{32.65} \.{\THEN}
  {\langle} op {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{32.65} \.{\ELSE}
+ \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}}\@s{32.65} \.{\ELSE}
  {\langle} op {\rangle} \.{\circ} XformOpOpsX ( Xform ( op ,\, Head ( ops ) )
  ,\, Tail ( ops ) )}%
 \@pvspace{8.0pt}%
@@ -1102,12 +1127,13 @@ Iteratively/recursively transforms the operation sequence \ensuremath{ops
 } against an operation \ensuremath{op}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}} XformOpsOp ( ops ,\, op )
+ \@x{\makebox[0pt][r]{\scriptsize 107\hspace{1em}} XformOpsOp ( ops ,\, op )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 97\hspace{1em}}\@s{16.4} \.{\LET} opX
+ \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}}\@s{16.4} \.{\LET} opX
  \.{\defeq} XformOpOpsX ( op ,\, ops )}%
- \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}}\@s{16.4} \.{\IN} [ i \.{\in}
- 1 \.{\dotdot} Len ( ops ) \.{\mapsto} Xform ( ops [ i ] ,\, opX [ i ] ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}}\@s{16.4} \.{\IN} [ i
+ \.{\in} 1 \.{\dotdot} Len ( ops ) \.{\mapsto} Xform ( ops [ i ] ,\, opX [ i
+ ] ) ]}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1119,16 +1145,16 @@ Iteratively/recursively transforms an operation sequence \ensuremath{ops1
 See also Definition 2.13 of the paper ``Imine @ \ensuremath{TCS06}''.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 106\hspace{1em}} {\RECURSIVE} XformOpsOps (
+ \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}} {\RECURSIVE} XformOpsOps (
  \_ ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 107\hspace{1em}} XformOpsOps ( ops1 ,\, ops2
+ \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}} XformOpsOps ( ops1 ,\, ops2
  ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}}\@s{16.4} {\IF} ops2 \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}}\@s{16.4} {\IF} ops2 \.{=}
  {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}}\@s{16.4} \.{\THEN} ops1}%
- \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}}\@s{16.4} \.{\ELSE}
+\@x{\makebox[0pt][r]{\scriptsize 120\hspace{1em}}\@s{16.4} \.{\THEN} ops1}%
+ \@x{\makebox[0pt][r]{\scriptsize 121\hspace{1em}}\@s{16.4} \.{\ELSE}
  XformOpsOps ( XformOpsOp ( ops1 ,\, Head ( ops2 ) ) ,\, Tail ( ops2 ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 122\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The \ensuremath{CP1} (C for Convergence) property.
@@ -1139,31 +1165,65 @@ The \ensuremath{CP1} (C for Convergence) property.
  \ensuremath{op2}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}} CP1 \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}\@s{19.96} \A\, l \.{\in}
- List \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}}\@s{31.28} \A\, op1 \.{\in}
- OpOnList ( l ) ,\, op2 \.{\in} OpOnList ( l ) \.{:}}%
-\@x{\makebox[0pt][r]{\scriptsize 120\hspace{1em}}\@s{42.60}}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Legal operations with respect to a list \ensuremath{l}.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 132\hspace{1em}} InsOp ( l )
+ \.{\defeq}\@s{4.1}}%
 \@y{\@s{0}%
- \ensuremath{\.{\land} PrintT(ToString(l) \.{\circ} \@w{, } \.{\circ}
- ToString(op1) \.{\circ} \@w{, } \.{\circ} ToString(op2))
+ Position of an insertion cannot be too large.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 133\hspace{1em}}\@s{16.4} [ type \.{:}
+ \{\@w{Ins} \} ,\, pos \.{:} 1 \.{\dotdot} Len ( l ) \.{+} 1 ,\, ch \.{:}
+ Char ,\, pr \.{:} 1 \.{\dotdot} MaxPr ]}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 135\hspace{1em}} DelOp ( l ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 136\hspace{1em}}\@s{16.4} {\IF} l \.{=}
+ {\langle} {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 137\hspace{1em}}\@s{16.4} \.{\THEN} \{ \}}%
+\@y{\@s{0}%
+ Not allowed to delete elements from an empty list.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 138\hspace{1em}}\@s{16.4} \.{\ELSE}\@s{4.1}
+ [ type \.{:} \{\@w{Del} \} ,\, pos \.{:} 1 \.{\dotdot} Len ( l ) ]}%
+\@y{\@s{0}%
+ Position of a deletion cannot be too large.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 139\hspace{1em}} OpOnList ( l ) \.{\defeq}
+ InsOp ( l ) \.{\cup} DelOp ( l )}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 141\hspace{1em}} CP1 \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 142\hspace{1em}}\@s{19.96} \A\, l \.{\in}
+ ListMaxLen \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 143\hspace{1em}}\@s{31.28} \A\, op1 \.{\in}
+ OpOnList ( l ) ,\, op2 \.{\in} OpOnList ( l ) \.{:}}%
+\@x{\makebox[0pt][r]{\scriptsize 144\hspace{1em}}\@s{42.60}}%
+\@y{\@s{0}%
+ \ensuremath{\.{\land} PrintT(ToString(l) \.{\circ} \mbox{``},\, \mbox{''}
+ \.{\circ} ToString(op1) \.{\circ} \mbox{``},\, \mbox{''} \.{\circ}
+ ToString(op2))
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 121\hspace{1em}}\@s{42.60} \.{\land}}%
+\@x{\makebox[0pt][r]{\scriptsize 145\hspace{1em}}\@s{42.60} \.{\land}}%
 \@y{\@s{0}%
  Priorities of these two insertions cannot be the same.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 122\hspace{1em}}\@s{53.71} \.{\lor} ( op1 .
+ \@x{\makebox[0pt][r]{\scriptsize 146\hspace{1em}}\@s{53.71} \.{\lor} ( op1 .
  type \.{=}\@w{Ins} \.{\land} op2 . type \.{=}\@w{Ins} \.{\land} op1 . pr
  \.{=} op2 . pr )}%
-\@x{\makebox[0pt][r]{\scriptsize 123\hspace{1em}}\@s{61.91}}%
+\@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{61.91}}%
 \@y{\@s{0}%
  The \ensuremath{CP1} itself.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 124\hspace{1em}}\@s{53.71} \.{\lor} ApplyOps
+ \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{53.71} \.{\lor} ApplyOps
  ( {\langle} op1 ,\, Xform ( op2 ,\, op1 ) {\rangle} ,\, l ) \.{=} ApplyOps (
  {\langle} op2 ,\, Xform ( op1 ,\, op2 ) {\rangle} ,\, l )}%
 \@pvspace{8.0pt}%
@@ -1180,29 +1240,29 @@ See also Theorem 2.14 of the paper ``Imine @ \ensuremath{TCS06}''.
 \ensuremath{FIXME}: Generate legal operation sequences.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 133\hspace{1em}} GCP1 \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 134\hspace{1em}}\@s{16.4} \A\, l \.{\in}
- List ,\, ops1 \.{\in} SeqMaxLen ( Op ,\, 1 ) ,\, ops2 \.{\in} SeqMaxLen ( Op
- ,\, 1 ) \.{:}}%
-\@x{\makebox[0pt][r]{\scriptsize 135\hspace{1em}}\@s{27.72}}%
+\@x{\makebox[0pt][r]{\scriptsize 157\hspace{1em}} GCP1 \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 158\hspace{1em}}\@s{16.4} \A\, l \.{\in}
+ ListMaxLen ,\, ops1 \.{\in} SeqMaxLen ( Op ,\, 1 ) ,\, ops2 \.{\in}
+ SeqMaxLen ( Op ,\, 1 ) \.{:}}%
+\@x{\makebox[0pt][r]{\scriptsize 159\hspace{1em}}\@s{27.72}}%
 \@y{\@s{0}%
  \ensuremath{\.{\lor}} (\ensuremath{Head(ops1).type \.{=} \@w{Del} \.{\lor}
  Head(ops2).type \.{=} \@w{Del}})
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 136\hspace{1em}}\@s{27.72} \.{\lor} ApplyOps
+ \@x{\makebox[0pt][r]{\scriptsize 160\hspace{1em}}\@s{27.72} \.{\lor} ApplyOps
  ( ops1 \.{\circ} XformOpsOps ( ops2 ,\, ops1 ) ,\, l ) \.{=}}%
- \@x{\makebox[0pt][r]{\scriptsize 137\hspace{1em}}\@s{38.83} ApplyOps ( ops2
+ \@x{\makebox[0pt][r]{\scriptsize 161\hspace{1em}}\@s{38.83} ApplyOps ( ops2
  \.{\circ} XformOpsOps ( ops1 ,\, ops2 ) ,\, l )}%
-\@x{\makebox[0pt][r]{\scriptsize 138\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 162\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Fri}
- \ensuremath{Jul} 06 16:18:49 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified Sat
+ \ensuremath{Jul} 07 12:24:04 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

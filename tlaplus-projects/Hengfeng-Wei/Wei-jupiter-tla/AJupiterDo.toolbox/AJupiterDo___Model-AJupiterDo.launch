@@ -19,9 +19,9 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="cop"/>
+<stringAttribute key="modelBehaviorVars" value="crec, cbuf, sincoming, cincoming, srec, cop, sstate, sbuf, cstate"/>
 <stringAttribute key="modelComments" value=""/>
-<booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
+<booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOK"/>
 </listAttribute>
@@ -34,12 +34,17 @@
 <listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;&gt;&gt;, c3 |-&gt; &lt;&lt;&gt;&gt;];0;0"/>
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
+<listEntry value="MaxPos;;3;0;0"/>
+<listEntry value="MaxPr;;3;0;0"/>
+<listEntry value="MaxLen;;3;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
-<listAttribute key="modelParameterDefinitions"/>
+<listAttribute key="modelParameterDefinitions">
+<listEntry value="Nop;;Nop;1;0"/>
+</listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
-<intAttribute key="numberOfWorkers" value="2"/>
+<intAttribute key="numberOfWorkers" value="1"/>
 <booleanAttribute key="recover" value="false"/>
 <stringAttribute key="result.mail.address" value=""/>
 <intAttribute key="simuAril" value="-1"/>
@@ -47,5 +52,5 @@
 <intAttribute key="simuSeed" value="-1"/>
 <stringAttribute key="specName" value="AJupiterDo"/>
 <stringAttribute key="view" value=""/>
-<booleanAttribute key="visualizeStateGraph" value="false"/>
+<booleanAttribute key="visualizeStateGraph" value="true"/>
 </launchConfiguration>

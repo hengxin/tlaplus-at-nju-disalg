@@ -5,6 +5,17 @@
 (* more general ones involving operation sequences.                        *)
 (***************************************************************************)
 EXTENDS Op, TLC
+
+(***************************************************************************)
+(* Constants for finite/bounded model checking.                            *)
+(***************************************************************************)
+CONSTANTS  MaxPr,  \* max priority
+           MaxLen  \* max length of list
+            
+ASSUME /\ MaxPr \in PosInt
+       /\ MaxLen \in Nat
+
+ListMaxLen == SeqMaxLen(Char, MaxLen)
 -----------------------------------------------------------------------------
 (***************************************************************************)
 (* OT (Operational Transformation) functions.                              *)
@@ -114,13 +125,24 @@ XformOpsOps(ops1, ops2) ==
 (*                                                                         *)
 (* TODO: refactor the generation of op1 and op2.                           *)
 (***************************************************************************)
+
+(*********************************************************************)
+(* Legal operations with respect to a list l.                        *)
+(*********************************************************************)
+InsOp(l) ==  \* Position of an insertion cannot be too large.
+    [type: {"Ins"}, pos: 1 .. Len(l) + 1, ch: Char, pr: 1 .. MaxPr]
+
+DelOp(l) == 
+    IF l = <<>> 
+    THEN {} \* Not allowed to delete elements from an empty list.
+    ELSE  [type: {"Del"}, pos: 1 .. Len(l)] \* Position of a deletion cannot be too large.
+OpOnList(l) == InsOp(l) \cup DelOp(l)
+
 CP1 == 
-    \A l \in List: 
+    \A l \in ListMaxLen: 
         \A op1 \in OpOnList(l), op2 \in OpOnList(l): 
             \* /\ PrintT(ToString(l) \o ", " \o ToString(op1) \o ", " \o ToString(op2))
-                 \* It is not allowed to delete elements from an empty list.
-            /\ \/ (l = <<>> /\ (op1.type = "Del" \/ op2.type = "Del")) 
-                 \* Priorities of these two insertions cannot be the same.
+            /\ \* Priorities of these two insertions cannot be the same.
                \/ (op1.type = "Ins" /\ op2.type = "Ins" /\ op1.pr = op2.pr)
                  \* The CP1 itself.
                \/ ApplyOps(<<op1, Xform(op2, op1)>>, l) = ApplyOps(<<op2, Xform(op1, op2)>>, l)
@@ -133,11 +155,11 @@ CP1 ==
 (* FIXME: Generate legal operation sequences.                              *)
 (***************************************************************************)
 GCP1 ==
-    \A l \in List, ops1 \in SeqMaxLen(Op, 1), ops2 \in SeqMaxLen(Op, 1):
+    \A l \in ListMaxLen, ops1 \in SeqMaxLen(Op, 1), ops2 \in SeqMaxLen(Op, 1):
         \* \/ (Head(ops1).type = "Del" \/ Head(ops2).type = "Del")
         \/ ApplyOps(ops1 \o XformOpsOps(ops2, ops1), l) = 
            ApplyOps(ops2 \o XformOpsOps(ops1, ops2), l)
 =============================================================================
 \* Modification History
-\* Last modified Fri Jul 06 15:28:17 CST 2018 by hengxin
+\* Last modified Sat Jul 07 12:24:04 CST 2018 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin
