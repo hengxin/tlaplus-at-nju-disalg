@@ -32,8 +32,8 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Replica;;{&quot;r1&quot;, &quot;r2&quot;, &quot;r3&quot;, &quot;r4&quot;};0;0"/>
-<listEntry value="Max;;[r1 |-&gt; 1, r2 |-&gt; 2, r3 |-&gt; 3, r4 |-&gt; 4];0;0"/>
+<listEntry value="Replica;;{&quot;r1&quot;, &quot;r2&quot;};0;0"/>
+<listEntry value="Max;;[r1 |-&gt; 1, r2 |-&gt; 2];0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value="IncConstraint"/>
 <listAttribute key="modelParameterDefinitions"/>
@@ -47,5 +47,5 @@
 <intAttribute key="simuSeed" value="-1"/>
 <stringAttribute key="specName" value="Counter"/>
 <stringAttribute key="view" value=""/>
-<booleanAttribute key="visualizeStateGraph" value="false"/>
+<booleanAttribute key="visualizeStateGraph" value="true"/>
 </launchConfiguration>
