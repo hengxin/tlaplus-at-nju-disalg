@@ -10,6 +10,7 @@ CONSTANTS
     InitState,  \* the initial state of each replica
     Cop         \* Cop[c]: operations issued by the client c \in Client
 
+\*OpToIssue == {op \in SUBSET}
 ASSUME 
     /\ InitState \in List
     /\ Cop \in [Client -> Seq(Op)]
@@ -47,7 +48,7 @@ cVars == <<cop, cbuf, crec, cstate>>
 sVars == <<sbuf, srec, sstate>>
 \* FIXME: subscript error (Don't know why yet!)
 \*vars == cVars \o sVars \o <<cincoming, sincoming>>
-vars == <<cop, cbuf, crec, cstate, sbuf, srec, sstate, cincoming, sincoming>>
+vars == <<cop, cbuf, crec, cstate, sbuf, srec, sstate, cincoming, sincoming>>   \* all variables
 -----------------------------------------------------------------------------
 TypeOK == 
     /\cop \in [Client -> Seq(Op)]
@@ -95,13 +96,13 @@ Init ==
 (*********************************************************************)
 Do(c) == 
     /\ cop[c] # <<>>
-    /\ LET op == Head(cop[c])
-        IN \* /\ PrintT(c \o ": Do " \o ToString(op))
+    /\ LET op == LegalizeOp(Head(cop[c]), cstate[c])  \* preprocess illegal operations
+        IN /\ PrintT(c \o ": Do " \o ToString(op))
            /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
            /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
            /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
     /\ crec' = [crec EXCEPT ![c] = 0]
-    /\ cop' = [cop EXCEPT ![c] = Tail(@)]
+    /\ cop' = [cop EXCEPT ![c] = Tail(@)]   \* consume one operation
     /\ UNCHANGED sVars
 
 (*********************************************************************)
@@ -185,5 +186,5 @@ THEOREM Spec => []QC
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jul 07 16:01:04 CST 2018 by hengxin
+\* Last modified Sat Jul 07 21:26:52 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

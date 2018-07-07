@@ -54,7 +54,19 @@ ApplyOps(ops, l) ==
     IF ops = <<>>
     THEN l
     ELSE Apply(Last(ops), ApplyOps(AllButLast(ops), l))
+-----------------------------------------------------------------------------
+(*********************************************************************)
+(* Check whether an operation op is legal with respect to the list l.*)
+(*********************************************************************)
+IsLegalOp(op, l) == CASE op.type = "Del" -> op.pos <= Len(l)
+                     []  op.type = "Ins" -> op.pos <= Len(l) + 1
+
+(*********************************************************************)
+(* Legalize an operation op with respect to the list l.              *)
+(*********************************************************************)
+LegalizeOp(op, l) == CASE op.type = "Del" -> [op EXCEPT !.pos = Min(@, Len(l))]
+                      []  op.type = "Ins" -> [op EXCEPT !.pos = Min(@, Len(l) + 1)]
 =============================================================================
 \* Modification History
-\* Last modified Sat Jul 07 14:56:02 CST 2018 by hengxin
+\* Last modified Sat Jul 07 21:26:42 CST 2018 by hengxin
 \* Created Sat Jun 23 20:56:53 CST 2018 by hengxin

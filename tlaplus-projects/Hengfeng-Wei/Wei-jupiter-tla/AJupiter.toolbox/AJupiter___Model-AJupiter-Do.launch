@@ -30,8 +30,8 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;, &quot;c4&quot;};0;0"/>
-<listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;Ins1&gt;&gt;, c3 |-&gt; &lt;&lt;Del1&gt;&gt;, c4 |-&gt; &lt;&lt;Ins2&gt;&gt;];0;0"/>
+<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
+<listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;Ins2, Ins3&gt;&gt;, c3 |-&gt; &lt;&lt;Del3&gt;&gt;];0;0"/>
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
 <listEntry value="InitState;;&lt;&lt;&quot;a&quot;, &quot;b&quot;&gt;&gt;;0;0"/>
@@ -50,5 +50,5 @@
 <intAttribute key="simuSeed" value="-1"/>
 <stringAttribute key="specName" value="AJupiter"/>
 <stringAttribute key="view" value=""/>
-<booleanAttribute key="visualizeStateGraph" value="true"/>
+<booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>
