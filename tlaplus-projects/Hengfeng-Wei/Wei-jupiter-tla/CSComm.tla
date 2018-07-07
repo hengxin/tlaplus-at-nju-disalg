@@ -68,7 +68,11 @@ SSend(c, acks, xop) ==
                         THEN cincoming[cl]
                         ELSE Append(cincoming[cl], [ack |-> acks[cl], op |-> xop])] 
 -----------------------------------------------------------------------------
+(*********************************************************************)
+(* Properties of communication.                                      *)
+(*********************************************************************)
+EmptyChannel == Init
 =============================================================================
 \* Modification History
-\* Last modified Tue Jul 03 13:55:53 CST 2018 by hengxin
+\* Last modified Sat Jul 07 15:53:20 CST 2018 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

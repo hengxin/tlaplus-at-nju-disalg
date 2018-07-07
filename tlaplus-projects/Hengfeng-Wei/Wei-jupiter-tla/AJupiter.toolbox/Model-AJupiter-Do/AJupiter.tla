@@ -96,7 +96,7 @@ Init ==
 Do(c) == 
     /\ cop[c] # <<>>
     /\ LET op == Head(cop[c])
-        IN /\ PrintT(c \o ": Do " \o ToString(op))
+        IN \* /\ PrintT(c \o ": Do " \o ToString(op))
            /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
            /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
            /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
@@ -117,6 +117,7 @@ Rev(c) ==
            xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
            /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
+    /\ UNCHANGED <<sbuf, srec, sstate, cop>>    \* NOTE: sVars \o <<cop>> is wrong!
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Server receives a message.                                    *)
@@ -150,8 +151,39 @@ Next ==
 (*********************************************************************)
 (* The Spec.                                                         *)
 (*********************************************************************)
-Spec == Init /\ [][Next]_vars
+Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
+-----------------------------------------------------------------------------
+(*********************************************************************)
+(* The safety properties to check: Eventual Convergence (EC),        *)
+(* Quiescent Consistency (QC), Strong Eventual Convergence (SEC),    *)
+(* Weak List Specification, (WLSpec),                                *)
+(* and Strong List Specification, (SLSpec).                          *)
+(*********************************************************************)
+
+(*********************************************************************)
+(* Eventual Consistency (EC)                                         *)
+(*********************************************************************)
+
+(*********************************************************************)
+(* Quiescent Consistency (QC)                                        *)
+(*********************************************************************)
+QConvergence == \forall c \in Client: cstate[c] = sstate
+QC == comm!EmptyChannel => QConvergence
+
+THEOREM Spec => []QC
+
+(*********************************************************************)
+(* Strong Eventual Consistency (SEC)                                 *)
+(*********************************************************************)
+
+(*********************************************************************)
+(* Weak List Consistency (WLSpec)                                    *)
+(*********************************************************************)
+
+(*********************************************************************)
+(* Strong List Consistency (SLSpec)                                  *)
+(*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jul 07 14:51:40 CST 2018 by hengxin
+\* Last modified Sat Jul 07 16:01:04 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

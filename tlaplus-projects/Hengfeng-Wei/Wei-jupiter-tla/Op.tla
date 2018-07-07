@@ -9,7 +9,6 @@ EXTENDS Naturals, Sequences,
 CONSTANTS   Char   \* set of characters allowed
 
 List == Seq(Char)   \* all possible lists/strings
-ListUptoLen(len) == UNION {[1 .. m -> Char]: m \in 0 .. len}    \* including the empty list <<>>
 ----------------------------------------------------------------------
 (*********************************************************************)
 (* The set of all operations.                                        *)
@@ -57,5 +56,5 @@ ApplyOps(ops, l) ==
     ELSE Apply(Last(ops), ApplyOps(AllButLast(ops), l))
 =============================================================================
 \* Modification History
-\* Last modified Sat Jul 07 14:20:05 CST 2018 by hengxin
+\* Last modified Sat Jul 07 14:56:02 CST 2018 by hengxin
 \* Created Sat Jun 23 20:56:53 CST 2018 by hengxin
