@@ -940,414 +940,161 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} AJupiter}\moduleRightDash\@xx{}%
+ {\MODULE} Op}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- Model checking the \ensuremath{Jupiter} protocol presented by
- \ensuremath{Attiya} and others.
+Model checking basic operations on strings
+ (\ensuremath{i.e}., list of characters).
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} OT ,\, TLC}%
-\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\CONSTANTS}}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} Client ,\,\@s{16.4}}%
+ \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} Naturals ,\,
+ Sequences ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}\@s{16.4}
+ AdditionalMathOperators ,\, AdditionalSetOperators ,\,
+ AdditionalSequenceOperators}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} {\CONSTANTS}\@s{8.2}
+ Char\@s{8.2}}%
 \@y{\@s{0}%
- the set of client replicas
+ set of characters allowed
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Server
- ,\,\@s{14.73}}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}} List \.{\defeq} Seq ( Char
+ )\@s{8.2}}%
 \@y{\@s{0}%
- the (unique) server replica
+ all possible lists/strings
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} InitState
- ,\,\@s{5.07}}%
+ \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} ListUptoLen ( len )
+ \.{\defeq} {\UNION} \{ [ 1 \.{\dotdot} m \.{\rightarrow} Char ] \.{:} m
+ \.{\in} 0 \.{\dotdot} len \}\@s{12.29}}%
 \@y{\@s{0}%
- the initial state of each replica
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} Cop\@s{31.77}}%
-\@y{\@s{0}%
- \ensuremath{Cop[c]}: operations issued by the client \ensuremath{c \.{\in}
- Client
+ including the empty list \ensuremath{{\langle}{\rangle}
 }}%
 \@xx{}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} {\ASSUME}}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} \.{\land} InitState
- \.{\in} List}%
- \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land} Cop
- \.{\in} [ Client \.{\rightarrow} Seq ( Op ) ]}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} {\VARIABLES}}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For model checking:
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} cop ,\,\@s{24.59}}%
-\@y{\@s{0}%
- \ensuremath{cop[c]}: operations issued by the client \ensuremath{c \.{\in}
- Client
-}}%
-\@xx{}%
-\@pvspace{8.0pt}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the client replicas:
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} cbuf ,\,\@s{12.29}}%
-\@y{\@s{0}%
- \ensuremath{cbuf[c]}: buffer (of operations) at the client \ensuremath{c
- \.{\in} Client
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{16.4} crec ,\,\@s{14.49}}%
-\@y{\@s{0}%
- \ensuremath{crec[c]}: the number of new messages have been received by the
- client \ensuremath{c \.{\in} Client
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{83.26}}%
-\@y{\@s{0}%
- since the last time a message was sent
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} cstate ,\,\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{cstate[c]}: state (the list content) of the client \ensuremath{c
- \.{\in} Client
-}}%
-\@xx{}%
-\@pvspace{8.0pt}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the server replica:
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} sbuf ,\,\@s{10.65}}%
-\@y{\@s{0}%
- \ensuremath{sbuf[c]}: buffer (of operations) at the \ensuremath{Server}, one
- per client \ensuremath{c \.{\in} Client
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{16.4} srec ,\,\@s{12.84}}%
-\@y{\@s{0}%
- \ensuremath{srec[c]}: the number of new messages have been \.{\dots}, one
- per client \ensuremath{c \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{16.4} sstate
- ,\,\@s{4.61}}%
-\@y{\@s{0}%
- \ensuremath{sstate}: state (the list content) of the server
- \ensuremath{Server
-}}%
-\@xx{}%
-\@pvspace{8.0pt}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For communication between the \ensuremath{Server} and the Clients:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} cincoming
- ,\,\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{cincoming[c]}: incoming channel at the client \ensuremath{c
- \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4}
- sincoming\@s{10.72}}%
-\@y{\@s{0}%
- incoming channel at the \ensuremath{Server
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}} comm \.{\defeq} {\INSTANCE}
- CSComm}%
-\@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} cVars \.{\defeq} {\langle}
- cop ,\, cbuf ,\, crec ,\, cstate {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}} sVars\@s{0.51} \.{\defeq}
- {\langle} sbuf ,\, srec ,\, sstate {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}}%
-\@y{\@s{0}%
- \ensuremath{FIXME}: subscript error (Don\mbox{'}t know why
- yet\ensuremath{{\bang})
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}}%
-\@y{%
- \ensuremath{vars \.{\defeq} cVars \.{\circ} sVars \.{\circ}
- {\langle}cincoming,\, sincoming{\rangle}
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}} vars \.{\defeq} {\langle}
- cop ,\, cbuf ,\, crec ,\, cstate ,\, sbuf ,\, srec ,\, sstate ,\, cincoming
- ,\, sincoming {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} TypeOK \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{16.4} \.{\land} cop
- \.{\in} [ Client \.{\rightarrow} Seq ( Op ) ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the client replicas:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{16.4} \.{\land} cbuf
- \.{\in} [ Client \.{\rightarrow} Seq ( Op \.{\cup} \{ Nop \} ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{16.4} \.{\land}
- crec\@s{2.19} \.{\in} [ Client \.{\rightarrow} Nat ]}%
- \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{16.4} \.{\land} cstate
- \.{\in} [ Client \.{\rightarrow} List ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the server replica:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{16.4} \.{\land} sbuf
- \.{\in} [ Client \.{\rightarrow} Seq ( Op \.{\cup} \{ Nop \} ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{16.4} \.{\land}
- srec\@s{2.19} \.{\in} [ Client \.{\rightarrow} Nat ]}%
- \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{16.4} \.{\land} sstate
- \.{\in} List}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For communication between the server and the clients:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} TypeOK}%
-\@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Init} predicate.
+The set of all operations.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}} Init \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{16.4} \.{\land} cop \.{=}
- Cop}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the client replicas:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{16.4} \.{\land} cbuf
- \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{16.4} \.{\land}
- crec\@s{2.19} \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{16.4} \.{\land} cstate
- \.{=} [ c \.{\in} Client \.{\mapsto} InitState ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the server replica:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{16.4} \.{\land} sbuf
- \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{16.4} \.{\land}
- srec\@s{2.19} \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{16.4} \.{\land} sstate
- \.{=} InitState}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For communication between the server and the clients:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} Init}%
-\@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} Rd \.{\defeq} [ type \.{:}
+ \{\@w{Rd} \} ]}%
+\@y{\@s{0}%
+ a read specifies no arguments
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} Ins\@s{1.35} \.{\defeq} [
+ type \.{:} \{\@w{Del} \} ,\, pos \.{:} PosInt ]}%
+\@y{\@s{0}%
+ a deletion specifies a position, indexed from 1
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} Del \.{\defeq} [ type \.{:}
+ \{\@w{Ins} \} ,\, pos\@s{2.27} \.{:} PosInt ,\, ch \.{:} Char ,\, pr \.{:}
+ PosInt ]}%
+\@y{\@s{0}%
+ an insertion also specifies a character and a priority
+}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} Op \.{\defeq} Ins \.{\cup}
+ Del\@s{4.1}}%
+\@y{\@s{0}%
+ Now we focus on \ensuremath{\@w{Ins}} and \ensuremath{\@w{Del}}.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} Nop \.{\defeq} PickNone ( Op
+ )\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{Nop}: an operation representing ``doing nothing''
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
+Some operations for test.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}} Do ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 97\hspace{1em}}\@s{22.34} \.{\land} cop [ c
- ] \.{\neq} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}}\@s{22.34} \.{\land} \.{\LET}
- op \.{\defeq} Head ( cop [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{37.55} \.{\IN} \.{\land}
- PrintT ( c \.{\circ}\@w{:\ Do\ } \.{\circ} ToString ( op ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{57.95} \.{\land} cstate
- \.{'} \.{=} [ cstate {\EXCEPT} {\bang} [ c ] \.{=} Apply ( op ,\, @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}}\@s{57.95} \.{\land} cbuf
- \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} Append ( @ ,\, op ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}}\@s{57.95} \.{\land} comm
- {\bang} CSend ( [ c \.{\mapsto} c ,\, ack \.{\mapsto} crec [ c ] ,\, op
- \.{\mapsto} op ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}}\@s{22.34} \.{\land} crec
- \.{'} \.{=} [ crec {\EXCEPT} {\bang} [ c ] \.{=} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 104\hspace{1em}}\@s{22.34} \.{\land} cop
- \.{'} \.{=} [ cop {\EXCEPT} {\bang} [ c ] \.{=} Tail ( @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}}\@s{22.34} \.{\land}
- {\UNCHANGED} sVars}%
+ \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} Del1 \.{\defeq} [ type
+ \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} Del2 \.{\defeq} [ type
+ \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 2 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} Del3 \.{\defeq} [ type
+ \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 3 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} Del4 \.{\defeq} [ type
+ \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 4 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}} Ins1\@s{1.35} \.{\defeq} [
+ type \.{\mapsto}\@w{Ins} ,\, pos\@s{2.27} \.{\mapsto} 1 ,\, ch
+ \.{\mapsto}\@w{a} ,\, pr\@s{0.36} \.{\mapsto} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} Ins2\@s{1.35} \.{\defeq} [
+ type \.{\mapsto}\@w{Ins} ,\, pos\@s{2.27} \.{\mapsto} 2 ,\, ch
+ \.{\mapsto}\@w{b} ,\, pr \.{\mapsto} 2 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} Ins3\@s{1.35} \.{\defeq} [
+ type \.{\mapsto}\@w{Ins} ,\, pos\@s{2.27} \.{\mapsto} 3 ,\, ch
+ \.{\mapsto}\@w{c} ,\, pr\@s{0.72} \.{\mapsto} 3 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}} Ops \.{\defeq} {\langle}
+ Ins2 ,\, Del3 ,\, Ins1 ,\, Del2 ,\, Ins3 ,\, Del1 {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}}\midbar\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ The ``Apply'' operator which applies an operation \ensuremath{op} on the list
+ \ensuremath{l}.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{T}{T}{0}{2.5}{%
+\ensuremath{Del}:}%
+ If \ensuremath{pos \.{>} Len(l)}, the last element of \ensuremath{l} is
+ deleted.
+ This is realized by the \ensuremath{DeleteElement} operator.
+\end{cpar}%
+\begin{cpar}{1}{T}{T}{0}{2.5}{%
+\ensuremath{Ins}:}%
+ If \ensuremath{pos \.{>} Len(l)}, the new element is appended to
+ \ensuremath{l}.
+ This is realized by the \ensuremath{InsertElement} operator.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}} Apply ( op ,\, l )
+ \.{\defeq} {\CASE} op \.{=} Nop \.{\rightarrow} l}%
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
+ op . type \.{=}\@w{Rd} \.{\rightarrow} l}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
+ op . type \.{=}\@w{Del} \.{\rightarrow} DeleteElement ( l ,\, op . pos )}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
+ op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} InsertElement ( l ,\, op .
+ ch ,\, op . pos )}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- Client \ensuremath{c \.{\in} Client} receives a message from the
- \ensuremath{Server}.
+ The ``\ensuremath{ApplyOps}'' operator which applies an operation sequence
+ \ensuremath{ops
+} on the list \ensuremath{l}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}} Rev ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}}\@s{20.94} \.{\land} comm
- {\bang} CRev ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 112\hspace{1em}}\@s{20.94} \.{\land} crec
- \.{'} \.{=} [ crec {\EXCEPT} {\bang} [ c ] \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 113\hspace{1em}}\@s{20.94} \.{\land}
- \.{\LET} m \.{\defeq} Head ( cincoming [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 114\hspace{1em}}\@s{52.45} cBuf \.{\defeq}
- cbuf [ c ]\@s{4.1}}%
-\@y{\@s{0}%
- the buffer at client \ensuremath{c \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 115\hspace{1em}}\@s{52.45} cShiftedBuf
- \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )\@s{4.1}}%
-\@y{\@s{0}%
- buffer shifted
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 116\hspace{1em}}\@s{52.45} xop \.{\defeq}
- XformOpOps ( m . op ,\, cShiftedBuf )}%
-\@y{\@s{0}%
- transform \ensuremath{op} vs. shifted buffer
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}}\@s{56.55} xcBuf \.{\defeq}
- XformOpsOp ( cShiftedBuf ,\, m . op )}%
-\@y{\@s{0}%
- transform shifted buffer vs. \ensuremath{op
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}\@s{36.15} \.{\IN} \.{\land}
- cbuf \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} xcBuf ]}%
- \@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}}\@s{56.55} \.{\land} cstate
- \.{'} \.{=} [ cstate {\EXCEPT} {\bang} [ c ] \.{=} Apply ( xop ,\, @ )
- ]\@s{7.69}}%
-\@y{\@s{0}%
- apply the transformed operation \ensuremath{xop
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 120\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Server} receives a message.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 124\hspace{1em}} SRev \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 125\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 126\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
- m \.{\defeq} Head ( sincoming )}%
-\@y{\@s{0}%
- the message to handle with
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 127\hspace{1em}}\@s{47.91} c\@s{3.77}
- \.{\defeq} m . c\@s{57.99}}%
-\@y{\@s{0}%
- the client \ensuremath{c \.{\in} Client} that sends this message
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 128\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
- sbuf [ c ]\@s{31.67}}%
-\@y{\@s{0}%
- the buffer at the \ensuremath{Server} for client \ensuremath{c \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 129\hspace{1em}}\@s{47.91} cShiftedBuf
- \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
-\@y{\@s{0}%
- buffer shifted
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 130\hspace{1em}}\@s{47.91} xop \.{\defeq}
- XformOpOps ( m . op ,\, cShiftedBuf )}%
-\@y{\@s{0}%
- transform \ensuremath{op} vs. shifted buffer
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 131\hspace{1em}}\@s{52.01} xcBuf \.{\defeq}
- XformOpsOp ( cShiftedBuf ,\, m . op )}%
-\@y{\@s{0}%
- transform shifted buffer vs. \ensuremath{op
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 132\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
- srec \.{'}\@s{2.19} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 133\hspace{1em}}\@s{117.66} {\IF} cl \.{=}
- c}%
- \@x{\makebox[0pt][r]{\scriptsize 134\hspace{1em}}\@s{117.66} \.{\THEN} srec [
- cl ] \.{+} 1}%
-\@y{\@s{0}%
- receive one more operation from client \ensuremath{c \.{\in} Client
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 135\hspace{1em}}\@s{117.66} \.{\ELSE} 0 ]}%
-\@y{\@s{0}%
- reset \ensuremath{srec} for other clients than \ensuremath{c \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 136\hspace{1em}}\@s{52.01} \.{\land} sbuf
- \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 137\hspace{1em}}\@s{117.66} {\IF} cl \.{=}
- c}%
- \@x{\makebox[0pt][r]{\scriptsize 138\hspace{1em}}\@s{117.66} \.{\THEN}
- xcBuf\@s{4.1}}%
-\@y{\@s{0}%
- transformed buffer for client \ensuremath{c \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 139\hspace{1em}}\@s{117.66} \.{\ELSE} Append
- ( sbuf [ cl ] ,\, xop ) ]}%
-\@y{\@s{0}%
- store transformed \ensuremath{xop} into other clients\mbox{'} bufs
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 140\hspace{1em}}\@s{52.01} \.{\land} sstate
- \.{'} \.{=} Apply ( xop ,\, sstate )\@s{4.1}}%
-\@y{\@s{0}%
- apply the transformed operation
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 141\hspace{1em}}\@s{52.01} \.{\land} comm
- {\bang} SSend ( c ,\, srec ,\, xop )}%
- \@x{\makebox[0pt][r]{\scriptsize 142\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} cVars}%
-\@x{\makebox[0pt][r]{\scriptsize 143\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The next-state relation.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}} Next \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
- \.{\in} Client \.{:} Do ( c ) \.{\lor} Rev ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 149\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Spec}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 153\hspace{1em}} Spec \.{\defeq} Init
- \.{\land} {\Box} [ Next ]_{ vars}}%
-\@x{\makebox[0pt][r]{\scriptsize 154\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}} {\RECURSIVE} ApplyOps ( \_
+ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}} ApplyOps ( ops ,\, l )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
+ {\langle} {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{16.4} \.{\THEN} l}%
+ \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{16.4} \.{\ELSE} Apply (
+ Last ( ops ) ,\, ApplyOps ( AllButLast ( ops ) ,\, l ) )}%
+\@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jul} 07
- 14:51:40 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified Sat
+ \ensuremath{Jul} 07 14:20:05 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created Sat \ensuremath{Jun} 23 17:14:18
+ \ensuremath{\.{\,\backslash\,}}* Created Sat \ensuremath{Jun} 23 20:56:53
  \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%

@@ -2,35 +2,35 @@
 EXTENDS Counter, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0Replica
-const_152844656619965000 == 
-{"r1", "r2", "r3", "r4"}
+const_1530944770266203000 == 
+{"r1", "r2"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1Max
-const_152844656620066000 == 
-[r1 |-> 1, r2 |-> 2, r3 |-> 3, r4 |-> 4]
+const_1530944770266204000 == 
+[r1 |-> 1, r2 |-> 2]
 ----
 
 \* CONSTRAINT definition @modelParameterContraint:0
-constr_152844656620067000 ==
+constr_1530944770266205000 ==
 IncConstraint
 ----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_152844656620068000 ==
+spec_1530944770267206000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_152844656620069000 ==
+inv_1530944770267207000 ==
 TypeOK
 ----
 \* PROPERTY definition @modelCorrectnessProperties:0
-prop_152844656620070000 ==
+prop_1530944770267208000 ==
 EC
 ----
 \* PROPERTY definition @modelCorrectnessProperties:1
-prop_152844656620071000 ==
+prop_1530944770267209000 ==
 QC
 ----
 =============================================================================
 \* Modification History
-\* Created Fri Jun 08 16:29:26 CST 2018 by hengxin
+\* Created Sat Jul 07 14:26:10 CST 2018 by hengxin

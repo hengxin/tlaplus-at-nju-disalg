@@ -30,13 +30,10 @@
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
-<listEntry value="State;;&lt;&lt;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&gt;&gt;;0;0"/>
 <listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;&gt;&gt;, c3 |-&gt; &lt;&lt;&gt;&gt;];0;0"/>
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
-<listEntry value="MaxPos;;3;0;0"/>
-<listEntry value="MaxPr;;3;0;0"/>
-<listEntry value="MaxLen;;3;0;0"/>
+<listEntry value="InitState;;&lt;&lt;&quot;a&quot;, &quot;b&quot;&gt;&gt;;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

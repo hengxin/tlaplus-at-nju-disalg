@@ -5,13 +5,13 @@
 EXTENDS OT, TLC
 -----------------------------------------------------------------------------
 CONSTANTS
-    Client,    \* the set of client replicas
-    Server,    \* the (unique) server replica
-    State,     \* the initial state of each replica
-    Cop        \* Cop[c]: operations issued by the client c \in Client
+    Client,     \* the set of client replicas
+    Server,     \* the (unique) server replica
+    InitState,  \* the initial state of each replica
+    Cop         \* Cop[c]: operations issued by the client c \in Client
 
 ASSUME 
-    /\ State \in List
+    /\ InitState \in List
     /\ Cop \in [Client -> Seq(Op)]
 
 VARIABLES
@@ -45,7 +45,9 @@ comm == INSTANCE CSComm
 -----------------------------------------------------------------------------
 cVars == <<cop, cbuf, crec, cstate>>
 sVars == <<sbuf, srec, sstate>>
-vars == cVars \o sVars \o comm!vars
+\* FIXME: subscript error (Don't know why yet!)
+\*vars == cVars \o sVars \o <<cincoming, sincoming>>
+vars == <<cop, cbuf, crec, cstate, sbuf, srec, sstate, cincoming, sincoming>>
 -----------------------------------------------------------------------------
 TypeOK == 
     /\cop \in [Client -> Seq(Op)]
@@ -76,13 +78,13 @@ Init ==
     (*****************************************************************)
     /\ cbuf = [c \in Client |-> <<>>]
     /\ crec = [c \in Client |-> 0]
-    /\ cstate = [c \in Client |-> State]
+    /\ cstate = [c \in Client |-> InitState]
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     /\ sbuf = [c \in Client |-> <<>>]
     /\ srec = [c \in Client |-> 0]
-    /\ sstate = State
+    /\ sstate = InitState
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
@@ -105,17 +107,16 @@ Do(c) ==
 (*********************************************************************)
 (* Client c \in Client receives a message from the Server.           *)
 (*********************************************************************)
-\*CRev(c) == 
-\*    /\ comm!CRev(c)
-\*    /\ crec' = [crec EXCEPT ![c] = @ + 1]
-\*    /\ LET m == Head(cincoming[c]) 
-\*           cBuf == cbuf[c]  \* the buffer at client c \in Client
-\*           cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))  \* buffer shifted
-\*           xop == XformOpOps(m.op, cShiftedBuf) \* transform op vs. shifted buffer
-\*           xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
-\*        IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
-\*           /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
-\*    /\ UNCHANGED (sVars \o <<cop>>)
+Rev(c) == 
+    /\ comm!CRev(c)
+    /\ crec' = [crec EXCEPT ![c] = @ + 1]
+    /\ LET m == Head(cincoming[c]) 
+           cBuf == cbuf[c]  \* the buffer at client c \in Client
+           cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))  \* buffer shifted
+           xop == XformOpOps(m.op, cShiftedBuf) \* transform op vs. shifted buffer
+           xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
+        IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
+           /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Server receives a message.                                    *)
@@ -144,7 +145,7 @@ SRev ==
 (* The next-state relation.                                          *)
 (*********************************************************************)
 Next == 
-    \/ \E c \in Client: Do(c)
+    \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
 (*********************************************************************)
 (* The Spec.                                                         *)
@@ -152,5 +153,5 @@ Next ==
 Spec == Init /\ [][Next]_vars
 =============================================================================
 \* Modification History
-\* Last modified Tue Jul 03 13:57:27 CST 2018 by hengxin
+\* Last modified Sat Jul 07 14:51:40 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

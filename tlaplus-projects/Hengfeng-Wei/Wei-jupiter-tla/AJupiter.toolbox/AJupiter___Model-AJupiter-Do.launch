@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
-<stringAttribute key="TLCCmdLineParameters" value="-dump model-ajupiter-do-state"/>
+<stringAttribute key="TLCCmdLineParameters" value=""/>
 <stringAttribute key="configurationName" value="Model-AJupiter-Do"/>
 <booleanAttribute key="deferLiveness" value="false"/>
 <intAttribute key="dfidDepth" value="100"/>
@@ -26,22 +26,18 @@
 <listEntry value="1TypeOK"/>
 </listAttribute>
 <listAttribute key="modelCorrectnessProperties"/>
-<stringAttribute key="modelExpressionEval" value=""/>
+<stringAttribute key="modelExpressionEval" value="cVars \o sVars \o &lt;&lt;cincoming, sincoming&gt;&gt;"/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
-<listEntry value="State;;&lt;&lt;&quot;a&quot;, &quot;b&quot;, &quot;c&quot;&gt;&gt;;0;0"/>
 <listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;&gt;&gt;, c3 |-&gt; &lt;&lt;&gt;&gt;];0;0"/>
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
-<listEntry value="MaxPos;;2;0;0"/>
-<listEntry value="MaxPr;;3;0;0"/>
-<listEntry value="MaxLen;;3;0;0"/>
+<listEntry value="InitState;;&lt;&lt;&quot;a&quot;, &quot;b&quot;&gt;&gt;;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
 <listEntry value="Nop;;Nop;1;0"/>
-<listEntry value="comm!Nop;;comm!Nop;1;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>

@@ -5,14 +5,13 @@
 EXTENDS OT, TLC
 -----------------------------------------------------------------------------
 CONSTANTS
-    Client,    \* the set of client replicas
-    Server,    \* the (unique) server replica
-    State,     \* the initial state of each replica
-    Cop        \* Cop[c]: operations issued by the client c \in Client
+    Client,     \* the set of client replicas
+    Server,     \* the (unique) server replica
+    InitState,  \* the initial state of each replica
+    Cop         \* Cop[c]: operations issued by the client c \in Client
 
-ASSUME 
-    /\ State \in List
-    /\ Cop \in [Client -> Seq(Op)]
+ASSUME /\ InitState \in List
+       /\ Cop \in [Client -> Seq(Op)]
 
 VARIABLES
     cop,      \* cop[c]: operations issued by the client c \in Client
@@ -50,13 +49,13 @@ TypeOK ==
     (*****************************************************************)
     /\ cbuf \in [Client -> Seq(Op \cup {Nop})]
     /\ crec \in [Client -> Nat]
-    /\ cstate \in [Client -> Seq(Char)]
+    /\ cstate \in [Client -> List]
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     /\ sbuf \in [Client -> Seq(Op \cup {Nop})]
     /\ srec \in [Client -> Nat]
-    /\ sstate \in [Client -> Seq(Char)]
+    /\ sstate \in [Client -> List]
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
@@ -72,13 +71,13 @@ Init ==
     (*****************************************************************)
     /\ cbuf = [c \in Client |-> <<>>]
     /\ crec = [c \in Client |-> 0]
-    /\ cstate = [c \in Client |-> State]
+    /\ cstate = [c \in Client |-> InitState]
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     /\ sbuf = [c \in Client |-> <<>>]
     /\ srec = [c \in Client |-> 0]
-    /\ sstate = [c \in Client |-> State]
+    /\ sstate = [c \in Client |-> InitState]
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
@@ -110,5 +109,5 @@ Next ==
 Spec == Init /\ [][Next]_vars
 =============================================================================
 \* Modification History
-\* Last modified Sat Jul 07 00:06:42 CST 2018 by hengxin
+\* Last modified Sat Jul 07 14:21:06 CST 2018 by hengxin
 \* Created Sun Jul 01 18:53:30 CST 2018 by hengxin

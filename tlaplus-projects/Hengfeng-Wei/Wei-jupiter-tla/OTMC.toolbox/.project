@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AJupiter</name>
+	<name>OTMC</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -21,39 +21,34 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>AJupiter.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AJupiter.tla</locationURI>
-		</link>
-		<link>
 			<name>AdditionalMathOperators.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AdditionalMathOperators.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalMathOperators.tla</location>
 		</link>
 		<link>
 			<name>AdditionalSequenceOperators.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AdditionalSequenceOperators.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSequenceOperators.tla</location>
 		</link>
 		<link>
 			<name>AdditionalSetOperators.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AdditionalSetOperators.tla</locationURI>
-		</link>
-		<link>
-			<name>CSComm.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/CSComm.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSetOperators.tla</location>
 		</link>
 		<link>
 			<name>OT.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/OT.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/OT.tla</location>
+		</link>
+		<link>
+			<name>OTMC.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/OTMC.tla</locationURI>
 		</link>
 		<link>
 			<name>Op.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Op.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/Op.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>
