@@ -1094,12 +1094,19 @@ Some operations for test.
 Legalize an operation \ensuremath{op} with respect to the list \ensuremath{l}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}} LegalizeOp ( op ,\, l )
- \.{\defeq} {\CASE} op . type \.{=}\@w{Del} \.{\rightarrow} [ op {\EXCEPT}
- {\bang} . pos \.{=} Min ( @ ,\, Len ( l ) ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{98.60} {\Box}\@s{14.40}
- op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} [ op {\EXCEPT} {\bang} .
- pos \.{=} Min ( @ ,\, Len ( l ) \.{+} 1 ) ]}%
+\@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}}%
+\@y{%
+ \ensuremath{LegalizeOp(op,\, l) \.{\defeq} {\CASE} op.type \.{=} \@w{Del}
+ \.{\rightarrow}} [\ensuremath{op} \ensuremath{{\EXCEPT} {\bang}.pos \.{=}
+ Min(@,\, Len(l))}]
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}}%
+\@y{\@s{52.5}%
+ \ensuremath{{\Box} op.type \.{=} \@w{Ins} \.{\rightarrow}} [\ensuremath{op}
+ \ensuremath{{\EXCEPT} {\bang}.pos \.{=} Min(@,\, Len(l) \.{+} 1)}]
+}%
+\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -1107,8 +1114,8 @@ Legalize an operation \ensuremath{op} with respect to the list \ensuremath{l}.
 \ensuremath{\.{\,\backslash\,}\.{*}} Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}\.{*} Last} modified Sat \ensuremath{Jul} 07
- 21:26:42 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}\.{*} Last} modified Sun \ensuremath{Jul} 08
+ 10:11:21 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

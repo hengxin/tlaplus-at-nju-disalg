@@ -2,42 +2,46 @@
 EXTENDS AJupiter, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0Client
-const_1530968776529213000 == 
-{"c1", "c2", "c3"}
+const_1531020959337330000 == 
+{"c1", "c2"}
 ----
 
-\* CONSTANT definitions @modelParameterConstants:1Cop
-const_1530968776529214000 == 
-[c1 |-> <<Ins1>>, c2 |-> <<Ins2, Ins3>>, c3 |-> <<Del3>>]
-----
-
-\* CONSTANT definitions @modelParameterConstants:2Char
-const_1530968776529215000 == 
+\* CONSTANT definitions @modelParameterConstants:1Char
+const_1531020959337331000 == 
 {"a", "b", "c"}
 ----
 
-\* CONSTANT definitions @modelParameterConstants:3Server
-const_1530968776529216000 == 
+\* CONSTANT definitions @modelParameterConstants:2Server
+const_1531020959337332000 == 
 "s"
 ----
 
-\* CONSTANT definitions @modelParameterConstants:4InitState
-const_1530968776529217000 == 
-<<"a", "b">>
+\* CONSTANT definitions @modelParameterConstants:3InitState
+const_1531020959337333000 == 
+<<"a">>
 ----
 
+\* CONSTANT definitions @modelParameterConstants:4Priority
+const_1531020959337334000 == 
+[c1 |-> 1, c2 |-> 2]
+----
+
+\* CONSTANT definition @modelParameterDefinitions:1
+def_ov_1531020959337336000 ==
+0 .. 3
+----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_1530968776529219000 ==
+spec_1531020959337337000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_1530968776529220000 ==
+inv_1531020959337338000 ==
 TypeOK
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:1
-inv_1530968776529221000 ==
+inv_1531020959337339000 ==
 QC
 ----
 =============================================================================
 \* Modification History
-\* Created Sat Jul 07 21:06:16 CST 2018 by hengxin
+\* Created Sun Jul 08 11:35:59 CST 2018 by hengxin

@@ -11,6 +11,7 @@
 
 - All inserted elements are distinct.
   - Using a single global source for issued operations.
+  - Generate op sequence for each client
 - Ins and Del should be legal. 
   - Excluded at Do(c) step.
   - Changed to legal operations at Do(c) step. [Now I use this method.]

@@ -8,18 +8,31 @@ CONSTANTS
     Client,     \* the set of client replicas
     Server,     \* the (unique) server replica
     InitState,  \* the initial state of each replica
-    Cop         \* Cop[c]: operations issued by the client c \in Client
+    Priority    \* Priority[c]: the priority value of client c \in Client
+\*    Cop         \* Cop[c]: operations issued by the client c \in Client
 
-\*OpToIssue == {op \in SUBSET}
 ASSUME 
     /\ InitState \in List
-    /\ Cop \in [Client -> Seq(Op)]
+    /\ Priority \in [Client -> PosInt]
+\*    /\ Cop \in [Client -> Seq(Op)]
+
+(***************************************************************************)
+(* Generate operations for AJupiter clients.                               *)
+(*                                                                         *)
+(* Note: Remember to overvide the definition of PosInt.                    *)
+(*                                                                         *)
+(* FIXME: PosInt => MaxPos; MaxPr determined by the size of Client.        *)
+(***************************************************************************)
+OpToIssue == {opset \in SUBSET Op: 
+                    \A op1, op2 \in opset:
+                        (op1.type = "Ins" /\ op2.type = "Ins") => op1.ch # op2.ch}
 
 VARIABLES
     (*****************************************************************)
     (* For model checking:                                           *)
     (*****************************************************************)
-    cop,       \* cop[c]: operations issued by the client c \in Client
+\*    cop,       \* cop[c]: operations issued by the client c \in Client
+    cop,     \* a set of operations for clients to issue
 
     (*****************************************************************)
     (* For the client replicas:                                      *)
@@ -48,10 +61,12 @@ cVars == <<cop, cbuf, crec, cstate>>
 sVars == <<sbuf, srec, sstate>>
 \* FIXME: subscript error (Don't know why yet!)
 \*vars == cVars \o sVars \o <<cincoming, sincoming>>
+jVars == <<cbuf, crec, cstate, sbuf, srec, sstate, cincoming, sincoming>>   \* all variables
 vars == <<cop, cbuf, crec, cstate, sbuf, srec, sstate, cincoming, sincoming>>   \* all variables
 -----------------------------------------------------------------------------
 TypeOK == 
-    /\cop \in [Client -> Seq(Op)]
+\*    /\cop \in [Client -> Seq(Op)]
+    /\ cop \in SUBSET Op
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -73,7 +88,8 @@ TypeOK ==
 (* The Init predicate.                                               *)
 (*********************************************************************)
 Init == 
-    /\ cop = Cop
+\*    /\ cop = Cop
+    /\ cop \in OpToIssue
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -91,19 +107,32 @@ Init ==
     (*****************************************************************)
     /\ comm!Init
 -----------------------------------------------------------------------------
+LegalizeOp(op, c) == 
+    LET len == Len(cstate[c]) 
+    IN CASE op.type = "Del" -> 
+            IF len = 0 THEN Nop ELSE [op EXCEPT !.pos = Min(@, len)]
+        []  op.type = "Ins" -> 
+            [op EXCEPT !.pos = Min(@, len + 1), !.pr = Priority[c]]
 (*********************************************************************)
 (* Client c \in Client issues an operation op.                       *)
 (*********************************************************************)
 Do(c) == 
-    /\ cop[c] # <<>>
-    /\ LET op == LegalizeOp(Head(cop[c]), cstate[c])  \* preprocess illegal operations
-        IN /\ PrintT(c \o ": Do " \o ToString(op))
-           /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
-           /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
-           /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
-    /\ crec' = [crec EXCEPT ![c] = 0]
-    /\ cop' = [cop EXCEPT ![c] = Tail(@)]   \* consume one operation
-    /\ UNCHANGED sVars
+\*    /\ cop[c] # <<>>
+    /\ cop # {}
+    /\ LET o == CHOOSE x \in cop: TRUE
+          op == LegalizeOp(o, c)  \* preprocess an illegal operation
+        IN \/ /\ op = Nop
+              /\ cop' = cop \ {o}   \* consume one operation
+              /\ UNCHANGED jVars
+           \/ /\ op # Nop
+           \* /\ PrintT(c \o ": Do " \o ToString(op))
+              /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
+              /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
+              /\ crec' = [crec EXCEPT ![c] = 0]
+              /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
+              /\ cop' = cop \ {o}   \* consume one operation
+              /\ UNCHANGED sVars
+\*    /\ cop' = [cop EXCEPT ![c] = Tail(@)]   \* consume one operation
 
 (*********************************************************************)
 (* Client c \in Client receives a message from the Server.           *)
@@ -186,5 +215,5 @@ THEOREM Spec => []QC
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jul 07 21:26:52 CST 2018 by hengxin
+\* Last modified Sun Jul 08 11:30:24 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

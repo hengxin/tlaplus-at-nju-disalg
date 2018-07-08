@@ -30,15 +30,16 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
-<listEntry value="Cop;;[c1 |-&gt; &lt;&lt;Ins1&gt;&gt;, c2 |-&gt; &lt;&lt;Ins2, Ins3&gt;&gt;, c3 |-&gt; &lt;&lt;Del3&gt;&gt;];0;0"/>
+<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;};0;0"/>
 <listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;, &quot;c&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
-<listEntry value="InitState;;&lt;&lt;&quot;a&quot;, &quot;b&quot;&gt;&gt;;0;0"/>
+<listEntry value="InitState;;&lt;&lt;&quot;a&quot;&gt;&gt;;0;0"/>
+<listEntry value="Priority;;[c1 |-&gt; 1, c2 |-&gt; 2];0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
 <listEntry value="Nop;;Nop;1;0"/>
+<listEntry value="comm!Nat;;0 .. 3;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
