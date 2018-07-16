@@ -1,0 +1,53 @@
+\chapter{Debug}	\label{chapter:debug}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\texttt{Print}}	\label{section:print}
+
+\subsection{Description: Print Twice.}
+
+\paragraph{Effect:}
+The \text{Print} may be executed twice (unexpectedly).
+
+\paragraph{Cause:}
+The reason is that ``TLC prints its output once during the generation of the state space 
+and then again when reconstructing the counter-example trace that leads to the violation.''
+
+\paragraph{Solution:}
+
+\paragraph{Reference:} 
+\href{https://groups.google.com/forum/#!topic/tlaplus/xUTjiMq3s3E}
+{Unexpected \texttt{Print} Output @ tlaplus-googlegroup}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Parse}	\label{section:parse}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Model Checking}	\label{section:mc}
+
+\subsection{Description: Model is Stuck in the 'modelchecking' State.}
+
+\paragraph{Effect:}
+I run the model, it gets stuck in a "modelchecking" state. 
+I can't stop or restart the model checker. 
+I have to restart the entire toolbox to reset the model's state.
+
+\paragraph{Cause:}
+The model is wrong.
+For example, use 'a'. 
+
+\paragraph{Solution:}
+Use ``a''.
+
+\paragraph{Reference:}
+\href{https://github.com/tlaplus/tlaplus/issues/143}{Model is stuck in 'modelchecking' state @ tlaplus-googlegroup}.
+
+\paragraph{Effect:}
+I run the model, it gets stuck in a "modelchecking" state. 
+I can't stop or restart the model checker. 
+I have to restart the entire toolbox to reset the model's state.
+{\it A .tla source file which is included by ``EXTENDS'' is missing in the Model folder.}
+
+\paragraph{Cause:}
+The project structure is broken.
+
+\paragraph{Solution:}

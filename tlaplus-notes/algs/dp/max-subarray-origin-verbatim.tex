@@ -1,0 +1,8 @@
+% file: max-subarray-origin-verbatim.tex
+
+\begin{verbatim}
+  MSS[0] = 0
+  For i = 1 to n
+    MSS[i] = max{MSS[i-1] + A[i], 0}
+  return max_{i = 1 to n} MSS[i]
+\end{verbatim}

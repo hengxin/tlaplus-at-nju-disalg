@@ -1,0 +1,121 @@
+@!@!@STARTMSG 2262:0 @!@!@
+TLC2 Version 2.12 of 29 January 2018
+@!@!@ENDMSG 2262 @!@!@
+@!@!@STARTMSG 2187:0 @!@!@
+Running breadth-first search Model-Checking with 4 workers on 4 cores with 1538MB heap and 3456MB offheap memory (Linux 4.13.0-43-generic amd64, Oracle Corporation 1.8.0_171 x86_64).
+@!@!@ENDMSG 2187 @!@!@
+@!@!@STARTMSG 2220:0 @!@!@
+Starting SANY...
+@!@!@ENDMSG 2220 @!@!@
+Parsing file /home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/tlaplus-crdt-tla/Counter.toolbox/EC/MC.tla
+Parsing file /home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/tlaplus-crdt-tla/Counter.toolbox/EC/Counter.tla
+Parsing file /home/hengxin/Software/toolbox/plugins/org.lamport.tlatools_1.0.0.201801291236/tla2sany/StandardModules/TLC.tla
+Parsing file /home/hengxin/Software/toolbox/plugins/org.lamport.tlatools_1.0.0.201801291236/tla2sany/StandardModules/Naturals.tla
+Parsing file /home/hengxin/Software/toolbox/plugins/org.lamport.tlatools_1.0.0.201801291236/tla2sany/StandardModules/Sequences.tla
+Semantic processing of module Naturals
+Semantic processing of module Sequences
+Semantic processing of module TLC
+Semantic processing of module Counter
+Semantic processing of module MC
+@!@!@STARTMSG 2219:0 @!@!@
+SANY finished.
+@!@!@ENDMSG 2219 @!@!@
+@!@!@STARTMSG 2185:0 @!@!@
+Starting... (2018-06-04 13:52:18)
+@!@!@ENDMSG 2185 @!@!@
+@!@!@STARTMSG 2212:0 @!@!@
+Implied-temporal checking--satisfiability problem has 1 branches.
+@!@!@ENDMSG 2212 @!@!@
+@!@!@STARTMSG 2189:0 @!@!@
+Computing initial states...
+@!@!@ENDMSG 2189 @!@!@
+@!@!@STARTMSG 2190:0 @!@!@
+Finished computing initial states: 1 distinct state generated.
+@!@!@ENDMSG 2190 @!@!@
+@!@!@STARTMSG 2192:0 @!@!@
+Checking temporal properties for the current state space with 73564 total distinct states at (2018-06-04 13:52:21)
+@!@!@ENDMSG 2192 @!@!@
+@!@!@STARTMSG 2267:0 @!@!@
+Finished checking temporal properties in 00s at 2018-06-04 13:52:22
+@!@!@ENDMSG 2267 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(12) at 2018-06-04 13:52:22: 296808 states generated (296,808 s/min), 73921 distinct states found (73,921 ds/min), 39052 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2192:0 @!@!@
+Checking temporal properties for the current state space with 2255837 total distinct states at (2018-06-04 13:53:22)
+@!@!@ENDMSG 2192 @!@!@
+@!@!@STARTMSG 2267:0 @!@!@
+Finished checking temporal properties in 17s at 2018-06-04 13:53:39
+@!@!@ENDMSG 2267 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(18) at 2018-06-04 13:53:39: 12459848 states generated (12,163,040 s/min), 2258502 distinct states found (2,184,581 ds/min), 842124 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(20) at 2018-06-04 13:54:39: 24986315 states generated (12,526,467 s/min), 4164167 distinct states found (1,905,665 ds/min), 1303108 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2192:0 @!@!@
+Checking temporal properties for the current state space with 5952489 total distinct states at (2018-06-04 13:55:39)
+@!@!@ENDMSG 2192 @!@!@
+@!@!@STARTMSG 2267:0 @!@!@
+Finished checking temporal properties in 01min 05s at 2018-06-04 13:56:45
+@!@!@ENDMSG 2267 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(21) at 2018-06-04 13:56:45: 37685523 states generated (12,699,208 s/min), 5955521 distinct states found (1,791,354 ds/min), 1625312 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2201:0 @!@!@
+The coverage statistics at 2018-06-04 13:56:45
+@!@!@ENDMSG 2201 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 50, col 14 to line 50, col 53 of module Counter: 17321522
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 51, col 14 to line 51, col 45 of module Counter: 17321595
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 52, col 14 to line 52, col 45 of module Counter: 17321512
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 53, col 26 to line 53, col 33 of module Counter: 17321523
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 67, col 15 to line 67, col 42 of module Counter: 4931989
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 68, col 15 to line 68, col 46 of module Counter: 4931969
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 69, col 27 to line 69, col 33 of module Counter: 4931964
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 69, col 36 to line 69, col 38 of module Counter: 4931969
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 76, col 21 to line 76, col 60 of module Counter: 15433571
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 77, col 18 to line 77, col 61 of module Counter: 15433571
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 78, col 30 to line 78, col 32 of module Counter: 15433524
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2221:0 @!@!@
+  line 78, col 35 to line 78, col 37 of module Counter: 15433515
+@!@!@ENDMSG 2221 @!@!@
+@!@!@STARTMSG 2202:0 @!@!@
+End of statistics.
+@!@!@ENDMSG 2202 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(22) at 2018-06-04 13:57:45: 50682785 states generated (12,997,262 s/min), 7669765 distinct states found (1,714,244 ds/min), 1824257 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(23) at 2018-06-04 13:58:45: 63566002 states generated (12,883,217 s/min), 9272007 distinct states found (1,602,242 ds/min), 1916265 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+@!@!@STARTMSG 2200:0 @!@!@
+Progress(24) at 2018-06-04 13:59:45: 76758469 states generated (13,192,467 s/min), 10802302 distinct states found (1,530,295 ds/min), 1888296 states left on queue.
+@!@!@ENDMSG 2200 @!@!@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 78643200 bytes for committing reserved memory.
+Java HotSpot(TM) 64-Bit Server VM warning: INFO: os::commit_memory(0x00000000c7c00000, 78643200, 0) failed; error='Cannot allocate memory' (errno=12)
+# An error report file with more information is saved as:
+# /home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/tlaplus-crdt-tla/Counter.toolbox/EC/hs_err_pid14666.log

@@ -1,0 +1,31 @@
+% file: algs/nodes-at-depth.tex
+% for UD Problem 4.3 (b)
+
+\begin{algorithm}[H]
+  \caption{Count the number of nodes of a tree $T$ at each depth.}
+  \label{alg:nodes-at-depth}
+  \begin{algorithmic}[1]
+    \Procedure{Nodes-at-Depth}{$r$} \Comment{$r$: root of the tree $T$}
+      \State $r.depth \gets 0$
+
+      \hStatex
+      \State $Q \gets \emptyset$
+      \State $\Call{Enqueue}{Q, r}$
+
+      \hStatex
+      \While{$Q \neq \emptyset$}
+	\State $u \gets \Call{Dequeue}{Q}$
+	\State $nodesAtDepth[u.depth] \text{\;+=\;} 1$
+
+	\hStatex
+	\ForAll{child vertex $v$ of $u$}
+	  \State $v.depth \gets u.depth + 1$
+	  \State $\Call{Enqueue}{Q, v}$
+	\EndFor
+      \EndWhile
+
+      \hStatex
+      \State \Return $\text{argmax}_{K} nodesAtDepth[k]$
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}

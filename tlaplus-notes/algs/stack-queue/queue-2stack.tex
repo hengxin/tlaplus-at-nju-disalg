@@ -1,0 +1,22 @@
+% file: algs/stack-queue/queue-2stack.tex
+
+\begin{algorithm}[H]
+  \caption{Simulating a queue using two stacks $S_1, S_2$.}
+  \begin{algorithmic}[]
+    \Procedure{Enq}{$x$}
+      \State \textsl{Push}($S_1, x$)
+    \EndProcedure
+
+    \Statex
+    \Procedure{Deq}{\null}
+      \If{$S_2 = \emptyset$}
+	\While{$S_1 \neq \emptyset$}
+	  \State \textsl{Push}($S_2$, \textsl{Pop}($S_1$))
+	\EndWhile
+      \EndIf
+
+      \Statex
+      \State \textsl{Pop}($S_2$)
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}

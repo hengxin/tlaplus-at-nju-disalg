@@ -1,0 +1,17 @@
+% file: algs/bubblesort-smallest.tex
+
+\begin{algorithm}[H]
+  \caption{Bubblesort (Bubble the smallest element each time.).}
+  \label{alg:bubblesort-smallest}
+  \begin{algorithmic}[1]
+    \Procedure{Bubblesort}{$A[1 \cdots n]$}
+      \For{$i \gets 1 \;\text{\bf to } n-1$}
+	\For{$j \gets n \;\text{\bf downto } i+1$}
+	  \If{$A[j] < A[j-1]$}
+	    \State $\Call{Swap}{A[j], A[j-1]}$
+	  \EndIf
+	\EndFor
+      \EndFor
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}

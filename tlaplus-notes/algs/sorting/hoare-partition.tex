@@ -1,0 +1,35 @@
+% file: algs/sorting/hoare-partition.tex
+
+\begin{algorithm}[H]
+  \caption{Hoare partition.}
+  \begin{algorithmic}[]
+    \Procedure{Hoare-Partition}{$A, l, r$}
+      \State $x \gets A[l]$
+      \State $i \gets l$
+      \State $j \gets r + 1$
+
+      \Statex
+      \While{TRUE}
+	\While{$A[++i] < x$}
+	  \If{$i = r$}
+	    \State \textbf{break}
+	  \EndIf
+	\EndWhile
+
+	\While{$A[--j] > x$}
+	  \If{$j = l$}
+	    \State \textbf{break}
+	  \EndIf
+	\EndWhile
+
+	\Statex
+	\If{$i < j$}
+	  \State \Call{Swap}{$A, i, j$}
+	\EndIf
+      \EndWhile
+
+      \Statex
+      \State \Call{Swap}{$A, l, j$}
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
