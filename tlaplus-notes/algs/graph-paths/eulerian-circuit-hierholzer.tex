@@ -1,0 +1,18 @@
+% file: algs/graph-paths/eulerian-circuit-hierholzer.tex
+
+\begin{algorithm}[H]
+  \caption{Hierholzer's algorithm for finding an Eulerian circuit.}
+  \label{alg:eulerian-circuit-hierholzer}
+  \begin{algorithmic}
+    \State $VE \gets \emptyset$
+    \State $C \gets \emptyset$
+
+    \Statex
+    \While{$VE \neq E$} 
+      \State $u \gets \Call{Choose}{u : (u \to v) \notin VE}$
+      \State $C' \gets \Call{Circuit}{u, E \setminus VE}$
+      \State $VE \gets VE \cup C'$
+      \State $C \gets C \cup C'$
+    \EndWhile
+  \end{algorithmic}
+\end{algorithm}

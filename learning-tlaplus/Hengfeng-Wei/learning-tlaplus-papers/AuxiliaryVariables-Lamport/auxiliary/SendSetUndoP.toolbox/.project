@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>SendSetUndoP</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>toolbox.builder.TLAParserBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>toolbox.builder.PCalAlgorithmSearchingBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>toolbox.natures.TLANature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>SendSet.tla</name>
+			<type>1</type>
+			<location>C:/lamport/papers/tla/prophecy/auxiliary/web/SendSet.tla</location>
+		</link>
+		<link>
+			<name>SendSetUndo.tla</name>
+			<type>1</type>
+			<location>C:/lamport/papers/tla/prophecy/auxiliary/web/SendSetUndo.tla</location>
+		</link>
+		<link>
+			<name>SendSetUndoP.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/SendSetUndoP.tla</locationURI>
+		</link>
+	</linkedResources>
+</projectDescription>
