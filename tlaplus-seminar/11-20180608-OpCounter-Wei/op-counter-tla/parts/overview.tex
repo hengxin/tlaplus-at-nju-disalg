@@ -1,0 +1,30 @@
+% file: parts/overview.tex
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \begin{center}
+    {\large \red{Our Goal:} Model checking RDT using TLA+} \\[5pt]
+
+    \teal{(RDT: Replicated Data Types)} \\[20pt] \pause
+
+    \textsl{Counter}, \textsl{Register}, \textsl{Set}, \textsl{Graph}, \textsl{List}, $\cdots$ \\[20pt] \pause
+
+    Various protocols $+$ Various specifications
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%
+\begin{frame}{}
+  \centerline{\red{\Large Modularity}}
+
+  \fignocaption{width = 0.25\textwidth}{figs/modularity}
+
+  \pause
+  \begin{center}
+    Communication \teal{\small (FIFO, Causal, $\cdots$)}\\[6pt]
+    Composition \teal{\small (\texttt{Set} $\implies$ \texttt{Graph})} \\[6pt]
+    Specification \teal{\small (Eventual Convergence)}
+  \end{center}
+\end{frame}
+%%%%%%%%%%%%%%%
