@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>AfekSimplifiedH</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>toolbox.builder.TLAParserBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>toolbox.builder.PCalAlgorithmSearchingBuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>toolbox.natures.TLANature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>AfekSimplified.tla</name>
+			<type>1</type>
+			<location>C:/lamport/papers/tla/prophecy/auxiliary/web/AfekSimplified.tla</location>
+		</link>
+		<link>
+			<name>AfekSimplifiedH.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/AfekSimplifiedH.tla</locationURI>
+		</link>
+		<link>
+			<name>LinearSnapshot.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/LinearSnapshot.tla</locationURI>
+		</link>
+		<link>
+			<name>NewLinearSnapshot.tla</name>
+			<type>1</type>
+			<location>C:/lamport/papers/tla/prophecy/auxiliary/web/NewLinearSnapshot.tla</location>
+		</link>
+	</linkedResources>
+</projectDescription>

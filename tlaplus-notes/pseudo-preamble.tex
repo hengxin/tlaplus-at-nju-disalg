@@ -1,0 +1,23 @@
+% file: pseudo-preamble.tex
+
+% math
+\usepackage{amsmath}
+\newcommand{\set}[1]{\{#1\}}
+
+% algorithm
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\newcommand{\hStatex}[0]{\vspace{5pt}}
+
+% list of algorithms
+% see https://tex.stackexchange.com/a/309695/23098
+\makeatletter
+\renewcommand{\listofalgorithms}{%
+  \let\l@algorithm\l@figure
+  \chapter*{\listalgorithmname}%
+  \@starttoc{loa}%
+}
+\makeatother
+
+% color
+\newcommand{\teal}[1]{\textcolor{teal}{#1}}
