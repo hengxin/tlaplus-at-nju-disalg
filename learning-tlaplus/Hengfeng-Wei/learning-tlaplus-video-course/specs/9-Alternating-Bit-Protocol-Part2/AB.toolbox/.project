@@ -28,7 +28,7 @@
 		<link>
 			<name>ABSpec.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/learning-tlaplus/learning-tlaplus-video-course/specs/9-Alternating-Bit-Protocol-Part2/ABSpec.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/ABSpec.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

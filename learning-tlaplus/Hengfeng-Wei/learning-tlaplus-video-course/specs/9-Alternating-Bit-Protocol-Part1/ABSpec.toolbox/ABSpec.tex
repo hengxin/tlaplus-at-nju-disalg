@@ -1044,7 +1044,11 @@ For understanding the spec, it\mbox{'}s useful to define formulas that should
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}} Inv \.{\defeq} ( AVar [ 2 ]
  \.{=} BVar [ 2 ] ) \.{\implies} ( AVar \.{=} BVar )}%
-\@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}}\midbar\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}} DeliveryLiveness \.{\defeq}
+ \A\, v \.{\in} Data \.{\times} \{ 0 ,\, 1 \} \.{:} ( AVar \.{=} v )
+ \.{\leadsto} ( BVar \.{=} v )}%
+\@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{FairSpec} is \ensuremath{Spec} with the addition requirement that
@@ -1052,7 +1056,7 @@ For understanding the spec, it\mbox{'}s useful to define formulas that should
  steps.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}} FairSpec \.{\defeq} Spec
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}} FairSpec \.{\defeq} Spec
  \.{\land} {\WF}_{ vars} ( Next )}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
@@ -1062,7 +1066,7 @@ For understanding the spec, it\mbox{'}s useful to define formulas that should
 } keep taking steps.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}} FairABSpec \.{\defeq} Spec
+ \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}} FairABSpec \.{\defeq} Spec
  \.{\land} {\WF}_{ vars} ( A ) \.{\land} {\WF}_{ vars} ( B )}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
@@ -1072,17 +1076,17 @@ For understanding the spec, it\mbox{'}s useful to define formulas that should
  to be received, but allows the sender to stop sending.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}} FairBSpec \.{\defeq} Spec
+ \@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}} FairBSpec \.{\defeq} Spec
  \.{\land} {\WF}_{ vars} ( B )}%
-\@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat May 12 20:55:59
- \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Aug} 11
+ 22:07:13 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

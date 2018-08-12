@@ -939,54 +939,107 @@
 \begin{document}
 \tlatex
 \setboolean{shading}{true}
-\@x{}\moduleLeftDash\@xx{ {\MODULE} DieHard}\moduleRightDash\@xx{}%
-\@x{ {\EXTENDS} Integers}%
+ \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
+ {\MODULE} DieHard}\moduleRightDash\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 2\hspace{1em}} {\EXTENDS} Integers}%
 \@pvspace{8.0pt}%
-\@x{ {\VARIABLES} small ,\, big}%
+\@x{\makebox[0pt][r]{\scriptsize 4\hspace{1em}} {\VARIABLES} small ,\, big}%
 \@pvspace{8.0pt}%
-\@x{ TypeOK \.{\defeq} \.{\land} small \.{\in} 0 \.{\dotdot} 3}%
-\@x{\@s{56.14} \.{\land} big\@s{10.88} \.{\in} 0 \.{\dotdot} 5}%
+ \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} TypeOK \.{\defeq} \.{\land}
+ small \.{\in} 0 \.{\dotdot} 3}%
+ \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}\@s{56.14} \.{\land}
+ big\@s{10.88} \.{\in} 0 \.{\dotdot} 5}%
 \@pvspace{8.0pt}%
-\@x{ Init \.{\defeq} \.{\land} big\@s{10.88} \.{=} 0}%
-\@x{\@s{35.70} \.{\land} small \.{=} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} Init \.{\defeq} \.{\land}
+ big\@s{10.88} \.{=} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{35.70} \.{\land} small
+ \.{=} 0}%
 \@pvspace{8.0pt}%
-\@x{ FillSmall \.{\defeq} \.{\land} small \.{'} \.{=} 3}%
-\@x{\@s{59.67} \.{\land} big \.{'}\@s{10.88} \.{=} big}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} FillSmall \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{16.4} \.{\land} small
+ \.{\neq} 3}%
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} \.{\land} small
+ \.{'} \.{=} 3}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land} big \.{'}
+ \.{=} big}%
 \@pvspace{8.0pt}%
-\@x{ FillBig \.{\defeq} \.{\land} big \.{'}\@s{10.88} \.{=} 5}%
-\@x{\@s{49.69} \.{\land} small \.{'} \.{=} small}%
+\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} FillBig \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land} big
+ \.{\neq} 5}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\land} big \.{'}
+ \.{=} 5}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} \.{\land} small
+ \.{'} \.{=} small}%
 \@pvspace{8.0pt}%
-\@x{ EmptySmall \.{\defeq} \.{\land} small \.{'} \.{=} 0}%
-\@x{\@s{72.70} \.{\land} big \.{'}\@s{10.88} \.{=} big}%
+\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} EmptySmall \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land} small
+ \.{\neq} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} small
+ \.{'} \.{=} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land} big \.{'}
+ \.{=} big}%
 \@pvspace{8.0pt}%
-\@x{ EmptyBig \.{\defeq} \.{\land} big \.{'}\@s{10.88} \.{=} 0}%
-\@x{\@s{62.72} \.{\land} small \.{'} \.{=} small}%
+\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} EmptyBig \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{16.4} \.{\land} big
+ \.{\neq} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land} big \.{'}
+ \.{=} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land} small
+ \.{'} \.{=} small}%
 \@pvspace{8.0pt}%
-\@x{ SmallToBig\@s{0.14} \.{\defeq} {\IF} big \.{+} small \.{\leq} 5}%
-\@x{\@s{74.76} \.{\THEN} \.{\land} big \.{'}\@s{10.88} \.{=} big \.{+} small}%
-\@x{\@s{106.07} \.{\land} small \.{'} \.{=} 0}%
-\@x{\@s{74.76} \.{\ELSE} \.{\land} big \.{'}\@s{10.88} \.{=} 5}%
-\@x{\@s{106.07} \.{\land} small \.{'} \.{=} small \.{-} ( 5 \.{-} big )}%
+\@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} SmallToBig \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\land} small
+ \.{\neq} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land} big
+ \.{\neq} 5}%
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{16.4} \.{\land} {\IF} big
+ \.{+} small\@s{7.69} \.{\leq} 5}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{27.51} \.{\THEN}
+ \.{\land} big \.{'}\@s{10.88} \.{=} big \.{+} small}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{58.82} \.{\land} small
+ \.{'} \.{=} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{27.51} \.{\ELSE}
+ \.{\land} big \.{'}\@s{10.88} \.{=} 5}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{58.82} \.{\land} small
+ \.{'} \.{=} small \.{-} ( 5 \.{-} big )}%
 \@pvspace{8.0pt}%
-\@x{ BigToSmall \.{\defeq} {\IF} big \.{+} small \.{\leq} 3}%
-\@x{\@s{74.76} \.{\THEN} \.{\land} big \.{'}\@s{10.88} \.{=} 0}%
-\@x{\@s{106.07} \.{\land} small \.{'} \.{=} big \.{+} small}%
- \@x{\@s{74.76} \.{\ELSE} \.{\land} big \.{'}\@s{10.88} \.{=} small \.{-} ( 3
- \.{-} big )}%
-\@x{\@s{106.07} \.{\land} small \.{'} \.{=} 3}%
+\@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} BigToSmall \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\land} big
+ \.{\neq} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land} small
+ \.{\neq} 3}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land} {\IF} big
+ \.{+} small\@s{7.69} \.{\leq} 3}%
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{27.51} \.{\THEN}
+ \.{\land} big \.{'}\@s{10.88} \.{=} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{58.82} \.{\land} small
+ \.{'} \.{=} big \.{+} small}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{27.51} \.{\ELSE}
+ \.{\land} big \.{'}\@s{10.88} \.{=} small \.{-} ( 3 \.{-} big )}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{58.82} \.{\land} small
+ \.{'} \.{=} 3}%
 \@pvspace{8.0pt}%
-\@x{ Next \.{\defeq} \.{\lor} FillSmall}%
-\@x{\@s{39.83} \.{\lor} FillBig}%
-\@x{\@s{39.83} \.{\lor} EmptySmall}%
-\@x{\@s{39.83} \.{\lor} EmptyBig}%
-\@x{\@s{39.83} \.{\lor} SmallToBig}%
-\@x{\@s{39.83} \.{\lor} BigToSmall}%
+\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}} Next \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\lor} FillSmall}%
+\@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{16.4} \.{\lor} FillBig}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{16.4} \.{\lor}
+ EmptySmall}%
+\@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{16.4} \.{\lor} EmptyBig}%
+ \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{16.4} \.{\lor}
+ SmallToBig}%
+ \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{16.4} \.{\lor}
+ BigToSmall}%
 \@pvspace{8.0pt}%
-\@x{}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Aug} 06 21:41:02 \ensuremath{CST} 2018 by \ensuremath{hengxin
+}%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified Sun May 21 19:24:58
