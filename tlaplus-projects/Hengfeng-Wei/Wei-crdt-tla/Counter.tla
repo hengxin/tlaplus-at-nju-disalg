@@ -131,5 +131,5 @@ QC == []((AccBroadcast /\ MessageDelivery) => QConvergence)
 (**********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Fri Jun 08 13:47:57 CST 2018 by hengxin
+\* Last modified Thu Aug 02 15:02:12 CST 2018 by hengxin
 \* Created Sun Jun 03 20:08:57 CST 2018 by hengxin

@@ -25,5 +25,10 @@
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/AdditionalSequenceOperators.tla</locationURI>
 		</link>
+		<link>
+			<name>AdditionalSetOperators.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSetOperators.tla</location>
+		</link>
 	</linkedResources>
 </projectDescription>

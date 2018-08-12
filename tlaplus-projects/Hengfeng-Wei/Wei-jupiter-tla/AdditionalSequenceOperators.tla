@@ -3,7 +3,7 @@
 (* Copyright: https://github.com/bringhurst/tlaplus/blob/master/org.lamport.tla.toolbox.uitest/farsite/AdditionalSequenceOperators.tla *)
 (*`^\addcontentsline{toc}{section}{AdditionalSequenceOperators}^'*)
 
-EXTENDS Naturals,Sequences,FiniteSets
+EXTENDS Naturals, Sequences, FiniteSets, TLC, AdditionalSetOperators
 (* 
     The TLA+ Sequences module defines the operators Head and Tail for
     retrieving the first element of a sequence and all-but-the-first elements
@@ -97,13 +97,80 @@ IsSequenceInterleaving(seq,subSeq1,subSeq2,indSeq1,indSeq2)==
 (****************************************************************)
 SeqMaxLen(S, n) ==  UNION {[1 .. m -> S] : m \in 0 .. n}
 
+
 (****************************************************************)
 (* Map on a sequence.                                           *)
 (*                                                              *)
 (* Copyright: https://www.learntla.com/libraries/sequences/     *)
 (****************************************************************)
 SeqMap(Op(_), seq) == [x \in DOMAIN seq |-> Op(seq[x])]
+
+(****************************************************************)
+(* The range (set) of a sequence seq.                           *)
+(*                                                              *)
+(* ADDED by hengxin; Aug. 12, 2018                              *)
+(****************************************************************)
+Range(seq) == {seq[x] : x \in DOMAIN seq}
+
+PermsWithin(S) ==  {s \in UNION {[1 .. m -> S] : m \in 0 .. Cardinality(S)} : Cardinality(Range(s)) = Cardinality(DOMAIN s)}
+
+(****************************************************************)
+(* All possible permutations generated based on sequence T.     *)
+(*                                                              *)
+(* Copyright: https://learntla.com/tla/functions/               *)
+(****************************************************************)
+PermutationKey(n) == {key \in [1..n -> 1..n] : Range(key) = 1..n}
+PermutationsOf(T) == { [x \in 1..Len(T) |-> T[P[x]]] : P \in PermutationKey(Len(T))}
+(****************************************************************)
+(* Get the index of the first occurrence of elem in seq.        *)
+(*                                                              *)
+(* Precondition: elem \in SeqImage(seq).                        *)
+(*                                                              *)
+(* ADDED by hengxin; Aug. 12, 2018                              *)
+(****************************************************************)
+RECURSIVE FirstIndexOfElement(_,_)
+FirstIndexOfElement(seq, elem) ==
+    IF Head(seq) = elem
+    THEN 1
+    ELSE 1 + FirstIndexOfElement(Tail(seq), elem)
+
+(****************************************************************)
+(* Check if two sequences are compatible.                       *)
+(*                                                              *)
+(* Precondition: No duplication in each individual sequence.                        *)
+(*                                                              *)
+(* Two sequences are compatible if and only if for any two common elements *)
+(* in both sequences, the relative order of them in the two     *)
+(* sequences are the same.                                      *)
+(*                                                              *)
+(* ADDED by hengxin; Aug. 12, 2018                              *)
+(****************************************************************)
+Compatible(seq1, seq2) ==
+    LET commonElements == Range(seq1) \cap Range(seq2)
+    IN \A e1 \in commonElements: 
+        \A e2 \in commonElements \ {e1}:
+            FirstIndexOfElement(seq1, e1) < FirstIndexOfElement(seq1, e2) 
+            <=> FirstIndexOfElement(seq2, e1) < FirstIndexOfElement(seq2, e2)
+            
+(****************************************************************)
+(* The length of the longest common subsequence of two sequences seq1 and seq2.                       *)
+(*                                                              *)
+(* ADDED by hengxin; Aug. 12, 2018                              *)
+(****************************************************************)
+RECURSIVE LCS(_,_)
+LCS(seq1, seq2) ==
+    IF seq1 = <<>> \/ seq2 = <<>>
+    THEN 0
+    ELSE IF Last(seq1) = Last(seq2)
+         THEN 1 + LCS(AllButLast(seq1), AllButLast(seq2))
+         ELSE MaxOfSet({LCS(AllButLast(seq1), seq2), LCS(seq1, AllButLast(seq2))})
+         
+LCSCompatible(seq1, seq2) == 
+    Compatible(seq1, seq2) <=> LCS(seq1, seq2) = Cardinality(Range(seq1) \cap Range(seq2))
+    
+LCSCompatibleTest(S) ==
+    \A seq1, seq2 \in PermsWithin(S): LCSCompatible(seq1, seq2)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jul 07 12:12:37 CST 2018 by hengxin
+\* Last modified Sun Aug 12 20:35:56 CST 2018 by hengxin
 \* Created Tue Jul 03 15:21:02 CST 2018 by hengxin

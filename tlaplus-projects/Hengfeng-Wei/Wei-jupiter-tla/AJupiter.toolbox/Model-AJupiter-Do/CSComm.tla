@@ -2,7 +2,7 @@
 (***************************************************************************)
 (* Specification of communication in a Client-Server system model.         *)
 (***************************************************************************)
-EXTENDS Naturals, Op
+EXTENDS Integers, Naturals, Op
 
 CONSTANTS
     Client,    \* the set of clients
@@ -19,8 +19,8 @@ vars == <<cincoming, sincoming>>
 (* There are two kinds of messages according to their destinations.        *)
 (* TODO: Abstraction from the concrete representation of messages.         *)
 (***************************************************************************)
-Msg == [c: Client, ack: Nat, op: Op \cup {Nop}] \cup \* messages sent to the Server from a client c \in Client
-       [ack: Nat, op: Op \cup {Nop}] \* messages broadcast to Clients from the Server
+Msg == [c: Client, ack: Int, op: Op \cup {Nop}] \cup \* messages sent to the Server from a client c \in Client
+       [ack: Int, op: Op \cup {Nop}] \* messages broadcast to Clients from the Server
 -----------------------------------------------------------------------------
 TypeOK == /\ cincoming \in [Client -> Seq(Msg)]
           /\ sincoming \in Seq(Msg)
@@ -59,7 +59,7 @@ SRev ==
 (*********************************************************************)
 (* The Server broadcasts messages to the Clients                     *)
 (* other than c \in Client.                                          *)
-(* The "ack" parts of the messages [ack: Nat, op: Op] broadcast      *)
+(* The "ack" parts of the messages [ack: Int, op: Op] broadcast      *)
 (* are determined by the parameter "acks".                           *)
 (*********************************************************************)
 SSend(c, acks, xop) == 
@@ -74,5 +74,5 @@ SSend(c, acks, xop) ==
 EmptyChannel == Init
 =============================================================================
 \* Modification History
-\* Last modified Sat Jul 07 15:53:20 CST 2018 by hengxin
+\* Last modified Sun Aug 12 22:22:57 CST 2018 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

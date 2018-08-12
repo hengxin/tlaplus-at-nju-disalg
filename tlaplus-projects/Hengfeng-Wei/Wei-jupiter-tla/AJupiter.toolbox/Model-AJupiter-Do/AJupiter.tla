@@ -2,19 +2,19 @@
 (***************************************************************************)
 (* Model checking the Jupiter protocol presented by Attiya and others.     *)
 (***************************************************************************)
-EXTENDS OT, TLC
+EXTENDS Integers, OT, TLC 
 -----------------------------------------------------------------------------
 CONSTANTS
     Client,     \* the set of client replicas
     Server,     \* the (unique) server replica
     InitState,  \* the initial state of each replica
     Priority    \* Priority[c]: the priority value of client c \in Client
-\*    Cop         \* Cop[c]: operations issued by the client c \in Client
+ \*    Cop         \* Cop[c]: operations issued by the client c \in Client
 
 ASSUME 
     /\ InitState \in List
     /\ Priority \in [Client -> PosInt]
-\*    /\ Cop \in [Client -> Seq(Op)]
+ \*    /\ Cop \in [Client -> Seq(Op)]
 
 (***************************************************************************)
 (* Generate operations for AJupiter clients.                               *)
@@ -24,14 +24,16 @@ ASSUME
 (* FIXME: PosInt => MaxPos; MaxPr determined by the size of Client.        *)
 (***************************************************************************)
 OpToIssue == {opset \in SUBSET Op: 
-                    \A op1, op2 \in opset:
-                        (op1.type = "Ins" /\ op2.type = "Ins") => op1.ch # op2.ch}
+                /\ opset # {}
+                /\ \A op1 \in opset: 
+                      \A op2 \in opset \ {op1}: 
+                          (op1.type = "Ins" /\ op2.type = "Ins") => op1.ch # op2.ch}
 
 VARIABLES
     (*****************************************************************)
     (* For model checking:                                           *)
     (*****************************************************************)
-\*    cop,       \* cop[c]: operations issued by the client c \in Client
+ \*    cop,       \* cop[c]: operations issued by the client c \in Client
     cop,     \* a set of operations for clients to issue
 
     (*****************************************************************)
@@ -57,27 +59,28 @@ VARIABLES
 -----------------------------------------------------------------------------
 comm == INSTANCE CSComm
 -----------------------------------------------------------------------------
-cVars == <<cop, cbuf, crec, cstate>>
-sVars == <<sbuf, srec, sstate>>
-\* FIXME: subscript error (Don't know why yet!)
-\*vars == cVars \o sVars \o <<cincoming, sincoming>>
-jVars == <<cbuf, crec, cstate, sbuf, srec, sstate, cincoming, sincoming>>   \* all variables
-vars == <<cop, cbuf, crec, cstate, sbuf, srec, sstate, cincoming, sincoming>>   \* all variables
+eVars == <<cop>>                        \* variables for the environment
+cVars == <<cbuf, crec, cstate>>         \* variables for the clients
+ecVars == <<cop, cVars>>                \* variables for the clients and the environment
+sVars == <<sbuf, srec, sstate>>         \* variables for the server
+commVars == <<cincoming, sincoming>>    \* variables for communication
+jVars == <<cVars, sVars, commVars>>     \* variables for the Jupiter system
+vars == <<eVars, cVars, sVars, commVars>> \* all variables
 -----------------------------------------------------------------------------
 TypeOK == 
-\*    /\cop \in [Client -> Seq(Op)]
+ \*    /\cop \in [Client -> Seq(Op)]
     /\ cop \in SUBSET Op
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
     /\ cbuf \in [Client -> Seq(Op \cup {Nop})]
-    /\ crec \in [Client -> Nat]
+    /\ crec \in [Client -> Int]
     /\ cstate \in [Client -> List]
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     /\ sbuf \in [Client -> Seq(Op \cup {Nop})]
-    /\ srec \in [Client -> Nat]
+    /\ srec \in [Client -> Int]
     /\ sstate \in List
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
@@ -113,14 +116,15 @@ LegalizeOp(op, c) ==
             IF len = 0 THEN Nop ELSE [op EXCEPT !.pos = Min(@, len)]
         []  op.type = "Ins" -> 
             [op EXCEPT !.pos = Min(@, len + 1), !.pr = Priority[c]]
+
 (*********************************************************************)
 (* Client c \in Client issues an operation op.                       *)
 (*********************************************************************)
 Do(c) == 
 \*    /\ cop[c] # <<>>
     /\ cop # {}
-    /\ LET o == CHOOSE x \in cop: TRUE
-          op == LegalizeOp(o, c)  \* preprocess an illegal operation
+    /\ \E o \in cop:
+        LET op == LegalizeOp(o, c)  \* preprocess an illegal operation
         IN \/ /\ op = Nop
               /\ cop' = cop \ {o}   \* consume one operation
               /\ UNCHANGED jVars
@@ -170,7 +174,7 @@ SRev ==
                             ELSE Append(sbuf[cl], xop)] \* store transformed xop into other clients' bufs
            /\ sstate' = Apply(xop, sstate)  \* apply the transformed operation
            /\ comm!SSend(c, srec, xop)
-    /\ UNCHANGED cVars
+    /\ UNCHANGED ecVars
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The next-state relation.                                          *)
@@ -179,7 +183,7 @@ Next ==
     \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
 (*********************************************************************)
-(* The Spec.                                                         *)
+(* The Spec.  (TODO: Check the fairness condition.)                  *)
 (*********************************************************************)
 Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
 -----------------------------------------------------------------------------
@@ -207,6 +211,13 @@ THEOREM Spec => []QC
 (*********************************************************************)
 
 (*********************************************************************)
+(* Termination                                                       *)
+(*********************************************************************)
+Termination == 
+    /\ cop = {}
+    /\ comm!EmptyChannel
+
+(*********************************************************************)
 (* Weak List Consistency (WLSpec)                                    *)
 (*********************************************************************)
 
@@ -215,5 +226,5 @@ THEOREM Spec => []QC
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Sun Jul 08 11:30:24 CST 2018 by hengxin
+\* Last modified Sun Aug 12 22:22:32 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin
