@@ -146,11 +146,12 @@ FirstIndexOfElement(seq, elem) ==
 (* ADDED by hengxin; Aug. 12, 2018                              *)
 (****************************************************************)
 Compatible(seq1, seq2) ==
-    LET commonElements == Range(seq1) \cap Range(seq2)
-    IN \A e1 \in commonElements: 
-        \A e2 \in commonElements \ {e1}:
-            FirstIndexOfElement(seq1, e1) < FirstIndexOfElement(seq1, e2) 
-            <=> FirstIndexOfElement(seq2, e1) < FirstIndexOfElement(seq2, e2)
+    \/ seq1 = seq2
+    \/ LET commonElements == Range(seq1) \cap Range(seq2)
+       IN \A e1, e2 \in commonElements:
+            \/ e1 = e2
+            \/ FirstIndexOfElement(seq1, e1) < FirstIndexOfElement(seq1, e2) 
+               <=> FirstIndexOfElement(seq2, e1) < FirstIndexOfElement(seq2, e2)
             
 (****************************************************************)
 (* The length of the longest common subsequence of two sequences seq1 and seq2.                       *)
@@ -172,5 +173,5 @@ LCSCompatibleTest(S) ==
     \A seq1, seq2 \in PermsWithin(S): LCSCompatible(seq1, seq2)
 =============================================================================
 \* Modification History
-\* Last modified Sun Aug 12 20:35:56 CST 2018 by hengxin
+\* Last modified Sun Aug 12 23:17:17 CST 2018 by hengxin
 \* Created Tue Jul 03 15:21:02 CST 2018 by hengxin

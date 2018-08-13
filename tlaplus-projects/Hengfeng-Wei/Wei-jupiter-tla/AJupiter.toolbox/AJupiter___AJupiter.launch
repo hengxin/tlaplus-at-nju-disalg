@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
 <stringAttribute key="TLCCmdLineParameters" value="-checkpoint 0"/>
-<stringAttribute key="configurationName" value="Model-AJupiter-Do"/>
+<stringAttribute key="configurationName" value="AJupiter"/>
 <booleanAttribute key="deferLiveness" value="true"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="114.212.82.145"/>
+<stringAttribute key="distributedNetworkInterface" value="192.168.1.104"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
@@ -19,12 +19,13 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="sincoming, crec, sbuf, cstate, cop, cincoming, srec, sstate, cbuf"/>
+<stringAttribute key="modelBehaviorVars" value="sincoming, list, crec, sbuf, cstate, cop, cincoming, srec, sstate, cbuf"/>
 <stringAttribute key="modelComments" value="Test the &quot;Do&quot; method of AJupiter."/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOK"/>
 <listEntry value="1QC"/>
+<listEntry value="1WLSpec"/>
 </listAttribute>
 <listAttribute key="modelCorrectnessProperties">
 <listEntry value="1&lt;&gt; comm!EmptyChannel"/>
@@ -33,16 +34,16 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;};0;0"/>
-<listEntry value="Char;;{&quot;a&quot;};0;0"/>
+<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
+<listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
-<listEntry value="Priority;;[c1 |-&gt; 1, c2 |-&gt; 2];0;0"/>
+<listEntry value="Priority;;[c1 |-&gt; 1, c2 |-&gt; 2, c3 |-&gt; 3];0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
 <listEntry value="Nop;;Nop;1;0"/>
-<listEntry value="comm!Nat;;0 .. 2;0;0"/>
+<listEntry value="comm!Nat;;0 .. 3;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>

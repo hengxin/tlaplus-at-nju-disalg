@@ -35,6 +35,7 @@ VARIABLES
     (*****************************************************************)
  \*    cop,       \* cop[c]: operations issued by the client c \in Client
     cop,     \* a set of operations for clients to issue
+    list,    \* all list states across the system
 
     (*****************************************************************)
     (* For the client replicas:                                      *)
@@ -65,11 +66,12 @@ ecVars == <<cop, cVars>>                \* variables for the clients and the env
 sVars == <<sbuf, srec, sstate>>         \* variables for the server
 commVars == <<cincoming, sincoming>>    \* variables for communication
 jVars == <<cVars, sVars, commVars>>     \* variables for the Jupiter system
-vars == <<eVars, cVars, sVars, commVars>> \* all variables
+vars == <<eVars, cVars, sVars, commVars, list>> \* all variables
 -----------------------------------------------------------------------------
 TypeOK == 
  \*    /\cop \in [Client -> Seq(Op)]
     /\ cop \in SUBSET Op
+    /\ list \in SUBSET List
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -93,6 +95,7 @@ TypeOK ==
 Init == 
 \*    /\ cop = Cop
     /\ cop \in OpToIssue
+    /\ list = {InitState}
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -127,10 +130,11 @@ Do(c) ==
         LET op == LegalizeOp(o, c)  \* preprocess an illegal operation
         IN \/ /\ op = Nop
               /\ cop' = cop \ {o}   \* consume one operation
-              /\ UNCHANGED jVars
+              /\ UNCHANGED <<jVars, list>>
            \/ /\ op # Nop
            \* /\ PrintT(c \o ": Do " \o ToString(op))
               /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
+              /\ list' = list \cup {cstate'[c]}
               /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
               /\ crec' = [crec EXCEPT ![c] = 0]
               /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
@@ -151,6 +155,7 @@ Rev(c) ==
            xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
            /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
+           /\ list' = list \cup {cstate'[c]}
     /\ UNCHANGED <<sbuf, srec, sstate, cop>>    \* NOTE: sVars \o <<cop>> is wrong!
 -----------------------------------------------------------------------------
 (*********************************************************************)
@@ -173,6 +178,7 @@ SRev ==
                             THEN xcBuf  \* transformed buffer for client c \in Client
                             ELSE Append(sbuf[cl], xop)] \* store transformed xop into other clients' bufs
            /\ sstate' = Apply(xop, sstate)  \* apply the transformed operation
+           /\ list' = list \cup {sstate'}
            /\ comm!SSend(c, srec, xop)
     /\ UNCHANGED ecVars
 -----------------------------------------------------------------------------
@@ -220,11 +226,14 @@ Termination ==
 (*********************************************************************)
 (* Weak List Consistency (WLSpec)                                    *)
 (*********************************************************************)
+WLSpec == 
+    Termination => \A l1, l2 \in list: Compatible(l1, l2)
 
+THEOREM Spec => WLSpec
 (*********************************************************************)
 (* Strong List Consistency (SLSpec)                                  *)
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Sun Aug 12 22:22:32 CST 2018 by hengxin
+\* Last modified Sun Aug 12 23:30:43 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

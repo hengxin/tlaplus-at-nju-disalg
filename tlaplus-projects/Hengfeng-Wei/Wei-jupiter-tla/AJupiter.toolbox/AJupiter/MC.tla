@@ -2,54 +2,58 @@
 EXTENDS AJupiter, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0Client
-const_1534083903980459000 == 
-{"c1", "c2"}
+const_153408899854854000 == 
+{"c1", "c2", "c3"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1Char
-const_1534083903980460000 == 
-{"a"}
+const_153408899854855000 == 
+{"a", "b"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2Server
-const_1534083903980461000 == 
+const_153408899854856000 == 
 "s"
 ----
 
 \* CONSTANT definitions @modelParameterConstants:3InitState
-const_1534083903980462000 == 
+const_153408899854857000 == 
 <<>>
 ----
 
 \* CONSTANT definitions @modelParameterConstants:4Priority
-const_1534083903980463000 == 
-[c1 |-> 1, c2 |-> 2]
+const_153408899854858000 == 
+[c1 |-> 1, c2 |-> 2, c3 |-> 3]
 ----
 
 \* CONSTANT definition @modelParameterDefinitions:1
-def_ov_1534083903980465000 ==
-0 .. 2
+def_ov_153408899854960000 ==
+0 .. 3
 ----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_1534083903980466000 ==
+spec_153408899854961000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_1534083903980467000 ==
+inv_153408899854962000 ==
 TypeOK
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:1
-inv_1534083903980468000 ==
+inv_153408899854963000 ==
 QC
 ----
+\* INVARIANT definition @modelCorrectnessInvariants:2
+inv_153408899854964000 ==
+WLSpec
+----
 \* PROPERTY definition @modelCorrectnessProperties:0
-prop_1534083903980469000 ==
+prop_153408899854965000 ==
 <> comm!EmptyChannel
 ----
 \* PROPERTY definition @modelCorrectnessProperties:1
-prop_1534083903980470000 ==
+prop_153408899854966000 ==
 <> Termination
 ----
 =============================================================================
 \* Modification History
-\* Created Sun Aug 12 22:25:03 CST 2018 by hengxin
+\* Created Sun Aug 12 23:49:58 CST 2018 by hengxin
