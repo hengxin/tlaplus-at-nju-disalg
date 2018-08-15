@@ -20,7 +20,7 @@
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
 <stringAttribute key="modelBehaviorVars" value="sincoming, list, crec, sbuf, cstate, cop, cincoming, srec, sstate, cbuf"/>
-<stringAttribute key="modelComments" value="Test the &quot;Do&quot; method of AJupiter."/>
+<stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOK"/>
@@ -34,11 +34,11 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
-<listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;};0;0"/>
+<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;};0;0"/>
+<listEntry value="Char;;{&quot;a&quot;,&quot;b&quot;, &quot;c&quot;, &quot;d&quot;};0;0"/>
 <listEntry value="Server;;&quot;s&quot;;0;0"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
-<listEntry value="Priority;;[c1 |-&gt; 1, c2 |-&gt; 2, c3 |-&gt; 3];0;0"/>
+<listEntry value="Priority;;[c1 |-&gt; 1, c2 |-&gt; 2];0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

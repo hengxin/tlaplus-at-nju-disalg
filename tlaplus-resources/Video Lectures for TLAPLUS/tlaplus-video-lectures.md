@@ -1,4 +1,4 @@
-# Video Lectures on TLAPlus
+# Video Lectures on TLAPLUS
 
 ## By Leslie Lamport
 
@@ -64,3 +64,8 @@ Unfortunately, the link is broken.
 ## Dr. TLA+ Series
 
 - [Andrew Helwer: Dr. TLA+ Series](https://www.youtube.com/watch?v=zCaJSrTmUFA&feature=youtu.be)
+
+## TLA+ Community Meeting
+- [TLA+ Community Meeting, 18 July 2018](http://tla2018.loria.fr/)
+  - [Program](http://tla2018.loria.fr/program.html)
+  - [Video](https://www.youtube.com/playlist?list=PLWLcqZLzY8u_3mDg2cHmduA5wl4J6hNX2)
