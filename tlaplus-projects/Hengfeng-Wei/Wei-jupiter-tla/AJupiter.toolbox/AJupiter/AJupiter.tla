@@ -23,7 +23,7 @@ ASSUME
 (*                                                                         *)
 (* FIXME: PosInt => MaxPos; MaxPr determined by the size of Client.        *)
 (***************************************************************************)
-OpToIssue == {opset \in SUBSET Op: 
+OpToIssue == {opset \in SUBSET Op:
                 /\ opset # {}
                 /\ \A op1 \in opset: 
                       \A op2 \in opset \ {op1}: 
@@ -94,6 +94,7 @@ TypeOK ==
 (*********************************************************************)
 Init == 
 \*    /\ cop = Cop
+    /\ PrintT(Cardinality(OpToIssue))
     /\ cop \in OpToIssue
     /\ list = {InitState}
     (*****************************************************************)
@@ -222,12 +223,13 @@ THEOREM Spec => []QC
 Termination == 
     /\ cop = {}
     /\ comm!EmptyChannel
-
+    
 (*********************************************************************)
 (* Weak List Consistency (WLSpec)                                    *)
+(*    /\ Termination => \A l1, l2 \in list: Compatible(l1, l2)       *)
 (*********************************************************************)
 WLSpec == 
-    Termination => \A l1, l2 \in list: Compatible(l1, l2)
+    /\ Termination => \A l1, l2 \in list: Compatible(l1, l2)
 
 THEOREM Spec => WLSpec
 (*********************************************************************)
@@ -235,5 +237,5 @@ THEOREM Spec => WLSpec
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Sun Aug 12 23:30:43 CST 2018 by hengxin
+\* Last modified Thu Aug 16 23:18:05 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

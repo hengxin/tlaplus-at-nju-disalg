@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
-<stringAttribute key="TLCCmdLineParameters" value="-checkpoint 0"/>
-<stringAttribute key="configurationName" value="AJupiter"/>
+<stringAttribute key="TLCCmdLineParameters" value=""/>
+<stringAttribute key="configurationName" value="Poker"/>
 <booleanAttribute key="deferLiveness" value="true"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
@@ -12,39 +12,31 @@
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
 <intAttribute key="fpIndex" value="1"/>
-<intAttribute key="maxHeapSize" value="79"/>
+<intAttribute key="maxHeapSize" value="85"/>
 <intAttribute key="maxSetSize" value="1000000"/>
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value=""/>
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="sincoming, list, crec, sbuf, cstate, cop, cincoming, srec, sstate, cbuf"/>
+<stringAttribute key="modelBehaviorVars" value="skipno, type, card, turn, max"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOK"/>
-<listEntry value="1QC"/>
-<listEntry value="1WLSpec"/>
+<listEntry value="1~Win"/>
 </listAttribute>
-<listAttribute key="modelCorrectnessProperties">
-<listEntry value="0&lt;&gt; comm!EmptyChannel"/>
-<listEntry value="0&lt;&gt; Termination"/>
-</listAttribute>
-<stringAttribute key="modelExpressionEval" value=""/>
+<listAttribute key="modelCorrectnessProperties"/>
+<stringAttribute key="modelExpressionEval" value="Hand"/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
-<listEntry value="Char;;{&quot;a&quot;,&quot;b&quot;,&quot;c&quot;};0;0"/>
-<listEntry value="Server;;&quot;s&quot;;0;0"/>
-<listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
-<listEntry value="Priority;;[c1 |-&gt; 1, c2 |-&gt; 2, c3 |-&gt; 3];0;0"/>
+<listEntry value="NumberOfPlayers;;2;0;0"/>
+<listEntry value="InitCard;;(1 :&gt; (1 :&gt; 1 @@ 2 :&gt; 1 @@ 4 :&gt; 2 @@ 5 :&gt; 2 @@ 7 :&gt; 2) @@ 2 :&gt; (3 :&gt; 2 @@ 6 :&gt; 2));0;0"/>
+<listEntry value="MaxDuplicate;;2;0;0"/>
+<listEntry value="MaxFace;;7;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
-<listAttribute key="modelParameterDefinitions">
-<listEntry value="Nop;;Nop;1;0"/>
-<listEntry value="comm!Nat;;0 .. 3;0;0"/>
-</listAttribute>
+<listAttribute key="modelParameterDefinitions"/>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
 <intAttribute key="numberOfWorkers" value="4"/>
@@ -53,7 +45,7 @@
 <intAttribute key="simuAril" value="-1"/>
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
-<stringAttribute key="specName" value="AJupiter"/>
+<stringAttribute key="specName" value="Poker"/>
 <stringAttribute key="view" value=""/>
-<booleanAttribute key="visualizeStateGraph" value="false"/>
+<booleanAttribute key="visualizeStateGraph" value="true"/>
 </launchConfiguration>
