@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AJupiter</name>
+	<name>OpOperators</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,21 +10,11 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>toolbox.builder.PCalAlgorithmSearchingBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>toolbox.natures.TLANature</nature>
 	</natures>
 	<linkedResources>
-		<link>
-			<name>AJupiter.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AJupiter.tla</locationURI>
-		</link>
 		<link>
 			<name>AdditionalFunctionOperators.tla</name>
 			<type>1</type>
@@ -33,37 +23,27 @@
 		<link>
 			<name>AdditionalMathOperators.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AdditionalMathOperators.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalMathOperators.tla</location>
 		</link>
 		<link>
 			<name>AdditionalSequenceOperators.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AdditionalSequenceOperators.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSequenceOperators.tla</location>
 		</link>
 		<link>
 			<name>AdditionalSetOperators.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AdditionalSetOperators.tla</locationURI>
-		</link>
-		<link>
-			<name>CSComm.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/CSComm.tla</locationURI>
-		</link>
-		<link>
-			<name>OT.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/OT.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSetOperators.tla</location>
 		</link>
 		<link>
 			<name>Op.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/Op.tla</locationURI>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/Op.tla</location>
 		</link>
 		<link>
 			<name>OpOperators.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/OpOperators.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/OpOperators.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

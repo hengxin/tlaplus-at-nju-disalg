@@ -948,7 +948,7 @@ Specification of \ensuremath{OT} (Operational Transformation) functions.
  more general ones involving operation sequences.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\EXTENDS} Op ,\, TLC}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\EXTENDS} Op}%
 \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1128,105 +1128,15 @@ See also Definition 2.13 of the paper ``Imine @ \ensuremath{TCS06}''.
 \@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}}\@s{16.4} \.{\THEN} ops1}%
  \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}}\@s{16.4} \.{\ELSE}
  XformOpsOps ( XformOpsOp ( ops1 ,\, Head ( ops2 ) ) ,\, Tail ( ops2 ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{CP1} (C for Convergence) property.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{TODO}: refactor the generation of \ensuremath{op1} and
- \ensuremath{op2}.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}} CP1 \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}\@s{19.96} \A\, l \.{\in}
- List ,\, op1 \.{\in} Op ,\, op2 \.{\in} Op \.{:}}%
-\@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}}\@s{31.28}}%
-\@y{\@s{0}%
- \ensuremath{\.{\land} PrintT(ToString(l) \.{\circ} \@w{, } \.{\circ}
- ToString(op1) \.{\circ} \@w{, } \.{\circ} ToString(op2))
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 120\hspace{1em}}\@s{51.78}}%
-\@y{\@s{0}%
- It is not allowed to delete elements from an empty list.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 121\hspace{1em}}\@s{31.28} \.{\land}
- \.{\lor} ( l \.{=} {\langle} {\rangle} \.{\land} ( op1 . type \.{=}\@w{Del}
- \.{\lor} op2 . type \.{=}\@w{Del} ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 122\hspace{1em}}\@s{50.59}}%
-\@y{\@s{0}%
- Priorities of these two insertions cannot be the same.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 123\hspace{1em}}\@s{42.39} \.{\lor} ( op1 .
- type \.{=}\@w{Ins} \.{\land} op2 . type \.{=}\@w{Ins} \.{\land} op1 . pr
- \.{=} op2 . pr )}%
-\@x{\makebox[0pt][r]{\scriptsize 124\hspace{1em}}\@s{50.59}}%
-\@y{\@s{0}%
- Position of an insertion cannot be too large.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 125\hspace{1em}}\@s{42.39} \.{\lor} ( op1 .
- type \.{=}\@w{Ins} \.{\land} op1 . pos \.{>} Len ( l ) \.{+} 1 )}%
- \@x{\makebox[0pt][r]{\scriptsize 126\hspace{1em}}\@s{42.39} \.{\lor} ( op2 .
- type \.{=}\@w{Ins} \.{\land} op2 . pos \.{>} Len ( l ) \.{+} 1 )}%
-\@x{\makebox[0pt][r]{\scriptsize 127\hspace{1em}}\@s{50.59}}%
-\@y{\@s{0}%
- Position of a deletion cannot be too large.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 128\hspace{1em}}\@s{42.39} \.{\lor} ( op1 .
- type \.{=}\@w{Del} \.{\land} op1 . pos \.{>} Len ( l ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 129\hspace{1em}}\@s{42.39} \.{\lor} ( op2 .
- type \.{=}\@w{Del} \.{\land} op2 . pos \.{>} Len ( l ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 130\hspace{1em}}\@s{50.59}}%
-\@y{\@s{0}%
- The \ensuremath{CP1} itself.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 131\hspace{1em}}\@s{42.39} \.{\lor} ApplyOps
- ( {\langle} op1 ,\, Xform ( op2 ,\, op1 ) {\rangle} ,\, l ) \.{=} ApplyOps (
- {\langle} op2 ,\, Xform ( op1 ,\, op2 ) {\rangle} ,\, l )}%
-\@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The generalized \ensuremath{CP1} (C for Convergence) property.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-See also Theorem 2.14 of the paper ``Imine @ \ensuremath{TCS06}''.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{FIXME}: Generate legal operation sequences.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 140\hspace{1em}} GCP1 \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 141\hspace{1em}}\@s{16.4} \A\, l \.{\in}
- List ,\, ops1 \.{\in} SeqMaxLen ( Op ,\, 1 ) ,\, ops2 \.{\in} SeqMaxLen ( Op
- ,\, 1 ) \.{:}}%
-\@x{\makebox[0pt][r]{\scriptsize 142\hspace{1em}}\@s{27.72}}%
-\@y{\@s{0}%
- \ensuremath{\.{\lor}} (\ensuremath{Head(ops1).type \.{=} \@w{Del} \.{\lor}
- Head(ops2).type \.{=} \@w{Del}})
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 143\hspace{1em}}\@s{27.72} \.{\lor} ApplyOps
- ( ops1 \.{\circ} XformOpsOps ( ops2 ,\, ops1 ) ,\, l ) \.{=}}%
- \@x{\makebox[0pt][r]{\scriptsize 144\hspace{1em}}\@s{38.83} ApplyOps ( ops2
- \.{\circ} XformOpsOps ( ops1 ,\, ops2 ) ,\, l )}%
-\@x{\makebox[0pt][r]{\scriptsize 145\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Fri}
- \ensuremath{Jul} 06 15:14:55 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jul} 07
+ 13:35:17 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

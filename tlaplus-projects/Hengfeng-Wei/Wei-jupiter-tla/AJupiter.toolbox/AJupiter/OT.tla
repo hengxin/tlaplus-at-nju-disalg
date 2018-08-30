@@ -4,7 +4,8 @@
 (* It consists of the basic OT functions for two operations and            *)
 (* more general ones involving operation sequences.                        *)
 (***************************************************************************)
-EXTENDS Op
+EXTENDS OpOperators, AdditionalSetOperators
+
 -----------------------------------------------------------------------------
 (***************************************************************************)
 (* OT (Operational Transformation) functions.                              *)
@@ -110,5 +111,5 @@ XformOpsOps(ops1, ops2) ==
     ELSE XformOpsOps(XformOpsOp(ops1, Head(ops2)), Tail(ops2))
 =============================================================================
 \* Modification History
-\* Last modified Sat Jul 07 13:35:17 CST 2018 by hengxin
+\* Last modified Tue Aug 28 15:52:04 CST 2018 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin

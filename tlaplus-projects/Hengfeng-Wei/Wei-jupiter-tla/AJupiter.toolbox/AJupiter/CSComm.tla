@@ -2,11 +2,12 @@
 (***************************************************************************)
 (* Specification of communication in a Client-Server system model.         *)
 (***************************************************************************)
-EXTENDS Integers, Naturals, Op
+EXTENDS Integers, Naturals, OpOperators
 
 CONSTANTS
     Client,    \* the set of clients
-    Server     \* the (unique) server
+    Server,     \* the (unique) server
+    Op
 
 VARIABLES
     cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
@@ -74,5 +75,5 @@ SSend(c, acks, xop) ==
 EmptyChannel == Init
 =============================================================================
 \* Modification History
-\* Last modified Sun Aug 12 22:22:57 CST 2018 by hengxin
+\* Last modified Tue Aug 28 15:52:22 CST 2018 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

@@ -2,41 +2,36 @@
 (***************************************************************************)
 (* Model checking the Jupiter protocol presented by Attiya and others.     *)
 (***************************************************************************)
-EXTENDS Integers, OT, TLC 
+
+EXTENDS Integers, OT, TLC, AdditionalFunctionOperators
 -----------------------------------------------------------------------------
 CONSTANTS
     Client,     \* the set of client replicas
     Server,     \* the (unique) server replica
-    InitState,  \* the initial state of each replica
-    Priority    \* Priority[c]: the priority value of client c \in Client
- \*    Cop         \* Cop[c]: operations issued by the client c \in Client
+    Char,       \* set of characters allowed
+    InitState   \* the initial state of each replica
 
+List == Seq(Char \cup Range(InitState))   \* all possible lists/strings
+MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any states;
+    \* We assume that all inserted elements are unique.
+ClientNum == Cardinality(Client)
+Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
+----------------------------------------------------------------------
 ASSUME 
-    /\ InitState \in List
-    /\ Priority \in [Client -> PosInt]
- \*    /\ Cop \in [Client -> Seq(Op)]
+    /\ Range(InitState) \cap Char = {}
+    /\ Priority \in [Client -> 1 .. ClientNum]
+-----------------------------------------------------------------------------
+(*********************************************************************)
+(* The set of all operations.                                        *)
+(* Note: The positions are indexed from 1. *)
+(*********************************************************************)
+Rd == [type: {"Rd"}]
+Del == [type: {"Del"}, pos: 1 .. MaxLen]
+Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
 
-(***************************************************************************)
-(* Generate operations for AJupiter clients.                               *)
-(*                                                                         *)
-(* Note: Remember to overvide the definition of PosInt.                    *)
-(*                                                                         *)
-(* FIXME: PosInt => MaxPos; MaxPr determined by the size of Client.        *)
-(***************************************************************************)
-OpToIssue == {opset \in SUBSET Op:
-                /\ opset # {}
-                /\ \A op1 \in opset: 
-                      \A op2 \in opset \ {op1}: 
-                          (op1.type = "Ins" /\ op2.type = "Ins") => op1.ch # op2.ch}
-
+Op == Ins \cup Del  \* Now we don't consider Rd operations.
+-----------------------------------------------------------------------------
 VARIABLES
-    (*****************************************************************)
-    (* For model checking:                                           *)
-    (*****************************************************************)
- \*    cop,       \* cop[c]: operations issued by the client c \in Client
-    cop,     \* a set of operations for clients to issue
-    list,    \* all list states across the system
-
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -56,22 +51,24 @@ VARIABLES
     (* For communication between the Server and the Clients:         *)
     (*****************************************************************)
     cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
-    sincoming   \* incoming channel at the Server
+    sincoming,  \* incoming channel at the Server
+    (*****************************************************************)
+    (* For model checking:                                           *)
+    (*****************************************************************)
+    list,   \* all list states across the system
+    chins   \* a set of chars to insert
+
 -----------------------------------------------------------------------------
 comm == INSTANCE CSComm
 -----------------------------------------------------------------------------
-eVars == <<cop>>                        \* variables for the environment
+eVars == <<chins>>                      \* variables for the environment
 cVars == <<cbuf, crec, cstate>>         \* variables for the clients
-ecVars == <<cop, cVars>>                \* variables for the clients and the environment
+ecVars == <<eVars, cVars>>              \* variables for the clients and the environment
 sVars == <<sbuf, srec, sstate>>         \* variables for the server
 commVars == <<cincoming, sincoming>>    \* variables for communication
-jVars == <<cVars, sVars, commVars>>     \* variables for the Jupiter system
 vars == <<eVars, cVars, sVars, commVars, list>> \* all variables
 -----------------------------------------------------------------------------
 TypeOK == 
- \*    /\cop \in [Client -> Seq(Op)]
-    /\ cop \in SUBSET Op
-    /\ list \in SUBSET List
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -88,15 +85,18 @@ TypeOK ==
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
     /\ comm!TypeOK
+    (*****************************************************************)
+    (* For model checking:                                           *)
+    (*****************************************************************)
+    /\ list \in SUBSET List
+    /\ chins \in SUBSET Char
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Init predicate.                                               *)
 (*********************************************************************)
 Init == 
-\*    /\ cop = Cop
-    /\ PrintT(Cardinality(OpToIssue))
-    /\ cop \in OpToIssue
     /\ list = {InitState}
+    /\ chins = Char
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -114,34 +114,34 @@ Init ==
     (*****************************************************************)
     /\ comm!Init
 -----------------------------------------------------------------------------
-LegalizeOp(op, c) == 
-    LET len == Len(cstate[c]) 
-    IN CASE op.type = "Del" -> 
-            IF len = 0 THEN Nop ELSE [op EXCEPT !.pos = Min(@, len)]
-        []  op.type = "Ins" -> 
-            [op EXCEPT !.pos = Min(@, len + 1), !.pr = Priority[c]]
-
 (*********************************************************************)
 (* Client c \in Client issues an operation op.                       *)
 (*********************************************************************)
+DoOp(c, op) == 
+    /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
+    /\ list' = list \cup {cstate'[c]}
+    /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
+    /\ crec' = [crec EXCEPT ![c] = 0]
+    /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
+
+DoIns(c) ==
+    \E ins \in Ins:
+        /\ ins.pos \in 1 .. (Len(cstate[c]) + 1)
+        /\ ins.ch \in chins
+        /\ ins.pr = Priority[c]
+        /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
+        /\ DoOp(c, ins)
+        /\ UNCHANGED sVars
+
+DoDel(c) == 
+    \E del \in Del:
+        /\ del.pos \in 1 .. Len(cstate[c])
+        /\ DoOp(c, del)
+        /\ UNCHANGED <<sVars, eVars>>
+
 Do(c) == 
-\*    /\ cop[c] # <<>>
-    /\ cop # {}
-    /\ \E o \in cop:
-        LET op == LegalizeOp(o, c)  \* preprocess an illegal operation
-        IN \/ /\ op = Nop
-              /\ cop' = cop \ {o}   \* consume one operation
-              /\ UNCHANGED <<jVars, list>>
-           \/ /\ op # Nop
-           \* /\ PrintT(c \o ": Do " \o ToString(op))
-              /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
-              /\ list' = list \cup {cstate'[c]}
-              /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
-              /\ crec' = [crec EXCEPT ![c] = 0]
-              /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
-              /\ cop' = cop \ {o}   \* consume one operation
-              /\ UNCHANGED sVars
-\*    /\ cop' = [cop EXCEPT ![c] = Tail(@)]   \* consume one operation
+    \/ DoIns(c)
+    \/ DoDel(c)
 
 (*********************************************************************)
 (* Client c \in Client receives a message from the Server.           *)
@@ -157,7 +157,7 @@ Rev(c) ==
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
            /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
            /\ list' = list \cup {cstate'[c]}
-    /\ UNCHANGED <<sbuf, srec, sstate, cop>>    \* NOTE: sVars \o <<cop>> is wrong!
+    /\ UNCHANGED <<sVars, eVars>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Server receives a message.                                    *)
@@ -221,15 +221,16 @@ THEOREM Spec => []QC
 (* Termination                                                       *)
 (*********************************************************************)
 Termination == 
-    /\ cop = {}
     /\ comm!EmptyChannel
     
 (*********************************************************************)
 (* Weak List Consistency (WLSpec)                                    *)
-(*    /\ Termination => \A l1, l2 \in list: Compatible(l1, l2)       *)
 (*********************************************************************)
 WLSpec == 
-    /\ Termination => \A l1, l2 \in list: Compatible(l1, l2)
+    /\ Termination => \A l1, l2 \in list: 
+                        /\ Injective(l1)
+                        /\ Injective(l2)
+                        /\ Compatible(l1, l2)
 
 THEOREM Spec => WLSpec
 (*********************************************************************)
@@ -237,5 +238,5 @@ THEOREM Spec => WLSpec
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Thu Aug 16 23:18:05 CST 2018 by hengxin
+\* Last modified Tue Aug 28 19:34:29 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

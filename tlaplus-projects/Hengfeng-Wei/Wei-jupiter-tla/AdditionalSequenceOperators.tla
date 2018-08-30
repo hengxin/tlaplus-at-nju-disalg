@@ -3,7 +3,7 @@
 (* Copyright: https://github.com/bringhurst/tlaplus/blob/master/org.lamport.tla.toolbox.uitest/farsite/AdditionalSequenceOperators.tla *)
 (*`^\addcontentsline{toc}{section}{AdditionalSequenceOperators}^'*)
 
-EXTENDS Naturals, Sequences, FiniteSets, TLC, AdditionalSetOperators
+EXTENDS Naturals, Sequences, FiniteSets, TLC, AdditionalSetOperators, AdditionalFunctionOperators
 (* 
     The TLA+ Sequences module defines the operators Head and Tail for
     retrieving the first element of a sequence and all-but-the-first elements
@@ -105,13 +105,6 @@ SeqMaxLen(S, n) ==  UNION {[1 .. m -> S] : m \in 0 .. n}
 (****************************************************************)
 SeqMap(Op(_), seq) == [x \in DOMAIN seq |-> Op(seq[x])]
 
-(****************************************************************)
-(* The range (set) of a sequence seq.                           *)
-(*                                                              *)
-(* ADDED by hengxin; Aug. 12, 2018                              *)
-(****************************************************************)
-Range(seq) == {seq[x] : x \in DOMAIN seq}
-
 PermsWithin(S) ==  {s \in UNION {[1 .. m -> S] : m \in 0 .. Cardinality(S)} : Cardinality(Range(s)) = Cardinality(DOMAIN s)}
 
 (****************************************************************)
@@ -173,5 +166,5 @@ LCSCompatibleTest(S) ==
     \A seq1, seq2 \in PermsWithin(S): LCSCompatible(seq1, seq2)
 =============================================================================
 \* Modification History
-\* Last modified Sun Aug 12 23:17:17 CST 2018 by hengxin
+\* Last modified Tue Aug 28 10:52:27 CST 2018 by hengxin
 \* Created Tue Jul 03 15:21:02 CST 2018 by hengxin

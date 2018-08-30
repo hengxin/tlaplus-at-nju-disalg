@@ -940,174 +940,37 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} Op}\moduleRightDash\@xx{}%
+ {\MODULE} AdditionalFunctionOperators}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Model checking basic operations on strings
- (\ensuremath{i.e}., list of characters).
+Additional Operations for Functions.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} Naturals ,\,
- Sequences ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}\@s{16.4}
- AdditionalMathOperators ,\, AdditionalSetOperators ,\,
- AdditionalSequenceOperators}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} {\CONSTANTS}}%
-\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Char\@s{8.2}}%
-\@y{\@s{0}%
- set of characters allowed
-}%
-\@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} List \.{\defeq} Seq ( Char
- )\@s{8.2}}%
-\@y{\@s{0}%
- all possible lists/strings
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} MaxPos \.{\defeq}
- Cardinality ( Char ) \.{+} 1}%
-\@y{\@s{0}%
- \ensuremath{max} possible position allowed
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The set of all operations.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} Rd \.{\defeq} [ type \.{:}
- \{\@w{Rd} \} ]}%
-\@y{\@s{0}%
- a read specifies no arguments
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} Del \.{\defeq} [ type \.{:}
- \{\@w{Del} \} ,\, pos \.{:} 1 \.{\dotdot} MaxPos ]}%
-\@y{\@s{0}%
- a deletion specifies a position, indexed from 1
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} Ins\@s{1.35} \.{\defeq} [
- type \.{:} \{\@w{Ins} \} ,\, pos\@s{2.27} \.{:} 1 \.{\dotdot} MaxPos ,\, ch
- \.{:} Char ,\, pr \.{:} PosInt ]}%
-\@y{\@s{0}%
- an insertion also specifies a character and a priority
-}%
-\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} Range ( f ) \.{\defeq} \{ f [
+ a ] \.{:} a \.{\in} {\DOMAIN} f \}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} Op \.{\defeq} Ins \.{\cup}
- Del\@s{4.1}}%
-\@y{\@s{0}%
- now we don\mbox{'}t consider \ensuremath{Rd} operations
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} Nop \.{\defeq} PickNone ( Op
- )\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{Nop}: a special operation representing ``doing nothing''
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The ``Apply'' operator which applies an operation \ensuremath{op} on the list
- \ensuremath{l}.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{T}{T}{0}{2.5}{%
-\ensuremath{Del}:}%
- If \ensuremath{pos \.{>} Len(l)}, the last element of \ensuremath{l} is
- deleted.
- This is realized by the \ensuremath{DeleteElement} operator.
-\end{cpar}%
-\begin{cpar}{1}{T}{T}{0}{2.5}{%
-\ensuremath{Ins}:}%
- If \ensuremath{pos \.{>} Len(l)}, the new element is appended to
- \ensuremath{l}.
- This is realized by the \ensuremath{InsertElement} operator.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} Apply ( op ,\, l )
- \.{\defeq} {\CASE} op \.{=} Nop \.{\rightarrow} l}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
- op . type \.{=}\@w{Rd} \.{\rightarrow} l}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
- op . type \.{=}\@w{Del} \.{\rightarrow} DeleteElement ( l ,\, op . pos )}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{77.27} {\Box}\@s{14.40}
- op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} InsertElement ( l ,\, op .
- ch ,\, op . pos )}%
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} Injective ( f ) \.{\defeq}
+ \A\, a ,\, b \.{\in} {\DOMAIN} f \.{:} ( a \.{\neq} b ) \.{\implies} ( f [ a
+ ] \.{\neq} f [ b ] )}%
 \@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The ``\ensuremath{ApplyOps}'' operator which applies an operation sequence
- \ensuremath{ops
-} on the list \ensuremath{l}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} {\RECURSIVE} ApplyOps ( \_
- ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}} ApplyOps ( ops ,\, l )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
- {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{16.4} \.{\THEN} l}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} \.{\ELSE} Apply (
- Last ( ops ) ,\, ApplyOps ( AllButLast ( ops ) ,\, l ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Check whether an operation \ensuremath{op} is legal with respect to the list
- \ensuremath{l}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}} IsLegalOp ( op ,\, l )
- \.{\defeq} {\CASE} op . type \.{=}\@w{Del} \.{\rightarrow} op . pos \.{\leq}
- Len ( l )}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{94.78} {\Box}\@s{14.40}
- op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} op . pos \.{\leq} Len ( l )
- \.{+} 1}%
-\@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Some operations for test.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} Del1 \.{\defeq} [ type
- \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}} Del2 \.{\defeq} [ type
- \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 2 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}} Del3 \.{\defeq} [ type
- \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 3 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}} Del4 \.{\defeq} [ type
- \.{\mapsto}\@w{Del} ,\, pos \.{\mapsto} 4 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}} Ins1\@s{1.35} \.{\defeq} [
- type \.{\mapsto}\@w{Ins} ,\, pos\@s{2.27} \.{\mapsto} 1 ,\, ch
- \.{\mapsto}\@w{a} ,\, pr\@s{0.36} \.{\mapsto} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}} Ins2\@s{1.35} \.{\defeq} [
- type \.{\mapsto}\@w{Ins} ,\, pos\@s{2.27} \.{\mapsto} 2 ,\, ch
- \.{\mapsto}\@w{b} ,\, pr \.{\mapsto} 2 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}} Ins3\@s{1.35} \.{\defeq} [
- type \.{\mapsto}\@w{Ins} ,\, pos\@s{2.27} \.{\mapsto} 3 ,\, ch
- \.{\mapsto}\@w{c} ,\, pr\@s{0.72} \.{\mapsto} 3 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}} Ops \.{\defeq} {\langle}
- Ins2 ,\, Del3 ,\, Ins1 ,\, Del2 ,\, Ins3 ,\, Del1 {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}} Surjective ( f ,\, B )
+ \.{\defeq} \A\, b \.{\in} B \.{:} \E\, a \.{\in} {\DOMAIN} f \.{:} f [ a ]
+ \.{=} b}%
+\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Tue}
- \ensuremath{Aug} 28 14:53:36 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
+ \ensuremath{Aug} 28 10:42:46 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created Sat \ensuremath{Jun} 23 20:56:53
- \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Tue} \ensuremath{Aug} 28
+ 10:35:49 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%
