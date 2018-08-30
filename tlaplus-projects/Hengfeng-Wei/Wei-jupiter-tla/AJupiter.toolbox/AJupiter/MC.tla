@@ -2,41 +2,35 @@
 EXTENDS AJupiter, TLC
 
 \* CONSTANT definitions @modelParameterConstants:0Client
-const_153551912797747000 == 
+const_153563721402760000 == 
 {"c1", "c2"}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1Char
-const_153551912797748000 == 
-{"a","b","c","d"}
+const_153563721402761000 == 
+{"a", "b"}
 ----
 
-\* CONSTANT definitions @modelParameterConstants:2Server
-const_153551912797749000 == 
-"s"
-----
-
-\* CONSTANT definitions @modelParameterConstants:3InitState
-const_153551912797750000 == 
+\* CONSTANT definitions @modelParameterConstants:2InitState
+const_153563721402762000 == 
 <<>>
 ----
 
+\* CONSTANT definition @modelParameterDefinitions:0
+CONSTANT def_ov_153563721402763000
+----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_153551912797852000 ==
+spec_153563721402764000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_153551912797853000 ==
+inv_153563721402765000 ==
 TypeOK
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:1
-inv_153551912797854000 ==
+inv_153563721402766000 ==
 QC
-----
-\* INVARIANT definition @modelCorrectnessInvariants:2
-inv_153551912797855000 ==
-WLSpec
 ----
 =============================================================================
 \* Modification History
-\* Created Wed Aug 29 13:05:27 CST 2018 by hengxin
+\* Created Thu Aug 30 21:53:34 CST 2018 by hengxin

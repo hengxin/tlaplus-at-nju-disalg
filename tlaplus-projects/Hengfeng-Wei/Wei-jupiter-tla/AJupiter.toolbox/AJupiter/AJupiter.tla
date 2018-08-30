@@ -55,7 +55,6 @@ VARIABLES
     (*****************************************************************)
     (* For model checking:                                           *)
     (*****************************************************************)
-    list,   \* all list states across the system
     chins   \* a set of chars to insert
 
 -----------------------------------------------------------------------------
@@ -66,7 +65,7 @@ cVars == <<cbuf, crec, cstate>>         \* variables for the clients
 ecVars == <<eVars, cVars>>              \* variables for the clients and the environment
 sVars == <<sbuf, srec, sstate>>         \* variables for the server
 commVars == <<cincoming, sincoming>>    \* variables for communication
-vars == <<eVars, cVars, sVars, commVars, list>> \* all variables
+vars == <<eVars, cVars, sVars, commVars>> \* all variables
 -----------------------------------------------------------------------------
 TypeOK == 
     (*****************************************************************)
@@ -88,14 +87,12 @@ TypeOK ==
     (*****************************************************************)
     (* For model checking:                                           *)
     (*****************************************************************)
-    /\ list \in SUBSET List
     /\ chins \in SUBSET Char
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Init predicate.                                               *)
 (*********************************************************************)
 Init == 
-    /\ list = {InitState}
     /\ chins = Char
     (*****************************************************************)
     (* For the client replicas:                                      *)
@@ -119,7 +116,6 @@ Init ==
 (*********************************************************************)
 DoOp(c, op) == 
     /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
-    /\ list' = list \cup {cstate'[c]}
     /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
     /\ crec' = [crec EXCEPT ![c] = 0]
     /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
@@ -156,7 +152,6 @@ Rev(c) ==
            xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
            /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
-           /\ list' = list \cup {cstate'[c]}
     /\ UNCHANGED <<sVars, eVars>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
@@ -179,7 +174,6 @@ SRev ==
                             THEN xcBuf  \* transformed buffer for client c \in Client
                             ELSE Append(sbuf[cl], xop)] \* store transformed xop into other clients' bufs
            /\ sstate' = Apply(xop, sstate)  \* apply the transformed operation
-           /\ list' = list \cup {sstate'}
            /\ comm!SSend(c, srec, xop)
     /\ UNCHANGED ecVars
 -----------------------------------------------------------------------------
@@ -216,27 +210,7 @@ THEOREM Spec => []QC
 (*********************************************************************)
 (* Strong Eventual Consistency (SEC)                                 *)
 (*********************************************************************)
-
-(*********************************************************************)
-(* Termination                                                       *)
-(*********************************************************************)
-Termination == 
-    /\ comm!EmptyChannel
-    
-(*********************************************************************)
-(* Weak List Consistency (WLSpec)                                    *)
-(*********************************************************************)
-WLSpec == 
-    /\ Termination => \A l1, l2 \in list: 
-                        /\ Injective(l1)
-                        /\ Injective(l2)
-                        /\ Compatible(l1, l2)
-
-THEOREM Spec => WLSpec
-(*********************************************************************)
-(* Strong List Consistency (SLSpec)                                  *)
-(*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Tue Aug 28 19:34:29 CST 2018 by hengxin
+\* Last modified Thu Aug 30 21:44:10 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin
