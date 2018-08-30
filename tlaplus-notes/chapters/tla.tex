@@ -5,7 +5,31 @@
 \section{\text{UNCHANGED}}	\label{section:unchanged}
 
 var1 == <<a, b>>
+
 var2 == <<c, d>>
+
 var == var1 \o var2
 
 Error: ``a'' is either undefined or not an operator.
+
+Solution: Use var == <<var1, var2>>.
+
+\section{Model}	\label{section:model}
+
+Question from hwayne on May 28, 2017:
+
+Lamport defines a memory cache with the operator $NoVal \triangleq CHOOSE\; v : v \notin Val$.
+He explicitly calls this best practice, because adding a `NOVAL` constant would be making the model more complex. 
+Except unbounded CHOOSE is not checkable by TLC! 
+While `NoVal` is nice for abstract specifications, 
+it breaks things in the 99\% of cases where you're actually using TLA+.
+
+Answer from pron on May 29, 2017:
+
+You definitely should write $NoVal \triangleq CHOOSE\; v : v \notin Val$ in your spec 
+(as that clarifies the intent) and override it as a "model value" (i.e., a constant) in TLC. 
+This is best practice. 
+Even $\exists x \in Nat$ is not checkable by TLC, 
+yet best practice is to leave it like that (as that is the intent), 
+and override `Nat` in TLC. 
+In either case, the more general specification is verifiable in TLAPS.
