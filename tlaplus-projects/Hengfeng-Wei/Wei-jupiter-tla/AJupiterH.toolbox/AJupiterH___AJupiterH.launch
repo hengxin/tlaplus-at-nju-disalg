@@ -20,7 +20,7 @@
 <stringAttribute key="modelBehaviorSpec" value="SpecH"/>
 <intAttribute key="modelBehaviorSpecType" value="2"/>
 <stringAttribute key="modelBehaviorVars" value="sincoming, list, crec, sbuf, chins, cstate, cincoming, srec, sstate, cbuf"/>
-<stringAttribute key="modelComments" value=""/>
+<stringAttribute key="modelComments" value="Check the weak list specification (WLSpec)."/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
 <listEntry value="1TypeOKH"/>
@@ -31,9 +31,9 @@
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Server;;Server;1;0"/>
-<listEntry value="Client;;{&quot;c1&quot;, &quot;c2&quot;, &quot;c3&quot;};0;0"/>
+<listEntry value="Client;;{c1, c2};1;1"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
-<listEntry value="Char;;{&quot;a&quot;, &quot;b&quot;};0;0"/>
+<listEntry value="Char;;{a, b, c};1;1"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
