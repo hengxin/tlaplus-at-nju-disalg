@@ -40,6 +40,14 @@ Op == Ins \cup Del  \* Now we don't consider Rd operations.
 (*********************************************************************)
 Oid == [c: Client, seq: Nat]  \* operation identifier
 Cop == [op: Op, oid: Oid, ctx: SUBSET Oid, sctx: SUBSET Oid] \* operation with context
+
+cop1 \prec cop2 == 
+    \/ cop2.sctx = {}
+    \/ cop1.oid \in cop2.sctx
+    
+COT(lcop, rcop) == 
+    [op |-> Xform(lcop.op, rcop.op), oid |-> lcop.oid, 
+        ctx |-> lcop.ctx \cup {rcop.oid}, sctx |-> lcop.stx]
 -----------------------------------------------------------------------------
 VARIABLES
     (*****************************************************************)
@@ -177,11 +185,34 @@ Do(c) ==
 (* rcss: the css at replica r \in Replica                            *)
 (*********************************************************************)
 Locate(cop, rcss) == CHOOSE n \in (rcss.node) : n = cop.ctx
-
 (*********************************************************************)
-(* xForm: .           *)
+(* xForm: iteratively transform cop with a path                      *)
+(* through the css at replica r \in Replica, following the first edges. *)
 (*********************************************************************)
-xForm(cop, rcss) == TRUE    \* TODO
+RECURSIVE xForm(_, _)
+xForm(cop, r) == 
+    LET rcss == css[r]
+        u == Locate(cop, rcss)
+        v == u \cup {cop.oid}
+        RECURSIVE xFormHelper(_, _, _)
+        xFormHelper(uh, vh, coph) == 
+            IF uh = cur[r]
+            THEN css' = [css EXCEPT ![r].node = @ \cup {vh},
+                                    ![r].edge = @ \cup {[from |-> uh, to |-> vh, cop |-> coph]}]
+            ELSE LET fedge == CHOOSE e \in rcss.edge: 
+                                /\ e.from = uh
+                                /\ \A ue \in rcss.edge: 
+                                    (ue.from = uh /\ ue # e) => (e.cop \prec ue.cop)
+                     uprime == fedge.to
+                     fcop  == fedge.cop
+                     cop2fcop == COT(cop, fcop)
+                     fcop2cop == COT(fcop, cop)
+                     vprime == v.oids \cup {fcop.oid}
+                 IN  /\ css' = [css EXCEPT ![r].node = @ \cup {vh},
+                                           ![r].edge = @ \cup {[from |-> uh, to |-> vh, cop |-> coph],
+                                                               [from |-> vh, to |-> vprime, cop |-> fcop2cop]}]
+                     /\ xFormHelper(uprime, vprime, cop2fcop)
+    IN  xFormHelper(u, v, cop)
 
 (*********************************************************************)
 (* Client c \in Client receives a message from the Server.           *)
@@ -216,5 +247,5 @@ Next ==
 Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
 =============================================================================
 \* Modification History
-\* Last modified Sat Sep 01 16:48:56 CST 2018 by hengxin
+\* Last modified Sun Sep 02 10:59:51 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

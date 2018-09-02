@@ -7,7 +7,8 @@ EXTENDS Integers, Naturals, OpOperators
 CONSTANTS
     Client,    \* the set of clients
     Server,     \* the (unique) server
-    Op
+    Op,
+    Msg
 
 VARIABLES
     cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
@@ -15,22 +16,16 @@ VARIABLES
 -----------------------------------------------------------------------------
 vars == <<cincoming, sincoming>>
 -----------------------------------------------------------------------------
-(***************************************************************************)
-(* Messages between the Server and the Clients.                            *)
-(* There are two kinds of messages according to their destinations.        *)
-(* TODO: Abstraction from the concrete representation of messages.         *)
-(***************************************************************************)
-Msg == [c: Client, ack: Int, op: Op \cup {Nop}] \cup \* messages sent to the Server from a client c \in Client
-       [ack: Int, op: Op \cup {Nop}] \* messages broadcast to Clients from the Server
------------------------------------------------------------------------------
-TypeOK == /\ cincoming \in [Client -> Seq(Msg)]
-          /\ sincoming \in Seq(Msg)
+TypeOK == 
+    /\ cincoming \in [Client -> Seq(Msg)]
+    /\ sincoming \in Seq(Msg)
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The initial predicate.                                            *)
 (*********************************************************************)
-Init == /\ cincoming = [c \in Client |-> <<>>]
-        /\ sincoming = <<>>
+Init == 
+    /\ cincoming = [c \in Client |-> <<>>]
+    /\ sincoming = <<>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* A client sends a message msg to the Server.                       *)
@@ -58,16 +53,30 @@ SRev ==
     /\ sincoming # <<>>    \* there are messages for the Server to handle with
     /\ sincoming' = Tail(sincoming) \* consume a message
 (*********************************************************************)
+(* The Server sents a message to each client other than c \in Client.                                          *)
+(*********************************************************************)
+SSend(c, cmsg) ==
+    /\ cincoming' = [cl \in Client |->
+                        IF cl = c
+                        THEN cincoming[cl]
+                        ELSE Append(cincoming[cl], cmsg[cl])]
+(*********************************************************************)
+(* The Server broadcasts the same message to all the Clients         *)
+(* other than c \in Client.                                          *)
+(*********************************************************************)
+SSendSame(c, msg) ==
+    /\ SSend(c, [cl \in Client |-> msg])
+(*********************************************************************)
 (* The Server broadcasts messages to the Clients                     *)
 (* other than c \in Client.                                          *)
 (* The "ack" parts of the messages [ack: Int, op: Op] broadcast      *)
 (* are determined by the parameter "acks".                           *)
 (*********************************************************************)
-SSend(c, acks, xop) == 
+SSend2(c, acks, xop) == 
     /\ cincoming' = [cl \in Client |->
                         IF cl = c
                         THEN cincoming[cl]
-                        ELSE Append(cincoming[cl], [ack |-> acks[cl], op |-> xop])] 
+                        ELSE Append(cincoming[cl], [ack |-> acks[cl], op |-> xop])]
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* Properties of communication.                                      *)
@@ -75,5 +84,5 @@ SSend(c, acks, xop) ==
 EmptyChannel == Init
 =============================================================================
 \* Modification History
-\* Last modified Tue Aug 28 15:52:22 CST 2018 by hengxin
+\* Last modified Sun Sep 02 12:53:45 CST 2018 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

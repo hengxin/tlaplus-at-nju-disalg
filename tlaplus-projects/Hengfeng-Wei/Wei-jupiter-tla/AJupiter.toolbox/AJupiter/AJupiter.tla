@@ -31,6 +31,13 @@ Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* 
 
 Op == Ins \cup Del  \* Now we don't consider Rd operations.
 -----------------------------------------------------------------------------
+(***************************************************************************)
+(* Messages between the Server and the Clients.                            *)
+(* There are two kinds of messages according to their destinations.        *)
+(***************************************************************************)
+Msg == [c: Client, ack: Int, op: Op \cup {Nop}] \cup \* messages sent to the Server from a client c \in Client
+       [ack: Int, op: Op \cup {Nop}] \* messages broadcast to Clients from the Server
+-----------------------------------------------------------------------------
 VARIABLES
     (*****************************************************************)
     (* For the client replicas:                                      *)
@@ -58,7 +65,7 @@ VARIABLES
     chins   \* a set of chars to insert
 
 -----------------------------------------------------------------------------
-comm == INSTANCE CSComm
+comm == INSTANCE CSComm WITH Msg <- Msg
 -----------------------------------------------------------------------------
 eVars == <<chins>>                      \* variables for the environment
 cVars == <<cbuf, crec, cstate>>         \* variables for the clients
@@ -174,7 +181,8 @@ SRev ==
                             THEN xcBuf  \* transformed buffer for client c \in Client
                             ELSE Append(sbuf[cl], xop)] \* store transformed xop into other clients' bufs
            /\ sstate' = Apply(xop, sstate)  \* apply the transformed operation
-           /\ comm!SSend(c, srec, xop)
+           /\ comm!SSend(c, [cl \in Client |-> [ack |-> srec[cl], op |-> xop]])
+\*           /\ comm!SSend2(c, srec, xop)
     /\ UNCHANGED ecVars
 -----------------------------------------------------------------------------
 (*********************************************************************)
@@ -212,5 +220,5 @@ THEOREM Spec => []QC
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Thu Aug 30 21:44:10 CST 2018 by hengxin
+\* Last modified Sun Sep 02 13:29:27 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin
