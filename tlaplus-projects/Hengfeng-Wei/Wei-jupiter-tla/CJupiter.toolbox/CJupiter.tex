@@ -1026,11 +1026,7 @@ The set of all operations.
 \@xx{}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} Op \.{\defeq} Ins \.{\cup}
- Del\@s{4.1}}%
-\@y{\@s{0}%
- Now we don\mbox{'}t consider \ensuremath{Rd} operations.
-}%
-\@xx{}%
+ Del}%
 \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}}\midbar\@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} Oid\@s{1.13} \.{\defeq} [ c
  \.{:} Client ,\, seq \.{:} Nat ]\@s{4.1}}%
@@ -1039,8 +1035,8 @@ The set of all operations.
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} Cop \.{\defeq} [ op \.{:} Op
- ,\, oid \.{:} Oid ,\, ctx \.{:} {\SUBSET} Oid ,\, sctx \.{:} {\SUBSET} Oid
- ]}%
+ \.{\cup} \{ Nop \} ,\, oid \.{:} Oid ,\, ctx \.{:} {\SUBSET} Oid ,\, sctx
+ \.{:} {\SUBSET} Oid ]}%
 \@y{\@s{0}%
  operation with context
 }%
@@ -1058,7 +1054,7 @@ The set of all operations.
  \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{27.19} [ op \.{\mapsto}
  Xform ( lcop . op ,\, rcop . op ) ,\, oid \.{\mapsto} lcop . oid ,\,}%
  \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{40.82} ctx \.{\mapsto}
- lcop . ctx \.{\cup} \{ rcop . oid \} ,\, sctx \.{\mapsto} lcop . stx ]}%
+ lcop . ctx \.{\cup} \{ rcop . oid \} ,\, sctx \.{\mapsto} lcop . sctx ]}%
 \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} {\VARIABLES}}%
 \begin{lcom}{16.4}%
@@ -1104,13 +1100,13 @@ For all replicas: the \ensuremath{n}-ary ordered state space
 \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{16.4} css ,\,\@s{13.96}}%
 \@y{\@s{0}%
  \ensuremath{css[r]}: the \ensuremath{n}-ary ordered state space at replica
- \ensuremath{r
+ \ensuremath{r \.{\in} Replica
 }}%
 \@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{16.4} cur ,\,\@s{11.12}}%
 \@y{\@s{0}%
  \ensuremath{cur[r]}: the current node of \ensuremath{css} at replica
- \ensuremath{r
+ \ensuremath{r \.{\in} Replica
 }}%
 \@xx{}%
 \begin{lcom}{16.4}%
@@ -1237,7 +1233,7 @@ For all replicas: the \ensuremath{n}-ary ordered state space
  \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}}\@s{16.4} \.{\land} \A\, r
  \.{\in} Replica \.{:} IsCSS ( css [ r ] )}%
  \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}\@s{16.4} \.{\land} cur
- \.{\in} [ Client \.{\rightarrow} {\SUBSET} Oid ]}%
+ \.{\in} [ Replica \.{\rightarrow} {\SUBSET} Oid ]}%
 \begin{lcom}{16.4}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 For communication between the server and the clients:
@@ -1285,8 +1281,8 @@ For all replicas: the \ensuremath{n}-ary ordered state space
 \end{cpar}%
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 146\hspace{1em}}\@s{16.4} \.{\land}
- css\@s{1.66} \.{=} [ r \.{\in} Replica \.{\mapsto} [ node \.{\mapsto} \{ \}
- ,\, edge \.{\mapsto} \{ \} ] ]}%
+ css\@s{1.66} \.{=} [ r \.{\in} Replica \.{\mapsto} [ node \.{\mapsto} \{ \{
+ \} \} ,\, edge \.{\mapsto} \{ \} ] ]}%
  \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{16.4} \.{\land} cur
  \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
 \begin{lcom}{16.4}%
@@ -1323,15 +1319,15 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 161\hspace{1em}}\@s{55.04} v \.{\defeq} cur
- \.{\cup} \{ cop . oid \}}%
+ [ c ] \.{\cup} \{ cop . oid \}}%
  \@x{\makebox[0pt][r]{\scriptsize 162\hspace{1em}}\@s{41.28} \.{\IN} \.{\land}
  css \.{'}\@s{1.66} \.{=} [ css {\EXCEPT} {\bang} [ c ] . node \.{=} @
  \.{\cup} \{ v \} ,\,}%
  \@x{\makebox[0pt][r]{\scriptsize 163\hspace{1em}}\@s{162.58} {\bang} [ c ] .
- edge\@s{1.53} \.{=} @ \.{\cup} \{ [ from \.{\mapsto} cur ,\, to \.{\mapsto}
- v ,\, cop \.{\mapsto} cop ] \} ]}%
+ edge\@s{1.53} \.{=} @ \.{\cup} \{ [ from \.{\mapsto} cur [ c ] ,\, to
+ \.{\mapsto} v ,\, cop \.{\mapsto} cop ] \} ]}%
  \@x{\makebox[0pt][r]{\scriptsize 164\hspace{1em}}\@s{61.68} \.{\land} cur
- \.{'} \.{=} v}%
+ \.{'} \.{=} [ cur {\EXCEPT} {\bang} [ c ] \.{=} v ]}%
  \@x{\makebox[0pt][r]{\scriptsize 165\hspace{1em}}\@s{61.68} \.{\land} comm
  {\bang} CSend ( cop )}%
 \@pvspace{8.0pt}%
@@ -1391,60 +1387,82 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  following the first edges.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 195\hspace{1em}} {\RECURSIVE} xForm ( \_ ,\,
- \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 196\hspace{1em}} xForm ( cop ,\, r )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 197\hspace{1em}}\@s{16.4} \.{\LET} rcss
- \.{\defeq} css [ r ]}%
- \@x{\makebox[0pt][r]{\scriptsize 198\hspace{1em}}\@s{36.79} u \.{\defeq}
- Locate ( cop ,\, rcss )}%
- \@x{\makebox[0pt][r]{\scriptsize 199\hspace{1em}}\@s{36.79} v\@s{0.45}
- \.{\defeq} u \.{\cup} \{ cop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 200\hspace{1em}}\@s{36.79} {\RECURSIVE}
- xFormHelper ( \_ ,\, \_ ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 201\hspace{1em}}\@s{40.89} xFormHelper ( uh
- ,\, vh ,\, coph ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 202\hspace{1em}}\@s{57.29} {\IF} uh \.{=}
- cur [ r ]}%
- \@x{\makebox[0pt][r]{\scriptsize 203\hspace{1em}}\@s{57.29} \.{\THEN} css
- \.{'} \.{=} [ css {\EXCEPT} {\bang} [ r ] . node \.{=} @ \.{\cup} \{ vh \}
- ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 204\hspace{1em}}\@s{176.74} {\bang} [ r ] .
- edge\@s{1.53} \.{=} @ \.{\cup} \{ [ from \.{\mapsto} uh ,\, to \.{\mapsto}
- vh ,\, cop \.{\mapsto} coph ] \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 205\hspace{1em}}\@s{57.29} \.{\ELSE}
- \.{\LET} fedge \.{\defeq} {\CHOOSE} e \.{\in} rcss . edge \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 206\hspace{1em}}\@s{158.31} \.{\land} e .
- from \.{=} uh}%
- \@x{\makebox[0pt][r]{\scriptsize 207\hspace{1em}}\@s{158.31} \.{\land} \A\,
- ue \.{\in} rcss . edge \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 208\hspace{1em}}\@s{173.52} ( ue . from
- \.{=} uh \.{\land} ue \.{\neq} e ) \.{\implies} ( e . cop \.{\prec} ue . cop
+ \@x{\makebox[0pt][r]{\scriptsize 195\hspace{1em}} {\RECURSIVE} xFormHelper (
+ \_ ,\, \_ ,\, \_ ,\, \_ ,\, \_ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 196\hspace{1em}} xFormHelper ( u ,\, v ,\,
+ cop ,\, r ,\, ns ,\, es ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 197\hspace{1em}}\@s{16.4} {\IF} u \.{=} cur
+ [ r ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 198\hspace{1em}}\@s{16.4} \.{\THEN}
+ {\langle} ns \.{\cup} \{ v \} ,\, es \.{\cup} \{ [ from \.{\mapsto} u ,\, to
+ \.{\mapsto} v ,\, cop \.{\mapsto} cop ] \} ,\, cop ,\, v {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 199\hspace{1em}}\@s{16.4} \.{\ELSE} \.{\LET}
+ fedge \.{\defeq} {\CHOOSE} e \.{\in} css [ r ] . edge \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 200\hspace{1em}}\@s{117.41} \.{\land} e .
+ from \.{=} u}%
+ \@x{\makebox[0pt][r]{\scriptsize 201\hspace{1em}}\@s{117.41} \.{\land} \A\,
+ ue \.{\in} css [ r ] . edge \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 202\hspace{1em}}\@s{132.62} ( ue . from
+ \.{=} u \.{\land} ue \.{\neq} e ) \.{\implies} ( e . cop \.{\prec} ue . cop
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 209\hspace{1em}}\@s{109.01} uprime
- \.{\defeq} fedge . to}%
- \@x{\makebox[0pt][r]{\scriptsize 210\hspace{1em}}\@s{109.01} fcop\@s{4.1}
+ \@x{\makebox[0pt][r]{\scriptsize 203\hspace{1em}}\@s{68.11} uprime \.{\defeq}
+ fedge . to}%
+ \@x{\makebox[0pt][r]{\scriptsize 204\hspace{1em}}\@s{68.11} fcop\@s{4.1}
  \.{\defeq} fedge . cop}%
- \@x{\makebox[0pt][r]{\scriptsize 211\hspace{1em}}\@s{109.01} cop2fcop
+ \@x{\makebox[0pt][r]{\scriptsize 205\hspace{1em}}\@s{68.11} cop2fcop
  \.{\defeq} COT ( cop ,\, fcop )}%
- \@x{\makebox[0pt][r]{\scriptsize 212\hspace{1em}}\@s{109.01} fcop2cop
+ \@x{\makebox[0pt][r]{\scriptsize 206\hspace{1em}}\@s{68.11} fcop2cop
  \.{\defeq} COT ( fcop ,\, cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 213\hspace{1em}}\@s{113.11} vprime
- \.{\defeq} v . oids \.{\cup} \{ fcop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 214\hspace{1em}}\@s{88.61} \.{\IN}\@s{4.09}
- \.{\land} css \.{'} \.{=} [ css {\EXCEPT} {\bang} [ r ] . node \.{=} @
- \.{\cup} \{ vh \} ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 215\hspace{1em}}\@s{212.35} {\bang} [ r ] .
- edge\@s{1.53} \.{=} @ \.{\cup} \{ [ from \.{\mapsto} uh ,\, to \.{\mapsto}
- vh ,\, cop \.{\mapsto} coph ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 216\hspace{1em}}\@s{288.45} [ from
- \.{\mapsto} vh ,\, to\@s{0.76} \.{\mapsto} vprime ,\, cop \.{\mapsto}
- fcop2cop ] \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 217\hspace{1em}}\@s{113.11} \.{\land}
- xFormHelper ( uprime ,\, vprime ,\, cop2fcop )}%
- \@x{\makebox[0pt][r]{\scriptsize 218\hspace{1em}}\@s{16.4} \.{\IN}\@s{4.09}
- xFormHelper ( u ,\, v ,\, cop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 207\hspace{1em}}\@s{72.21} vprime \.{\defeq}
+ v \.{\cup} \{ fcop . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 208\hspace{1em}}\@s{47.71} \.{\IN}\@s{4.09}
+ xFormHelper ( uprime ,\, vprime ,\, cop2fcop ,\, r ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 209\hspace{1em}}\@s{84.51} ns \.{\cup} \{ v
+ \} ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 210\hspace{1em}}\@s{84.51} es\@s{1.02}
+ \.{\cup} \{ [ from \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto}
+ cop ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 211\hspace{1em}}\@s{111.15} [ from
+ \.{\mapsto} v ,\, to\@s{0.45} \.{\mapsto} vprime ,\, cop \.{\mapsto}
+ fcop2cop ] \} )}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 213\hspace{1em}}}%
+\@y{%
+ \ensuremath{xForm(cop,\, r) \.{\defeq}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 214\hspace{1em}}}%
+\@y{\@s{7.5}%
+ \ensuremath{\.{\LET}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 215\hspace{1em}}}%
+\@y{\@s{17.5}%
+ \ensuremath{u \.{\defeq} Locate(cop,\, css[r])
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 216\hspace{1em}}}%
+\@y{\@s{17.5}%
+ \ensuremath{v \.{\defeq} u \.{\cup} \{cop.oid\}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 217\hspace{1em}}}%
+\@y{\@s{10.0}%
+ \ensuremath{\.{\IN}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 218\hspace{1em}}}%
+\@y{\@s{10.0}%
+ \ensuremath{css\.{'} \.{=}} [\ensuremath{css} \ensuremath{{\EXCEPT}
+ {\bang}[r].node \.{=}} @ \ensuremath{\.{\cup} \{v\}},
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 219\hspace{1em}}}%
+\@y{\@s{65.0}%
+ \ensuremath{{\bang}[r].edge \.{=}} @ \ensuremath{\.{\cup} \{[from
+ \.{\mapsto} u,\, to \.{\mapsto} v,\, cop \.{\mapsto} cop]\}}]
+}%
+\@xx{}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1452,83 +1470,106 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  \ensuremath{Server}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 223\hspace{1em}} Rev ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 224\hspace{1em}}\@s{20.94} \.{\land} comm
+\@x{\makebox[0pt][r]{\scriptsize 224\hspace{1em}} Rev ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 225\hspace{1em}}\@s{20.94} \.{\land} comm
  {\bang} CRev ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 225\hspace{1em}}\@s{20.94} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 226\hspace{1em}}\@s{20.94} \.{\land}
  \.{\LET} cop \.{\defeq} Head ( cincoming [ c ] )}%
 \@y{\@s{0}%
  the received original operation
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 226\hspace{1em}}\@s{56.55} xcop \.{\defeq}
- xForm ( cop ,\, c )\@s{14.70}}%
+ \@x{\makebox[0pt][r]{\scriptsize 227\hspace{1em}}\@s{60.65} u\@s{0.60}
+ \.{\defeq} Locate ( cop ,\, css [ c ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 228\hspace{1em}}\@s{60.65} v\@s{1.06}
+ \.{\defeq} u \.{\cup} \{ cop . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 229\hspace{1em}}\@s{44.35} xcss\@s{4.80}
+ \.{\defeq} xFormHelper ( u ,\, v ,\, cop ,\, c ,\, \{ \} ,\, \{ \}
+ )\@s{16.4}}%
 \@y{\@s{0}%
  the transformed operation
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 227\hspace{1em}}\@s{36.15} \.{\IN} cstate
- \.{'} \.{=} [ cstate {\EXCEPT} {\bang} [ c ] \.{=} Apply ( xcop . op ,\, @ )
- ]}%
- \@x{\makebox[0pt][r]{\scriptsize 228\hspace{1em}}\@s{20.94} \.{\land}
- {\UNCHANGED} {\langle} sVars ,\, eVars {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 229\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 230\hspace{1em}}\@s{36.15} \.{\IN} \.{\land}
+ css \.{'}\@s{1.66} \.{=} [ css {\EXCEPT} {\bang} [ c ] . node \.{=} @
+ \.{\cup} xcss [ 1 ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 231\hspace{1em}}\@s{157.46} {\bang} [ c ] .
+ edge\@s{1.53} \.{=} @ \.{\cup} xcss [ 2 ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 232\hspace{1em}}\@s{56.55} \.{\land} cur
+ \.{'} \.{=} [ cur {\EXCEPT} {\bang} [ c ] \.{=} xcss [ 4 ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 233\hspace{1em}}\@s{56.55} \.{\land} cstate
+ \.{'} \.{=} [ cstate {\EXCEPT} {\bang} [ c ] \.{=} Apply ( xcss [ 3 ] . op
+ ,\, @ ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 234\hspace{1em}}\@s{20.94} \.{\land}
+ {\UNCHANGED} {\langle} cseq ,\, sVars ,\, eVars {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 235\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The \ensuremath{Server} receives a message.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 233\hspace{1em}} SRev \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 234\hspace{1em}}\@s{16.4} \.{\land} comm
+\@x{\makebox[0pt][r]{\scriptsize 239\hspace{1em}} SRev \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 240\hspace{1em}}\@s{16.4} \.{\land} comm
  {\bang} SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 235\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
+ \@x{\makebox[0pt][r]{\scriptsize 241\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
  org\@s{0.64} \.{\defeq} Head ( sincoming )}%
 \@y{\@s{0}%
  the received operation
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 236\hspace{1em}}\@s{47.91} cop \.{\defeq} [
- org {\EXCEPT} {\bang} . sctx \.{=} soids ]\@s{21.97}}%
+ \@x{\makebox[0pt][r]{\scriptsize 242\hspace{1em}}\@s{47.91} cop \.{\defeq} [
+ org {\EXCEPT} {\bang} . sctx \.{=} soids ]\@s{8.2}}%
 \@y{\@s{0}%
  set its \ensuremath{sctx} field
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 237\hspace{1em}}\@s{52.01} xcop \.{\defeq}
- xForm ( cop ,\, Server )}%
- \@x{\makebox[0pt][r]{\scriptsize 238\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 243\hspace{1em}}\@s{56.11} u\@s{0.60}
+ \.{\defeq} Locate ( cop ,\, css [ Server ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 244\hspace{1em}}\@s{56.11} v\@s{1.06}
+ \.{\defeq} u \.{\cup} \{ cop . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 245\hspace{1em}}\@s{39.81} xcss\@s{4.80}
+ \.{\defeq} xFormHelper ( u ,\, v ,\, cop ,\, Server ,\, \{ \} ,\, \{ \} )}%
+ \@x{\makebox[0pt][r]{\scriptsize 246\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
  soids \.{'} \.{=} soids \.{\cup} \{ cop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 239\hspace{1em}}\@s{52.01} \.{\land} sstate
- \.{'} \.{=} Apply ( xcop . op ,\, sstate )\@s{23.53}}%
+ \@x{\makebox[0pt][r]{\scriptsize 247\hspace{1em}}\@s{52.01} \.{\land} css
+ \.{'}\@s{1.66} \.{=} [ css {\EXCEPT} {\bang} [ Server ] . node \.{=} @
+ \.{\cup} xcss [ 1 ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 248\hspace{1em}}\@s{152.91} {\bang} [ Server
+ ] . edge\@s{1.53} \.{=} @ \.{\cup} xcss [ 2 ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 249\hspace{1em}}\@s{52.01} \.{\land} cur
+ \.{'} \.{=} [ cur {\EXCEPT} {\bang} [ Server ] \.{=} xcss [ 4 ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 250\hspace{1em}}\@s{52.01} \.{\land} sstate
+ \.{'} \.{=} Apply ( xcss [ 3 ] . op ,\, sstate )\@s{4.1}}%
 \@y{\@s{0}%
  apply the transformed operation
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 240\hspace{1em}}\@s{52.01} \.{\land} comm
- {\bang} SSendSame ( cop . oid . cid ,\, cop )\@s{4.10}}%
+ \@x{\makebox[0pt][r]{\scriptsize 251\hspace{1em}}\@s{52.01} \.{\land} comm
+ {\bang} SSendSame ( cop . oid . c ,\, cop )\@s{4.1}}%
 \@y{\@s{0}%
  broadcast the original operation
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 241\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 252\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} ecVars}%
-\@x{\makebox[0pt][r]{\scriptsize 242\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 253\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The next-state relation.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 246\hspace{1em}} Next \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 247\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
+\@x{\makebox[0pt][r]{\scriptsize 257\hspace{1em}} Next \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 258\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
  \.{\in} Client \.{:} Do ( c ) \.{\lor} Rev ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 248\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
+\@x{\makebox[0pt][r]{\scriptsize 259\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The \ensuremath{Spec}. (\ensuremath{TODO}: Check the fairness condition.)
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 252\hspace{1em}} Spec \.{\defeq} Init
+ \@x{\makebox[0pt][r]{\scriptsize 263\hspace{1em}} Spec \.{\defeq} Init
  \.{\land} {\Box} [ Next ]_{ vars} \.{\land} {\WF}_{ vars} ( Next )}%
-\@x{\makebox[0pt][r]{\scriptsize 253\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 264\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1536,7 +1577,7 @@ The \ensuremath{Spec}. (\ensuremath{TODO}: Check the fairness condition.)
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Sep} 03 14:03:58 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{Sep} 03 19:22:40 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
