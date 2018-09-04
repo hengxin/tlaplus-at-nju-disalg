@@ -32,6 +32,9 @@
 
 ## General Problems
 
-- [] Extract more "statistics" and generate pretty figures
+- [ ] Extract more "statistics" and generate pretty figures
   - resize windows
   - export raw data (cvs?)
+- [ ] Refactoring and Testing
+  - [ ] Run multiple models
+  - [ ] Compare results/statistics with previous results/statistics

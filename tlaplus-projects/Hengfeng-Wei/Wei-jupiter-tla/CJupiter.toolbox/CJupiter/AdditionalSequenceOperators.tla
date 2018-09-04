@@ -3,7 +3,10 @@
 (* Copyright: https://github.com/bringhurst/tlaplus/blob/master/org.lamport.tla.toolbox.uitest/farsite/AdditionalSequenceOperators.tla *)
 (*`^\addcontentsline{toc}{section}{AdditionalSequenceOperators}^'*)
 
-EXTENDS Naturals, Sequences, FiniteSets, TLC, AdditionalSetOperators, AdditionalFunctionOperators
+EXTENDS FiniteSets, Sequences, TLC, AdditionalSetOperators, AdditionalFunctionOperators
+
+LOCAL INSTANCE Naturals
+
 (* 
     The TLA+ Sequences module defines the operators Head and Tail for
     retrieving the first element of a sequence and all-but-the-first elements
@@ -97,7 +100,6 @@ IsSequenceInterleaving(seq,subSeq1,subSeq2,indSeq1,indSeq2)==
 (****************************************************************)
 SeqMaxLen(S, n) ==  UNION {[1 .. m -> S] : m \in 0 .. n}
 
-
 (****************************************************************)
 (* Map on a sequence.                                           *)
 (*                                                              *)
@@ -166,5 +168,5 @@ LCSCompatibleTest(S) ==
     \A seq1, seq2 \in PermsWithin(S): LCSCompatible(seq1, seq2)
 =============================================================================
 \* Modification History
-\* Last modified Tue Aug 28 10:52:27 CST 2018 by hengxin
+\* Last modified Mon Sep 03 20:26:21 CST 2018 by hengxin
 \* Created Tue Jul 03 15:21:02 CST 2018 by hengxin

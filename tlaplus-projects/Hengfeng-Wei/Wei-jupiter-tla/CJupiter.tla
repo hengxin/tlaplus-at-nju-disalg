@@ -3,7 +3,7 @@
 (* Model of our own CJupiter protocol.                                     *)
 (***************************************************************************)
 
-EXTENDS Integers, OT, TLC, AdditionalFunctionOperators
+EXTENDS Integers, OT, TLC, AdditionalFunctionOperators, AdditionalSequenceOperators
 -----------------------------------------------------------------------------
 CONSTANTS
     Client,     \* the set of client replicas
@@ -78,12 +78,13 @@ VARIABLES
 -----------------------------------------------------------------------------
 comm == INSTANCE CSComm WITH Msg <- Cop
 -----------------------------------------------------------------------------
-eVars == <<chins>>                      \* variables for the environment
-cVars == <<cseq, cstate>>         \* variables for the clients
-ecVars == <<eVars, cVars>>              \* variables for the clients and the environment
-sVars == <<soids, sstate>>         \* variables for the server
+eVars == <<chins>>           \* variables for the environment
+cVars == <<cseq, cstate>>    \* variables for the clients
+ecVars == <<eVars, cVars>>   \* variables for the clients and the environment
+sVars  == <<soids, sstate>>  \* variables for the server
+dsVars == <<css, cur>>       \* variables for the data structure: the n-ary ordered state space
 commVars == <<cincoming, sincoming>>    \* variables for communication
-vars == <<eVars, cVars, sVars, commVars, css, cur>> \* all variables
+vars == <<eVars, cVars, sVars, commVars, dsVars>> \* all variables
 -----------------------------------------------------------------------------
 (*****************************************************************)
 (* An css is a directed graph with labeled edges.                *)
@@ -188,49 +189,58 @@ Do(c) ==
 (* rcss: the css at replica r \in Replica                            *)
 (*********************************************************************)
 Locate(cop, rcss) == CHOOSE n \in (rcss.node) : n = cop.ctx
+
 (*********************************************************************)
 (* xForm: iteratively transform cop with a path                      *)
 (* through the css at replica r \in Replica, following the first edges. *)
 (*********************************************************************)
-RECURSIVE xFormHelper(_, _, _, _, _, _)
-xFormHelper(u, v, cop, r, ns, es) ==    
-    IF u = cur[r]
-    THEN <<ns \cup {v}, es \cup {[from |-> u, to |-> v, cop |-> cop]}, cop, v>>
-    ELSE LET fedge == CHOOSE e \in css[r].edge: 
-                        /\ e.from = u
-                        /\ \A ue \in css[r].edge: 
-                            (ue.from = u /\ ue # e) => (e.cop \prec ue.cop)
-             uprime == fedge.to
-             fcop  == fedge.cop
-             cop2fcop == COT(cop, fcop)
-             fcop2cop == COT(fcop, cop)
-             vprime == v \cup {fcop.oid}
-         IN  xFormHelper(uprime, vprime, cop2fcop, r, 
-                ns \cup {v}, 
-                es \cup {[from |-> u, to |-> v, cop |-> cop], 
-                         [from |-> v, to |-> vprime, cop |-> fcop2cop]})
+xForm(cop, r) ==
+    LET rcss == css[r]
+        u == Locate(cop, rcss)
+        v == u \cup {cop.oid}
+        RECURSIVE xFormHelper(_, _, _, _)
+        \* 'h' stands for "helper"; xcss: eXtra css created during transformation
+        xFormHelper(uh, vh, coph, xcss) ==  
+            IF uh = cur[r]
+            THEN xcss
+            ELSE LET fedge == CHOOSE e \in rcss.edge: 
+                                /\ e.from = uh
+                                /\ \A uhe \in rcss.edge: 
+                                    (uhe.from = uh /\ uhe # e) => (e.cop \prec uhe.cop)
+                     uprime == fedge.to
+                     fcop == fedge.cop
+                     coph2fcop == COT(coph, fcop)
+                     fcop2coph == COT(fcop, coph)
+                     vprime == vh \cup {fcop.oid}
+                  IN xFormHelper(uprime, vprime, coph2fcop,
+                        [xcss EXCEPT !.node = @ \o <<vprime>>,
+                                     \* the order of recording edges here is important
+                                     !.edge = @ \o <<[from |-> vh, to |-> vprime, cop |-> fcop2coph],
+                                                     [from |-> uprime, to |-> vprime, cop |-> coph2fcop]>>])  
+    IN xFormHelper(u, v, cop, [node |-> <<v>>, edge |-> <<[from |-> u, to |-> v, cop |-> cop]>>])
 
-\*xForm(cop, r) == 
-\*    LET 
-\*        u == Locate(cop, css[r])
-\*        v == u \cup {cop.oid}
-\*     IN 
-\*     css' = [css EXCEPT ![r].node = @ \cup {v},
-\*                           ![r].edge = @ \cup {[from |-> u, to |-> v, cop |-> cop]}]
-
+(*********************************************************************)
+(* The eXtra css (xcss) updates the status of replica r \in Replica. *)
+(*********************************************************************)
+r (+) xcss == 
+    LET xn == xcss.node
+        xe == xcss.edge
+        xcur == Last(xn)
+        xcop == Last(xe).cop
+    IN /\ css' = [css EXCEPT ![r].node = @ \cup Range(xn),
+                             ![r].edge = @ \cup Range(xe)]
+       /\ cur' = [cur EXCEPT ![r] = xcur]
+\*       /\ cstate' = [cstate EXCEPT ![r] = Apply(xcop.op, @)]
+    
 (*********************************************************************)
 (* Client c \in Client receives a message from the Server.           *)
 (*********************************************************************)
 Rev(c) == 
     /\ comm!CRev(c)
     /\ LET cop == Head(cincoming[c]) \* the received original operation
-             u == Locate(cop, css[c])
-             v == u \cup {cop.oid}
-          xcss == xFormHelper(u, v, cop, c, {}, {})     \* the transformed operation
-        IN /\ css' = [css EXCEPT ![c].node = @ \cup xcss[1],
-                                 ![c].edge = @ \cup xcss[2]]
-           /\ cur' = [cur EXCEPT ![c] = xcss[4]]
-           /\ cstate' = [cstate EXCEPT ![c] = Apply(xcss[3].op, @)]
+          xcss == xForm(cop, c)      \* the eXtra part of css
+        IN /\ c (+) xcss
+           /\ cstate' = [cstate EXCEPT ![c] = Apply(Last(xcss.edge).cop.op, @)]
     /\ UNCHANGED <<cseq, sVars, eVars>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
@@ -240,14 +250,10 @@ SRev ==
     /\ comm!SRev
     /\ LET org == Head(sincoming) \* the received operation
            cop == [org EXCEPT !.sctx = soids]   \* set its sctx field
-             u == Locate(cop, css[Server])
-             v == u \cup {cop.oid} 
-          xcss == xFormHelper(u, v, cop, Server, {}, {})
+          xcss == xForm(cop, Server)    \* the eXtra part of css
         IN /\ soids' = soids \cup {cop.oid}
-           /\ css' = [css EXCEPT ![Server].node = @ \cup xcss[1],
-                                 ![Server].edge = @ \cup xcss[2]]
-           /\ cur' = [cur EXCEPT ![Server] = xcss[4]]
-           /\ sstate' = Apply(xcss[3].op, sstate)  \* apply the transformed operation
+           /\ Server (+) xcss
+           /\ sstate' = Apply(Last(xcss.edge).cop.op, sstate)  \* apply the transformed operation
            /\ comm!SSendSame(cop.oid.c, cop)  \* broadcast the original operation
     /\ UNCHANGED ecVars
 -----------------------------------------------------------------------------
@@ -263,5 +269,5 @@ Next ==
 Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
 =============================================================================
 \* Modification History
-\* Last modified Mon Sep 03 19:22:40 CST 2018 by hengxin
+\* Last modified Tue Sep 04 23:22:46 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

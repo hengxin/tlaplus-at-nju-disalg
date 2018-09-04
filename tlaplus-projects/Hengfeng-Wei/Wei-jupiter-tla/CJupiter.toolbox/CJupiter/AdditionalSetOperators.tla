@@ -2,7 +2,9 @@
 (***************************************************************************)
 (* Copyright: https://www.learntla.com/libraries/sets/                     *)
 (***************************************************************************)
-EXTENDS Naturals, TLC
+EXTENDS TLC
+
+LOCAL INSTANCE Naturals
 
 (***************************************************************************)
 (* Pick an element from the set S.                                         *)
@@ -51,5 +53,5 @@ MinOfSet(set) == CHOOSE min \in set:(\A x \in set: min \leq x)
 MaxOfSet(set) == CHOOSE max \in set:(\A x \in set: max \geq x)
 =============================================================================
 \* Modification History
-\* Last modified Fri Jul 06 15:21:37 CST 2018 by hengxin
+\* Last modified Mon Sep 03 20:21:19 CST 2018 by hengxin
 \* Created Fri Jul 06 13:21:26 CST 2018 by hengxin

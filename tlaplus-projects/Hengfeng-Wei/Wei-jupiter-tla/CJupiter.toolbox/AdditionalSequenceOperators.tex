@@ -940,654 +940,344 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} CJupiter}\moduleRightDash\@xx{}%
+ {\MODULE} AdditionalSequenceOperators}\moduleRightDash\@xx{}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 3\hspace{1em}}}%
+\@y{\@s{0}%
+ Copyright: https:\ensuremath{\.{\slsl}github.com}/bringhurst/tlaplus/blob/master/\ensuremath{org.lamport.tla.toolbox.uitest}/farsite/\ensuremath{AdditionalSequenceOperators.tla
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 4\hspace{1em}}}%
+\@y{%
+   \addcontentsline{toc}{section}{AdditionalSequenceOperators}
+}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} FiniteSets ,\,
+ Sequences ,\, TLC ,\, AdditionalSetOperators ,\,
+ AdditionalFunctionOperators}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\LOCAL} {\INSTANCE}
+ Naturals}%
+\@pvspace{8.0pt}%
+\begin{lcom}{10.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ The TLA+ \ensuremath{Sequences} module defines the operators
+ \ensuremath{Head} and \ensuremath{Tail} for
+ retrieving the first element of a sequence and all-but-the-first elements
+ of a sequence, respectively.
+ This module provides four operators that slightly generalize the notions
+ of \ensuremath{Head} and \ensuremath{Tail}:
+\end{cpar}%
+\begin{cpar}{0}{T}{F}{10.0}{0}{}%
+ First returns the first element of a sequence, equivalently to
+ \ensuremath{Head}.
+ Last returns the last element of a sequence.
+ \ensuremath{AllButFirst} returns all-but-the-first elements of a sequence,
+\end{cpar}%
+\begin{cpar}{0}{T}{F}{10.0}{0}{}%
+equivalently to \ensuremath{Tail}.
+\end{cpar}%
+\begin{cpar}{1}{F}{F}{0}{0}{}%
+\ensuremath{AllButLast} returns all-but-the-last elements of a sequence.
+\end{cpar}%
+\begin{cpar}{1}{F}{F}{0}{0}{}%
+This module also provides several additional operators on sequences:
+ \ensuremath{IsElementInSeq} is a predicate that is true when the specified
+ value is an element
+ of the specified sequence.
+ \ensuremath{IsSequenceOfSetElements} is a predicate that is true when the
+ specified
+ sequence contains all and only elements of the specified set.
+ \ensuremath{IsSortedSequenceOfSetElements} is a predicate that is true when
+ the
+ \ensuremath{IsSequenceOfSetElements} is true and the sequence is also sorted
+ in increasing order.
+ \ensuremath{DeleteElement} produces a sequence by deleting an indicated
+ element from another
+ sequence.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} Prepend ( s ,\, e )
+ \.{\defeq} {\langle} e {\rangle} \.{\circ} s}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}} First ( seq ) \.{\defeq} seq
+ [ 1 ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} Last ( seq ) \.{\defeq} seq
+ [ Len ( seq ) ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}} AllButFirst ( seq )
+ \.{\defeq} [ i \.{\in} 1 \.{\dotdot} ( Len ( seq ) \.{-} 1 ) \.{\mapsto} seq
+ [ ( i \.{+} 1 ) ] ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} AllButLast ( seq )
+ \.{\defeq} [ i \.{\in} 1 \.{\dotdot} ( Len ( seq ) \.{-} 1 ) \.{\mapsto} seq
+ [ i ] ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} DoesSeqPrefixSeq ( seq1 ,\,
+ seq2 ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{8.2} \.{\land} Len ( seq1
+ ) \.{\leq} Len ( seq2 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \.{\in} 1 \.{\dotdot} Len ( seq1 ) \.{:} seq1 [ i ] \.{=} seq2 [ i ] )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} DoesSeqProperlyPrefixSeq (
+ seq1 ,\, seq2 ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{8.2} \.{\land} Len ( seq1
+ ) \.{<} Len ( seq2 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \.{\in} 1 \.{\dotdot} Len ( seq1 ) \.{:} seq1 [ i ] \.{=} seq2 [ i ] )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}} IsElementInSeq ( el ,\, seq
+ ) \.{\defeq} \E\, i \.{\in} {\DOMAIN} seq \.{:} seq [ i ] \.{=} el}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} IsSequenceOfSetElements (
+ seq ,\, set ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{8.2} \.{\land} Len ( seq
+ ) \.{=} Cardinality ( set )}%
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{8.2} \.{\land} ( \A\, el
+ \.{\in} set \.{:} IsElementInSeq ( el ,\, seq ) )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}
+ IsSortedSequenceOfSetElements ( seq ,\, set ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{8.2} \.{\land}
+ IsSequenceOfSetElements ( seq ,\, set )}%
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \.{\in} {\DOMAIN} seq ,\, j \.{\in} {\DOMAIN} seq \.{:} i \.{<} j
+ \.{\implies} seq [ i ] \.{<} seq [ j ] )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}} DeleteElement ( seq ,\,
+ index ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{8.2} [ i \.{\in} 1
+ \.{\dotdot} ( Len ( seq ) \.{-} 1 ) \.{\mapsto} {\IF} i \.{<} index
+ \.{\THEN} seq [ i ] \.{\ELSE} seq [ ( i \.{+} 1 ) ] ]}%
+\@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Model of our own \ensuremath{CJupiter} protocol.
-\end{cpar}%
-\end{lcom}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} Integers ,\, OT
- ,\, TLC ,\, AdditionalFunctionOperators ,\, AdditionalSequenceOperators}%
-\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\CONSTANTS}}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Client ,\,\@s{16.4}}%
-\@y{\@s{0}%
- the set of client replicas
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Server
- ,\,\@s{14.73}}%
-\@y{\@s{0}%
- the (unique) server replica
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} Char ,\,\@s{20.99}}%
-\@y{\@s{0}%
- set of characters allowed
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4}
- InitState\@s{11.18}}%
-\@y{\@s{0}%
- the initial state of each replica
-}%
-\@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} Replica \.{\defeq} Client
- \.{\cup} \{ Server \}}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} List \.{\defeq} Seq ( Char
- \.{\cup} Range ( InitState ) )\@s{8.2}}%
-\@y{\@s{0}%
- all possible lists/strings
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} MaxLen \.{\defeq}
- Cardinality ( Char ) \.{+} Len ( InitState )}%
-\@y{\@s{0}%
- the max length of lists in any states;
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4}}%
-\@y{\@s{0}%
- We assume that all inserted elements are unique.
-}%
-\@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} ClientNum \.{\defeq}
- Cardinality ( Client )}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} Priority \.{\defeq}
- {\CHOOSE} f \.{\in} [ Client \.{\rightarrow} 1 \.{\dotdot} ClientNum ] \.{:}
- Injective ( f )}%
-\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} {\ASSUME}}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} Range (
- InitState ) \.{\cap} Char \.{=} \{ \}}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land} Priority
- \.{\in} [ Client \.{\rightarrow} 1 \.{\dotdot} ClientNum ]}%
-\@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The set of all operations.
- Note: The positions are indexed from 1.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}} Rd \.{\defeq} [ type \.{:}
- \{\@w{Rd} \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} Del \.{\defeq} [ type \.{:}
- \{\@w{Del} \} ,\, pos \.{:} 1 \.{\dotdot} MaxLen ]}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} Ins\@s{1.35} \.{\defeq} [
- type \.{:} \{\@w{Ins} \} ,\, pos\@s{2.27} \.{:} 1 \.{\dotdot} ( MaxLen \.{+}
- 1 ) ,\, ch \.{:} Char ,\, pr \.{:} 1 \.{\dotdot} ClientNum ]}%
-\@y{\@s{0}%
- \ensuremath{pr}: priority
-}%
-\@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} Op \.{\defeq} Ins \.{\cup}
- Del}%
-\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} Oid\@s{1.13} \.{\defeq} [ c
- \.{:} Client ,\, seq \.{:} Nat ]\@s{4.1}}%
-\@y{\@s{0}%
- operation identifier
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} Cop \.{\defeq} [ op \.{:} Op
- \.{\cup} \{ Nop \} ,\, oid \.{:} Oid ,\, ctx \.{:} {\SUBSET} Oid ,\, sctx
- \.{:} {\SUBSET} Oid ]}%
-\@y{\@s{0}%
- operation with context
-}%
-\@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}} cop1 \.{\prec} cop2
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{16.4} \.{\lor} cop2 .
- sctx \.{=} \{ \}}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} \.{\lor} cop1 . oid
- \.{\in} cop2 . sctx}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}} COT ( lcop ,\, rcop )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{27.19} [ op \.{\mapsto}
- Xform ( lcop . op ,\, rcop . op ) ,\, oid \.{\mapsto} lcop . oid ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{40.82} ctx \.{\mapsto}
- lcop . ctx \.{\cup} \{ rcop . oid \} ,\, sctx \.{\mapsto} lcop . sctx ]}%
-\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} {\VARIABLES}}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the client replicas:
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{16.4} cseq ,\,\@s{12.29}}%
-\@y{\@s{0}%
- \ensuremath{cseq[c]}: local sequence number at client \ensuremath{c \.{\in}
- Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{16.4} cstate
- ,\,\@s{4.76}}%
-\@y{\@s{0}%
- \ensuremath{cstate[c]}: state (the list content) of the client \ensuremath{c
- \.{\in} Client
-}}%
-\@xx{}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the server replica:
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{16.4} soids ,\,\@s{4.1}}%
-\@y{\@s{0}%
- the set of operations the \ensuremath{Server} has executed
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} sstate
- ,\,\@s{1.10}}%
-\@y{\@s{0}%
- \ensuremath{sstate}: state (the list content) of the server
- \ensuremath{Server
-}}%
-\@xx{}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For all replicas: the \ensuremath{n}-ary ordered state space
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{16.4} css ,\,\@s{13.96}}%
-\@y{\@s{0}%
- \ensuremath{css[r]}: the \ensuremath{n}-ary ordered state space at replica
- \ensuremath{r \.{\in} Replica
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{16.4} cur ,\,\@s{11.12}}%
-\@y{\@s{0}%
- \ensuremath{cur[r]}: the current node of \ensuremath{css} at replica
- \ensuremath{r \.{\in} Replica
-}}%
-\@xx{}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For communication between the \ensuremath{Server} and the Clients:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{16.4} cincoming
- ,\,\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{cincoming[c]}: incoming channel at the client \ensuremath{c
- \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{16.4} sincoming
- ,\,\@s{4.61}}%
-\@y{\@s{0}%
- incoming channel at the \ensuremath{Server
-}}%
-\@xx{}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For model checking:
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}\@s{16.4} chins\@s{8.2}}%
-\@y{\@s{0}%
- a set of chars to insert
-}%
-\@xx{}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}} comm \.{\defeq} {\INSTANCE}
- CSComm {\WITH} Msg \.{\leftarrow} Cop}%
-\@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}} eVars \.{\defeq} {\langle}
- chins {\rangle}\@s{42.50}}%
-\@y{\@s{0}%
- variables for the environment
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}} cVars \.{\defeq} {\langle}
- cseq ,\, cstate {\rangle}\@s{15.64}}%
-\@y{\@s{0}%
- variables for the clients
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}} ecVars\@s{0.51} \.{\defeq}
- {\langle} eVars ,\, cVars {\rangle}\@s{4.1}}%
-\@y{\@s{0}%
- variables for the clients and the environment
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}} sVars\@s{5.11} \.{\defeq}
- {\langle} soids ,\, sstate {\rangle}\@s{7.53}}%
-\@y{\@s{0}%
- variables for the server
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}} dsVars \.{\defeq} {\langle}
- css ,\, cur {\rangle}\@s{26.24}}%
-\@y{\@s{0}%
- variables for the data structure: the \ensuremath{n}-ary ordered state space
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}} commVars \.{\defeq}
- {\langle} cincoming ,\, sincoming {\rangle}\@s{12.29}}%
-\@y{\@s{0}%
- variables for communication
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}} vars \.{\defeq} {\langle}
- eVars ,\, cVars ,\, sVars ,\, commVars ,\, dsVars {\rangle}}%
-\@y{\@s{0}%
- all variables
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-An \ensuremath{css} is a directed graph with labeled edges.
+It requires that \ensuremath{index \.{\geq} 1}.
 \end{cpar}%
 \vshade{5.0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-It is represented by a record with node field and edge field.
+ If \ensuremath{index \.{>} Len(seq) \.{+} 1}, then it appends the element to
+ \ensuremath{seq}.
 \end{cpar}%
 \vshade{5.0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Each node is characterized by its context, a set of operations.
+(ADDED by hengxin; \ensuremath{July} 04, 2018)
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}} InsertElement ( seq ,\, elem
+ ,\, index ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{8.2} [ i \.{\in} 1
+ \.{\dotdot} ( Len ( seq ) \.{+} 1 ) \.{\mapsto} {\IF} i \.{<} index}%
+ \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{124.92} \.{\THEN} {\IF} i
+ \.{=} ( Len ( seq ) \.{+} 1 )}%
+\@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{156.23} \.{\THEN} elem}%
+ \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{156.23} \.{\ELSE} seq [ i
+ ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{124.92} \.{\ELSE} {\IF} i
+ \.{=} index}%
+\@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}\@s{156.23} \.{\THEN} elem}%
+ \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{156.23} \.{\ELSE} seq [ (
+ i \.{-} 1 ) ] ]}%
+\@y{\@s{0}%
+ \ensuremath{i \.{>} index
+}}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}} IsSorted2Partition ( n ,\,
+ seq1 ,\, seq2 ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{8.2} \.{\land} seq1
+ \.{\in} Seq ( 1 \.{\dotdot} n )}%
+ \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{8.2} \.{\land} seq2
+ \.{\in} Seq ( 1 \.{\dotdot} n )}%
+ \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{8.2} \.{\land} n \.{=}
+ Len ( seq1 ) \.{+} Len ( seq2 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \.{\in} {\DOMAIN} seq1 ,\, j \.{\in} {\DOMAIN} seq1 \.{:} i \.{<} j
+ \.{\implies} seq1 [ i ] \.{<} seq1 [ j ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \.{\in} {\DOMAIN} seq2 ,\, j \.{\in} {\DOMAIN} seq2 \.{:} i \.{<} j
+ \.{\implies} seq2 [ i ] \.{<} seq2 [ j ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \.{\in} {\DOMAIN} seq1 ,\, j \.{\in} {\DOMAIN} seq2 \.{:} seq1 [ i ]
+ \.{\neq} seq2 [ j ] )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}} IsSequenceInterleaving ( seq
+ ,\, subSeq1 ,\, subSeq2 ,\, indSeq1 ,\, indSeq2 ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{8.2} \.{\land} indSeq1
+ \.{\in} Seq ( Nat )}%
+ \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{8.2} \.{\land} indSeq2
+ \.{\in} Seq ( Nat )}%
+ \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{8.2} \.{\land}
+ IsSorted2Partition ( Len ( seq ) ,\, indSeq1 ,\, indSeq2 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{8.2} \.{\land} Len (
+ indSeq1 ) \.{=} Len ( subSeq1 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}\@s{8.2} \.{\land} Len (
+ indSeq2 ) \.{=} Len ( subSeq2 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \.{\in} {\DOMAIN} indSeq1 \.{:} seq [ ( indSeq1 [ i ] ) ] \.{=} subSeq1 [ i
+ ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \.{\in} {\DOMAIN} indSeq2 \.{:} seq [ ( indSeq2 [ i ] ) ] \.{=} subSeq2 [ i
+ ] )}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ Sequences up to length \ensuremath{n}, including the empty sequence
+ \ensuremath{{\langle}{\rangle}}.
 \end{cpar}%
 \vshade{5.0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Each edge is labeled with an operation.
- For clarity, we denote edges by records instead of tuples.
+Copyright: https:\ensuremath{\.{\slsl}www.learntla.com}/libraries/sequences/
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}} IsCSS ( G ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{16.4} \.{\land} G \.{=}
- [ node \.{\mapsto} G . node ,\, edge \.{\mapsto} G . edge ]}%
- \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}}\@s{16.4} \.{\land} G . node
- \.{\subseteq} ( {\SUBSET} Oid )}%
- \@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}}\@s{16.4} \.{\land} G .
- edge\@s{1.53} \.{\subseteq} [ from \.{:} G . node ,\, to \.{:} G . node ,\,
- cop \.{:} Cop ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}} SeqMaxLen ( S ,\, n )
+ \.{\defeq}\@s{4.1} {\UNION} \{ [ 1 \.{\dotdot} m \.{\rightarrow} S ] \.{:} m
+ \.{\in} 0 \.{\dotdot} n \}}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 104\hspace{1em}} TypeOK \.{\defeq}}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the client replicas:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{\in} [ Client \.{\rightarrow} Nat ]}%
- \@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}}\@s{16.4} \.{\land} cstate
- \.{\in} [ Client \.{\rightarrow} List ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the server replica:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 113\hspace{1em}}\@s{16.4} \.{\land} soids
- \.{\subseteq} Oid}%
- \@x{\makebox[0pt][r]{\scriptsize 114\hspace{1em}}\@s{16.4} \.{\land} sstate
- \.{\in} List}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For all replicas: the \ensuremath{n}-ary ordered state space
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}\@s{16.4} \.{\land} \A\, r
- \.{\in} Replica \.{:} IsCSS ( css [ r ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}}\@s{16.4} \.{\land} cur
- \.{\in} [ Replica \.{\rightarrow} {\SUBSET} Oid ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For communication between the server and the clients:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 123\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} TypeOK}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For model checking:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 127\hspace{1em}}\@s{16.4} \.{\land} chins
- \.{\subseteq} Char}%
-\@x{\makebox[0pt][r]{\scriptsize 128\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Init} predicate.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 132\hspace{1em}} Init \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 133\hspace{1em}}\@s{16.4} \.{\land} chins
- \.{=} Char}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the client replicas:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 137\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 138\hspace{1em}}\@s{16.4} \.{\land} cstate
- \.{=} [ c \.{\in} Client \.{\mapsto} InitState ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the server replica:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 142\hspace{1em}}\@s{16.4} \.{\land} soids
- \.{=} \{ \}}%
- \@x{\makebox[0pt][r]{\scriptsize 143\hspace{1em}}\@s{16.4} \.{\land} sstate
- \.{=} InitState}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For all replicas: the \ensuremath{n}-ary ordered state space
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{16.4} \.{\land}
- css\@s{1.66} \.{=} [ r \.{\in} Replica \.{\mapsto} [ node \.{\mapsto} \{ \{
- \} \} ,\, edge \.{\mapsto} \{ \} ] ]}%
- \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{16.4} \.{\land} cur
- \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For communication between the server and the clients:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 152\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} Init}%
-\@x{\makebox[0pt][r]{\scriptsize 153\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 157\hspace{1em}} DoOp ( c ,\, op )
- \.{\defeq}}%
-\@y{\@s{0}%
- \ensuremath{op}: the raw operation generated by the client \ensuremath{c
- \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 158\hspace{1em}}\@s{26.06} \.{\land} cstate
- \.{'} \.{=} [ cstate {\EXCEPT} {\bang} [ c ] \.{=} Apply ( op ,\, @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 159\hspace{1em}}\@s{26.06} \.{\land} cseq
- \.{'} \.{=} [ cseq {\EXCEPT} {\bang} [ c ] \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 160\hspace{1em}}\@s{26.06} \.{\land}
- \.{\LET} cop \.{\defeq} [ op \.{\mapsto} op ,\, oid \.{\mapsto} [ c
- \.{\mapsto} c ,\, seq \.{\mapsto} cseq \.{'} [ c ] ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 161\hspace{1em}}\@s{41.28} ctx \.{\mapsto}
- cur [ c ] ,\, sctx \.{\mapsto} \{ \} ]\@s{12.29}}%
-\@y{\@s{0}%
- cop: original operation with context
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 162\hspace{1em}}\@s{55.04} v \.{\defeq} cur
- [ c ] \.{\cup} \{ cop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 163\hspace{1em}}\@s{41.28} \.{\IN} \.{\land}
- css \.{'}\@s{1.66} \.{=} [ css {\EXCEPT} {\bang} [ c ] . node \.{=} @
- \.{\cup} \{ v \} ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 164\hspace{1em}}\@s{162.58} {\bang} [ c ] .
- edge\@s{1.53} \.{=} @ \.{\cup} \{ [ from \.{\mapsto} cur [ c ] ,\, to
- \.{\mapsto} v ,\, cop \.{\mapsto} cop ] \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 165\hspace{1em}}\@s{61.68} \.{\land} cur
- \.{'} \.{=} [ cur {\EXCEPT} {\bang} [ c ] \.{=} v ]}%
- \@x{\makebox[0pt][r]{\scriptsize 166\hspace{1em}}\@s{61.68} \.{\land} comm
- {\bang} CSend ( cop )}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 168\hspace{1em}} DoIns ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 169\hspace{1em}}\@s{16.4} \E\, ins \.{\in}
- Ins \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 170\hspace{1em}}\@s{27.72} \.{\land} ins .
- pos \.{\in} 1 \.{\dotdot} ( Len ( cstate [ c ] ) \.{+} 1 )}%
- \@x{\makebox[0pt][r]{\scriptsize 171\hspace{1em}}\@s{27.72} \.{\land} ins .
- ch \.{\in} chins}%
- \@x{\makebox[0pt][r]{\scriptsize 172\hspace{1em}}\@s{27.72} \.{\land} ins .
- pr\@s{0.07} \.{=} Priority [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 173\hspace{1em}}\@s{27.72} \.{\land} chins
- \.{'}\@s{0.73} \.{=} chins \.{\,\backslash\,} \{ ins . ch \}}%
-\@y{\@s{0}%
- We assume that all inserted elements are unique.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 174\hspace{1em}}\@s{27.72} \.{\land} DoOp (
- c ,\, ins )}%
- \@x{\makebox[0pt][r]{\scriptsize 175\hspace{1em}}\@s{27.72} \.{\land}
- {\UNCHANGED} sVars}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 177\hspace{1em}} DoDel ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 178\hspace{1em}}\@s{16.4} \E\, del \.{\in}
- Del \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 179\hspace{1em}}\@s{27.72} \.{\land} del .
- pos \.{\in} 1 \.{\dotdot} Len ( cstate [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 180\hspace{1em}}\@s{27.72} \.{\land} DoOp (
- c ,\, del )}%
- \@x{\makebox[0pt][r]{\scriptsize 181\hspace{1em}}\@s{27.72} \.{\land}
- {\UNCHANGED} {\langle} sVars ,\, eVars {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 183\hspace{1em}} Do ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 184\hspace{1em}}\@s{22.34} \.{\lor} DoIns (
- c )}%
- \@x{\makebox[0pt][r]{\scriptsize 185\hspace{1em}}\@s{22.34} \.{\lor} DoDel (
- c )}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Locate the node in \ensuremath{rcss} which matches the context
- \ensuremath{ctx} of cop.
+Map on a sequence.
 \end{cpar}%
 \vshade{5.0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{rcss}: the \ensuremath{css} at replica \ensuremath{r \.{\in}
- Replica
-}%
+Copyright: https:\ensuremath{\.{\slsl}www.learntla.com}/libraries/sequences/
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 191\hspace{1em}} Locate ( cop ,\, rcss )
- \.{\defeq} {\CHOOSE} n \.{\in} ( rcss . node ) \.{:} n \.{=} cop . ctx}%
+ \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}} SeqMap ( Op ( \_ ) ,\, seq
+ ) \.{\defeq} [ x \.{\in} {\DOMAIN} seq \.{\mapsto} Op ( seq [ x ] ) ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}} PermsWithin ( S )
+ \.{\defeq}\@s{4.1} \{ s \.{\in} {\UNION} \{ [ 1 \.{\dotdot} m
+ \.{\rightarrow} S ] \.{:} m \.{\in} 0 \.{\dotdot} Cardinality ( S ) \} \.{:}
+ Cardinality ( Range ( s ) ) \.{=} Cardinality ( {\DOMAIN} s ) \}}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{xForm}: iteratively transform cop with a path
- through the \ensuremath{css} at replica \ensuremath{r \.{\in} Replica},
- following the first edges.
+All possible permutations generated based on sequence \ensuremath{T}.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Copyright: https:\ensuremath{\.{\slsl}learntla.com}/tla/functions/
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 197\hspace{1em}} xForm ( cop ,\, r )
+ \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}} PermutationKey ( n
+ )\@s{1.00} \.{\defeq} \{ key \.{\in} [ 1 \.{\dotdot} n \.{\rightarrow} 1
+ \.{\dotdot} n ] \.{:} Range ( key ) \.{=} 1 \.{\dotdot} n \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}} PermutationsOf ( T )
+ \.{\defeq} \{ [ x\@s{6.31} \.{\in} 1 \.{\dotdot} Len ( T ) \.{\mapsto} T [ P
+ [ x ] ] ] \.{:} P \.{\in} PermutationKey ( Len ( T ) ) \}}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ Get the index of the first occurrence of \ensuremath{elem} in
+ \ensuremath{seq}.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Precondition: \ensuremath{elem \.{\in} SeqImage(seq)}.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ADDED by hengxin; \ensuremath{Aug}. 12, 2018
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 126\hspace{1em}} {\RECURSIVE}
+ FirstIndexOfElement ( \_ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 127\hspace{1em}} FirstIndexOfElement ( seq
+ ,\, elem ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 128\hspace{1em}}\@s{16.4} {\IF} Head ( seq )
+ \.{=} elem}%
+\@x{\makebox[0pt][r]{\scriptsize 129\hspace{1em}}\@s{16.4} \.{\THEN} 1}%
+ \@x{\makebox[0pt][r]{\scriptsize 130\hspace{1em}}\@s{16.4} \.{\ELSE} 1 \.{+}
+ FirstIndexOfElement ( Tail ( seq ) ,\, elem )}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Check if two sequences are compatible.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Precondition: No duplication in each individual sequence.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Two sequences are compatible if and only if for any two common elements
+ in both sequences, the relative order of them in the two
+ sequences are the same.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ADDED by hengxin; \ensuremath{Aug}. 12, 2018
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 143\hspace{1em}} Compatible ( seq1 ,\, seq2
+ ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 144\hspace{1em}}\@s{16.4} \.{\lor} seq1
+ \.{=} seq2}%
+ \@x{\makebox[0pt][r]{\scriptsize 145\hspace{1em}}\@s{16.4} \.{\lor} \.{\LET}
+ commonElements \.{\defeq} Range ( seq1 ) \.{\cap} Range ( seq2 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 146\hspace{1em}}\@s{27.51} \.{\IN} \A\, e1
+ ,\, e2 \.{\in} commonElements \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{56.11} \.{\lor} e1 \.{=}
+ e2}%
+ \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{56.11} \.{\lor}
+ FirstIndexOfElement ( seq1 ,\, e1 ) \.{<} FirstIndexOfElement ( seq1 ,\, e2
+ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 149\hspace{1em}}\@s{67.22} \.{\equiv}
+ FirstIndexOfElement ( seq2 ,\, e1 ) \.{<} FirstIndexOfElement ( seq2 ,\, e2
+ )}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ The length of the longest common subsequence of two sequences
+ \ensuremath{seq1} and \ensuremath{seq2}.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ADDED by hengxin; \ensuremath{Aug}. 12, 2018
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 156\hspace{1em}} {\RECURSIVE} LCS ( \_ ,\,
+ \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 157\hspace{1em}} LCS ( seq1 ,\, seq2 )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 198\hspace{1em}}\@s{16.4} \.{\LET} rcss
- \.{\defeq} css [ r ]}%
- \@x{\makebox[0pt][r]{\scriptsize 199\hspace{1em}}\@s{36.79} u \.{\defeq}
- Locate ( cop ,\, rcss )}%
- \@x{\makebox[0pt][r]{\scriptsize 200\hspace{1em}}\@s{36.79} v\@s{0.45}
- \.{\defeq} u \.{\cup} \{ cop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 201\hspace{1em}}\@s{36.79} {\RECURSIVE}
- xFormHelper ( \_ ,\, \_ ,\, \_ ,\, \_ )}%
-\@x{\makebox[0pt][r]{\scriptsize 202\hspace{1em}}\@s{36.79}}%
-\@y{\@s{0}%
- \mbox{'}h\mbox{'} stands for ``helper''; \ensuremath{xcss}:
- \ensuremath{eXtra} \ensuremath{css} created during transformation
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 203\hspace{1em}}\@s{36.79} xFormHelper ( uh
- ,\, vh ,\, coph ,\, xcss ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 204\hspace{1em}}\@s{53.19} {\IF} uh \.{=}
- cur [ r ]}%
-\@x{\makebox[0pt][r]{\scriptsize 205\hspace{1em}}\@s{53.19} \.{\THEN} xcss}%
- \@x{\makebox[0pt][r]{\scriptsize 206\hspace{1em}}\@s{53.19} \.{\ELSE}
- \.{\LET} fedge \.{\defeq} {\CHOOSE} e \.{\in} rcss . edge \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 207\hspace{1em}}\@s{154.21} \.{\land} e .
- from \.{=} uh}%
- \@x{\makebox[0pt][r]{\scriptsize 208\hspace{1em}}\@s{154.21} \.{\land} \A\,
- uhe\@s{5.90} \.{\in} rcss . edge \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 209\hspace{1em}}\@s{169.42} ( uhe . from
- \.{=} uh \.{\land} uhe \.{\neq} e ) \.{\implies} ( e . cop \.{\prec} uhe .
- cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 210\hspace{1em}}\@s{104.91} uprime
- \.{\defeq} fedge . to}%
- \@x{\makebox[0pt][r]{\scriptsize 211\hspace{1em}}\@s{104.91} fcop \.{\defeq}
- fedge . cop}%
- \@x{\makebox[0pt][r]{\scriptsize 212\hspace{1em}}\@s{104.91} coph2fcop
- \.{\defeq} COT ( coph ,\, fcop )}%
- \@x{\makebox[0pt][r]{\scriptsize 213\hspace{1em}}\@s{104.91} fcop2coph
- \.{\defeq} COT ( fcop ,\, coph )}%
- \@x{\makebox[0pt][r]{\scriptsize 214\hspace{1em}}\@s{109.01} vprime
- \.{\defeq} vh \.{\cup} \{ fcop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 215\hspace{1em}}\@s{88.61} \.{\IN}
- xFormHelper ( uprime ,\, vprime ,\, coph2fcop ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 216\hspace{1em}}\@s{121.31} [ xcss {\EXCEPT}
- {\bang} . node \.{=} @ \.{\circ} {\langle} vprime {\rangle} ,\,}%
-\@x{\makebox[0pt][r]{\scriptsize 217\hspace{1em}}\@s{184.34}}%
-\@y{\@s{0}%
- the order of recording edges here is important
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 218\hspace{1em}}\@s{184.34} {\bang} . edge
- \.{=} @ \.{\circ} {\langle} [ from \.{\mapsto} vh ,\, to \.{\mapsto} vprime
- ,\, cop \.{\mapsto} fcop2coph ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 219\hspace{1em}}\@s{245.29} [ from
- \.{\mapsto} uprime ,\, to \.{\mapsto} vprime ,\, cop \.{\mapsto} coph2fcop ]
- {\rangle} ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 220\hspace{1em}}\@s{16.4} \.{\IN}
- xFormHelper ( u ,\, v ,\, cop ,\, [ node \.{\mapsto} {\langle} v {\rangle}
- ,\, edge \.{\mapsto} {\langle} [ from \.{\mapsto} u ,\, to\@s{30.50}
- \.{\mapsto} v ,\, cop \.{\mapsto} cop ] {\rangle} ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 158\hspace{1em}}\@s{24.13} {\IF} seq1 \.{=}
+ {\langle} {\rangle} \.{\lor} seq2 \.{=} {\langle} {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 159\hspace{1em}}\@s{24.13} \.{\THEN} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 160\hspace{1em}}\@s{24.13} \.{\ELSE} {\IF}
+ Last ( seq1 ) \.{=} Last ( seq2 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 161\hspace{1em}}\@s{55.44} \.{\THEN} 1 \.{+}
+ LCS ( AllButLast ( seq1 ) ,\, AllButLast ( seq2 ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 162\hspace{1em}}\@s{55.44} \.{\ELSE}
+ MaxOfSet ( \{ LCS ( AllButLast ( seq1 ) ,\, seq2 ) ,\, LCS ( seq1 ,\,
+ AllButLast ( seq2 ) ) \} )}%
 \@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The \ensuremath{eXtra} \ensuremath{css} (\ensuremath{xcss}) updates the
- status of replica \ensuremath{r \.{\in} Replica}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 225\hspace{1em}} r \.{\oplus} xcss\@s{9.16}
+ \@x{\makebox[0pt][r]{\scriptsize 164\hspace{1em}} LCSCompatible ( seq1 ,\,
+ seq2 ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 165\hspace{1em}}\@s{16.4} Compatible ( seq1
+ ,\, seq2 ) \.{\equiv} LCS ( seq1 ,\, seq2 ) \.{=} Cardinality ( Range ( seq1
+ ) \.{\cap} Range ( seq2 ) )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 167\hspace{1em}} LCSCompatibleTest ( S )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 226\hspace{1em}}\@s{13.49} \.{\LET} xn
- \.{\defeq} xcss . node}%
- \@x{\makebox[0pt][r]{\scriptsize 227\hspace{1em}}\@s{33.89} xe\@s{1.03}
- \.{\defeq} xcss . edge}%
- \@x{\makebox[0pt][r]{\scriptsize 228\hspace{1em}}\@s{33.89} xcur \.{\defeq}
- Last ( xn )}%
- \@x{\makebox[0pt][r]{\scriptsize 229\hspace{1em}}\@s{33.89} xcop\@s{0.31}
- \.{\defeq} Last ( xe ) . cop}%
- \@x{\makebox[0pt][r]{\scriptsize 230\hspace{1em}}\@s{13.49} \.{\IN} \.{\land}
- css \.{'}\@s{1.66} \.{=} [ css {\EXCEPT} {\bang} [ r ] . node \.{=} @
- \.{\cup} Range ( xn ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 231\hspace{1em}}\@s{134.80} {\bang} [ r ] .
- edge\@s{1.53} \.{=} @ \.{\cup} Range ( xe ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 232\hspace{1em}}\@s{33.89} \.{\land} cur
- \.{'} \.{=} [ cur {\EXCEPT} {\bang} [ r ] \.{=} xcur ]}%
-\@x{\makebox[0pt][r]{\scriptsize 233\hspace{1em}}}%
-\@y{\@s{15.0}%
- \ensuremath{\.{\land} cstate\.{'} \.{=}} [\ensuremath{cstate}
- \ensuremath{{\EXCEPT} {\bang}[r] \.{=} Apply(xcop.op,\, @)}]
-}%
-\@xx{}%
-\@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Client \ensuremath{c \.{\in} Client} receives a message from the
- \ensuremath{Server}.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 238\hspace{1em}} Rev ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 239\hspace{1em}}\@s{20.94} \.{\land} comm
- {\bang} CRev ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 240\hspace{1em}}\@s{20.94} \.{\land}
- \.{\LET} cop \.{\defeq} Head ( cincoming [ c ] )}%
-\@y{\@s{0}%
- the received original operation
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 241\hspace{1em}}\@s{44.35} xcss\@s{4.80}
- \.{\defeq} xForm ( cop ,\, c )\@s{23.44}}%
-\@y{\@s{0}%
- the \ensuremath{eXtra} part of \ensuremath{css
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 242\hspace{1em}}\@s{36.15} \.{\IN} \.{\land}
- c \.{\oplus} xcss}%
- \@x{\makebox[0pt][r]{\scriptsize 243\hspace{1em}}\@s{56.55} \.{\land} cstate
- \.{'} \.{=} [ cstate {\EXCEPT} {\bang} [ c ] \.{=} Apply ( Last ( xcss .
- edge ) . cop . op ,\, @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 244\hspace{1em}}\@s{20.94} \.{\land}
- {\UNCHANGED} {\langle} cseq ,\, sVars ,\, eVars {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 245\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Server} receives a message.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 249\hspace{1em}} SRev \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 250\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 251\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
- org\@s{0.64} \.{\defeq} Head ( sincoming )}%
-\@y{\@s{0}%
- the received operation
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 252\hspace{1em}}\@s{47.91} cop \.{\defeq} [
- org {\EXCEPT} {\bang} . sctx \.{=} soids ]\@s{8.2}}%
-\@y{\@s{0}%
- set its \ensuremath{sctx} field
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 253\hspace{1em}}\@s{39.81} xcss\@s{4.80}
- \.{\defeq} xForm ( cop ,\, Server )\@s{12.29}}%
-\@y{\@s{0}%
- the \ensuremath{eXtra} part of \ensuremath{css
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 254\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
- soids \.{'} \.{=} soids \.{\cup} \{ cop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 255\hspace{1em}}\@s{52.01} \.{\land} Server
- \.{\oplus} xcss}%
- \@x{\makebox[0pt][r]{\scriptsize 256\hspace{1em}}\@s{52.01} \.{\land} sstate
- \.{'} \.{=} Apply ( Last ( xcss . edge ) . cop . op ,\, sstate )\@s{4.1}}%
-\@y{\@s{0}%
- apply the transformed operation
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 257\hspace{1em}}\@s{52.01} \.{\land} comm
- {\bang} SSendSame ( cop . oid . c ,\, cop )\@s{4.1}}%
-\@y{\@s{0}%
- broadcast the original operation
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 258\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} ecVars}%
-\@x{\makebox[0pt][r]{\scriptsize 259\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The next-state relation.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 263\hspace{1em}} Next \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 264\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
- \.{\in} Client \.{:} Do ( c ) \.{\lor} Rev ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 265\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Spec}. (\ensuremath{TODO}: Check the fairness condition.)
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 269\hspace{1em}} Spec \.{\defeq} Init
- \.{\land} {\Box} [ Next ]_{ vars} \.{\land} {\WF}_{ vars} ( Next )}%
-\@x{\makebox[0pt][r]{\scriptsize 270\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 168\hspace{1em}}\@s{16.4} \A\, seq1 ,\, seq2
+ \.{\in} PermsWithin ( S ) \.{:} LCSCompatible ( seq1 ,\, seq2 )}%
+\@x{\makebox[0pt][r]{\scriptsize 169\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Tue}
- \ensuremath{Sep} 04 23:22:46 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Mon}
+ \ensuremath{Sep} 03 20:26:21 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created Sat \ensuremath{Sep} 01 11:08:00
- \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Tue} \ensuremath{Jul} 03
+ 15:21:02 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%
