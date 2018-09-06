@@ -28,7 +28,7 @@
 		<link>
 			<name>AdditionalFunctionOperators.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalFunctionOperators.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/AdditionalFunctionOperators.tla</locationURI>
 		</link>
 		<link>
 			<name>AdditionalMathOperators.tla</name>
@@ -63,7 +63,7 @@
 		<link>
 			<name>OpOperators.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/OpOperators.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/OpOperators.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

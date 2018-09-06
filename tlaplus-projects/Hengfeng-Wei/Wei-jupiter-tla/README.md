@@ -26,10 +26,10 @@
 ## CJupiter.tla
 
 ### TypeOK
-- cur[r]: always largest node
 
 ### Properties to Check
 - [ ] All csses are (strongly) eventually the same
+- [ ] cur[r]: always largest node
 
 ### FIXME
 - [ ] Find an error involving 16 states
