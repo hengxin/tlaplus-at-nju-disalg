@@ -19,7 +19,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="soids, sincoming, chins, cseq, cstate, cincoming, css, sstate, cur"/>
+<stringAttribute key="modelBehaviorVars" value="soids, sincoming, chins, cseq, cincoming, css, state, cur"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -30,7 +30,7 @@
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Server;;Server;1;0"/>
-<listEntry value="Client;;{c1, c2};1;1"/>
+<listEntry value="Client;;{c1, c2, c3};1;1"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
 <listEntry value="Char;;{a, b};1;1"/>
 </listAttribute>
@@ -47,6 +47,9 @@
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
 <stringAttribute key="specName" value="CJupiter"/>
+<listAttribute key="traceExploreExpressions">
+<listEntry value="1css"/>
+</listAttribute>
 <stringAttribute key="view" value=""/>
 <booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>

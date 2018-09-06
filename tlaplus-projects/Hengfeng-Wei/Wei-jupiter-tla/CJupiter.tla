@@ -35,16 +35,25 @@ Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* 
 Op == Ins \cup Del
 -----------------------------------------------------------------------------
 (*********************************************************************)
-(*                                         *)
-(*  *)
+(* Cop: operation of type Op with context                            *)
 (*********************************************************************)
 Oid == [c: Client, seq: Nat]  \* operation identifier
-Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid, sctx: SUBSET Oid] \* operation with context
-
-cop1 \prec cop2 == 
-    \/ cop2.sctx = {}
-    \/ cop1.oid \in cop2.sctx
+Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid, sctx: SUBSET Oid]
     
+(*********************************************************************)
+(* tb: Is cop1 totally ordered before cop2?                          *)
+(*                                                                   *)
+(* At a given replica r \in Replica, these can be determined in terms of sctx. *)
+(*********************************************************************)
+tb(cop1, cop2, r) ==
+    \/ cop1.oid \in cop2.sctx
+    \/ /\ cop1.oid \notin cop2.sctx
+       /\ cop2.oid \notin cop1.sctx
+       /\ cop1.oid.c # r
+    
+(*********************************************************************)
+(* OT of two operations of type Cop.                                 *)
+(*********************************************************************)
 COT(lcop, rcop) == 
     [op |-> Xform(lcop.op, rcop.op), oid |-> lcop.oid, 
         ctx |-> lcop.ctx \cup {rcop.oid}, sctx |-> lcop.sctx]
@@ -54,17 +63,16 @@ VARIABLES
     (* For the client replicas:                                      *)
     (*****************************************************************)
     cseq,    \* cseq[c]: local sequence number at client c \in Client
-    cstate,  \* cstate[c]: state (the list content) of the client c \in Client
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     soids,  \* the set of operations the Server has executed
-    sstate, \* sstate: state (the list content) of the server Server
     (*****************************************************************)
-    (* For all replicas: the n-ary ordered state space                                      *)
+    (* For all replicas: the n-ary ordered state space               *)
     (*****************************************************************)
     css,    \* css[r]: the n-ary ordered state space at replica r \in Replica
     cur,    \* cur[r]: the current node of css at replica r \in Replica
+    state,  \* state[r]: state (the list content) of replica r \in Replica
     (*****************************************************************)
     (* For communication between the Server and the Clients:         *)
     (*****************************************************************)
@@ -78,11 +86,11 @@ VARIABLES
 -----------------------------------------------------------------------------
 comm == INSTANCE CSComm WITH Msg <- Cop
 -----------------------------------------------------------------------------
-eVars == <<chins>>           \* variables for the environment
-cVars == <<cseq, cstate>>    \* variables for the clients
+eVars == <<chins>>  \* variables for the environment
+cVars == <<cseq>>   \* variables for the clients
 ecVars == <<eVars, cVars>>   \* variables for the clients and the environment
-sVars  == <<soids, sstate>>  \* variables for the server
-dsVars == <<css, cur>>       \* variables for the data structure: the n-ary ordered state space
+sVars  == <<soids>> \* variables for the server
+dsVars == <<css, cur, state>>           \* variables for the data structure: the n-ary ordered state space
 commVars == <<cincoming, sincoming>>    \* variables for communication
 vars == <<eVars, cVars, sVars, commVars, dsVars>> \* all variables
 -----------------------------------------------------------------------------
@@ -106,17 +114,16 @@ TypeOK ==
     (* For the client replicas:                                      *)
     (*****************************************************************)
     /\ cseq \in [Client -> Nat]
-    /\ cstate \in [Client -> List]
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     /\ soids \subseteq Oid
-    /\ sstate \in List
     (*****************************************************************)
     (* For all replicas: the n-ary ordered state space                                      *)
     (*****************************************************************)
     /\ \A r \in Replica: IsCSS(css[r])
     /\ cur \in [Replica -> SUBSET Oid]
+    /\ state \in [Replica -> List]
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
@@ -135,17 +142,16 @@ Init ==
     (* For the client replicas:                                      *)
     (*****************************************************************)
     /\ cseq = [c \in Client |-> 0]
-    /\ cstate = [c \in Client |-> InitState]
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     /\ soids = {}
-    /\ sstate = InitState
     (*****************************************************************)
     (* For all replicas: the n-ary ordered state space                                      *)
     (*****************************************************************)
     /\ css = [r \in Replica |-> [node |-> {{}}, edge |-> {}]]
     /\ cur = [r \in Replica |-> {}]
+    /\ state = [r \in Replica |-> InitState]
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
@@ -155,7 +161,7 @@ Init ==
 (* Client c \in Client issues an operation op.                       *)
 (*********************************************************************)
 DoOp(c, op) == \* op: the raw operation generated by the client c \in Client
-    /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
+    /\ state' = [state EXCEPT ![c] = Apply(op, @)] 
     /\ cseq' = [cseq EXCEPT ![c] = @ + 1]
     /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]],
         ctx |-> cur[c], sctx |-> {}]    \* cop: original operation with context
@@ -167,7 +173,7 @@ DoOp(c, op) == \* op: the raw operation generated by the client c \in Client
 
 DoIns(c) ==
     \E ins \in Ins:
-        /\ ins.pos \in 1 .. (Len(cstate[c]) + 1)
+        /\ ins.pos \in 1 .. (Len(state[c]) + 1)
         /\ ins.ch \in chins
         /\ ins.pr = Priority[c]
         /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
@@ -176,7 +182,7 @@ DoIns(c) ==
 
 DoDel(c) == 
     \E del \in Del:
-        /\ del.pos \in 1 .. Len(cstate[c])
+        /\ del.pos \in 1 .. Len(state[c])
         /\ DoOp(c, del)
         /\ UNCHANGED <<sVars, eVars>>
 
@@ -206,7 +212,7 @@ xForm(cop, r) ==
             ELSE LET fedge == CHOOSE e \in rcss.edge: 
                                 /\ e.from = uh
                                 /\ \A uhe \in rcss.edge: 
-                                    (uhe.from = uh /\ uhe # e) => (e.cop \prec uhe.cop)
+                                    (uhe.from = uh /\ uhe # e) => tb(e.cop, uhe.cop, r)
                      uprime == fedge.to
                      fcop == fedge.cop
                      coph2fcop == COT(coph, fcop)
@@ -230,7 +236,7 @@ r (+) xcss ==
     IN /\ css' = [css EXCEPT ![r].node = @ \cup Range(xn),
                              ![r].edge = @ \cup Range(xe)]
        /\ cur' = [cur EXCEPT ![r] = xcur]
-\*       /\ cstate' = [cstate EXCEPT ![r] = Apply(xcop.op, @)]
+       /\ state' = [state EXCEPT ![r] = Apply(xcop.op, @)]
     
 (*********************************************************************)
 (* Client c \in Client receives a message from the Server.           *)
@@ -240,8 +246,7 @@ Rev(c) ==
     /\ LET cop == Head(cincoming[c]) \* the received original operation
           xcss == xForm(cop, c)      \* the eXtra part of css
         IN /\ c (+) xcss
-           /\ cstate' = [cstate EXCEPT ![c] = Apply(Last(xcss.edge).cop.op, @)]
-    /\ UNCHANGED <<cseq, sVars, eVars>>
+    /\ UNCHANGED <<ecVars, sVars>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Server receives a message.                                    *)
@@ -253,7 +258,6 @@ SRev ==
           xcss == xForm(cop, Server)    \* the eXtra part of css
         IN /\ soids' = soids \cup {cop.oid}
            /\ Server (+) xcss
-           /\ sstate' = Apply(Last(xcss.edge).cop.op, sstate)  \* apply the transformed operation
            /\ comm!SSendSame(cop.oid.c, cop)  \* broadcast the original operation
     /\ UNCHANGED ecVars
 -----------------------------------------------------------------------------
@@ -269,5 +273,5 @@ Next ==
 Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
 =============================================================================
 \* Modification History
-\* Last modified Tue Sep 04 23:22:46 CST 2018 by hengxin
+\* Last modified Wed Sep 05 19:53:11 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

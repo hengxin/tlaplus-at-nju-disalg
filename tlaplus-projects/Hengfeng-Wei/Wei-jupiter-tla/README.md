@@ -5,9 +5,7 @@
 ### ToCheck
 - \A a, b \in S
   - \A a \in S: \A b \in S \ {a}:
-- Int, Nat
-  - Definition Override
-- Nop
+- Nop: definition override
 
 ### Problems
 - AJupiter.dot vs. AJupiter_linveness.dot (syntax error in it)
@@ -27,7 +25,28 @@
 
 ## CJupiter.tla
 
+### TypeOK
+- cur[r]: always largest node
+
+### Properties to Check
+- [ ] All csses are (strongly) eventually the same
+
+### FIXME
+- [ ] Find an error involving 16 states
+  - 3 clients + 2 chars
+  - sctx error
+
+### Improvement
+- [ ] css: edge
+  - [ ] using sequence instead of set?
+- [ ] sctx: using sequence instead of set
+
 ### TODO
+- [ ] Refactor CJupiter and AJupiter => Extract common "Jupiter" module
+- [ ] Dynamic schedule graph
+  - Only in simulation mode?
+  - Using Animation Module?
+- [ ] Dynamic CSS graph
 
 
 ## General Problems
@@ -38,3 +57,8 @@
 - [ ] Refactoring and Testing
   - [ ] Run multiple models
   - [ ] Compare results/statistics with previous results/statistics
+
+## CSComm
+
+### TODO
+- [ ] cincoming[c], sincoming (for s) => incoming[r]
