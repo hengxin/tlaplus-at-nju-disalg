@@ -8,15 +8,15 @@ EXTENDS AJupiter
 VARIABLE list
 varsH == <<vars, list>>
 
-TypeOKH == TypeOK /\ (list \in SUBSET List)
+TypeOKH == TypeOK /\ (list \subseteq List)
 -------------------------------------------------------------
 InitH == Init /\ list = {InitState}
 
-DoH(c) == Do(c) /\ list' = list \cup {cstate'[c]}
+DoH(c) == Do(c) /\ list' = list \cup {state'[c]}
 
-RevH(c) == Rev(c) /\ list' = list \cup {cstate'[c]}
+RevH(c) == Rev(c) /\ list' = list \cup {state'[c]}
 
-SRevH == SRev /\ list' = list \cup {sstate'}
+SRevH == SRev /\ list' = list \cup {state'[Server]}
 -------------------------------------------------------------
 NextH == 
     \/ \E c \in Client: DoH(c) \/ RevH(c)
@@ -25,19 +25,13 @@ NextH ==
 SpecH == InitH /\ [][NextH]_varsH /\ WF_varsH(NextH)
 -------------------------------------------------------------
 (*********************************************************************)
-(* Termination                                                       *)
-(*********************************************************************)
-Termination == 
-    /\ comm!EmptyChannel
-    
-(*********************************************************************)
 (* Weak List Consistency (WLSpec)                                    *)
 (*********************************************************************)
-WLSpec == 
-    /\ Termination => \A l1, l2 \in list: 
-                        /\ Injective(l1)
-                        /\ Injective(l2)
-                        /\ Compatible(l1, l2)
+WLSpec == comm!EmptyChannel 
+            => \A l1, l2 \in list: 
+                /\ Injective(l1) 
+                /\ Injective(l2) 
+                /\ Compatible(l1, l2)
 
 THEOREM SpecH => WLSpec
 (*********************************************************************)
@@ -45,5 +39,5 @@ THEOREM SpecH => WLSpec
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Thu Aug 30 21:44:27 CST 2018 by hengxin
+\* Last modified Sun Sep 09 10:35:07 CST 2018 by hengxin
 \* Created Thu Aug 30 21:26:18 CST 2018 by hengxin

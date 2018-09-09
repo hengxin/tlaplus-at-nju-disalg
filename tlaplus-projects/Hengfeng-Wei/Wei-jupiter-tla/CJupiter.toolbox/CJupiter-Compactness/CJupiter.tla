@@ -189,7 +189,8 @@ xForm(cop, r) ==
                                      \* the order of recording edges here is important
                                      !.edge = @ \o <<[from |-> vh, to |-> vprime, cop |-> fcop2coph],
                                                      [from |-> uprime, to |-> vprime, cop |-> coph2fcop]>>])  
-    IN xFormHelper(u, v, cop, [node |-> <<v>>, edge |-> <<[from |-> u, to |-> v, cop |-> cop]>>])
+    IN xFormHelper(u, v, cop, [node |-> <<v>>, 
+                               edge |-> <<[from |-> u, to |-> v, cop |-> cop]>>])
 
 (*********************************************************************)
 (* Perform cop at replica r \in Replica.                             *)
@@ -264,17 +265,17 @@ Next ==
 Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
 -----------------------------------------------------------------------------
 (*********************************************************************)
-(* Properties about css to check.                                    *)
+(* The compactness of CJupiter:                                      *)
+(* the css at all replicas are essentially the same.               *)
 (*********************************************************************)
-Termination == comm!EmptyChannel
-
 IgnoreSctx(rcss) ==
     [rcss EXCEPT !.edge = {[e EXCEPT !.cop.sctx = {}] : e \in @}]
 
-Compactness == Termination => Cardinality({IgnoreSctx(css[r]) : r \in Replica}) = 1
+Compactness == 
+    comm!EmptyChannel => Cardinality({IgnoreSctx(css[r]) : r \in Replica}) = 1
 
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Thu Sep 06 21:13:22 CST 2018 by hengxin
+\* Last modified Sat Sep 08 17:01:04 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

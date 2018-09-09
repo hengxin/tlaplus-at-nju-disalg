@@ -2,18 +2,16 @@
 (***************************************************************************)
 (* Specification of communication in a Client-Server system model.         *)
 (***************************************************************************)
-EXTENDS Integers, Naturals, AdditionalSequenceOperators
+EXTENDS AdditionalSequenceOperators
 -----------------------------------------------------------------------------
 CONSTANTS
     Client,    \* the set of clients
-    Server,     \* the (unique) server
-    Msg
+    Server,    \* the (unique) server
+    Msg        \* the set of possible messages
 -----------------------------------------------------------------------------
 VARIABLES
     cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
     sincoming   \* incoming channel at the Server
-
-vars == <<cincoming, sincoming>>
 -----------------------------------------------------------------------------
 TypeOK == 
     /\ cincoming \in [Client -> Seq(Msg)]
@@ -72,5 +70,5 @@ SSendSame(c, msg) ==
 EmptyChannel == Init
 =============================================================================
 \* Modification History
-\* Last modified Sun Sep 02 13:31:58 CST 2018 by hengxin
+\* Last modified Sat Sep 08 17:00:33 CST 2018 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

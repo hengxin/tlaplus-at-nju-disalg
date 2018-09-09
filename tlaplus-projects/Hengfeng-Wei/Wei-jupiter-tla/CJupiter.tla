@@ -189,7 +189,8 @@ xForm(cop, r) ==
                                      \* the order of recording edges here is important
                                      !.edge = @ \o <<[from |-> vh, to |-> vprime, cop |-> fcop2coph],
                                                      [from |-> uprime, to |-> vprime, cop |-> coph2fcop]>>])  
-    IN xFormHelper(u, v, cop, [node |-> <<v>>, edge |-> <<[from |-> u, to |-> v, cop |-> cop]>>])
+    IN xFormHelper(u, v, cop, [node |-> <<v>>, 
+                               edge |-> <<[from |-> u, to |-> v, cop |-> cop]>>])
 
 (*********************************************************************)
 (* Perform cop at replica r \in Replica.                             *)
@@ -276,5 +277,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Thu Sep 06 21:18:42 CST 2018 by hengxin
+\* Last modified Sat Sep 08 17:01:04 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

@@ -5,7 +5,6 @@
 ### ToCheck
 - \A a, b \in S
   - \A a \in S: \A b \in S \ {a}:
-- Nop: definition override
 
 ### Problems
 - AJupiter.dot vs. AJupiter_linveness.dot (syntax error in it)
@@ -22,6 +21,8 @@
   - AJupiterFixedInput
   - simulation mode
   - simulation-guided testing (generating all possible interleavings due to communication)
+- [ ] Refactor
+  - [ ] common "xForm" for Rev(c) and SRev
 
 ## CJupiter.tla
 
@@ -61,4 +62,5 @@
 ## CSComm
 
 ### TODO
-- [ ] cincoming[c], sincoming (for s) => incoming[r]
+- [x] cincoming[c], sincoming (for s) => incoming[r]
+  - [x] this is not flexible! Rejected!

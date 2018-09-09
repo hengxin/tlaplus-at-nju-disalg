@@ -1,6 +1,6 @@
 ------------------------------ MODULE AJupiter ------------------------------
 (***************************************************************************)
-(* Model checking the Jupiter protocol presented by Attiya and others.     *)
+(* Specification of the Jupiter protocol presented by Attiya and others.     *)
 (***************************************************************************)
 
 EXTENDS Integers, OT, TLC, AdditionalFunctionOperators
@@ -10,6 +10,8 @@ CONSTANTS
     Server,     \* the (unique) server replica
     Char,       \* set of characters allowed
     InitState   \* the initial state of each replica
+    
+Replica == Client \cup {Server}
 
 List == Seq(Char \cup Range(InitState))   \* all possible lists/strings
 MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any states;
@@ -45,15 +47,15 @@ VARIABLES
     cbuf,    \* cbuf[c]: buffer (of operations) at the client c \in Client
     crec,    \* crec[c]: the number of new messages have been received by the client c \in Client
                     \* since the last time a message was sent
-    cstate,  \* cstate[c]: state (the list content) of the client c \in Client
-
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     sbuf,    \* sbuf[c]: buffer (of operations) at the Server, one per client c \in Client
     srec,    \* srec[c]: the number of new messages have been ..., one per client c \in Client
-    sstate,  \* sstate: state (the list content) of the server Server
-
+    (*
+      For all replicas.
+    *)
+    state,  \* state[r]: state (the list content) of replica r \in Replica
     (*****************************************************************)
     (* For communication between the Server and the Clients:         *)
     (*****************************************************************)
@@ -63,16 +65,15 @@ VARIABLES
     (* For model checking:                                           *)
     (*****************************************************************)
     chins   \* a set of chars to insert
-
 -----------------------------------------------------------------------------
 comm == INSTANCE CSComm \* WITH Msg <- Msg
 -----------------------------------------------------------------------------
-eVars == <<chins>>                      \* variables for the environment
-cVars == <<cbuf, crec, cstate>>         \* variables for the clients
-ecVars == <<eVars, cVars>>              \* variables for the clients and the environment
-sVars == <<sbuf, srec, sstate>>         \* variables for the server
+eVars == <<chins>>              \* variables for the environment
+cVars == <<cbuf, crec>>         \* variables for the clients
+ecVars == <<eVars, cVars>>      \* variables for the clients and the environment
+sVars == <<sbuf, srec>>         \* variables for the server
 commVars == <<cincoming, sincoming>>    \* variables for communication
-vars == <<eVars, cVars, sVars, commVars>> \* all variables
+vars == <<eVars, cVars, sVars, commVars, state>> \* all variables
 -----------------------------------------------------------------------------
 TypeOK == 
     (*****************************************************************)
@@ -80,13 +81,15 @@ TypeOK ==
     (*****************************************************************)
     /\ cbuf \in [Client -> Seq(Op \cup {Nop})]
     /\ crec \in [Client -> Int]
-    /\ cstate \in [Client -> List]
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     /\ sbuf \in [Client -> Seq(Op \cup {Nop})]
     /\ srec \in [Client -> Int]
-    /\ sstate \in List
+    (*
+      For all replicas.
+    *)
+    /\ state \in [Replica -> List]
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
@@ -106,13 +109,15 @@ Init ==
     (*****************************************************************)
     /\ cbuf = [c \in Client |-> <<>>]
     /\ crec = [c \in Client |-> 0]
-    /\ cstate = [c \in Client |-> InitState]
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
     /\ sbuf = [c \in Client |-> <<>>]
     /\ srec = [c \in Client |-> 0]
-    /\ sstate = InitState
+    (*
+      For all replicas.
+    *)
+    /\ state = [r \in Replica |-> InitState]
     (*****************************************************************)
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
@@ -122,14 +127,14 @@ Init ==
 (* Client c \in Client issues an operation op.                       *)
 (*********************************************************************)
 DoOp(c, op) == 
-    /\ cstate' = [cstate EXCEPT ![c] = Apply(op, @)] 
+    /\ state' = [state EXCEPT ![c] = Apply(op, @)] 
     /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
     /\ crec' = [crec EXCEPT ![c] = 0]
     /\ comm!CSend([c |-> c, ack |-> crec[c], op |-> op])
 
 DoIns(c) ==
     \E ins \in Ins:
-        /\ ins.pos \in 1 .. (Len(cstate[c]) + 1)
+        /\ ins.pos \in 1 .. (Len(state[c]) + 1)
         /\ ins.ch \in chins
         /\ ins.pr = Priority[c]
         /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
@@ -138,7 +143,7 @@ DoIns(c) ==
 
 DoDel(c) == 
     \E del \in Del:
-        /\ del.pos \in 1 .. Len(cstate[c])
+        /\ del.pos \in 1 .. Len(state[c])
         /\ DoOp(c, del)
         /\ UNCHANGED <<sVars, eVars>>
 
@@ -158,7 +163,7 @@ Rev(c) ==
            xop == XformOpOps(m.op, cShiftedBuf) \* transform op vs. shifted buffer
            xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
-           /\ cstate' = [cstate EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
+           /\ state' = [state EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
     /\ UNCHANGED <<sVars, eVars>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
@@ -180,7 +185,7 @@ SRev ==
                             IF cl = c
                             THEN xcBuf  \* transformed buffer for client c \in Client
                             ELSE Append(sbuf[cl], xop)] \* store transformed xop into other clients' bufs
-           /\ sstate' = Apply(xop, sstate)  \* apply the transformed operation
+           /\ state' = [state EXCEPT ![Server] = Apply(xop, @)]  \* apply the transformed operation
            /\ comm!SSend(c, [cl \in Client |-> [ack |-> srec[cl], op |-> xop]])
     /\ UNCHANGED ecVars
 -----------------------------------------------------------------------------
@@ -209,8 +214,7 @@ Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
 (*********************************************************************)
 (* Quiescent Consistency (QC)                                        *)
 (*********************************************************************)
-QConvergence == \forall c \in Client: cstate[c] = sstate
-QC == comm!EmptyChannel => QConvergence
+QC == comm!EmptyChannel => Cardinality(Range(state)) = 1
 
 THEOREM Spec => []QC
 
@@ -219,5 +223,5 @@ THEOREM Spec => []QC
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Sun Sep 02 15:03:42 CST 2018 by hengxin
+\* Last modified Sun Sep 09 10:05:29 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

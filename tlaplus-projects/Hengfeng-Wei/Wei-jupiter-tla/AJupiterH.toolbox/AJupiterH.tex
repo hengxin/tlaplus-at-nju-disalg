@@ -954,19 +954,19 @@
  vars ,\, list {\rangle}}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}} TypeOKH \.{\defeq} TypeOK
- \.{\land} ( list \.{\in} {\SUBSET} List )}%
+ \.{\land} ( list \.{\subseteq} List )}%
 \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}}\midbar\@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} InitH \.{\defeq} Init
  \.{\land} list \.{=} \{ InitState \}}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} DoH ( c ) \.{\defeq} Do ( c
- ) \.{\land} list \.{'} \.{=} list \.{\cup} \{ cstate \.{'} [ c ] \}}%
+ ) \.{\land} list \.{'} \.{=} list \.{\cup} \{ state \.{'} [ c ] \}}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} RevH ( c ) \.{\defeq} Rev (
- c ) \.{\land} list \.{'} \.{=} list \.{\cup} \{ cstate \.{'} [ c ] \}}%
+ c ) \.{\land} list \.{'} \.{=} list \.{\cup} \{ state \.{'} [ c ] \}}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} SRevH \.{\defeq} SRev
- \.{\land} list \.{'} \.{=} list \.{\cup} \{ sstate \.{'} \}}%
+ \.{\land} list \.{'} \.{=} list \.{\cup} \{ state \.{'} [ Server ] \}}%
 \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} NextH \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
@@ -978,44 +978,36 @@
 \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Termination
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} Termination \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} EmptyChannel}%
-\@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
 Weak \ensuremath{List} Consistency (\ensuremath{WLSpec})
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} WLSpec \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land}\@s{8.22}
- Termination \.{\implies} \A\, l1 ,\, l2 \.{\in} list \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{114.56} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} WLSpec \.{\defeq} comm
+ {\bang} EmptyChannel}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{62.82} \.{\implies} \A\,
+ l1 ,\, l2 \.{\in} list \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{82.48} \.{\land}
  Injective ( l1 )}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{114.56} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{82.48} \.{\land}
  Injective ( l2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{114.56} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{82.48} \.{\land}
  Compatible ( l1 ,\, l2 )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} {\THEOREM} SpecH
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} {\THEOREM} SpecH
  \.{\implies} WLSpec}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 Strong \ensuremath{List} Consistency (\ensuremath{SLSpec})
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
- \ensuremath{Aug} 30 21:44:27 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Sep} 09
+ 10:35:07 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

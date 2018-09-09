@@ -19,7 +19,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="SpecH"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="sincoming, list, crec, sbuf, chins, cstate, cincoming, srec, sstate, cbuf"/>
+<stringAttribute key="modelBehaviorVars" value="crec, chins, cbuf, sincoming, state, cincoming, srec, list, sbuf"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants"/>
@@ -28,9 +28,9 @@
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Server;;Server;1;0"/>
-<listEntry value="Client;;{c1, c2, c3};1;1"/>
+<listEntry value="Client;;{c1, c2};1;1"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
-<listEntry value="Char;;{a, b, c};1;1"/>
+<listEntry value="Char;;{a, b};1;1"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

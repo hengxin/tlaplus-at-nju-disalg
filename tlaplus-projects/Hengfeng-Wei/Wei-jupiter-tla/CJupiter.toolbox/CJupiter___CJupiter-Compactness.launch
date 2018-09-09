@@ -12,14 +12,14 @@
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
 <intAttribute key="fpIndex" value="1"/>
-<intAttribute key="maxHeapSize" value="50"/>
+<intAttribute key="maxHeapSize" value="70"/>
 <intAttribute key="maxSetSize" value="1000000"/>
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value=""/>
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="soids, sincoming, chins, cseq, cincoming, css, state, cur"/>
+<stringAttribute key="modelBehaviorVars" value="css, chins, cur, soids, state, cseq, incoming"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -30,10 +30,10 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Server;;Server;1;0"/>
 <listEntry value="Client;;{c1, c2, c3};1;1"/>
-<listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
 <listEntry value="Char;;{a};1;1"/>
+<listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
+<listEntry value="Server;;Server;1;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
@@ -41,7 +41,7 @@
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
-<intAttribute key="numberOfWorkers" value="4"/>
+<intAttribute key="numberOfWorkers" value="2"/>
 <booleanAttribute key="recover" value="false"/>
 <stringAttribute key="result.mail.address" value=""/>
 <intAttribute key="simuAril" value="-1"/>
