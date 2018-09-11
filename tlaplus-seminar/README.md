@@ -28,6 +28,7 @@
 | 15		| The TLC Model Checker |	易星辰		| 2018-09-XX (周x)  	| Video Lecture, SS Chapter 14		|		|
 | | Refinement (3) |	| 2018-06-XX   	|  Paper |		|
 | | Composing Specifications |	| 2018-xx-XX   	|  Paper |		|
+| | Animation Module    |	| 2018-xx-XX   	|  Paper |		|
 | | The TLA+ Language	|	| 2018-xx-XX   	|  Paper |		|
 | | Liveness and Fairness |	| 2018-xx-XX   	|  Paper |		|
 | | PlusCal |	| 2018-xx-XX   	|  Paper |		|

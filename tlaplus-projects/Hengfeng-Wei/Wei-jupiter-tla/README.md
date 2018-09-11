@@ -29,8 +29,8 @@
 ### TypeOK
 
 ### Properties to Check
-- [ ] All csses are (strongly) eventually the same
-- [ ] cur[r]: always largest node
+- [x] All csses are (strongly) eventually the same
+- [x] cur[r]: always largest node
 
 ### FIXME
 - [ ] Find an error involving 16 states
