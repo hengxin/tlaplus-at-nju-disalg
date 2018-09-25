@@ -24,8 +24,8 @@
 | 11 		| Op-based Counter	|  	魏恒峰		| 2018-06-08 (周五)  	|  RDT paper		| RDT Project   |
 | 12 		| How AWS Uses formal Methods	|易星辰		| 2018-07-06 (周五) | AWS paper	|  |
 | 13 		| Refinement (1) 	|	纪业 		| 2018-07-13 (周五)   	| Auxiliary Variables in TLA+ (Section 2) |		|
-| 14 		| Refinement (2) 	|	唐瑞泽		| 2018-09-xx (周x)   	| Auxiliary Variables in TLA+ (Section 3) |		|
-| 15		| The TLC Model Checker |	易星辰		| 2018-09-XX (周x)  	| Video Lecture, SS Chapter 14		|		|
+| 14 		| Refinement (2) 	|	唐瑞泽		| 2018-09-14 (周五)   	| Auxiliary Variables in TLA+ (Section 3) |		|
+| 15		| The TLC Model Checker |	易星辰		| 2018-09-28 (周五)  	| Video Lecture, SS Chapter 14		|		|
 | | Refinement (3) |	| 2018-06-XX   	|  Paper |		|
 | | Composing Specifications |	| 2018-xx-XX   	|  Paper |		|
 | | Animation Module    |	| 2018-xx-XX   	|  Paper |		|

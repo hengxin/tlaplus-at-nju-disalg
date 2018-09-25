@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AbsJupiter</name>
+	<name>JupiterH</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -15,11 +15,6 @@
 		<nature>toolbox.natures.TLANature</nature>
 	</natures>
 	<linkedResources>
-		<link>
-			<name>AbsJupiter.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AbsJupiter.tla</locationURI>
-		</link>
 		<link>
 			<name>AdditionalFunctionOperators.tla</name>
 			<type>1</type>
@@ -36,9 +31,19 @@
 			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSetOperators.tla</location>
 		</link>
 		<link>
-			<name>Order.tla</name>
+			<name>Jupiter.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/Order.tla</location>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/Jupiter.tla</location>
+		</link>
+		<link>
+			<name>JupiterH.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/JupiterH.tla</locationURI>
+		</link>
+		<link>
+			<name>JupiterInterface.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/JupiterInterface.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>
