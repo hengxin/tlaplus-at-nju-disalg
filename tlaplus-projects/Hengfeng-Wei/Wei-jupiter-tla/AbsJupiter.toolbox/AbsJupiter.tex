@@ -998,25 +998,25 @@ Abstract \ensuremath{Jupiter
 \@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} {\ASSUME}}%
  \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} \.{\land} O
- \.{\subseteq} [ c \.{:} Client ,\, n \.{:} Nat ]\@s{12.29}}%
+ \.{\subseteq} Client \.{\times} Nat\@s{37.17}}%
 \@y{\@s{0}%
  \ensuremath{oid \.{=}} (\ensuremath{c}, \ensuremath{n})
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land}
- co\@s{0.51} \.{\in} [ Client \.{\rightarrow} Seq ( O ) ]\@s{12.29}}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land} co
+ \.{\in} [ Client \.{\rightarrow} Seq ( O ) ]\@s{12.30}}%
 \@y{\@s{0}%
  strict total order (for each client) represented by sequence
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land}
- so\@s{0.51} \.{\in} Seq ( O )\@s{16.4}}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land} so
+ \.{\in} Seq ( O )\@s{28.7}}%
 \@y{\@s{0}%
  strict total order represented by sequence
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land} hb
- \.{\in} O \.{\times} O\@s{18.54}}%
+ \.{\subseteq} O \.{\times} O\@s{30.33}}%
 \@y{\@s{0}%
  strict partial order
 }%
@@ -1035,21 +1035,40 @@ Abstract \ensuremath{Jupiter
 }}%
 \@xx{}%
 \@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} Res ( csched ,\, oset )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{20.18} [ O \.{\mapsto}
+ oset ,\, co \.{\mapsto} Retain ( csched . co ,\, oset ) ,\, so \.{\mapsto}
+ Retain ( csched . so ,\, oset ) ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{22.95} hb \.{\mapsto}
+ csched . hb \.{\,|\,} oset ]}%
+\@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 Determine the \ensuremath{eo} order at client \ensuremath{c
 }%
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} {\RECURSIVE} EOR ( \_ )}%
-\@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}} EOR ( csigma ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{26.02} {\IF} csigma . co
- \.{=} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{26.02} \.{\THEN} csigma .
+\@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}} {\RECURSIVE} EOR ( \_ )}%
+\@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}} EOR ( csigma ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{26.02} {\IF} PrintT (
+ csigma ) \.{\land} csigma . co \.{=} {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{26.02} \.{\THEN} csigma .
  so}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{26.02} \.{\ELSE} \.{\LET}
- o \.{\defeq} Head ( csigma . co )}%
-\@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{61.43} \.{\IN} {\FALSE}}%
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{26.02} \.{\ELSE}
+ \.{\LET}\@s{4.1} o\@s{9.19} \.{\defeq} Head ( csigma . co )}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{81.83} hbo \.{\defeq} LT
+ ( hb ,\, o )\@s{12.29}}%
+\@y{\@s{0}%
+ the set of operation happened-before \ensuremath{o
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{61.43} \.{\IN} Retain (
+ csigma . so ,\, hbo )}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{94.13} \.{\circ}\@s{7.52}
+ {\langle} o {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{94.13} \.{\circ}\@s{7.52}
+ EOR ( Res ( csigma ,\, csigma . O \.{\,\backslash\,} \{ hbo ,\, o \} ) )}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1058,22 +1077,22 @@ Determine the \ensuremath{eo} order at client \ensuremath{c
  the order in which the operations are processed at each \ensuremath{r}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}} eo \.{\defeq} [ r \.{\in}
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}} eo \.{\defeq} [ r \.{\in}
  Replica \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{35.59} {\IF} r \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{35.59} {\IF} r \.{=}
  Server}%
-\@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{35.59} \.{\THEN} so}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{35.59} \.{\ELSE} EOR ( [
- sigma {\EXCEPT} {\bang} . co \.{=} co [ r ] ] ) ]}%
-\@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{35.59} \.{\THEN} so}%
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{35.59} \.{\ELSE} EOR ( [
+ sigma {\EXCEPT} {\bang} . co \.{=} @ [ r ] ] ) ]}%
+\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
- \ensuremath{Sep} 25 17:05:12 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Tue}
+ \ensuremath{Sep} 25 20:09:17 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

@@ -21,6 +21,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>AdditionalFunctionOperators.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalFunctionOperators.tla</location>
+		</link>
+		<link>
 			<name>AdditionalSequenceOperators.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/AdditionalSequenceOperators.tla</locationURI>
@@ -28,7 +33,7 @@
 		<link>
 			<name>AdditionalSetOperators.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSetOperators.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/AdditionalSetOperators.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

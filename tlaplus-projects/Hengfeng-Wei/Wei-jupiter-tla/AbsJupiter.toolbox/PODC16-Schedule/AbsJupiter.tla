@@ -54,5 +54,5 @@ eo == [r \in Replica |->
         ELSE EOR([sigma EXCEPT !.co = @[r]])]
 =============================================================================
 \* Modification History
-\* Last modified Tue Sep 25 20:27:08 CST 2018 by hengxin
+\* Last modified Tue Sep 25 20:26:45 CST 2018 by hengxin
 \* Created Mon Aug 20 20:23:41 CST 2018 by hengxin

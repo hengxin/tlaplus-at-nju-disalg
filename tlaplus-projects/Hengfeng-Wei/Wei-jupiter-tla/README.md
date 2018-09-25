@@ -1,5 +1,9 @@
 # tlaplus-jupiter project
 
+## AbsJupiter.tla
+- [ ] eo: ELSE EOR([sigma EXCEPT !.co = @[r]])]; TypeOK for eo does not hold
+- [ ] strict total order vs. sequence
+
 ## AJupiter.tla
 
 ### ToCheck
