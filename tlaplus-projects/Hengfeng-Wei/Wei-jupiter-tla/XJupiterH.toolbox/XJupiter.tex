@@ -952,8 +952,7 @@
 \end{cpar}%
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\EXTENDS} Integers ,\, OT
- ,\, TLCUtils ,\, AdditionalFunctionOperators ,\,
- AdditionalSequenceOperators}%
+ ,\, TLC ,\, AdditionalFunctionOperators ,\, AdditionalSequenceOperators}%
 \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} {\CONSTANTS}}%
  \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Client
@@ -1561,32 +1560,15 @@ The \ensuremath{Spec}. (\ensuremath{TODO}: Check the fairness condition.)
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 276\hspace{1em}} Spec \.{\defeq} Init
  \.{\land} {\Box} [ Next ]_{ vars} \.{\land} {\WF}_{ vars} ( Next )}%
-\@x{\makebox[0pt][r]{\scriptsize 277\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- In \ensuremath{Jupiter} (not limited to \ensuremath{XJupiter}), each client
- synchronizes with the server.
- In \ensuremath{XJupiter}, this is expressed as the following
- \ensuremath{CSSync} property.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 282\hspace{1em}} {\ASSUME} ( TLCSet ( 1 ,\,
- {\langle}\@w{SameOids} ,\, 0 {\rangle} ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 283\hspace{1em}} CSSync \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 284\hspace{1em}}\@s{16.4} \forall\, c
- \.{\in} Client \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 285\hspace{1em}}\@s{32.8} ( ccur [ c ] \.{=}
- scur [ c ] \.{\land} TLCCnt ( 1 ,\, 100 ) ) \.{\implies} css [ c ] \.{=} sss
- [ c ]}%
-\@x{\makebox[0pt][r]{\scriptsize 286\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 277\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Thu}
- \ensuremath{Oct} 11 20:13:07 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Wed}
+ \ensuremath{Oct} 10 15:00:09 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
