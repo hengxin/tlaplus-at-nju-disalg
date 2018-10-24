@@ -947,7 +947,8 @@
  states across the system.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} XJupiter}%
+ \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} XJupiter ,\,
+ TLCUtils}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\VARIABLE} list}%
  \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} varsH \.{\defeq} {\langle}
@@ -981,33 +982,35 @@
 Weak \ensuremath{List} Consistency (\ensuremath{WLSpec})
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} WLSpec \.{\defeq} comm
- {\bang} EmptyChannel}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{62.82} \.{\implies} \A\,
- l1 ,\, l2 \.{\in} list \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{82.48} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} {\ASSUME} ( TLCSet ( 1 ,\,
+ {\langle}\@w{EmptyChannel} ,\, 0 {\rangle} ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}} WLSpec \.{\defeq} ( comm
+ {\bang} EmptyChannel \.{\land} TLCCnt ( 1 ,\, 100 ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{62.61}
+ \.{\implies}\@s{6.66} \A\, l1 ,\, l2 \.{\in} list \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{88.93} \.{\land}
  Injective ( l1 )}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{82.48} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{88.93} \.{\land}
  Injective ( l2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{82.48} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{88.93} \.{\land}
  Compatible ( l1 ,\, l2 )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} {\THEOREM} SpecH
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}} {\THEOREM} SpecH
  \.{\implies} WLSpec}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 Strong \ensuremath{List} Consistency (\ensuremath{SLSpec})
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
- \ensuremath{Oct} 10 15:41:28 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified Sun
+ \ensuremath{Oct} 14 11:08:39 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

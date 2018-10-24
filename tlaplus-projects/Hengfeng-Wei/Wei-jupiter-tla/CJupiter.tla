@@ -86,7 +86,6 @@ comm == INSTANCE CSComm WITH Msg <- Cop
 -----------------------------------------------------------------------------
 eVars == <<chins>>  \* variables for the environment
 cVars == <<cseq>>   \* variables for the clients
-ecVars == <<eVars, cVars>>   \* variables for the clients and the environment
 sVars  == <<soids>> \* variables for the server
 dsVars == <<css, cur, state>>           \* variables for the data structure: the n-ary ordered state space
 commVars == <<cincoming, sincoming>>    \* variables for communication
@@ -135,7 +134,6 @@ TypeOK ==
 (* The Init predicate.                                               *)
 (*********************************************************************)
 Init == 
-    /\ chins = Char
     (*****************************************************************)
     (* For the client replicas:                                      *)
     (*****************************************************************)
@@ -154,6 +152,10 @@ Init ==
     (* For communication between the server and the clients:         *)
     (*****************************************************************)
     /\ comm!Init
+    (*****************************************************************)
+    (* For model checking:                                           *)
+    (*****************************************************************)
+    /\ chins = Char
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* Locate the node in rcss which matches the context ctx of cop.     *)
@@ -240,7 +242,7 @@ Rev(c) ==
     /\ comm!CRev(c)
     /\ LET cop == Head(cincoming[c]) \* the received original operation
         IN Perform(cop, c)
-    /\ UNCHANGED <<ecVars, sVars>>
+    /\ UNCHANGED <<eVars, cVars, sVars>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Server receives a message.                                    *)
@@ -251,7 +253,7 @@ SRev ==
         IN /\ soids' = soids \cup {cop.oid}
            /\ Perform(cop, Server)
            /\ comm!SSendSame(cop.oid.c, cop)  \* broadcast the original operation
-    /\ UNCHANGED ecVars
+    /\ UNCHANGED <<eVars, cVars>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The next-state relation.                                          *)
@@ -277,5 +279,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Sat Sep 08 17:01:04 CST 2018 by hengxin
+\* Last modified Wed Oct 24 10:41:24 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

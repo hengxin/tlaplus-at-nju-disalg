@@ -46,6 +46,11 @@
 			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/OpOperators.tla</location>
 		</link>
 		<link>
+			<name>TLCUtils.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/TLCUtils.tla</location>
+		</link>
+		<link>
 			<name>XJupiter.tla</name>
 			<type>1</type>
 			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/XJupiter.tla</location>

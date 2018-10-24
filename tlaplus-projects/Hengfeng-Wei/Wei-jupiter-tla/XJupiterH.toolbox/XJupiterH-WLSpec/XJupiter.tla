@@ -4,7 +4,7 @@ Specification of the Jupiter protocol described in CSCW'2014
 by Yi Xu, Chengzheng Sun, and Mo Li.
 We call it XJupiter, with 'X' for "Xu".
 *)
-EXTENDS Integers, OT, TLC, AdditionalFunctionOperators, AdditionalSequenceOperators
+EXTENDS Integers, OT, TLCUtils, AdditionalFunctionOperators, AdditionalSequenceOperators
 -----------------------------------------------------------------------------
 CONSTANTS
     Client,     \* the set of client replicas
@@ -274,7 +274,16 @@ Next ==
 The Spec.  (TODO: Check the fairness condition.)
 *)
 Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
+-----------------------------------------------------------------------------
+(*
+In Jupiter (not limited to XJupiter), each client synchronizes with the server.
+In XJupiter, this is expressed as the following CSSync property.
+*)
+ASSUME (TLCSet(1, <<"SameOids", 0>>))
+CSSync == 
+    \forall c \in Client: 
+        (ccur[c] = scur[c] /\ TLCCnt(1, 100)) => css[c] = sss[c]
 =============================================================================
 \* Modification History
-\* Last modified Wed Oct 10 15:00:09 CST 2018 by hengxin
+\* Last modified Thu Oct 11 20:13:07 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

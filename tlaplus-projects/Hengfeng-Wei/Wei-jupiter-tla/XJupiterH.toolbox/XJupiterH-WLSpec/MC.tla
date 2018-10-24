@@ -3,7 +3,7 @@ EXTENDS XJupiterH, TLC
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-c1, c2, c3
+c1, c2
 ----
 
 \* MV CONSTANT declarations@modelParameterConstants
@@ -12,37 +12,37 @@ a, b
 ----
 
 \* MV CONSTANT definitions Client
-const_15391618778582000 == 
-{c1, c2, c3}
+const_1539486590670125000 == 
+{c1, c2}
 ----
 
 \* MV CONSTANT definitions Char
-const_15391618778583000 == 
+const_1539486590670126000 == 
 {a, b}
 ----
 
 \* SYMMETRY definition
-symm_15391618778584000 == 
-Permutations(const_15391618778582000) \union Permutations(const_15391618778583000)
+symm_1539486590670127000 == 
+Permutations(const_1539486590670125000) \union Permutations(const_1539486590670126000)
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2InitState
-const_15391618778585000 == 
+const_1539486590670128000 == 
 <<>>
 ----
 
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_15391618778587000 ==
+spec_1539486590670130000 ==
 SpecH
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_15391618778598000 ==
+inv_1539486590670131000 ==
 TypeOKH
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:1
-inv_15391618778599000 ==
+inv_1539486590670132000 ==
 WLSpec
 ----
 =============================================================================
 \* Modification History
-\* Created Wed Oct 10 16:57:57 CST 2018 by hengxin
+\* Created Sun Oct 14 11:09:50 CST 2018 by hengxin
