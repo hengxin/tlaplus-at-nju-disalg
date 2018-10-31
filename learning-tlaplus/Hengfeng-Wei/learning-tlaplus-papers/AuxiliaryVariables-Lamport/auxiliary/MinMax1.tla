@@ -94,7 +94,7 @@ Infinity      == CHOOSE n : n \notin Int
 MinusInfinity == CHOOSE n : n \notin (Int \cup {Infinity})
 
 M == INSTANCE MinMax2 
-        WITH min <- IF y = {} THEN Infinity      ELSE setMin(y),
+        WITH min <- IF y = {} THEN Infinity      ELSE setMin(y) + 1,
              max <- IF y = {} THEN MinusInfinity ELSE setMax(y)
 
 (***************************************************************************)
@@ -106,7 +106,7 @@ M == INSTANCE MinMax2
 THEOREM Spec => M!Spec
 =============================================================================
 \* Modification History
-\* Last modified Tue Jun 26 17:51:08 CST 2018 by hengxin
+\* Last modified Wed Oct 31 19:44:20 CST 2018 by hengxin
 \* Last modified Tue Jun 26 17:29:03 CST 2018 by hengxin
 \* Last modified Fri Oct 21 23:48:10 PDT 2016 by lamport
 \* Created Fri Aug 26 14:28:26 PDT 2016 by lamport

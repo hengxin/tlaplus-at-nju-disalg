@@ -21,7 +21,7 @@
 <intAttribute key="modelBehaviorSpecType" value="1"/>
 <stringAttribute key="modelBehaviorVars" value="x, y, turn"/>
 <stringAttribute key="modelComments" value=""/>
-<booleanAttribute key="modelCorrectnessCheckDeadlock" value="true"/>
+<booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants"/>
 <listAttribute key="modelCorrectnessProperties">
 <listEntry value="1M!Spec"/>
@@ -40,7 +40,7 @@
 <listEntry value="MinusInfinity;;MinusInfinity;1;0"/>
 <listEntry value="M!Infinity;;M!Infinity;1;0"/>
 <listEntry value="M!MinusInfinity;;M!MinusInfinity;1;0"/>
-<listEntry value="Int;;1 .. 20;0;0"/>
+<listEntry value="Int;;1 .. 4;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
@@ -51,6 +51,9 @@
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
 <stringAttribute key="specName" value="MinMax1"/>
+<listAttribute key="traceExploreExpressions">
+<listEntry value="1M!min"/>
+</listAttribute>
 <stringAttribute key="view" value=""/>
 <booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>

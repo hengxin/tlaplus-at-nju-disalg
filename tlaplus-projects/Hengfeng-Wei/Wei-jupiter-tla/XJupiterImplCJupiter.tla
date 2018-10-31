@@ -38,7 +38,7 @@ SRevImpl ==
     /\ SRev
     /\ LET cop == [Head(sincoming) EXCEPT !.sctx = soids]
              c == cop.oid.c
-            ss == xForm(cop, sss[c], scur[c], Remote)
+            ss == xForm(cop, s2ss[c], scur[c], Remote)
         IN /\ cincomingCJ' = [cl \in Client |-> 
                                   IF cl = c
                                   THEN cincomingCJ[cl] 
@@ -67,22 +67,23 @@ ss1 (+) ss2 ==
 
 IgnoreDir(ss) ==
     [ss EXCEPT !.edge = 
-        \* [field \in (DOMAIN e \ {"lr"}) |-> e.field]
+        \* {[field \in (DOMAIN e \ {"lr"}) |-> e.field] : e \in @}]
         {[from |-> e.from, to |-> e.to, cop |-> e.cop] : e \in @}]
 
-CJ == INSTANCE CJupiter WITH cincoming <- cincomingCJ, 
-        css <- [r \in Replica |->
-                    IF r = Server
-                    THEN IgnoreDir(SetReduce((+), Range(sss), [node |-> {{}}, edge |-> {}])) 
-                    ELSE IgnoreDir(css[r] (+) cxss[r])],
-        cur <- [r \in Replica |->
-                    IF r = Server
-                    \* It SHOULD be that Cardinality(Range(scur)) = 1
-                    THEN CHOOSE n \in Range(scur) : TRUE 
-                    ELSE ccur[r]]
+CJ == INSTANCE CJupiter 
+        WITH cincoming <- cincomingCJ, 
+             css <- [r \in Replica |-> 
+                        IF r = Server 
+                        THEN IgnoreDir(SetReduce((+), Range(s2ss), [node |-> {{}}, edge |-> {}])) 
+                        ELSE IgnoreDir(c2ss[r] (+) cxss[r])], 
+             cur <- [r \in Replica |-> 
+                        IF r = Server 
+                        \* It SHOULD be that Cardinality(Range(scur)) = 1 
+                        THEN CHOOSE n \in Range(scur) : TRUE 
+                        ELSE ccur[r]]
 
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Wed Oct 31 17:24:39 CST 2018 by hengxin
+\* Last modified Wed Oct 31 19:18:02 CST 2018 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

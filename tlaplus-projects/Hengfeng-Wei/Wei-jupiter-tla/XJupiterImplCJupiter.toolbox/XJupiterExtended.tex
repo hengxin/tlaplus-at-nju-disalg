@@ -1100,26 +1100,26 @@ The \ensuremath{2D} state spaces (\ensuremath{ss}, for short).
  each client.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{16.4} css ,\,\@s{12.86}}%
+\@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{16.4} c2ss ,\,\@s{8.38}}%
 \@y{\@s{0}%
- \ensuremath{css[c]}: the \ensuremath{2D} state space at client \ensuremath{c
- \.{\in} Client
+ \ensuremath{c2ss[c]}: the \ensuremath{2D} state space at client
+ \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{16.4} ccur ,\,\@s{7.11}}%
 \@y{\@s{0}%
- \ensuremath{cur[c]}: the current node of \ensuremath{css[c]
+ \ensuremath{cur[c]}: the current node of \ensuremath{c2ss[c]
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{16.4} sss ,\,\@s{13.37}}%
+\@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{16.4} s2ss ,\,\@s{12.29}}%
 \@y{\@s{0}%
- \ensuremath{sss[c]}: the \ensuremath{2D} state space maintained by the
+ \ensuremath{s2ss[c]}: the \ensuremath{2D} state space maintained by the
  \ensuremath{Server} for client \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{16.4} scur ,\,\@s{7.11}}%
+\@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{16.4} scur ,\,\@s{8.2}}%
 \@y{\@s{0}%
- \ensuremath{scur[c]}: the current node of \ensuremath{sss[c]
+ \ensuremath{scur[c]}: the current node of \ensuremath{s2ss[c]
 }}%
 \@xx{}%
 \begin{lcom}{10.0}%
@@ -1127,7 +1127,7 @@ The \ensuremath{2D} state spaces (\ensuremath{ss}, for short).
 For all replicas
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{16.4} state ,\,\@s{5.26}}%
+\@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{16.4} state ,\,\@s{6.35}}%
 \@y{\@s{0}%
  \ensuremath{state[r]}: state (the list content) of replica \ensuremath{r
  \.{\in} Replica
@@ -1183,14 +1183,14 @@ For model checking:
  variables for the \ensuremath{Server
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}} cssVars \.{\defeq} {\langle}
- css ,\, ccur {\rangle}\@s{12.29}}%
+ \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}} c2ssVars\@s{7.21} \.{\defeq}
+ {\langle} c2ss ,\, ccur {\rangle}\@s{12.29}}%
 \@y{\@s{0}%
  variables for \ensuremath{2D} state spaces at clients
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}} sssVars\@s{0.51} \.{\defeq}
- {\langle} sss ,\, scur {\rangle}\@s{12.81}}%
+ \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}} s2ssVars\@s{7.46} \.{\defeq}
+ {\langle} s2ss ,\, scur {\rangle}\@s{12.55}}%
 \@y{\@s{0}%
  variables for \ensuremath{2D} state spaces at the \ensuremath{Server
 }}%
@@ -1202,7 +1202,7 @@ For model checking:
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}} vars \.{\defeq} {\langle}
- eVars ,\, cVars ,\, sVars ,\, commVars ,\, cssVars ,\, sssVars ,\, state
+ eVars ,\, cVars ,\, sVars ,\, commVars ,\, c2ssVars ,\, s2ssVars ,\, state
  {\rangle}}%
 \@y{\@s{0}%
  all variables
@@ -1243,8 +1243,8 @@ For the \ensuremath{2D} state spaces:
 \end{cpar}%
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}}\@s{16.4} \.{\land} \A\,
- c\@s{6.96} \.{\in} Client \.{:} IsSS ( css [ c ] ) \.{\land} IsSS ( sss [ c
- ] )}%
+ c\@s{6.96} \.{\in} Client \.{:} IsSS ( c2ss [ c ] ) \.{\land} IsSS ( s2ss [
+ c ] )}%
  \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}\@s{16.4} \.{\land} ccur
  \.{\in} [ Client \.{\rightarrow} {\SUBSET} Oid ]}%
  \@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}}\@s{16.4} \.{\land} scur
@@ -1291,14 +1291,14 @@ For the \ensuremath{Server} replica (the extended part):
 For the \ensuremath{2D} state spaces:
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 145\hspace{1em}}\@s{16.4} \.{\land} css
- \.{=} [ c \.{\in} Client \.{\mapsto} [ node \.{\mapsto} \{ \{ \} \} ,\, edge
- \.{\mapsto} \{ \} ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 145\hspace{1em}}\@s{16.4} \.{\land}
+ c2ss\@s{0.18} \.{=} [ c \.{\in} Client \.{\mapsto} [ node \.{\mapsto} \{ \{
+ \} \} ,\, edge \.{\mapsto} \{ \} ] ]}%
  \@x{\makebox[0pt][r]{\scriptsize 146\hspace{1em}}\@s{16.4} \.{\land} ccur
  \.{=} [ c \.{\in} Client \.{\mapsto} \{ \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{16.4} \.{\land} sss
- \.{=} [ c \.{\in} Client \.{\mapsto} [ node \.{\mapsto} \{ \{ \} \} ,\, edge
- \.{\mapsto} \{ \} ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{16.4} \.{\land}
+ s2ss\@s{0.44} \.{=} [ c \.{\in} Client \.{\mapsto} [ node \.{\mapsto} \{ \{
+ \} \} ,\, edge \.{\mapsto} \{ \} ] ]}%
  \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{16.4} \.{\land} scur
  \.{=} [ c \.{\in} Client \.{\mapsto} \{ \} ]}%
 \begin{lcom}{15.0}%
@@ -1407,7 +1407,7 @@ For model checking:
  \@x{\makebox[0pt][r]{\scriptsize 198\hspace{1em}} ClientPerform ( cop ,\, c
  ,\, d ) \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 199\hspace{1em}}\@s{16.4} \.{\LET} xss
- \.{\defeq} xForm ( cop ,\, css [ c ] ,\, ccur [ c ] ,\, d )}%
+ \.{\defeq} xForm ( cop ,\, c2ss [ c ] ,\, ccur [ c ] ,\, d )}%
  \@x{\makebox[0pt][r]{\scriptsize 200\hspace{1em}}\@s{36.79} xn \.{\defeq} xss
  . node}%
  \@x{\makebox[0pt][r]{\scriptsize 201\hspace{1em}}\@s{36.79} xe\@s{1.03}
@@ -1417,10 +1417,10 @@ For model checking:
  \@x{\makebox[0pt][r]{\scriptsize 203\hspace{1em}}\@s{36.79} xcop\@s{0.31}
  \.{\defeq} Last ( xe ) . cop}%
  \@x{\makebox[0pt][r]{\scriptsize 204\hspace{1em}}\@s{16.4} \.{\IN} \.{\land}
- css \.{'} \.{=} [ css {\EXCEPT} {\bang} [ c ] . node \.{=} @ \.{\cup} Range
- ( xn ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 205\hspace{1em}}\@s{136.04} {\bang} [ c ] .
- edge\@s{1.53} \.{=} @ \.{\cup} Range ( xe ) ]}%
+ c2ss \.{'}\@s{0.18} \.{=} [ c2ss {\EXCEPT} {\bang} [ c ] . node \.{=} @
+ \.{\cup} Range ( xn ) ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 205\hspace{1em}}\@s{125.83} {\bang} [ c ] .
+ edge \.{=} @ \.{\cup} Range ( xe ) ]}%
  \@x{\makebox[0pt][r]{\scriptsize 206\hspace{1em}}\@s{36.79} \.{\land} ccur
  \.{'} \.{=} [ ccur {\EXCEPT} {\bang} [ c ] \.{=} xcur ]}%
  \@x{\makebox[0pt][r]{\scriptsize 207\hspace{1em}}\@s{36.79} \.{\land} state
@@ -1472,7 +1472,7 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  \@x{\makebox[0pt][r]{\scriptsize 224\hspace{1em}}\@s{27.72} \.{\land} DoOp (
  c ,\, ins )}%
  \@x{\makebox[0pt][r]{\scriptsize 225\hspace{1em}}\@s{27.72} \.{\land}
- {\UNCHANGED} {\langle} sVars ,\, sssVars {\rangle}}%
+ {\UNCHANGED} {\langle} sVars ,\, s2ssVars {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 227\hspace{1em}} DoDel ( c ) \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 228\hspace{1em}}\@s{16.4} \E\, del \.{\in}
@@ -1482,7 +1482,7 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  \@x{\makebox[0pt][r]{\scriptsize 230\hspace{1em}}\@s{27.72} \.{\land} DoOp (
  c ,\, del )}%
  \@x{\makebox[0pt][r]{\scriptsize 231\hspace{1em}}\@s{27.72} \.{\land}
- {\UNCHANGED} {\langle} sVars ,\, sssVars ,\, eVars {\rangle}}%
+ {\UNCHANGED} {\langle} sVars ,\, s2ssVars ,\, eVars {\rangle}}%
 \@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 233\hspace{1em}} Do ( c ) \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 234\hspace{1em}}\@s{22.34} \.{\lor} DoIns (
@@ -1507,7 +1507,7 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  \@x{\makebox[0pt][r]{\scriptsize 242\hspace{1em}}\@s{36.15} \.{\IN}
  ClientPerform ( cop ,\, c ,\, Local )}%
  \@x{\makebox[0pt][r]{\scriptsize 243\hspace{1em}}\@s{20.94} \.{\land}
- {\UNCHANGED} {\langle} eVars ,\, cVars ,\, sVars ,\, sssVars {\rangle}}%
+ {\UNCHANGED} {\langle} eVars ,\, cVars ,\, sVars ,\, s2ssVars {\rangle}}%
 \@x{\makebox[0pt][r]{\scriptsize 244\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1519,7 +1519,7 @@ The \ensuremath{Server} performs operation cop.
  \@x{\makebox[0pt][r]{\scriptsize 249\hspace{1em}}\@s{16.4} \.{\LET} c
  \.{\defeq} cop . oid . c}%
  \@x{\makebox[0pt][r]{\scriptsize 250\hspace{1em}}\@s{24.59} xss\@s{3.72}
- \.{\defeq} xForm ( cop ,\, sss [ c ] ,\, scur [ c ] ,\, Remote )}%
+ \.{\defeq} xForm ( cop ,\, s2ss [ c ] ,\, scur [ c ] ,\, Remote )}%
  \@x{\makebox[0pt][r]{\scriptsize 251\hspace{1em}}\@s{28.69} xn\@s{2.23}
  \.{\defeq} xss . node}%
  \@x{\makebox[0pt][r]{\scriptsize 252\hspace{1em}}\@s{28.69} xe\@s{3.27}
@@ -1529,24 +1529,24 @@ The \ensuremath{Server} performs operation cop.
  \@x{\makebox[0pt][r]{\scriptsize 254\hspace{1em}}\@s{20.5} xcop\@s{1.88}
  \.{\defeq} Last ( xe ) . cop}%
  \@x{\makebox[0pt][r]{\scriptsize 255\hspace{1em}}\@s{16.4} \.{\IN} \.{\land}
- sss \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
-\@x{\makebox[0pt][r]{\scriptsize 256\hspace{1em}}\@s{88.11} {\IF} cl \.{=} c}%
- \@x{\makebox[0pt][r]{\scriptsize 257\hspace{1em}}\@s{88.11} \.{\THEN} [ sss [
- cl ] {\EXCEPT} {\bang} . node \.{=} @ \.{\cup} Range ( xn ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 258\hspace{1em}}\@s{191.05} {\bang} .
- edge\@s{1.53} \.{=} @ \.{\cup} Range ( xe ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 259\hspace{1em}}\@s{88.11} \.{\ELSE}
+ s2ss \.{'}\@s{0.44} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
+\@x{\makebox[0pt][r]{\scriptsize 256\hspace{1em}}\@s{90.27} {\IF} cl \.{=} c}%
+ \@x{\makebox[0pt][r]{\scriptsize 257\hspace{1em}}\@s{90.27} \.{\THEN} [ s2ss
+ [ cl ] {\EXCEPT} {\bang} . node \.{=} @ \.{\cup} Range ( xn ) ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 258\hspace{1em}}\@s{181.61}
+ {\bang}\@s{12.85} . edge \.{=} @ \.{\cup} Range ( xe ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 259\hspace{1em}}\@s{90.27} \.{\ELSE}
  \.{\LET} scurcl \.{\defeq} scur [ cl ]}%
- \@x{\makebox[0pt][r]{\scriptsize 260\hspace{1em}}\@s{139.82} scurclprime
+ \@x{\makebox[0pt][r]{\scriptsize 260\hspace{1em}}\@s{141.98} scurclprime
  \.{\defeq} scurcl \.{\cup} \{ cop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 261\hspace{1em}}\@s{119.42} \.{\IN} [ sss [
+ \@x{\makebox[0pt][r]{\scriptsize 261\hspace{1em}}\@s{121.58} \.{\IN} [ s2ss [
  cl ] {\EXCEPT} {\bang} . node \.{=} @ \.{\cup} \{ scurclprime \} ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 262\hspace{1em}}\@s{211.45} {\bang} .
- edge\@s{1.53} \.{=} @ \.{\cup} \{ [ from \.{\mapsto} scurcl ,\, to
- \.{\mapsto} scurclprime ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 263\hspace{1em}}\@s{283.58} cop\@s{1.78}
+ \@x{\makebox[0pt][r]{\scriptsize 262\hspace{1em}}\@s{202.01}
+ {\bang}\@s{12.85} . edge \.{=} @ \.{\cup} \{ [ from \.{\mapsto} scurcl ,\,
+ to \.{\mapsto} scurclprime ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 263\hspace{1em}}\@s{285.46} cop\@s{1.78}
  \.{\mapsto} xcop ,\, lr \.{\mapsto} Remote ] \} ]}%
-\@x{\makebox[0pt][r]{\scriptsize 264\hspace{1em}}\@s{77.13} ]}%
+\@x{\makebox[0pt][r]{\scriptsize 264\hspace{1em}}\@s{74.16} ]}%
  \@x{\makebox[0pt][r]{\scriptsize 265\hspace{1em}}\@s{36.79} \.{\land} scur
  \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
  \@x{\makebox[0pt][r]{\scriptsize 266\hspace{1em}}\@s{90.27} {\IF} cl \.{=} c
@@ -1580,7 +1580,7 @@ The \ensuremath{Server} receives a message.
  \@x{\makebox[0pt][r]{\scriptsize 277\hspace{1em}}\@s{52.01} \.{\land}
  ServerPerform ( cop )}%
  \@x{\makebox[0pt][r]{\scriptsize 278\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} {\langle} eVars ,\, cVars ,\, cssVars {\rangle}}%
+ {\UNCHANGED} {\langle} eVars ,\, cVars ,\, c2ssVars {\rangle}}%
 \@x{\makebox[0pt][r]{\scriptsize 279\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1606,7 +1606,7 @@ The \ensuremath{Spec}. (\ensuremath{TODO}: Check the fairness condition.)
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Wed}
- \ensuremath{Oct} 31 17:26:33 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{Oct} 31 19:02:50 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
