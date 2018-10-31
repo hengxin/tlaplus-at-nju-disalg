@@ -28,7 +28,7 @@
 		<link>
 			<name>MinMax2.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/learning-tlaplus/learning-tlaplus-papers/AuxiliaryVariables-Lamport/auxiliary/MinMax2.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/MinMax2.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
