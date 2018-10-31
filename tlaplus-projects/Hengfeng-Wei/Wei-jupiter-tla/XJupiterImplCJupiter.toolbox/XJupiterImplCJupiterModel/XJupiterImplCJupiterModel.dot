@@ -1,0 +1,379 @@
+strict digraph DiskGraph {
+edge [colorscheme="paired12"]
+nodesep=0.35;
+subgraph cluster_graph {
+color="white";
+-5772242913186935567 [style = filled] [label="/\\ soids = {}
+/\\ sincoming = <<>>
+/\\ ccur = (c1 :> {} @@ c2 :> {})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {a, b}
+/\\ cseq = (c1 :> 0 @@ c2 :> 0)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ state = (c1 :> <<>> @@ c2 :> <<>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"]
+-5772242913186935567 -> -3590144877979867377 [label="" color="2" fontcolor="2"];
+-3590144877979867377 [label="/\\ soids = {}
+/\\ sincoming = << [ sctx |-> {},
+     oid |-> [c |-> c1, seq |-> 1],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+     ctx |-> {} ] >>
+/\\ ccur = (c1 :> {[c |-> c1, seq |-> 1]} @@ c2 :> {})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {b}
+/\\ cseq = (c1 :> 1 @@ c2 :> 0)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = ( c1 :>
+      [ node |-> {{}, {[c |-> c1, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 0 ] } ] @@
+  c2 :> [node |-> {{}}, edge |-> {}] )
+/\\ state = (c1 :> <<a>> @@ c2 :> <<>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"];
+-5772242913186935567 -> -3199902776153476642 [label="" color="2" fontcolor="2"];
+-3199902776153476642 [label="/\\ soids = {}
+/\\ sincoming = << [ sctx |-> {},
+     oid |-> [c |-> c1, seq |-> 1],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> b, pr |-> 1],
+     ctx |-> {} ] >>
+/\\ ccur = (c1 :> {[c |-> c1, seq |-> 1]} @@ c2 :> {})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {a}
+/\\ cseq = (c1 :> 1 @@ c2 :> 0)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = ( c1 :>
+      [ node |-> {{}, {[c |-> c1, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> b, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 0 ] } ] @@
+  c2 :> [node |-> {{}}, edge |-> {}] )
+/\\ state = (c1 :> <<b>> @@ c2 :> <<>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"];
+-3590144877979867377 -> -3870665022480224967 [label="" color="2" fontcolor="2"];
+-3870665022480224967 [label="/\\ soids = {}
+/\\ sincoming = << [ sctx |-> {},
+     oid |-> [c |-> c1, seq |-> 1],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+     ctx |-> {} ],
+   [ sctx |-> {},
+     oid |-> [c |-> c1, seq |-> 2],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> b, pr |-> 1],
+     ctx |-> {[c |-> c1, seq |-> 1]} ] >>
+/\\ ccur = (c1 :> {[c |-> c1, seq |-> 1], [c |-> c1, seq |-> 2]} @@ c2 :> {})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {}
+/\\ cseq = (c1 :> 2 @@ c2 :> 0)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = ( c1 :>
+      [ node |->
+            { {},
+              {[c |-> c1, seq |-> 1]},
+              {[c |-> c1, seq |-> 1], [c |-> c1, seq |-> 2]} },
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 0 ],
+              [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 2],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> b, pr |-> 1],
+                      ctx |-> {[c |-> c1, seq |-> 1]} ],
+                from |-> {[c |-> c1, seq |-> 1]},
+                to |-> {[c |-> c1, seq |-> 1], [c |-> c1, seq |-> 2]},
+                lr |-> 0 ] } ] @@
+  c2 :> [node |-> {{}}, edge |-> {}] )
+/\\ state = (c1 :> <<b, a>> @@ c2 :> <<>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"];
+-3590144877979867377 -> -878673385979242566 [label="" color="2" fontcolor="2"];
+-878673385979242566 [label="/\\ soids = {}
+/\\ sincoming = << [ sctx |-> {},
+     oid |-> [c |-> c1, seq |-> 1],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+     ctx |-> {} ],
+   [ sctx |-> {},
+     oid |-> [c |-> c1, seq |-> 2],
+     op |-> [type |-> \"Ins\", pos |-> 2, ch |-> b, pr |-> 1],
+     ctx |-> {[c |-> c1, seq |-> 1]} ] >>
+/\\ ccur = (c1 :> {[c |-> c1, seq |-> 1], [c |-> c1, seq |-> 2]} @@ c2 :> {})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {}
+/\\ cseq = (c1 :> 2 @@ c2 :> 0)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = ( c1 :>
+      [ node |->
+            { {},
+              {[c |-> c1, seq |-> 1]},
+              {[c |-> c1, seq |-> 1], [c |-> c1, seq |-> 2]} },
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 0 ],
+              [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 2],
+                      op |-> [type |-> \"Ins\", pos |-> 2, ch |-> b, pr |-> 1],
+                      ctx |-> {[c |-> c1, seq |-> 1]} ],
+                from |-> {[c |-> c1, seq |-> 1]},
+                to |-> {[c |-> c1, seq |-> 1], [c |-> c1, seq |-> 2]},
+                lr |-> 0 ] } ] @@
+  c2 :> [node |-> {{}}, edge |-> {}] )
+/\\ state = (c1 :> <<a, b>> @@ c2 :> <<>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"];
+-3590144877979867377 -> 5133086814510068106 [label="" color="2" fontcolor="2"];
+5133086814510068106 [label="/\\ soids = {}
+/\\ sincoming = << [ sctx |-> {},
+     oid |-> [c |-> c1, seq |-> 1],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+     ctx |-> {} ],
+   [ sctx |-> {},
+     oid |-> [c |-> c1, seq |-> 2],
+     op |-> [type |-> \"Del\", pos |-> 1],
+     ctx |-> {[c |-> c1, seq |-> 1]} ] >>
+/\\ ccur = (c1 :> {[c |-> c1, seq |-> 1], [c |-> c1, seq |-> 2]} @@ c2 :> {})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {b}
+/\\ cseq = (c1 :> 2 @@ c2 :> 0)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = ( c1 :>
+      [ node |->
+            { {},
+              {[c |-> c1, seq |-> 1]},
+              {[c |-> c1, seq |-> 1], [c |-> c1, seq |-> 2]} },
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 0 ],
+              [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 2],
+                      op |-> [type |-> \"Del\", pos |-> 1],
+                      ctx |-> {[c |-> c1, seq |-> 1]} ],
+                from |-> {[c |-> c1, seq |-> 1]},
+                to |-> {[c |-> c1, seq |-> 1], [c |-> c1, seq |-> 2]},
+                lr |-> 0 ] } ] @@
+  c2 :> [node |-> {{}}, edge |-> {}] )
+/\\ state = (c1 :> << >> @@ c2 :> <<>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"];
+-5772242913186935567 -> -3347401294854963295 [label="" color="2" fontcolor="2"];
+-3347401294854963295 [label="/\\ soids = {}
+/\\ sincoming = << [ sctx |-> {},
+     oid |-> [c |-> c2, seq |-> 1],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 2],
+     ctx |-> {} ] >>
+/\\ ccur = (c1 :> {} @@ c2 :> {[c |-> c2, seq |-> 1]})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {b}
+/\\ cseq = (c1 :> 0 @@ c2 :> 1)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = ( c1 :> [node |-> {{}}, edge |-> {}] @@
+  c2 :>
+      [ node |-> {{}, {[c |-> c2, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c2, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 2],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c2, seq |-> 1]},
+                lr |-> 0 ] } ] )
+/\\ state = (c1 :> <<>> @@ c2 :> <<a>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"];
+-3590144877979867377 -> 5606210779558570276 [label="" color="2" fontcolor="2"];
+5606210779558570276 [label="/\\ soids = {}
+/\\ sincoming = << [ sctx |-> {},
+     oid |-> [c |-> c1, seq |-> 1],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+     ctx |-> {} ],
+   [ sctx |-> {},
+     oid |-> [c |-> c2, seq |-> 1],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> b, pr |-> 2],
+     ctx |-> {} ] >>
+/\\ ccur = (c1 :> {[c |-> c1, seq |-> 1]} @@ c2 :> {[c |-> c2, seq |-> 1]})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {}
+/\\ cseq = (c1 :> 1 @@ c2 :> 1)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = ( c1 :>
+      [ node |-> {{}, {[c |-> c1, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 0 ] } ] @@
+  c2 :>
+      [ node |-> {{}, {[c |-> c2, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c2, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> b, pr |-> 2],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c2, seq |-> 1]},
+                lr |-> 0 ] } ] )
+/\\ state = (c1 :> <<a>> @@ c2 :> <<b>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"];
+-5772242913186935567 -> 3272786793363831113 [label="" color="2" fontcolor="2"];
+3272786793363831113 [label="/\\ soids = {}
+/\\ sincoming = << [ sctx |-> {},
+     oid |-> [c |-> c2, seq |-> 1],
+     op |-> [type |-> \"Ins\", pos |-> 1, ch |-> b, pr |-> 2],
+     ctx |-> {} ] >>
+/\\ ccur = (c1 :> {} @@ c2 :> {[c |-> c2, seq |-> 1]})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {a}
+/\\ cseq = (c1 :> 0 @@ c2 :> 1)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = ( c1 :> [node |-> {{}}, edge |-> {}] @@
+  c2 :>
+      [ node |-> {{}, {[c |-> c2, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c2, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> b, pr |-> 2],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c2, seq |-> 1]},
+                lr |-> 0 ] } ] )
+/\\ state = (c1 :> <<>> @@ c2 :> <<b>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"];
+-5772242913186935567 -> -5772242913186935567 [style="dashed"];
+-5772242913186935567 [label="/\\ soids = {}
+/\\ sincoming = <<>>
+/\\ ccur = (c1 :> {} @@ c2 :> {})
+/\\ cxss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ chins = {a, b}
+/\\ cseq = (c1 :> 0 @@ c2 :> 0)
+/\\ scur = (c1 :> {} @@ c2 :> {})
+/\\ cincoming = (c1 :> <<>> @@ c2 :> <<>>)
+/\\ css = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ state = (c1 :> <<>> @@ c2 :> <<>> @@ Server :> <<>>)
+/\\ sss = (c1 :> [node |-> {{}}, edge |-> {}] @@ c2 :> [node |-> {{}}, edge |-> {}])
+/\\ cincomingCJ = (c1 :> <<>> @@ c2 :> <<>>)"];
+-3590144877979867377 -> 4674157858159842524 [label="" color="3" fontcolor="3"];
+4674157858159842524 [label="/\\ soids = {[c |-> c1, seq |-> 1]}
+/\\ sincoming = <<>>
+/\\ ccur = (c1 :> {[c |-> c1, seq |-> 1]} @@ c2 :> {})
+/\\ cxss = ( c1 :> [node |-> {{}}, edge |-> {}] @@
+  c2 :>
+      [ node |-> {{}, {[c |-> c1, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 0 ] } ] )
+/\\ chins = {b}
+/\\ cseq = (c1 :> 1 @@ c2 :> 0)
+/\\ scur = (c1 :> {[c |-> c1, seq |-> 1]} @@ c2 :> {[c |-> c1, seq |-> 1]})
+/\\ cincoming = ( c1 :> <<>> @@
+  c2 :>
+      << [ sctx |-> {},
+           oid |-> [c |-> c1, seq |-> 1],
+           op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+           ctx |-> {} ] >> )
+/\\ css = ( c1 :>
+      [ node |-> {{}, {[c |-> c1, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 0 ] } ] @@
+  c2 :> [node |-> {{}}, edge |-> {}] )
+/\\ state = (c1 :> <<a>> @@ c2 :> <<>> @@ Server :> <<a>>)
+/\\ sss = ( c1 :>
+      [ node |-> {{}, {[c |-> c1, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 0 ] } ] @@
+  c2 :>
+      [ node |-> {{}, {[c |-> c1, seq |-> 1]}},
+        edge |->
+            { [ cop |->
+                    [ sctx |-> {},
+                      oid |-> [c |-> c1, seq |-> 1],
+                      op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+                      ctx |-> {} ],
+                from |-> {},
+                to |-> {[c |-> c1, seq |-> 1]},
+                lr |-> 1 ] } ] )
+/\\ cincomingCJ = ( c1 :> <<>> @@
+  c2 :>
+      << [ sctx |-> {},
+           oid |-> [c |-> c1, seq |-> 1],
+           op |-> [type |-> \"Ins\", pos |-> 1, ch |-> a, pr |-> 1],
+           ctx |-> {} ] >> )"];
+{rank = same; -5772242913186935567;}
+{rank = same; -3590144877979867377;}
+}
+subgraph cluster_legend {graph[style=bold];label = "Next State Actions" style="solid"
+node [ labeljust="l" colorscheme="paired12" style=filled shape=record ]
+DoImpl [label="DoImpl" fillcolor=2]
+SRevImpl [label="SRevImpl" fillcolor=3]
+}}
