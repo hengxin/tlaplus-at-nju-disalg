@@ -52,7 +52,7 @@
 <intAttribute key="simuSeed" value="-1"/>
 <stringAttribute key="specName" value="MinMax1"/>
 <listAttribute key="traceExploreExpressions">
-<listEntry value="1M!min"/>
+<listEntry value="1min"/>
 </listAttribute>
 <stringAttribute key="view" value=""/>
 <booleanAttribute key="visualizeStateGraph" value="false"/>

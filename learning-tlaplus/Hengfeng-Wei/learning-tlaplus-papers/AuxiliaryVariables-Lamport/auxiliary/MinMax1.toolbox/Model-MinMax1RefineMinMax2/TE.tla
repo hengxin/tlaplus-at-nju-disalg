@@ -2,26 +2,26 @@
 EXTENDS MinMax1, TLC
 
 \* CONSTANT definition @modelParameterDefinitions:2
-CONSTANT def_ov_1540986290415234000
+CONSTANT def_ov_1540988705861261000
 ----
 \* CONSTANT definition @modelParameterDefinitions:3
-CONSTANT def_ov_1540986290415235000
+CONSTANT def_ov_1540988705861262000
 ----
 \* CONSTANT definition @modelParameterDefinitions:4
-def_ov_1540986290415236000 ==
+def_ov_1540988705861263000 ==
 1 .. 4
 ----
 \* TRACE EXPLORER variable declaration @traceExploreExpressions
-VARIABLES __trace_var_1540986290415238000
+VARIABLES __trace_var_1540988705861265000
 ----
 
 \* TRACE EXPLORER identifier definition @traceExploreExpressions
-trace_def_1540986290415237000 ==
-M!min
+trace_def_1540988705861264000 ==
+min
 ----
 
 \* TRACE INIT definitiontraceExploreInit
-init_1540986290415239000 ==
+init_1540988705861266000 ==
  x = (
 None
 )/\
@@ -34,7 +34,7 @@ None
 ----
 
 \* TRACE NEXT definitiontraceExploreNext
-next_1540986290415240000 ==
+next_1540988705861267000 ==
 ( x = (
 None
 )/\
@@ -76,4 +76,4 @@ Both
 
 =============================================================================
 \* Modification History
-\* Created Wed Oct 31 19:44:50 CST 2018 by hengxin
+\* Created Wed Oct 31 20:25:05 CST 2018 by hengxin

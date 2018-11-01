@@ -242,6 +242,7 @@ Rev(c) ==
     /\ comm!CRev(c)
     /\ LET cop == Head(cincoming[c]) \* the received original operation
         IN Perform(cop, c)
+    /\ PrintT(css)
     /\ UNCHANGED <<eVars, cVars, sVars>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
@@ -261,10 +262,11 @@ SRev ==
 Next == 
     \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
-(*********************************************************************)
-(* The Spec.  (TODO: Check the fairness condition.)                  *)
-(*********************************************************************)
-Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
+(*
+The Spec.
+There is no requirement that the clients ever generate operations.
+*)
+Spec == Init /\ [][Next]_vars /\ WF_vars(SRev \/ \E c \in Client: Rev(c))
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The compactness of CJupiter:                                      *)
@@ -279,5 +281,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Wed Oct 24 10:41:24 CST 2018 by hengxin
+\* Last modified Thu Nov 01 14:15:01 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

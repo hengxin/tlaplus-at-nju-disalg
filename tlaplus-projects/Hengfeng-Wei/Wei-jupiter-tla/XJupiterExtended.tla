@@ -284,10 +284,10 @@ Next ==
     \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
 (* 
-The Spec.  (TODO: Check the fairness condition.)
+The Spec.
 *)
-Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
+Spec == Init /\ [][Next]_vars /\ WF_vars(SRev \/ \E c \in Client: Rev(c))
 =============================================================================
 \* Modification History
-\* Last modified Wed Oct 31 19:02:50 CST 2018 by hengxin
+\* Last modified Thu Nov 01 10:08:39 CST 2018 by hengxin
 \* Created Tue Oct 30 20:32:27 CST 2018 by hengxin

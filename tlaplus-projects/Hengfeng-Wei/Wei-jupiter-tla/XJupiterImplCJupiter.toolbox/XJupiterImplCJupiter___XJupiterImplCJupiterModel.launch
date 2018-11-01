@@ -19,7 +19,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="SpecImpl"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="soids, sincoming, s2ss, ccur, cxss, chins, cseq, scur, cincoming, c2ss, state, cincomingCJ"/>
+<stringAttribute key="modelBehaviorVars" value="soids, sincoming, s2ss, ccur, op2ss, chins, cseq, scur, cincoming, c2ss, c2ssX, state, cincomingCJ"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants"/>
@@ -49,8 +49,9 @@
 <stringAttribute key="specName" value="XJupiterImplCJupiter"/>
 <listAttribute key="traceExploreExpressions">
 <listEntry value="1IgnoreDir(SetReduce((+), Range(s2ss), [node |-&gt; {{}}, edge |-&gt; {}]))"/>
-<listEntry value="1PrintT(css)"/>
+<listEntry value="1IgnoreDir(c2ss[c1] (+) c2ssX[c1])"/>
+<listEntry value="1IgnoreDir(c2ss[c2] (+) c2ssX[c2])"/>
 </listAttribute>
 <stringAttribute key="view" value=""/>
-<booleanAttribute key="visualizeStateGraph" value="true"/>
+<booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>

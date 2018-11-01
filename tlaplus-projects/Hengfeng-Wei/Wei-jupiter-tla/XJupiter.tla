@@ -271,9 +271,9 @@ Next ==
     \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
 (* 
-The Spec.  (TODO: Check the fairness condition.)
+The Spec.
 *)
-Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
+Spec == Init /\ [][Next]_vars /\ WF_vars(SRev \/ \E c \in Client: Rev(c))
 -----------------------------------------------------------------------------
 (*
 In Jupiter (not limited to XJupiter), each client synchronizes with the server.
@@ -285,5 +285,5 @@ CSSync ==
         (ccur[c] = scur[c] /\ TLCCnt(1, 100)) => css[c] = sss[c]
 =============================================================================
 \* Modification History
-\* Last modified Thu Oct 11 20:13:07 CST 2018 by hengxin
+\* Last modified Thu Nov 01 10:07:53 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

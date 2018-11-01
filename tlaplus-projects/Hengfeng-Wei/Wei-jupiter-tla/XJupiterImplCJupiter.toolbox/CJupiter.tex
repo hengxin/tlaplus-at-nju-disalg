@@ -1495,82 +1495,86 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 244\hspace{1em}}\@s{36.15} \.{\IN} Perform (
  cop ,\, c )}%
- \@x{\makebox[0pt][r]{\scriptsize 245\hspace{1em}}\@s{20.94} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 245\hspace{1em}}\@s{20.94} \.{\land} PrintT
+ ( css )}%
+ \@x{\makebox[0pt][r]{\scriptsize 246\hspace{1em}}\@s{20.94} \.{\land}
  {\UNCHANGED} {\langle} eVars ,\, cVars ,\, sVars {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 246\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 247\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The \ensuremath{Server} receives a message.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 250\hspace{1em}} SRev \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 251\hspace{1em}}\@s{16.4} \.{\land} comm
+\@x{\makebox[0pt][r]{\scriptsize 251\hspace{1em}} SRev \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 252\hspace{1em}}\@s{16.4} \.{\land} comm
  {\bang} SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 252\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
+ \@x{\makebox[0pt][r]{\scriptsize 253\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
  cop \.{\defeq} [ Head ( sincoming ) {\EXCEPT} {\bang} . sctx \.{=} soids
  ]\@s{8.2}}%
 \@y{\@s{0}%
  set its \ensuremath{sctx} field
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 253\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 254\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
  soids \.{'} \.{=} soids \.{\cup} \{ cop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 254\hspace{1em}}\@s{52.01} \.{\land} Perform
+ \@x{\makebox[0pt][r]{\scriptsize 255\hspace{1em}}\@s{52.01} \.{\land} Perform
  ( cop ,\, Server )}%
- \@x{\makebox[0pt][r]{\scriptsize 255\hspace{1em}}\@s{52.01} \.{\land} comm
+ \@x{\makebox[0pt][r]{\scriptsize 256\hspace{1em}}\@s{52.01} \.{\land} comm
  {\bang} SSendSame ( cop . oid . c ,\, cop )\@s{4.1}}%
 \@y{\@s{0}%
  broadcast the original operation
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 256\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 257\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} {\langle} eVars ,\, cVars {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 257\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 258\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The next-state relation.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 261\hspace{1em}} Next \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 262\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
+\@x{\makebox[0pt][r]{\scriptsize 262\hspace{1em}} Next \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 263\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
  \.{\in} Client \.{:} Do ( c ) \.{\lor} Rev ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 263\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
+\@x{\makebox[0pt][r]{\scriptsize 264\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Spec}. (\ensuremath{TODO}: Check the fairness condition.)
+The \ensuremath{Spec}.
+ There is no requirement that the clients ever generate operations.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 267\hspace{1em}} Spec \.{\defeq} Init
- \.{\land} {\Box} [ Next ]_{ vars} \.{\land} {\WF}_{ vars} ( Next )}%
-\@x{\makebox[0pt][r]{\scriptsize 268\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 269\hspace{1em}} Spec \.{\defeq} Init
+ \.{\land} {\Box} [ Next ]_{ vars} \.{\land} {\WF}_{ vars} ( SRev \.{\lor}
+ \E\, c \.{\in} Client \.{:} Rev ( c ) )}%
+\@x{\makebox[0pt][r]{\scriptsize 270\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The compactness of \ensuremath{CJupiter}:
  the \ensuremath{css} at all replicas are essentially the same.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 273\hspace{1em}} IgnoreSctx ( rcss )
+ \@x{\makebox[0pt][r]{\scriptsize 275\hspace{1em}} IgnoreSctx ( rcss )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 274\hspace{1em}}\@s{16.4} [ rcss {\EXCEPT}
+ \@x{\makebox[0pt][r]{\scriptsize 276\hspace{1em}}\@s{16.4} [ rcss {\EXCEPT}
  {\bang} . edge \.{=} \{ [ e {\EXCEPT} {\bang} . cop . sctx \.{=} \{ \} ]
  \.{:} e \.{\in} @ \} ]}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 276\hspace{1em}} Compactness \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 277\hspace{1em}}\@s{16.4} comm {\bang}
+\@x{\makebox[0pt][r]{\scriptsize 278\hspace{1em}} Compactness \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 279\hspace{1em}}\@s{16.4} comm {\bang}
  EmptyChannel \.{\implies} Cardinality ( \{ IgnoreSctx ( css [ r ] ) \.{:} r
  \.{\in} Replica \} ) \.{=} 1}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 279\hspace{1em}} {\THEOREM} Spec
+ \@x{\makebox[0pt][r]{\scriptsize 281\hspace{1em}} {\THEOREM} Spec
  \.{\implies} Compactness}%
-\@x{\makebox[0pt][r]{\scriptsize 280\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 282\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Wed}
- \ensuremath{Oct} 24 10:41:24 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Thu}
+ \ensuremath{Nov} 01 14:15:01 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
