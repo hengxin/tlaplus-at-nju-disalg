@@ -12,28 +12,28 @@ a, b
 ----
 
 \* MV CONSTANT definitions Client
-const_154107353743224000 == 
+const_154139990274426000 == 
 {c1, c2}
 ----
 
 \* MV CONSTANT definitions Char
-const_154107353743225000 == 
+const_154139990274427000 == 
 {a, b}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2InitState
-const_154107353743226000 == 
+const_154139990274428000 == 
 <<>>
 ----
 
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_154107353743228000 ==
+spec_154139990274430000 ==
 SpecImpl
 ----
 \* PROPERTY definition @modelCorrectnessProperties:0
-prop_154107353743329000 ==
+prop_154139990274431000 ==
 CJ!Spec
 ----
 =============================================================================
 \* Modification History
-\* Created Thu Nov 01 19:58:57 CST 2018 by hengxin
+\* Created Mon Nov 05 14:38:22 CST 2018 by hengxin

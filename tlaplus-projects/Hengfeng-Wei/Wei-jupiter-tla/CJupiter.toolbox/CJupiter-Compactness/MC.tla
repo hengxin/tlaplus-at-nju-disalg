@@ -8,41 +8,41 @@ c1, c2, c3
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-a
+a, b
 ----
 
 \* MV CONSTANT definitions Client
-const_153639726723134000 == 
+const_154140658389418000 == 
 {c1, c2, c3}
 ----
 
 \* MV CONSTANT definitions Char
-const_153639726723135000 == 
-{a}
+const_154140658389419000 == 
+{a, b}
 ----
 
 \* SYMMETRY definition
-symm_153639726723136000 == 
-Permutations(const_153639726723134000) \union Permutations(const_153639726723135000)
+symm_154140658389420000 == 
+Permutations(const_154140658389418000) \union Permutations(const_154140658389419000)
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2InitState
-const_153639726723137000 == 
+const_154140658389421000 == 
 <<>>
 ----
 
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_153639726723139000 ==
+spec_154140658389423000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_153639726723140000 ==
+inv_154140658389424000 ==
 TypeOK
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:1
-inv_153639726723141000 ==
+inv_154140658389425000 ==
 Compactness
 ----
 =============================================================================
 \* Modification History
-\* Created Sat Sep 08 17:01:07 CST 2018 by hengxin
+\* Created Mon Nov 05 16:29:43 CST 2018 by hengxin

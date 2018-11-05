@@ -19,7 +19,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="css, chins, cur, soids, state, cseq, incoming"/>
+<stringAttribute key="modelBehaviorVars" value="css, chins, cur, soids, sincoming, state, cincoming, cseq"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -31,7 +31,7 @@
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Client;;{c1, c2, c3};1;1"/>
-<listEntry value="Char;;{a};1;1"/>
+<listEntry value="Char;;{a, b};1;1"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
 <listEntry value="Server;;Server;1;0"/>
 </listAttribute>

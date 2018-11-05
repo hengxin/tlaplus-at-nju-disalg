@@ -51,6 +51,7 @@
 <listEntry value="1IgnoreDir(SetReduce((+), Range(s2ss), [node |-&gt; {{}}, edge |-&gt; {}]))"/>
 <listEntry value="1IgnoreDir(c2ss[c1] (+) c2ssX[c1])"/>
 <listEntry value="1IgnoreDir(c2ss[c2] (+) c2ssX[c2])"/>
+<listEntry value="1IgnoreDir(c2ss[c1])"/>
 </listAttribute>
 <stringAttribute key="view" value=""/>
 <booleanAttribute key="visualizeStateGraph" value="false"/>

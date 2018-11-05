@@ -60,6 +60,17 @@ IsSortedSequenceOfSetElements(seq,set)==
 DeleteElement(seq,index)==
   [i \in 1..(Len(seq)-1)|->IF i<index THEN seq[i]ELSE seq[(i+1)]]
   
+(*
+Retain only the elements in R in their original order in seq.
+*)
+RECURSIVE Retain(_,_)
+Retain(seq, R) ==
+    IF seq = <<>>
+    THEN <<>>
+    ELSE LET h == Head(seq)
+          IN IF h \in R
+             THEN <<h>> \o Retain(Tail(seq), R)
+             ELSE Retain(Tail(seq), R)
 (****************************************************************)
 (* It requires that index >= 1.                                 *)
 (*                                                              *)
@@ -168,5 +179,5 @@ LCSCompatibleTest(S) ==
     \A seq1, seq2 \in PermsWithin(S): LCSCompatible(seq1, seq2)
 =============================================================================
 \* Modification History
-\* Last modified Mon Sep 03 20:26:21 CST 2018 by hengxin
+\* Last modified Tue Sep 25 19:13:32 CST 2018 by hengxin
 \* Created Tue Jul 03 15:21:02 CST 2018 by hengxin
