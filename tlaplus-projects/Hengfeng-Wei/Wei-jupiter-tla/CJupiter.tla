@@ -38,18 +38,7 @@ Op == Ins \cup Del
 (* Cop: operation of type Op with context                            *)
 (*********************************************************************)
 Oid == [c: Client, seq: Nat]  \* operation identifier
-Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid, sctx: SUBSET Oid]
-    
-(*********************************************************************)
-(* tb: Is cop1 totally ordered before cop2?                          *)
-(*                                                                   *)
-(* At a given replica r \in Replica, these can be determined in terms of sctx. *)
-(*********************************************************************)
-tb(cop1, cop2, r) ==
-    \/ cop1.oid \in cop2.sctx
-    \/ /\ cop1.oid \notin cop2.sctx
-       /\ cop2.oid \notin cop1.sctx
-       /\ cop1.oid.c # r
+Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid]
     
 (*********************************************************************)
 (* OT of two operations of type Cop.                                 *)
@@ -61,10 +50,12 @@ VARIABLES
     (* For the client replicas:                                      *)
     (*****************************************************************)
     cseq,    \* cseq[c]: local sequence number at client c \in Client
-    (*****************************************************************)
-    (* For the server replica:                                       *)
-    (*****************************************************************)
-    soids,  \* the set of operations the Server has executed
+    (*
+    For edge ordering
+    *)
+    serial, \* serial[r]: the serial order of operations from the view of each replica r \in Replica
+    cincomingSerial,
+    sincomingSerial,
     (*****************************************************************)
     (* For all replicas: the n-ary ordered state space               *)
     (*****************************************************************)
@@ -81,15 +72,27 @@ VARIABLES
     (*****************************************************************)
     chins   \* a set of chars to insert
 
+(* 
+tb: Is cop1 totally ordered before cop2?
+This is determined according to "serial" at replica r \in Replica
+*)
+tb(cop1, cop2, r) == 
+    LET pos1 == FirstIndexOfElementSafe(serial[r], cop1.oid)
+        pos2 == FirstIndexOfElementSafe(serial[r], cop2.oid)
+     IN IF pos1 # 0 /\ pos2 # 0
+        THEN pos1 < pos2
+        ELSE pos1 # 0
 -----------------------------------------------------------------------------
 comm == INSTANCE CSComm WITH Msg <- Cop
+commSerial == INSTANCE CSComm 
+                WITH Msg <- Seq(Oid), cincoming <- cincomingSerial, sincoming <- sincomingSerial
 -----------------------------------------------------------------------------
 eVars == <<chins>>  \* variables for the environment
 cVars == <<cseq>>   \* variables for the clients
-sVars  == <<soids>> \* variables for the server
 dsVars == <<css, cur, state>>           \* variables for the data structure: the n-ary ordered state space
 commVars == <<cincoming, sincoming>>    \* variables for communication
-vars == <<eVars, cVars, sVars, commVars, dsVars>> \* all variables
+serialVars == <<serial, cincomingSerial, sincomingSerial>>
+vars == <<eVars, cVars, commVars, serialVars, dsVars>> \* all variables
 -----------------------------------------------------------------------------
 (*****************************************************************)
 (* An css is a directed graph with labeled edges.                *)
@@ -111,10 +114,11 @@ TypeOK ==
     (* For the client replicas:                                      *)
     (*****************************************************************)
     /\ cseq \in [Client -> Nat]
-    (*****************************************************************)
-    (* For the server replica:                                       *)
-    (*****************************************************************)
-    /\ soids \subseteq Oid
+    (*
+    For edge ordering:
+    *)
+\*    /\ serial \in [Replica -> Seq(Seq(Oid))]
+\*    /\ commSerial!TypeOK
     (*****************************************************************)
     (* For all replicas: the n-ary ordered state space                                      *)
     (*****************************************************************)
@@ -141,7 +145,8 @@ Init ==
     (*****************************************************************)
     (* For the server replica:                                       *)
     (*****************************************************************)
-    /\ soids = {}
+    /\ serial = [r \in Replica |-> <<>>]
+    /\ commSerial!Init
     (*****************************************************************)
     (* For all replicas: the n-ary ordered state space                                      *)
     (*****************************************************************)
@@ -213,7 +218,7 @@ Perform(cop, r) ==
 (*********************************************************************)
 DoOp(c, op) == \* op: the raw operation generated by the client c \in Client
     /\ cseq' = [cseq EXCEPT ![c] = @ + 1]
-    /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> cur[c], sctx |-> {}]
+    /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> cur[c]]
         IN /\ Perform(cop, c)
            /\ comm!CSend(cop)
 
@@ -224,13 +229,13 @@ DoIns(c) ==
         /\ ins.pr = Priority[c]
         /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
         /\ DoOp(c, ins)
-        /\ UNCHANGED sVars
+        /\ UNCHANGED <<serialVars>>
 
 DoDel(c) == 
     \E del \in Del:
         /\ del.pos \in 1 .. Len(state[c])
         /\ DoOp(c, del)
-        /\ UNCHANGED <<sVars, eVars>>
+        /\ UNCHANGED <<eVars, serialVars>>
 
 Do(c) == 
     \/ DoIns(c)
@@ -242,18 +247,21 @@ Rev(c) ==
     /\ comm!CRev(c)
     /\ LET cop == Head(cincoming[c]) \* the received original operation
         IN Perform(cop, c)
-    /\ UNCHANGED <<eVars, cVars, sVars>>
+    /\ commSerial!CRev(c)
+    /\ serial' = [serial EXCEPT ![c] = Head(cincomingSerial[c])]
+    /\ UNCHANGED <<eVars, cVars>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The Server receives a message.                                    *)
 (*********************************************************************)
 SRev == 
     /\ comm!SRev
-    /\ LET cop == [Head(sincoming) EXCEPT !.sctx = soids]   \* set its sctx field
-        IN /\ soids' = soids \cup {cop.oid}
-           /\ Perform(cop, Server)
+    /\ LET cop == Head(sincoming)
+        IN /\ Perform(cop, Server)
            /\ comm!SSendSame(cop.oid.c, cop)  \* broadcast the original operation
-    /\ UNCHANGED <<eVars, cVars>>
+           /\ serial' = [serial EXCEPT ![Server] = Append(@, cop.oid)]
+           /\ commSerial!SSendSame(cop.oid.c, serial')
+    /\ UNCHANGED <<eVars, cVars, sincomingSerial>>
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* The next-state relation.                                          *)
@@ -271,14 +279,11 @@ Spec == Init /\ [][Next]_vars /\ WF_vars(SRev \/ \E c \in Client: Rev(c))
 (* The compactness of CJupiter:                                      *)
 (* the css at all replicas are essentially the same.               *)
 (*********************************************************************)
-IgnoreSctx(rcss) ==
-    [rcss EXCEPT !.edge = {[e EXCEPT !.cop.sctx = {}] : e \in @}]
-
 Compactness == 
-    comm!EmptyChannel => Cardinality({IgnoreSctx(css[r]) : r \in Replica}) = 1
+    comm!EmptyChannel => Cardinality({css[r] : r \in Replica}) = 1
 
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Mon Nov 05 15:21:27 CST 2018 by hengxin
+\* Last modified Mon Nov 05 21:24:49 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

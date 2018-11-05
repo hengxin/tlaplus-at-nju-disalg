@@ -1217,6 +1217,31 @@ ADDED by hengxin; \ensuremath{Aug}. 12, 2018
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
+Get the index of the first occurence of \ensuremath{elem} in \ensuremath{seq}.
+ It returns 0 if \ensuremath{elem} does not occur in \ensuremath{seq}.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}} {\RECURSIVE}
+ FirstIndexOfElementSafe ( \_ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}} FirstIndexOfElementSafe (
+ seq ,\, elem ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 149\hspace{1em}}\@s{16.4} \.{\LET}
+ {\RECURSIVE} FirstIndexOfElementSafeHelper ( \_ ,\, \_ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 150\hspace{1em}}\@s{40.89}
+ FirstIndexOfElementSafeHelper ( seqh ,\, elemh ,\, fail ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 151\hspace{1em}}\@s{57.29} {\IF} seqh \.{=}
+ {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 152\hspace{1em}}\@s{57.29} \.{\THEN} 0 \.{-}
+ fail}%
+ \@x{\makebox[0pt][r]{\scriptsize 153\hspace{1em}}\@s{57.29} \.{\ELSE} {\IF}
+ Head ( seqh ) \.{=} elemh}%
+\@x{\makebox[0pt][r]{\scriptsize 154\hspace{1em}}\@s{88.61} \.{\THEN} 1}%
+ \@x{\makebox[0pt][r]{\scriptsize 155\hspace{1em}}\@s{88.61} \.{\ELSE} 1 \.{+}
+ FirstIndexOfElementSafeHelper ( Tail ( seqh ) ,\, elemh ,\, fail \.{+} 1 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 156\hspace{1em}}\@s{20.5} \.{\IN}
+ FirstIndexOfElementSafeHelper ( seq ,\, elem ,\, 0 )}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
 Check if two sequences are compatible.
 \end{cpar}%
 \vshade{5.0}%
@@ -1234,20 +1259,20 @@ Two sequences are compatible if and only if for any two common elements
 ADDED by hengxin; \ensuremath{Aug}. 12, 2018
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 154\hspace{1em}} Compatible ( seq1 ,\, seq2
+ \@x{\makebox[0pt][r]{\scriptsize 168\hspace{1em}} Compatible ( seq1 ,\, seq2
  ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 155\hspace{1em}}\@s{16.4} \.{\lor} seq1
+ \@x{\makebox[0pt][r]{\scriptsize 169\hspace{1em}}\@s{16.4} \.{\lor} seq1
  \.{=} seq2}%
- \@x{\makebox[0pt][r]{\scriptsize 156\hspace{1em}}\@s{16.4} \.{\lor} \.{\LET}
+ \@x{\makebox[0pt][r]{\scriptsize 170\hspace{1em}}\@s{16.4} \.{\lor} \.{\LET}
  commonElements \.{\defeq} Range ( seq1 ) \.{\cap} Range ( seq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 157\hspace{1em}}\@s{27.51} \.{\IN} \A\, e1
+ \@x{\makebox[0pt][r]{\scriptsize 171\hspace{1em}}\@s{27.51} \.{\IN} \A\, e1
  ,\, e2 \.{\in} commonElements \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 158\hspace{1em}}\@s{56.11} \.{\lor} e1 \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 172\hspace{1em}}\@s{56.11} \.{\lor} e1 \.{=}
  e2}%
- \@x{\makebox[0pt][r]{\scriptsize 159\hspace{1em}}\@s{56.11} \.{\lor}
+ \@x{\makebox[0pt][r]{\scriptsize 173\hspace{1em}}\@s{56.11} \.{\lor}
  FirstIndexOfElement ( seq1 ,\, e1 ) \.{<} FirstIndexOfElement ( seq1 ,\, e2
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 160\hspace{1em}}\@s{67.22} \.{\equiv}
+ \@x{\makebox[0pt][r]{\scriptsize 174\hspace{1em}}\@s{67.22} \.{\equiv}
  FirstIndexOfElement ( seq2 ,\, e1 ) \.{<} FirstIndexOfElement ( seq2 ,\, e2
  )}%
 \@pvspace{8.0pt}%
@@ -1261,40 +1286,40 @@ ADDED by hengxin; \ensuremath{Aug}. 12, 2018
 ADDED by hengxin; \ensuremath{Aug}. 12, 2018
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 167\hspace{1em}} {\RECURSIVE} LCS ( \_ ,\,
+ \@x{\makebox[0pt][r]{\scriptsize 181\hspace{1em}} {\RECURSIVE} LCS ( \_ ,\,
  \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 168\hspace{1em}} LCS ( seq1 ,\, seq2 )
+ \@x{\makebox[0pt][r]{\scriptsize 182\hspace{1em}} LCS ( seq1 ,\, seq2 )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 169\hspace{1em}}\@s{24.13} {\IF} seq1 \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 183\hspace{1em}}\@s{24.13} {\IF} seq1 \.{=}
  {\langle} {\rangle} \.{\lor} seq2 \.{=} {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 170\hspace{1em}}\@s{24.13} \.{\THEN} 0}%
- \@x{\makebox[0pt][r]{\scriptsize 171\hspace{1em}}\@s{24.13} \.{\ELSE} {\IF}
+\@x{\makebox[0pt][r]{\scriptsize 184\hspace{1em}}\@s{24.13} \.{\THEN} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 185\hspace{1em}}\@s{24.13} \.{\ELSE} {\IF}
  Last ( seq1 ) \.{=} Last ( seq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 172\hspace{1em}}\@s{55.44} \.{\THEN} 1 \.{+}
+ \@x{\makebox[0pt][r]{\scriptsize 186\hspace{1em}}\@s{55.44} \.{\THEN} 1 \.{+}
  LCS ( AllButLast ( seq1 ) ,\, AllButLast ( seq2 ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 173\hspace{1em}}\@s{55.44} \.{\ELSE}
+ \@x{\makebox[0pt][r]{\scriptsize 187\hspace{1em}}\@s{55.44} \.{\ELSE}
  MaxOfSet ( \{ LCS ( AllButLast ( seq1 ) ,\, seq2 ) ,\, LCS ( seq1 ,\,
  AllButLast ( seq2 ) ) \} )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 175\hspace{1em}} LCSCompatible ( seq1 ,\,
+ \@x{\makebox[0pt][r]{\scriptsize 189\hspace{1em}} LCSCompatible ( seq1 ,\,
  seq2 ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 176\hspace{1em}}\@s{16.4} Compatible ( seq1
+ \@x{\makebox[0pt][r]{\scriptsize 190\hspace{1em}}\@s{16.4} Compatible ( seq1
  ,\, seq2 ) \.{\equiv} LCS ( seq1 ,\, seq2 ) \.{=} Cardinality ( Range ( seq1
  ) \.{\cap} Range ( seq2 ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 178\hspace{1em}} LCSCompatibleTest ( S )
+ \@x{\makebox[0pt][r]{\scriptsize 192\hspace{1em}} LCSCompatibleTest ( S )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 179\hspace{1em}}\@s{16.4} \A\, seq1 ,\, seq2
+ \@x{\makebox[0pt][r]{\scriptsize 193\hspace{1em}}\@s{16.4} \A\, seq1 ,\, seq2
  \.{\in} PermsWithin ( S ) \.{:} LCSCompatible ( seq1 ,\, seq2 )}%
-\@x{\makebox[0pt][r]{\scriptsize 180\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 194\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Tue}
- \ensuremath{Sep} 25 19:13:32 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Mon}
+ \ensuremath{Nov} 05 21:10:44 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

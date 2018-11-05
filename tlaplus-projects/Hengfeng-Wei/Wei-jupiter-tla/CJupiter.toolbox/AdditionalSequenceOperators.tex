@@ -1055,6 +1055,28 @@ This module also provides several additional operators on sequences:
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
+ Retain only the elements in \ensuremath{R} in their original order in
+ \ensuremath{seq}.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}} {\RECURSIVE} Retain ( \_ ,\,
+ \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}} Retain ( seq ,\, R )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{16.4} {\IF} seq \.{=}
+ {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{16.4} \.{\THEN} {\langle}
+ {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{16.4} \.{\ELSE} \.{\LET}
+ h \.{\defeq} Head ( seq )}%
+ \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{51.81} \.{\IN} {\IF} h
+ \.{\in} R}%
+ \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{72.21} \.{\THEN}
+ {\langle} h {\rangle} \.{\circ} Retain ( Tail ( seq ) ,\, R )}%
+ \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{72.21} \.{\ELSE} Retain (
+ Tail ( seq ) ,\, R )}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
 It requires that \ensuremath{index \.{\geq} 1}.
 \end{cpar}%
 \vshade{5.0}%
@@ -1067,59 +1089,59 @@ It requires that \ensuremath{index \.{\geq} 1}.
 (ADDED by hengxin; \ensuremath{July} 04, 2018)
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}} InsertElement ( seq ,\, elem
+ \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}} InsertElement ( seq ,\, elem
  ,\, index ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{8.2} [ i \.{\in} 1
+ \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{8.2} [ i \.{\in} 1
  \.{\dotdot} ( Len ( seq ) \.{+} 1 ) \.{\mapsto} {\IF} i \.{<} index}%
- \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{124.92} \.{\THEN} {\IF} i
+ \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{124.92} \.{\THEN} {\IF} i
  \.{=} ( Len ( seq ) \.{+} 1 )}%
-\@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{156.23} \.{\THEN} elem}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{156.23} \.{\ELSE} seq [ i
+\@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{156.23} \.{\THEN} elem}%
+ \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{156.23} \.{\ELSE} seq [ i
  ]}%
- \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{124.92} \.{\ELSE} {\IF} i
+ \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{124.92} \.{\ELSE} {\IF} i
  \.{=} index}%
-\@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}\@s{156.23} \.{\THEN} elem}%
- \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{156.23} \.{\ELSE} seq [ (
+\@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{156.23} \.{\THEN} elem}%
+ \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{156.23} \.{\ELSE} seq [ (
  i \.{-} 1 ) ] ]}%
 \@y{\@s{0}%
  \ensuremath{i \.{>} index
 }}%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}} IsSorted2Partition ( n ,\,
+ \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}} IsSorted2Partition ( n ,\,
  seq1 ,\, seq2 ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{8.2} \.{\land} seq1
+ \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{8.2} \.{\land} seq1
  \.{\in} Seq ( 1 \.{\dotdot} n )}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{8.2} \.{\land} seq2
+ \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}\@s{8.2} \.{\land} seq2
  \.{\in} Seq ( 1 \.{\dotdot} n )}%
- \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{8.2} \.{\land} n \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}}\@s{8.2} \.{\land} n \.{=}
  Len ( seq1 ) \.{+} Len ( seq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} seq1 ,\, j \.{\in} {\DOMAIN} seq1 \.{:} i \.{<} j
  \.{\implies} seq1 [ i ] \.{<} seq1 [ j ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 95\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} seq2 ,\, j \.{\in} {\DOMAIN} seq2 \.{:} i \.{<} j
  \.{\implies} seq2 [ i ] \.{<} seq2 [ j ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} seq1 ,\, j \.{\in} {\DOMAIN} seq2 \.{:} seq1 [ i ]
  \.{\neq} seq2 [ j ] )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}} IsSequenceInterleaving ( seq
+ \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}} IsSequenceInterleaving ( seq
  ,\, subSeq1 ,\, subSeq2 ,\, indSeq1 ,\, indSeq2 ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{8.2} \.{\land} indSeq1
+ \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{8.2} \.{\land} indSeq1
  \.{\in} Seq ( Nat )}%
- \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{8.2} \.{\land} indSeq2
+ \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{8.2} \.{\land} indSeq2
  \.{\in} Seq ( Nat )}%
- \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{8.2} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}}\@s{8.2} \.{\land}
  IsSorted2Partition ( Len ( seq ) ,\, indSeq1 ,\, indSeq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{8.2} \.{\land} Len (
+ \@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}}\@s{8.2} \.{\land} Len (
  indSeq1 ) \.{=} Len ( subSeq1 )}%
- \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}\@s{8.2} \.{\land} Len (
+ \@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}}\@s{8.2} \.{\land} Len (
  indSeq2 ) \.{=} Len ( subSeq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 104\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} indSeq1 \.{:} seq [ ( indSeq1 [ i ] ) ] \.{=} subSeq1 [ i
  ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
+ \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}}\@s{8.2} \.{\land} ( \A\, i
  \.{\in} {\DOMAIN} indSeq2 \.{:} seq [ ( indSeq2 [ i ] ) ] \.{=} subSeq2 [ i
  ] )}%
 \@pvspace{8.0pt}%
@@ -1133,7 +1155,7 @@ It requires that \ensuremath{index \.{\geq} 1}.
 Copyright: https:\ensuremath{\.{\slsl}www.learntla.com}/libraries/sequences/
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}} SeqMaxLen ( S ,\, n )
+ \@x{\makebox[0pt][r]{\scriptsize 112\hspace{1em}} SeqMaxLen ( S ,\, n )
  \.{\defeq}\@s{4.1} {\UNION} \{ [ 1 \.{\dotdot} m \.{\rightarrow} S ] \.{:} m
  \.{\in} 0 \.{\dotdot} n \}}%
 \@pvspace{8.0pt}%
@@ -1146,10 +1168,10 @@ Map on a sequence.
 Copyright: https:\ensuremath{\.{\slsl}www.learntla.com}/libraries/sequences/
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}} SeqMap ( Op ( \_ ) ,\, seq
+ \@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}} SeqMap ( Op ( \_ ) ,\, seq
  ) \.{\defeq} [ x \.{\in} {\DOMAIN} seq \.{\mapsto} Op ( seq [ x ] ) ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}} PermsWithin ( S )
+ \@x{\makebox[0pt][r]{\scriptsize 121\hspace{1em}} PermsWithin ( S )
  \.{\defeq}\@s{4.1} \{ s \.{\in} {\UNION} \{ [ 1 \.{\dotdot} m
  \.{\rightarrow} S ] \.{:} m \.{\in} 0 \.{\dotdot} Cardinality ( S ) \} \.{:}
  Cardinality ( Range ( s ) ) \.{=} Cardinality ( {\DOMAIN} s ) \}}%
@@ -1163,10 +1185,10 @@ All possible permutations generated based on sequence \ensuremath{T}.
 Copyright: https:\ensuremath{\.{\slsl}learntla.com}/tla/functions/
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}} PermutationKey ( n
+ \@x{\makebox[0pt][r]{\scriptsize 128\hspace{1em}} PermutationKey ( n
  )\@s{1.00} \.{\defeq} \{ key \.{\in} [ 1 \.{\dotdot} n \.{\rightarrow} 1
  \.{\dotdot} n ] \.{:} Range ( key ) \.{=} 1 \.{\dotdot} n \}}%
- \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}} PermutationsOf ( T )
+ \@x{\makebox[0pt][r]{\scriptsize 129\hspace{1em}} PermutationsOf ( T )
  \.{\defeq} \{ [ x\@s{6.31} \.{\in} 1 \.{\dotdot} Len ( T ) \.{\mapsto} T [ P
  [ x ] ] ] \.{:} P \.{\in} PermutationKey ( Len ( T ) ) \}}%
 \begin{lcom}{0}%
@@ -1183,16 +1205,35 @@ Precondition: \ensuremath{elem \.{\in} SeqImage(seq)}.
 ADDED by hengxin; \ensuremath{Aug}. 12, 2018
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 126\hspace{1em}} {\RECURSIVE}
+ \@x{\makebox[0pt][r]{\scriptsize 137\hspace{1em}} {\RECURSIVE}
  FirstIndexOfElement ( \_ ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 127\hspace{1em}} FirstIndexOfElement ( seq
+ \@x{\makebox[0pt][r]{\scriptsize 138\hspace{1em}} FirstIndexOfElement ( seq
  ,\, elem ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 128\hspace{1em}}\@s{16.4} {\IF} Head ( seq )
+ \@x{\makebox[0pt][r]{\scriptsize 139\hspace{1em}}\@s{16.4} {\IF} Head ( seq )
  \.{=} elem}%
-\@x{\makebox[0pt][r]{\scriptsize 129\hspace{1em}}\@s{16.4} \.{\THEN} 1}%
- \@x{\makebox[0pt][r]{\scriptsize 130\hspace{1em}}\@s{16.4} \.{\ELSE} 1 \.{+}
+\@x{\makebox[0pt][r]{\scriptsize 140\hspace{1em}}\@s{16.4} \.{\THEN} 1}%
+ \@x{\makebox[0pt][r]{\scriptsize 141\hspace{1em}}\@s{16.4} \.{\ELSE} 1 \.{+}
  FirstIndexOfElement ( Tail ( seq ) ,\, elem )}%
 \@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 143\hspace{1em}} {\RECURSIVE}
+ FirstIndexOfElementSafe ( \_ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 144\hspace{1em}} FirstIndexOfElementSafe (
+ seq ,\, elem ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 145\hspace{1em}}\@s{16.4} \.{\LET}
+ {\RECURSIVE} FirstIndexOfElementSafeHelper ( \_ ,\, \_ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 146\hspace{1em}}\@s{40.89}
+ FirstIndexOfElementSafeHelper ( seqh ,\, elemh ,\, fail ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{57.29} {\IF} seqh \.{=}
+ {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{57.29} \.{\THEN} 0 \.{-}
+ fail}%
+ \@x{\makebox[0pt][r]{\scriptsize 149\hspace{1em}}\@s{57.29} \.{\ELSE} {\IF}
+ Head ( seqh ) \.{=} elemh}%
+\@x{\makebox[0pt][r]{\scriptsize 150\hspace{1em}}\@s{88.61} \.{\THEN} 1}%
+ \@x{\makebox[0pt][r]{\scriptsize 151\hspace{1em}}\@s{88.61} \.{\ELSE} 1 \.{+}
+ FirstIndexOfElementSafeHelper ( Tail ( seqh ) ,\, elemh ,\, fail \.{+} 1 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 152\hspace{1em}}\@s{20.5} \.{\IN}
+ FirstIndexOfElementSafeHelper ( seq ,\, elem ,\, 0 )}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 Check if two sequences are compatible.
@@ -1212,20 +1253,20 @@ Two sequences are compatible if and only if for any two common elements
 ADDED by hengxin; \ensuremath{Aug}. 12, 2018
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 143\hspace{1em}} Compatible ( seq1 ,\, seq2
+ \@x{\makebox[0pt][r]{\scriptsize 164\hspace{1em}} Compatible ( seq1 ,\, seq2
  ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 144\hspace{1em}}\@s{16.4} \.{\lor} seq1
+ \@x{\makebox[0pt][r]{\scriptsize 165\hspace{1em}}\@s{16.4} \.{\lor} seq1
  \.{=} seq2}%
- \@x{\makebox[0pt][r]{\scriptsize 145\hspace{1em}}\@s{16.4} \.{\lor} \.{\LET}
+ \@x{\makebox[0pt][r]{\scriptsize 166\hspace{1em}}\@s{16.4} \.{\lor} \.{\LET}
  commonElements \.{\defeq} Range ( seq1 ) \.{\cap} Range ( seq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 146\hspace{1em}}\@s{27.51} \.{\IN} \A\, e1
+ \@x{\makebox[0pt][r]{\scriptsize 167\hspace{1em}}\@s{27.51} \.{\IN} \A\, e1
  ,\, e2 \.{\in} commonElements \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{56.11} \.{\lor} e1 \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 168\hspace{1em}}\@s{56.11} \.{\lor} e1 \.{=}
  e2}%
- \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{56.11} \.{\lor}
+ \@x{\makebox[0pt][r]{\scriptsize 169\hspace{1em}}\@s{56.11} \.{\lor}
  FirstIndexOfElement ( seq1 ,\, e1 ) \.{<} FirstIndexOfElement ( seq1 ,\, e2
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 149\hspace{1em}}\@s{67.22} \.{\equiv}
+ \@x{\makebox[0pt][r]{\scriptsize 170\hspace{1em}}\@s{67.22} \.{\equiv}
  FirstIndexOfElement ( seq2 ,\, e1 ) \.{<} FirstIndexOfElement ( seq2 ,\, e2
  )}%
 \@pvspace{8.0pt}%
@@ -1239,32 +1280,32 @@ ADDED by hengxin; \ensuremath{Aug}. 12, 2018
 ADDED by hengxin; \ensuremath{Aug}. 12, 2018
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 156\hspace{1em}} {\RECURSIVE} LCS ( \_ ,\,
+ \@x{\makebox[0pt][r]{\scriptsize 177\hspace{1em}} {\RECURSIVE} LCS ( \_ ,\,
  \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 157\hspace{1em}} LCS ( seq1 ,\, seq2 )
+ \@x{\makebox[0pt][r]{\scriptsize 178\hspace{1em}} LCS ( seq1 ,\, seq2 )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 158\hspace{1em}}\@s{24.13} {\IF} seq1 \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 179\hspace{1em}}\@s{24.13} {\IF} seq1 \.{=}
  {\langle} {\rangle} \.{\lor} seq2 \.{=} {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 159\hspace{1em}}\@s{24.13} \.{\THEN} 0}%
- \@x{\makebox[0pt][r]{\scriptsize 160\hspace{1em}}\@s{24.13} \.{\ELSE} {\IF}
+\@x{\makebox[0pt][r]{\scriptsize 180\hspace{1em}}\@s{24.13} \.{\THEN} 0}%
+ \@x{\makebox[0pt][r]{\scriptsize 181\hspace{1em}}\@s{24.13} \.{\ELSE} {\IF}
  Last ( seq1 ) \.{=} Last ( seq2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 161\hspace{1em}}\@s{55.44} \.{\THEN} 1 \.{+}
+ \@x{\makebox[0pt][r]{\scriptsize 182\hspace{1em}}\@s{55.44} \.{\THEN} 1 \.{+}
  LCS ( AllButLast ( seq1 ) ,\, AllButLast ( seq2 ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 162\hspace{1em}}\@s{55.44} \.{\ELSE}
+ \@x{\makebox[0pt][r]{\scriptsize 183\hspace{1em}}\@s{55.44} \.{\ELSE}
  MaxOfSet ( \{ LCS ( AllButLast ( seq1 ) ,\, seq2 ) ,\, LCS ( seq1 ,\,
  AllButLast ( seq2 ) ) \} )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 164\hspace{1em}} LCSCompatible ( seq1 ,\,
+ \@x{\makebox[0pt][r]{\scriptsize 185\hspace{1em}} LCSCompatible ( seq1 ,\,
  seq2 ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 165\hspace{1em}}\@s{16.4} Compatible ( seq1
+ \@x{\makebox[0pt][r]{\scriptsize 186\hspace{1em}}\@s{16.4} Compatible ( seq1
  ,\, seq2 ) \.{\equiv} LCS ( seq1 ,\, seq2 ) \.{=} Cardinality ( Range ( seq1
  ) \.{\cap} Range ( seq2 ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 167\hspace{1em}} LCSCompatibleTest ( S )
+ \@x{\makebox[0pt][r]{\scriptsize 188\hspace{1em}} LCSCompatibleTest ( S )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 168\hspace{1em}}\@s{16.4} \A\, seq1 ,\, seq2
+ \@x{\makebox[0pt][r]{\scriptsize 189\hspace{1em}}\@s{16.4} \A\, seq1 ,\, seq2
  \.{\in} PermsWithin ( S ) \.{:} LCSCompatible ( seq1 ,\, seq2 )}%
-\@x{\makebox[0pt][r]{\scriptsize 169\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 190\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1272,7 +1313,7 @@ ADDED by hengxin; \ensuremath{Aug}. 12, 2018
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Mon}
- \ensuremath{Sep} 03 20:26:21 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{Nov} 05 21:06:18 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
