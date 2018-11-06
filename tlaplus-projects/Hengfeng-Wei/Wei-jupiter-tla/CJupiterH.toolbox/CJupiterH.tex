@@ -940,619 +940,66 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} CJupiter}\moduleRightDash\@xx{}%
+ {\MODULE} CJupiterH}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Model of our own \ensuremath{CJupiter} protocol.
+\ensuremath{CJupiter} with a history of all list states across the system.
 \end{cpar}%
 \end{lcom}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} Integers ,\, OT
- ,\, TLC ,\, AdditionalFunctionOperators ,\, AdditionalSequenceOperators}%
+\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} CJupiter}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\CONSTANTS}}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Client ,\,\@s{16.4}}%
-\@y{\@s{0}%
- the set of client replicas
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Server
- ,\,\@s{14.73}}%
-\@y{\@s{0}%
- the (unique) server replica
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} Char ,\,\@s{20.99}}%
-\@y{\@s{0}%
- set of characters allowed
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4}
- InitState\@s{11.18}}%
-\@y{\@s{0}%
- the initial state of each replica
-}%
-\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\VARIABLE} list}%
+ \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} varsH \.{\defeq} {\langle}
+ vars ,\, list {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} Replica \.{\defeq} Client
- \.{\cup} \{ Server \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}} TypeOKH \.{\defeq} TypeOK
+ \.{\land} ( list \.{\subseteq} List )}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} InitH \.{\defeq} Init
+ \.{\land} list \.{=} \{ InitState \}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} List \.{\defeq} Seq ( Char
- \.{\cup} Range ( InitState ) )\@s{42.53}}%
-\@y{\@s{0}%
- all possible lists/strings
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} MaxLen \.{\defeq}
- Cardinality ( Char ) \.{+} Len ( InitState )}%
-\@y{\@s{0}%
- the max length of lists in any states;
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4}}%
-\@y{\@s{0}%
- We assume that all inserted elements are unique.
-}%
-\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} DoH ( c ) \.{\defeq} Do ( c
+ ) \.{\land} list \.{'} \.{=} list \.{\cup} \{ state \.{'} [ c ] \}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} ClientNum \.{\defeq}
- Cardinality ( Client )}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} Priority \.{\defeq}
- {\CHOOSE} f \.{\in} [ Client \.{\rightarrow} 1 \.{\dotdot} ClientNum ] \.{:}
- Injective ( f )}%
-\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} {\ASSUME}}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} Range (
- InitState ) \.{\cap} Char \.{=} \{ \}\@s{4.1}}%
-\@y{\@s{0}%
- due to the uniqueness requirement
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land} Priority
- \.{\in} [ Client \.{\rightarrow} 1 \.{\dotdot} ClientNum ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} RevH ( c ) \.{\defeq} Rev (
+ c ) \.{\land} list \.{'} \.{=} list \.{\cup} \{ state \.{'} [ c ] \}}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} SRevH \.{\defeq} SRev
+ \.{\land} list \.{'} \.{=} list \.{\cup} \{ state \.{'} [ Server ] \}}%
+\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} NextH \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
+ \.{\in} Client \.{:} DoH ( c ) \.{\lor} RevH ( c )}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\lor} SRevH}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} SpecH \.{\defeq} InitH
+ \.{\land} {\Box} [ NextH ]_{ varsH} \.{\land} {\WF}_{ varsH} ( SRevH
+ \.{\lor} \E\, c \.{\in} Client \.{:} RevH ( c ) )}%
 \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-The set of all operations.
- Note: The positions are indexed from 1.
+\ensuremath{WLSpec}: the weak list specification
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}} Rd \.{\defeq} [ type \.{:}
- \{\@w{Rd} \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} Del \.{\defeq} [ type \.{:}
- \{\@w{Del} \} ,\, pos \.{:} 1 \.{\dotdot} MaxLen ]}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} Ins\@s{1.35} \.{\defeq} [
- type \.{:} \{\@w{Ins} \} ,\, pos\@s{2.27} \.{:} 1 \.{\dotdot} ( MaxLen \.{+}
- 1 ) ,\, ch \.{:} Char ,\, pr \.{:} 1 \.{\dotdot} ClientNum ]}%
-\@y{\@s{0}%
- \ensuremath{pr}: priority
-}%
-\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} WLSpec \.{\defeq} comm
+ {\bang} EmptyChannel}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{62.82} \.{\implies} \A\,
+ l1 ,\, l2 \.{\in} list \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{82.48} \.{\land}
+ Injective ( l1 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{82.48} \.{\land}
+ Injective ( l2 )}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{82.48} \.{\land}
+ Compatible ( l1 ,\, l2 )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} Op \.{\defeq} Ins \.{\cup}
- Del}%
-\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} {\THEOREM} SpecH
+ \.{\implies} WLSpec}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Cop: operation of type \ensuremath{Op} with context
+\ensuremath{SLSpec}: the strong list specification
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} Oid\@s{1.13} \.{\defeq} [ c
- \.{:} Client ,\, seq \.{:} Nat ]\@s{4.1}}%
-\@y{\@s{0}%
- operation identifier
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} Cop \.{\defeq} [ op \.{:} Op
- \.{\cup} \{ Nop \} ,\, oid \.{:} Oid ,\, ctx \.{:} {\SUBSET} Oid ]}%
-\@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{tb}: Is \ensuremath{cop1} totally ordered before
- \ensuremath{cop2}\.{?}
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- This can be determined according to the serial view (\ensuremath{sv}) of any
- replica.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}} tb ( cop1 ,\, cop2 ,\, sv )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{16.54} \.{\LET}
- pos1\@s{4.09} \.{\defeq} FirstIndexOfElementSafe ( sv ,\, cop1 . oid )}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{41.04} pos2 \.{\defeq}
- FirstIndexOfElementSafe ( sv ,\, cop2 . oid )}%
- \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{20.64} \.{\IN} {\IF} pos1
- \.{\neq} 0 \.{\land} pos2 \.{\neq} 0}%
-\@y{\@s{0}%
- at the server or both are remote operations
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{41.04} \.{\THEN} pos1
- \.{<} pos2\@s{15.28}}%
-\@y{\@s{0}%
- at a client: one is a remote operation and the other is a local operation
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{41.04} \.{\ELSE} pos1
- \.{\neq} 0}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{OT} of two operations of type \ensuremath{Cop}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} COT ( lcop ,\, rcop )
- \.{\defeq} [ lcop {\EXCEPT} {\bang} . op \.{=} Xform ( lcop . op ,\, rcop .
- op ) ,\, {\bang} . ctx \.{=} @ \.{\cup} \{ rcop . oid \} ]}%
-\@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}} {\VARIABLES}}%
-\begin{lcom}{15.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the client replicas:
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{16.4} cseq ,\,\@s{8.2}}%
-\@y{\@s{0}%
- \ensuremath{cseq[c]}: local sequence number at client \ensuremath{c \.{\in}
- Client
-}}%
-\@xx{}%
-\begin{lcom}{15.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For all replicas: the \ensuremath{n}-ary ordered state space
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{16.4} css ,\,\@s{12.86}}%
-\@y{\@s{0}%
- \ensuremath{css[r]}: the \ensuremath{n}-ary ordered state space at replica
- \ensuremath{r \.{\in} Replica
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{16.4} cur ,\,\@s{11.20}}%
-\@y{\@s{0}%
- \ensuremath{cur[r]}: the current node of \ensuremath{css} at replica
- \ensuremath{r \.{\in} Replica
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{16.4} state ,\,\@s{5.26}}%
-\@y{\@s{0}%
- \ensuremath{state[r]}: state (the list content) of replica \ensuremath{r
- \.{\in} Replica
-}}%
-\@xx{}%
-\begin{lcom}{15.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For edge ordering in \ensuremath{CSS
-}%
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{16.4} serial
- ,\,\@s{1.79}}%
-\@y{\@s{0}%
- \ensuremath{serial[r]}: the serial view of replica \ensuremath{r \.{\in}
- Replica} about the server
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{16.4} cincomingSerial
- ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{16.4} sincomingSerial
- ,\,}%
-\begin{lcom}{15.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For communication between the \ensuremath{Server} and the Clients:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{16.4} cincoming
- ,\,\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{cincoming[c]}: incoming channel at the client \ensuremath{c
- \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{16.4} sincoming
- ,\,\@s{4.61}}%
-\@y{\@s{0}%
- incoming channel at the \ensuremath{Server
-}}%
-\@xx{}%
-\begin{lcom}{15.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For model checking:
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{16.4} chins\@s{8.2}}%
-\@y{\@s{0}%
- a set of chars to insert
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}} comm \.{\defeq} {\INSTANCE}
- CSComm {\WITH} Msg \.{\leftarrow} Cop}%
- \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}} commSerial \.{\defeq}
- {\INSTANCE} CSComm {\WITH} Msg \.{\leftarrow} Seq ( Oid ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{78.84} cincoming
- \.{\leftarrow} cincomingSerial ,\, sincoming \.{\leftarrow} sincomingSerial}%
-\@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}} eVars \.{\defeq} {\langle}
- chins {\rangle}\@s{4.1}}%
-\@y{\@s{0}%
- variables for the environment
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}} cVars \.{\defeq} {\langle}
- cseq {\rangle}\@s{9.14}}%
-\@y{\@s{0}%
- variables for the clients
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}} dsVars \.{\defeq} {\langle}
- css ,\, cur ,\, state {\rangle}\@s{61.65}}%
-\@y{\@s{0}%
- variables for the data structure: the \ensuremath{n}-ary ordered state space
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}} commVars \.{\defeq}
- {\langle} cincoming ,\, sincoming {\rangle}\@s{12.30}}%
-\@y{\@s{0}%
- variables for communication
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}} serialVars \.{\defeq}
- {\langle} serial ,\, cincomingSerial ,\, sincomingSerial {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 95\hspace{1em}} vars \.{\defeq} {\langle}
- eVars ,\, cVars ,\, commVars ,\, serialVars ,\, dsVars {\rangle}}%
-\@y{\@s{0}%
- all variables
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-A \ensuremath{css} is a directed graph with labeled edges,
- represented by a record with node field and edge field.
- Each node is characterized by its context, a set of oids.
- Each edge is labeled with an operation.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}} IsCSS ( G ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 104\hspace{1em}}\@s{16.4} \.{\land} G \.{=}
- [ node \.{\mapsto} G . node ,\, edge \.{\mapsto} G . edge ]}%
- \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}}\@s{16.4} \.{\land} G . node
- \.{\subseteq} ( {\SUBSET} Oid )}%
- \@x{\makebox[0pt][r]{\scriptsize 106\hspace{1em}}\@s{16.4} \.{\land} G .
- edge\@s{1.53} \.{\subseteq} [ from \.{:} G . node ,\, to \.{:} G . node ,\,
- cop \.{:} Cop ]}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}} TypeOK \.{\defeq}}%
-\begin{lcom}{15.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the client replicas:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 112\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{\in} [ Client \.{\rightarrow} Nat ]}%
-\begin{lcom}{10.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For edge ordering in \ensuremath{CSS}:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 116\hspace{1em}}\@s{16.4} \.{\land} serial
- \.{\in} [ Replica \.{\rightarrow} Seq ( Oid ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}}\@s{16.4} \.{\land}
- commSerial {\bang} TypeOK}%
-\begin{lcom}{15.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For all replicas: the \ensuremath{n}-ary ordered state space
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 121\hspace{1em}}\@s{16.4} \.{\land} \A\, r
- \.{\in} Replica \.{:} IsCSS ( css [ r ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 122\hspace{1em}}\@s{16.4} \.{\land} cur
- \.{\in} [ Replica \.{\rightarrow} {\SUBSET} Oid ]}%
- \@x{\makebox[0pt][r]{\scriptsize 123\hspace{1em}}\@s{16.4} \.{\land} state
- \.{\in} [ Replica \.{\rightarrow} List ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For communication between the server and the clients:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 127\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} TypeOK}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For model checking:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 131\hspace{1em}}\@s{16.4} \.{\land} chins
- \.{\subseteq} Char}%
-\@x{\makebox[0pt][r]{\scriptsize 132\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Init} predicate.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 136\hspace{1em}} Init \.{\defeq}}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the client replicas:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 140\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For the server replica:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 144\hspace{1em}}\@s{16.4} \.{\land} serial
- \.{=} [ r \.{\in} Replica \.{\mapsto} {\langle} {\rangle} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 145\hspace{1em}}\@s{16.4} \.{\land}
- commSerial {\bang} Init}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For all replicas: the \ensuremath{n}-ary ordered state space
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 149\hspace{1em}}\@s{16.4} \.{\land}
- css\@s{1.66} \.{=} [ r \.{\in} Replica \.{\mapsto} [ node \.{\mapsto} \{ \{
- \} \} ,\, edge \.{\mapsto} \{ \} ] ]}%
- \@x{\makebox[0pt][r]{\scriptsize 150\hspace{1em}}\@s{16.4} \.{\land} cur
- \.{=} [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 151\hspace{1em}}\@s{16.4} \.{\land} state
- \.{=} [ r \.{\in} Replica \.{\mapsto} InitState ]}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For communication between the server and the clients:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 155\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} Init}%
-\begin{lcom}{16.4}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For model checking:
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 159\hspace{1em}}\@s{16.4} \.{\land} chins
- \.{=} Char}%
-\@x{\makebox[0pt][r]{\scriptsize 160\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Locate the node in \ensuremath{rcss} (the \ensuremath{css} at replica
- \ensuremath{r \.{\in} Replica}) that matches the context \ensuremath{ctx} of
- cop.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 164\hspace{1em}} Locate ( cop ,\, rcss )
- \.{\defeq} {\CHOOSE} n \.{\in} ( rcss . node ) \.{:} n \.{=} cop . ctx}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{xForm}: Iteratively transform cop with a path through the
- \ensuremath{css
-} at replica \ensuremath{r \.{\in} Replica}, following the first edges.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 169\hspace{1em}} xForm ( cop ,\, r )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 170\hspace{1em}}\@s{16.4} \.{\LET} rcss
- \.{\defeq} css [ r ]}%
- \@x{\makebox[0pt][r]{\scriptsize 171\hspace{1em}}\@s{36.79} u \.{\defeq}
- Locate ( cop ,\, rcss )}%
- \@x{\makebox[0pt][r]{\scriptsize 172\hspace{1em}}\@s{36.79} v\@s{0.45}
- \.{\defeq} u \.{\cup} \{ cop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 173\hspace{1em}}\@s{36.79} {\RECURSIVE}
- xFormHelper ( \_ ,\, \_ ,\, \_ ,\, \_ )}%
-\@x{\makebox[0pt][r]{\scriptsize 174\hspace{1em}}\@s{36.79}}%
-\@y{\@s{0}%
- \mbox{'}h\mbox{'} stands for ``helper''; \ensuremath{xcss}:
- \ensuremath{eXtra} \ensuremath{css} created during transformation
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 175\hspace{1em}}\@s{36.79} xFormHelper ( uh
- ,\, vh ,\, coph ,\, xcss ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 176\hspace{1em}}\@s{53.19} {\IF} uh \.{=}
- cur [ r ]}%
-\@x{\makebox[0pt][r]{\scriptsize 177\hspace{1em}}\@s{53.19} \.{\THEN} xcss}%
- \@x{\makebox[0pt][r]{\scriptsize 178\hspace{1em}}\@s{53.19} \.{\ELSE}
- \.{\LET} fedge \.{\defeq} {\CHOOSE} e \.{\in} rcss . edge \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 179\hspace{1em}}\@s{154.21} \.{\land} e .
- from \.{=} uh}%
- \@x{\makebox[0pt][r]{\scriptsize 180\hspace{1em}}\@s{154.21} \.{\land} \A\,
- uhe\@s{5.90} \.{\in} rcss . edge \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 181\hspace{1em}}\@s{169.42} ( uhe . from
- \.{=} uh \.{\land} uhe \.{\neq} e ) \.{\implies} tb ( e . cop ,\, uhe . cop
- ,\, serial [ r ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 182\hspace{1em}}\@s{104.91} uprime
- \.{\defeq} fedge . to}%
- \@x{\makebox[0pt][r]{\scriptsize 183\hspace{1em}}\@s{104.91} fcop \.{\defeq}
- fedge . cop}%
- \@x{\makebox[0pt][r]{\scriptsize 184\hspace{1em}}\@s{104.91} coph2fcop
- \.{\defeq} COT ( coph ,\, fcop )}%
- \@x{\makebox[0pt][r]{\scriptsize 185\hspace{1em}}\@s{104.91} fcop2coph
- \.{\defeq} COT ( fcop ,\, coph )}%
- \@x{\makebox[0pt][r]{\scriptsize 186\hspace{1em}}\@s{109.01} vprime
- \.{\defeq} vh \.{\cup} \{ fcop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 187\hspace{1em}}\@s{84.51} \.{\IN}\@s{4.09}
- xFormHelper ( uprime ,\, vprime ,\, coph2fcop ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 188\hspace{1em}}\@s{121.31} [ xcss {\EXCEPT}
- {\bang} . node \.{=} @ \.{\circ} {\langle} vprime {\rangle} ,\,}%
-\@x{\makebox[0pt][r]{\scriptsize 189\hspace{1em}}\@s{124.08}}%
-\@y{\@s{0}%
- the order of recording edges here is important; used in
- \ensuremath{Perform(cop,\, r)
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 190\hspace{1em}}\@s{128.18} {\bang} . edge
- \.{=} @ \.{\circ} {\langle} [ from \.{\mapsto} vh ,\, to \.{\mapsto} vprime
- ,\, cop \.{\mapsto} fcop2coph ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 191\hspace{1em}}\@s{189.34} [ from
- \.{\mapsto} uprime ,\, to \.{\mapsto} vprime ,\, cop \.{\mapsto} coph2fcop ]
- {\rangle} ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 192\hspace{1em}}\@s{12.29} \.{\IN}\@s{4.1}
- xFormHelper ( u ,\, v ,\, cop ,\, [ node \.{\mapsto} {\langle} v {\rangle}
- ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 193\hspace{1em}}\@s{145.53} edge\@s{1.53}
- \.{\mapsto} {\langle} [ from \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop
- \.{\mapsto} cop ] {\rangle} ] )}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Perform cop at replica \ensuremath{r \.{\in} Replica}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 197\hspace{1em}} Perform ( cop ,\, r )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 198\hspace{1em}}\@s{16.4} \.{\LET} xcss
- \.{\defeq} xForm ( cop ,\, r )}%
- \@x{\makebox[0pt][r]{\scriptsize 199\hspace{1em}}\@s{36.79} xn \.{\defeq}
- xcss . node}%
- \@x{\makebox[0pt][r]{\scriptsize 200\hspace{1em}}\@s{36.79} xe\@s{1.03}
- \.{\defeq} xcss . edge}%
- \@x{\makebox[0pt][r]{\scriptsize 201\hspace{1em}}\@s{36.79} xcur \.{\defeq}
- Last ( xn )}%
- \@x{\makebox[0pt][r]{\scriptsize 202\hspace{1em}}\@s{36.79} xcop\@s{0.31}
- \.{\defeq} Last ( xe ) . cop}%
- \@x{\makebox[0pt][r]{\scriptsize 203\hspace{1em}}\@s{16.4} \.{\IN} \.{\land}
- css \.{'}\@s{1.66} \.{=} [ css {\EXCEPT} {\bang} [ r ] . node \.{=} @
- \.{\cup} Range ( xn ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 204\hspace{1em}}\@s{137.70} {\bang} [ r ] .
- edge\@s{1.53} \.{=} @ \.{\cup} Range ( xe ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 205\hspace{1em}}\@s{36.79} \.{\land} cur
- \.{'} \.{=} [ cur {\EXCEPT} {\bang} [ r ] \.{=} xcur ]}%
- \@x{\makebox[0pt][r]{\scriptsize 206\hspace{1em}}\@s{36.79} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ r ] \.{=} Apply ( xcop . op ,\, @ )
- ]}%
-\@x{\makebox[0pt][r]{\scriptsize 207\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 211\hspace{1em}} DoOp ( c ,\, op )
- \.{\defeq}}%
-\@y{\@s{0}%
- \ensuremath{op}: the raw operation generated by the client \ensuremath{c
- \.{\in} Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 212\hspace{1em}}\@s{26.06} \.{\land} cseq
- \.{'} \.{=} [ cseq {\EXCEPT} {\bang} [ c ] \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 213\hspace{1em}}\@s{26.06} \.{\land}
- \.{\LET} cop \.{\defeq} [ op \.{\mapsto} op ,\, oid \.{\mapsto} [ c
- \.{\mapsto} c ,\, seq \.{\mapsto} cseq \.{'} [ c ] ] ,\, ctx \.{\mapsto} cur
- [ c ] ]}%
- \@x{\makebox[0pt][r]{\scriptsize 214\hspace{1em}}\@s{37.18} \.{\IN} \.{\land}
- Perform ( cop ,\, c )}%
- \@x{\makebox[0pt][r]{\scriptsize 215\hspace{1em}}\@s{57.58} \.{\land} comm
- {\bang} CSend ( cop )}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 217\hspace{1em}} DoIns ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 218\hspace{1em}}\@s{16.4} \E\, ins \.{\in}
- \{ op \.{\in} Ins \.{:} op . pos \.{\in} 1 \.{\dotdot} ( Len ( state [ c ] )
- \.{+} 1 ) \.{\land} op . ch \.{\in} chins \.{\land} op . pr \.{=} Priority [
- c ] \} \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 219\hspace{1em}}\@s{27.72} \.{\land} DoOp (
- c ,\, ins )}%
- \@x{\makebox[0pt][r]{\scriptsize 220\hspace{1em}}\@s{27.72} \.{\land} chins
- \.{'} \.{=} chins \.{\,\backslash\,} \{ ins . ch \}}%
-\@y{\@s{0}%
- We assume that all inserted elements are unique.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 221\hspace{1em}}\@s{27.72} \.{\land}
- {\UNCHANGED} {\langle} serialVars {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 223\hspace{1em}} DoDel ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 224\hspace{1em}}\@s{16.4} \E\, del \.{\in}
- \{ op \.{\in} Del \.{:} op . pos \.{\in} 1 \.{\dotdot} Len ( state [ c ] )
- \} \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 225\hspace{1em}}\@s{27.72} \.{\land} DoOp (
- c ,\, del )}%
- \@x{\makebox[0pt][r]{\scriptsize 226\hspace{1em}}\@s{27.72} \.{\land}
- {\UNCHANGED} {\langle} eVars ,\, serialVars {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 228\hspace{1em}} Do ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 229\hspace{1em}}\@s{22.34} \.{\lor} DoIns (
- c )}%
- \@x{\makebox[0pt][r]{\scriptsize 230\hspace{1em}}\@s{22.34} \.{\lor} DoDel (
- c )}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Client \ensuremath{c \.{\in} Client} receives a message from the
- \ensuremath{Server}.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 234\hspace{1em}} Rev ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 235\hspace{1em}}\@s{20.94} \.{\land} comm
- {\bang} CRev ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 236\hspace{1em}}\@s{20.94} \.{\land} Perform
- ( Head ( cincoming [ c ] ) ,\, c )}%
- \@x{\makebox[0pt][r]{\scriptsize 237\hspace{1em}}\@s{20.94} \.{\land}
- commSerial {\bang} CRev ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 238\hspace{1em}}\@s{20.94} \.{\land} serial
- \.{'} \.{=} [ serial {\EXCEPT} {\bang} [ c ] \.{=} Head ( cincomingSerial [
- c ] ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 239\hspace{1em}}\@s{20.94} \.{\land}
- {\UNCHANGED} {\langle} eVars ,\, cVars {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 240\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Server} receives a message.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 244\hspace{1em}} SRev \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 245\hspace{1em}}\@s{16.4} \.{\land} comm
- {\bang} SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 246\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
- cop \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 247\hspace{1em}}\@s{27.51} \.{\IN} \.{\land}
- Perform ( cop ,\, Server )}%
- \@x{\makebox[0pt][r]{\scriptsize 248\hspace{1em}}\@s{47.91} \.{\land} comm
- {\bang} SSendSame ( cop . oid . c ,\, cop )\@s{4.1}}%
-\@y{\@s{0}%
- broadcast the original operation
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 249\hspace{1em}}\@s{47.91} \.{\land} serial
- \.{'} \.{=} [ serial {\EXCEPT} {\bang} [ Server ] \.{=} Append ( @ ,\, cop .
- oid ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 250\hspace{1em}}\@s{47.91} \.{\land}
- commSerial {\bang} SSendSame ( cop . oid . c ,\, serial \.{'} [ Server ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 251\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} {\langle} eVars ,\, cVars ,\, sincomingSerial {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 252\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The next-state relation.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 256\hspace{1em}} Next \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 257\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
- \.{\in} Client \.{:} Do ( c ) \.{\lor} Rev ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 258\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Spec}.
- There is no requirement that the clients ever generate operations.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 263\hspace{1em}} Spec \.{\defeq} Init
- \.{\land} {\Box} [ Next ]_{ vars} \.{\land} {\WF}_{ vars} ( SRev \.{\lor}
- \E\, c \.{\in} Client \.{:} Rev ( c ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 264\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The compactness of \ensuremath{CJupiter}: the \ensuremath{CSSes} at all
- replicas are the same.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 268\hspace{1em}} Compactness \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 269\hspace{1em}}\@s{16.4} comm {\bang}
- EmptyChannel \.{\implies} Cardinality ( \{ css [ r ] \.{:} r \.{\in} Replica
- \} ) \.{=} 1}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 271\hspace{1em}} {\THEOREM} Spec
- \.{\implies} Compactness}%
-\@x{\makebox[0pt][r]{\scriptsize 272\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1560,12 +1007,12 @@ The \ensuremath{Spec}.
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}\.{*} Last} modified \ensuremath{Tue}
- \ensuremath{Nov} 06 20:02:28 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{Nov} 06 20:41:18 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}\.{*}} Created Sat \ensuremath{Sep} 01 11:08:00
- \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}\.{*}} Created \ensuremath{Tue}
+ \ensuremath{Oct} 09 09:28:48 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%

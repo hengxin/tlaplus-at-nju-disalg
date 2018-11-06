@@ -140,6 +140,20 @@ FirstIndexOfElement(seq, elem) ==
     THEN 1
     ELSE 1 + FirstIndexOfElement(Tail(seq), elem)
 
+(*
+Get the index of the first occurence of elem in seq.
+It returns 0 if elem does not occur in seq.
+*)
+RECURSIVE FirstIndexOfElementSafe(_,_)
+FirstIndexOfElementSafe(seq, elem) == 
+    LET RECURSIVE FirstIndexOfElementSafeHelper(_,_,_)
+        FirstIndexOfElementSafeHelper(seqh, elemh, fail) ==
+            IF seqh = <<>>
+            THEN 0-fail
+            ELSE IF Head(seqh) = elemh
+                 THEN 1
+                 ELSE 1 + FirstIndexOfElementSafeHelper(Tail(seqh), elemh, fail + 1)
+     IN FirstIndexOfElementSafeHelper(seq, elem, 0)
 (****************************************************************)
 (* Check if two sequences are compatible.                       *)
 (*                                                              *)
@@ -179,5 +193,5 @@ LCSCompatibleTest(S) ==
     \A seq1, seq2 \in PermsWithin(S): LCSCompatible(seq1, seq2)
 =============================================================================
 \* Modification History
-\* Last modified Tue Sep 25 19:13:32 CST 2018 by hengxin
+\* Last modified Mon Nov 05 21:10:44 CST 2018 by hengxin
 \* Created Tue Jul 03 15:21:02 CST 2018 by hengxin
