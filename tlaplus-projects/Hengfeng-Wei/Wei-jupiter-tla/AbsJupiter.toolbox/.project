@@ -23,22 +23,22 @@
 		<link>
 			<name>AdditionalFunctionOperators.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalFunctionOperators.tla</location>
+			<location>PARENT-1-PROJECT_LOC/AdditionalFunctionOperators.tla</location>
 		</link>
 		<link>
 			<name>AdditionalSequenceOperators.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSequenceOperators.tla</location>
+			<location>PARENT-1-PROJECT_LOC/AdditionalSequenceOperators.tla</location>
 		</link>
 		<link>
 			<name>AdditionalSetOperators.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AdditionalSetOperators.tla</location>
+			<location>PARENT-1-PROJECT_LOC/AdditionalSetOperators.tla</location>
 		</link>
 		<link>
 			<name>Order.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/Order.tla</location>
+			<location>PARENT-1-PROJECT_LOC/Order.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>
