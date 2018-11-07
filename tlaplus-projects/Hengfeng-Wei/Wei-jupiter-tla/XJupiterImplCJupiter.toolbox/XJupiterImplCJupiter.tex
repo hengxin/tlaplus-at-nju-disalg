@@ -947,157 +947,152 @@
  \ensuremath{CJupiter}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} XJupiterExtended}%
+\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} XJupiterExtended}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\VARIABLES}}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} op2ss ,\,\@s{24.59}}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\VARIABLES}}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} op2ss ,\,\@s{4.1}}%
 \@y{\@s{0}%
  a function from an operation (represented by its \ensuremath{Oid})
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{72.45}}%
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{51.95}}%
 \@y{\@s{0}%
  to the part of \ensuremath{2D} state space produced while the operation is
  transformed
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} c2ssX\@s{28.20}}%
+\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} c2ssX\@s{7.70}}%
 \@y{\@s{0}%
  \ensuremath{c2ssX[c]}: redundant (\ensuremath{eXtra}) \ensuremath{2D} state
  space maintained for client \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} varsImpl \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} varsImpl \.{\defeq}
  {\langle} varsEx ,\, op2ss ,\, c2ssX {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} TypeOKImpl \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} \.{\land} TypeOKEx}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{16.4} \.{\land} \A\, oid
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} TypeOKImpl \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land} TypeOKEx}%
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} \.{\land} \A\, oid
  \.{\in} {\DOMAIN} op2ss \.{:} oid \.{\in} Oid \.{\land} IsSS ( op2ss [ oid ]
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land} \A\, c
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{16.4} \.{\land} \A\, c
  \.{\in} Client \.{:} IsSS ( c2ssX [ c ] )}%
-\@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} InitImpl \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land} InitEx}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land}
+\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} InitImpl \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} \.{\land} InitEx}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land}
  op2ss\@s{2.50} \.{=} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land} c2ssX
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land} c2ssX
  \.{=} [ c \.{\in} Client \.{\mapsto} [ node \.{\mapsto} \{ \{ \} \} ,\, edge
  \.{\mapsto} \{ \} ] ]}%
-\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  Take union of \ensuremath{2D} state spaces \ensuremath{ss1} and
  \ensuremath{ss2}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} ss1 \.{\oplus} ss2
+ \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} ss1 \.{\oplus} ss2
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{13.99} [ ss1 {\EXCEPT}
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{13.99} [ ss1 {\EXCEPT}
  {\bang} . node \.{=} @ \.{\cup} ss2 . node ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{72.79} {\bang} .
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{72.79} {\bang} .
  edge\@s{1.53} \.{=} @ \.{\cup} ss2 . edge ]}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- Ignore the \ensuremath{lr} field in edges of \ensuremath{2D} state space
- \ensuremath{ss}.
+Ignore the lr field in edges of \ensuremath{2D} state space \ensuremath{ss}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}} IgnoreDir ( ss ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{16.4} [ ss {\EXCEPT}
+\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} IgnoreDir ( ss ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} [ ss {\EXCEPT}
  {\bang} . edge \.{=}}%
-\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{28.17}}%
+\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{28.17}}%
 \@y{\@s{0}%
  \ensuremath{\{[field \.{\in} ({\DOMAIN} e \.{\,\backslash\,}
  \{\mbox{``}lr\mbox{''}\}) \.{\mapsto} e.field] \.{:} e \.{\in} @\}}]
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{28.17} \{ [ from
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{28.17} \{ [ from
  \.{\mapsto} e . from ,\, to \.{\mapsto} e . to ,\, cop \.{\mapsto} e . cop ]
  \.{:} e \.{\in} @ \} ]}%
-\@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}} DoImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land} DoEx ( c
+\@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}} DoImpl ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{16.4} \.{\land} DoEx ( c
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} {\langle} op2ss ,\, c2ssX {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}} RevImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
+\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} RevImpl ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
  RevEx ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
  \.{\LET} cop \.{\defeq} Head ( cincoming [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{40.81} \.{\IN} c2ssX
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{40.81} \.{\IN} c2ssX
  \.{'} \.{=} [ c2ssX {\EXCEPT} {\bang} [ c ] \.{=} @ \.{\oplus} op2ss [ cop .
  oid ] ]}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
  {\UNCHANGED} {\langle} op2ss {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}} SRevImpl \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} \.{\land} SRevEx}%
- \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
+\@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}} SRevImpl \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{16.4} \.{\land} SRevEx}%
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
  cop \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{56.11} c\@s{1.57}
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{56.11} c\@s{1.57}
  \.{\defeq} cop . oid . c}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{52.01} ss\@s{1.84}
- \.{\defeq} xForm ( cop ,\, s2ss [ c ] ,\, scur [ c ] ,\, Remote )}%
- \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{31.61} \.{\IN} op2ss
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{52.01} ss\@s{1.84}
+ \.{\defeq} xForm ( cop ,\, s2ss [ c ] ,\, cur [ Server ] ,\, Remote
+ )\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{TODO}: performance\.{!!}!
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{31.61} \.{\IN} op2ss
  \.{'} \.{=} op2ss \.{\,@@\,} ( cop . oid \.{\colongt} [ node \.{\mapsto}
  Range ( ss . node ) ,\, edge \.{\mapsto} Range ( ss . edge ) ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} {\langle} c2ssX {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} NextImpl \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
+\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}} NextImpl \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
  \.{\in} Client \.{:} DoImpl ( c ) \.{\lor} RevImpl ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{16.4} \.{\lor} SRevImpl}%
+\@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{16.4} \.{\lor} SRevImpl}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}} SpecImpl \.{\defeq} InitImpl
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}} SpecImpl \.{\defeq} InitImpl
  \.{\land} {\Box} [ NextImpl ]_{ varsImpl}}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \.{\land} {\WF}_{
+ \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{16.4} \.{\land} {\WF}_{
  varsImpl} ( SRevImpl \.{\lor} \E\, c \.{\in} Client \.{:} RevImpl ( c ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}} CJ \.{\defeq} {\INSTANCE}
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}} CJ \.{\defeq} {\INSTANCE}
  CJupiter}%
- \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{40.89} {\WITH} cincoming
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{40.89} {\WITH} cincoming
  \.{\leftarrow} cincomingCJ ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{71.87} css\@s{1.66}
- \.{\leftarrow} [ r \.{\in} Replica \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{114.86} {\IF} r \.{=}
- Server}%
- \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{114.86} \.{\THEN}
- IgnoreDir ( SetReduce ( \.{\oplus} ,\, Range ( s2ss ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{158.47} [ node
- \.{\mapsto} \{ \{ \} \} ,\, edge \.{\mapsto} \{ \} ] ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{114.86} \.{\ELSE}
- IgnoreDir ( c2ss [ r ] \.{\oplus} c2ssX [ r ] ) ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{71.87} cur \.{\leftarrow}
- [ r \.{\in} Replica \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{114.86} {\IF} r \.{=}
- Server}%
-\@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{114.86}}%
 \@y{\@s{0}%
- It SHOULD be that \ensuremath{Cardinality(Range(scur)) \.{=} 1
-}}%
+ \ensuremath{sincoming} needs no substitution
+}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{114.86} \.{\THEN}
- {\CHOOSE} n \.{\in} Range ( scur ) \.{:} {\TRUE}}%
- \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{114.86} \.{\ELSE} ccur [
- r ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{71.87} css \.{\leftarrow}
+ [ r \.{\in} Replica \.{\mapsto}}%
+ \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{113.19} {\IF} r \.{=}
+ Server}%
+ \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{113.19} \.{\THEN}
+ IgnoreDir ( SetReduce ( \.{\oplus} ,\, Range ( s2ss ) ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{156.81} [ node
+ \.{\mapsto} \{ \{ \} \} ,\, edge \.{\mapsto} \{ \} ] ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{113.19} \.{\ELSE}
+ IgnoreDir ( c2ss [ r ] \.{\oplus} c2ssX [ r ] ) ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}} {\THEOREM} SpecImpl
+ \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}} {\THEOREM} SpecImpl
  \.{\implies} CJ {\bang} Spec}%
-\@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Wed}
- \ensuremath{Nov} 07 12:36:14 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
+ \ensuremath{Nov} 07 13:45:05 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

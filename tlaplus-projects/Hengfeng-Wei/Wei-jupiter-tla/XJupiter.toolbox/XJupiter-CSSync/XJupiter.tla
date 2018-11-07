@@ -14,15 +14,16 @@ CONSTANTS
 
 Replica == Client \cup {Server}
 
-List == Seq(Char \cup Range(InitState))   \* all possible lists/strings
+List == Seq(Char \cup Range(InitState))      \* all possible lists/strings
 MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any states;
     \* We assume that all inserted elements are unique.
 
 ClientNum == Cardinality(Client)
 Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
-
-\* direction flags
-Local == 0
+(*
+Direction flags for edges in 2D state spaces and OT.
+*)
+Local == 0 
 Remote == 1
 ----------------------------------------------------------------------
 ASSUME 
@@ -56,25 +57,24 @@ VARIABLES
     *)
     cseq,   \* cseq[c]: local sequence number at client c \in Client
     (*
-     The 2D state spaces (ss, for short).
-     Each client maintains one 2D state space.
-     The server maintains n 2D state spaces, one for each client.
+      The 2D state spaces (ss, for short).
+      Each client maintains one 2D state space.
+      The server maintains n 2D state spaces, one for each client.
     *)
-    css,    \* css[c]: the 2D state space at client c \in Client
-    ccur,   \* cur[c]: the current node of css[c]
-    sss,    \* sss[c]: the 2D state space maintained by the Server for client c \in Client
-    scur,   \* scur[c]: the current node of sss[c]
+    c2ss,   \* c2ss[c]: the 2D state space at client c \in Client
+    s2ss,   \* s2ss[c]: the 2D state space maintained by the Server for client c \in Client
+    cur,    \* cur[r]: the current node of the 2D state space at replica r \in Replica
     (* 
-    For all replicas 
+      For all replicas 
     *)
     state,  \* state[r]: state (the list content) of replica r \in Replica
     (* 
-    For communication between the Server and the Clients:         
+      For communication between the Server and the Clients:         
     *)
     cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
     sincoming,  \* incoming channel at the Server
     (* 
-    For model checking:                                           
+      For model checking:                                           
     *)
     chins   \* a set of chars to insert
 -----------------------------------------------------------------------------
@@ -82,10 +82,8 @@ comm == INSTANCE CSComm WITH Msg <- Cop
 -----------------------------------------------------------------------------
 eVars == <<chins>>  \* variables for the environment
 cVars == <<cseq>>   \* variables for the clients
-cssVars == <<css, ccur>>    \* variables for 2D state spaces at clients
-sssVars == <<sss, scur>>    \* variables for 2D state spaces at the Server
 commVars == <<cincoming, sincoming>>    \* variables for communication
-vars == <<eVars, cVars, commVars, cssVars, sssVars, state>> \* all variables
+vars == <<eVars, cVars, cur, commVars, c2ss, s2ss, state>> \* all variables
 -----------------------------------------------------------------------------
 (* 
 A 2D state space is a directed graph with labeled edges.
@@ -108,9 +106,8 @@ TypeOK ==
     (* 
       For the 2D state spaces:
     *)
-    /\ \A c \in Client: IsSS(css[c]) /\ IsSS(sss[c])
-    /\ ccur \in [Client -> SUBSET Oid]
-    /\ scur \in [Client -> SUBSET Oid]
+    /\ \A c \in Client: IsSS(c2ss[c]) /\ IsSS(s2ss[c])
+    /\ cur \in [Replica -> SUBSET Oid]
     /\ state \in [Replica -> List]
     (* 
       For communication between the server and the clients:
@@ -121,9 +118,6 @@ TypeOK ==
     *)
     /\ chins \subseteq Char
 -----------------------------------------------------------------------------
-(*********************************************************************)
-(* The Init predicate.                                               *)
-(*********************************************************************)
 Init == 
     (* 
       For the client replicas:
@@ -132,10 +126,9 @@ Init ==
     (* 
       For the 2D state spaces:
     *)
-    /\ css = [c \in Client |-> [node |-> {{}}, edge |-> {}]]
-    /\ ccur = [c \in Client |-> {}]
-    /\ sss = [c \in Client |-> [node |-> {{}}, edge |-> {}]]
-    /\ scur = [c \in Client |-> {}]
+    /\ c2ss = [c \in Client |-> [node |-> {{}}, edge |-> {}]]
+    /\ s2ss = [c \in Client |-> [node |-> {{}}, edge |-> {}]]
+    /\ cur  = [r \in Replica |-> {}]
     (*
       For all replicas:
     *)
@@ -153,19 +146,18 @@ Init ==
 Locate the node in the 2D state space ss which matches the context ctx of cop.    
 *)
 Locate(cop, ss) == CHOOSE n \in (ss.node) : n = cop.ctx
-
 (* 
 xForm: iteratively transform cop with a path
 through the 2D state space ss at some client, 
 following the edges with the direction flag d.
 *)
-xForm(cop, ss, cur, d) ==
+xForm(cop, ss, current, d) ==
     LET u == Locate(cop, ss)
         v == u \cup {cop.oid}
         RECURSIVE xFormHelper(_, _, _, _)
         \* 'h' stands for "helper"; xss: eXtra ss created during transformation
         xFormHelper(uh, vh, coph, xss) ==  
-            IF uh = cur
+            IF uh = current
             THEN xss
             ELSE LET e == CHOOSE e \in ss.edge: e.from = uh /\ e.lr = d
                      uprime == e.to
@@ -186,42 +178,38 @@ xForm(cop, ss, cur, d) ==
 Client c \in Client perform operation cop guided by the direction flag d.
 *)
 ClientPerform(cop, c, d) ==
-    LET xss == xForm(cop, css[c], ccur[c], d)
+    LET xss == xForm(cop, c2ss[c], cur[c], d)
         xn == xss.node
         xe == xss.edge
         xcur == Last(xn)
         xcop == Last(xe).cop
-    IN /\ css' = [css EXCEPT ![c].node = @ \cup Range(xn),
+    IN /\ c2ss' = [c2ss EXCEPT ![c].node = @ \cup Range(xn),
                              ![c].edge = @ \cup Range(xe)]
-       /\ ccur' = [ccur EXCEPT ![c] = xcur]
+       /\ cur' = [cur EXCEPT ![c] = xcur]
        /\ state' = [state EXCEPT ![c] = Apply(xcop.op, @)]
 (* 
-Client c \in Client issues an operation op.
+Client c \in Client generates an operation op.
 *)
-DoOp(c, op) == \* op: the raw operation generated by the client c \in Client
+DoOp(c, op) ==
     /\ cseq' = [cseq EXCEPT ![c] = @ + 1]
-    /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ccur[c]]    
+    /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> cur[c]]
         IN /\ ClientPerform(cop, c, Remote)
            /\ comm!CSend(cop)
 
 DoIns(c) ==
-    \E ins \in Ins:
-        /\ ins.pos \in 1 .. (Len(state[c]) + 1)
-        /\ ins.ch \in chins
-        /\ ins.pr = Priority[c]
-        /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
+    \E ins \in {op \in Ins: op.pos \in 1 .. (Len(state[c]) + 1) /\ op.ch \in chins /\ op.pr = Priority[c]}:
         /\ DoOp(c, ins)
-        /\ UNCHANGED <<sssVars>>
+        /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
 
 DoDel(c) == 
-    \E del \in Del:
-        /\ del.pos \in 1 .. Len(state[c])
+    \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
         /\ DoOp(c, del)
-        /\ UNCHANGED <<sssVars, eVars>>
+        /\ UNCHANGED <<eVars>>
 
 Do(c) == 
-    \/ DoIns(c)
-    \/ DoDel(c)
+    /\ \/ DoIns(c) 
+       \/ DoDel(c)
+    /\ UNCHANGED <<s2ss>>
 (* 
 Client c \in Client receives a message from the Server.
 *)
@@ -229,30 +217,28 @@ Rev(c) ==
     /\ comm!CRev(c)
     /\ LET cop == Head(cincoming[c]) \* the received (transformed) operation
         IN ClientPerform(cop, c, Local)
-    /\ UNCHANGED <<eVars, cVars, sssVars>>
+    /\ UNCHANGED <<eVars, cVars, s2ss>>
 -----------------------------------------------------------------------------
 (*
 The Server performs operation cop.
 *)
 ServerPerform(cop) == 
     LET c == cop.oid.c
-      xss == xForm(cop, sss[c], scur[c], Remote)
+     scur == cur[Server]
+      xss == xForm(cop, s2ss[c], scur, Remote)
        xn == xss.node
        xe == xss.edge
      xcur == Last(xn)
      xcop == Last(xe).cop 
-    IN /\ sss' = [cl \in Client |-> 
+    IN /\ s2ss' = [cl \in Client |-> 
                     IF cl = c 
-                    THEN [sss[cl] EXCEPT !.node = @ \cup Range(xn),
-                                         !.edge = @ \cup Range(xe)]
-                    ELSE LET scurcl == scur[cl] 
-                            scurclprime == scurcl \cup {cop.oid}
-                         IN [sss[cl] EXCEPT !.node = @ \cup {scurclprime},
-                                            !.edge = @ \cup {[from |-> scurcl, to |-> scurclprime, 
-                                                               cop |-> xcop, lr |-> Remote]}]
-                 ]
-       /\ scur' = [cl \in Client |->
-                    IF cl = c THEN xcur ELSE scur[cl] \cup {cop.oid}]
+                    THEN [s2ss[cl] EXCEPT !.node = @ \cup Range(xn),
+                                          !.edge = @ \cup Range(xe)]
+                    ELSE [s2ss[cl] EXCEPT !.node = @ \cup {xcur},
+                                          !.edge = @ \cup {[from |-> scur, to |-> xcur,
+                                                             cop |-> xcop, lr |-> Remote]}]
+                  ]
+       /\ cur' = [cur EXCEPT ![Server] = xcur]
        /\ state' = [state EXCEPT ![Server] = Apply(xcop.op, @)]
        /\ comm!SSendSame(c, xcop)  \* broadcast the transformed operation
 (* 
@@ -262,28 +248,21 @@ SRev ==
     /\ comm!SRev
     /\ LET cop == Head(sincoming)
         IN ServerPerform(cop)
-    /\ UNCHANGED <<eVars, cVars, cssVars>>
+    /\ UNCHANGED <<eVars, cVars, c2ss>>
 -----------------------------------------------------------------------------
-(* 
-The next-state relation.
-*)
 Next == 
     \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
-(* 
-The Spec.  (TODO: Check the fairness condition.)
-*)
-Spec == Init /\ [][Next]_vars /\ WF_vars(Next)
+
+Spec == Init /\ [][Next]_vars /\ WF_vars(SRev \/ \E c \in Client: Rev(c))
 -----------------------------------------------------------------------------
 (*
 In Jupiter (not limited to XJupiter), each client synchronizes with the server.
 In XJupiter, this is expressed as the following CSSync property.
 *)
-ASSUME (TLCSet(1, <<"SameOids", 0>>))
 CSSync == 
-    \forall c \in Client: 
-        (ccur[c] = scur[c] /\ TLCCnt(1, 100)) => css[c] = sss[c]
+    \forall c \in Client: (cur[c] = cur[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Thu Oct 11 20:13:07 CST 2018 by hengxin
+\* Last modified Wed Nov 07 13:35:57 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin
