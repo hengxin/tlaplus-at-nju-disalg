@@ -1,7 +1,7 @@
 ------------------------------ MODULE CJupiter ------------------------------
-(***************************************************************************)
-(* Model of our own CJupiter protocol.                                     *)
-(***************************************************************************)
+(*
+Model of our own CJupiter protocol.
+*)
 
 EXTENDS Integers, OT, TLC, AdditionalFunctionOperators, AdditionalSequenceOperators
 -----------------------------------------------------------------------------
@@ -24,9 +24,9 @@ ASSUME
     /\ Range(InitState) \cap Char = {}  \* due to the uniqueness requirement
     /\ Priority \in [Client -> 1 .. ClientNum]
 -----------------------------------------------------------------------------
-(*********************************************************************)
-(* The set of all operations.                                        *)
-(* Note: The positions are indexed from 1. *)
+(*
+The set of all operations. Note: The positions are indexed from 1.
+*)
 (*********************************************************************)
 Rd == [type: {"Rd"}]
 Del == [type: {"Del"}, pos: 1 .. MaxLen]
@@ -130,9 +130,9 @@ TypeOK ==
     (*****************************************************************)
     /\ chins \subseteq Char
 -----------------------------------------------------------------------------
-(*********************************************************************)
-(* The Init predicate.                                               *)
-(*********************************************************************)
+(*
+The Init predicate.
+*)
 Init == 
     (*****************************************************************)
     (* For the client replicas:                                      *)
@@ -271,5 +271,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Tue Nov 06 20:02:28 CST 2018 by hengxin
+\* Last modified Tue Nov 06 21:10:38 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin
