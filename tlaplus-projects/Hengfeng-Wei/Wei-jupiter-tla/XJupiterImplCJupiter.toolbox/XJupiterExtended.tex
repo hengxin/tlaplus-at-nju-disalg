@@ -1056,45 +1056,43 @@ For edge ordering in \ensuremath{CSS}.
  \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{16.4} \.{\land} serial
  \.{'} \.{=} [ serial {\EXCEPT} {\bang} [ c ] \.{=} Head ( cincomingSerial [
  c ] ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} {\langle} s2ssVars {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}} SRevEx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+\@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}} SRevEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  \.{\LET} cop \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{62.83} c\@s{1.57}
+ \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{62.83} c\@s{1.57}
  \.{\defeq} cop . oid . c}%
- \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{34.23} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{34.23} \.{\IN} \.{\land}
  commCJ {\bang} SSendSame ( c ,\, cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{54.63} \.{\land} serial
+ \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{54.63} \.{\land} serial
  \.{'} \.{=} [ serial {\EXCEPT} {\bang} [ Server ] \.{=} Append ( @ ,\, cop .
  oid ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{54.63} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{54.63} \.{\land}
  commSerial {\bang} SSendSame ( c ,\, serial \.{'} [ Server ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  {\UNCHANGED} {\langle} sincomingCJ ,\, sincomingSerial {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}} NextEx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+\@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}} NextEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
  \E\, c \.{\in} Client \.{:} DoEx ( c ) \.{\lor} RevEx ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
  SRevEx}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}} SpecEx \.{\defeq} InitEx
+ \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}} SpecEx \.{\defeq} InitEx
  \.{\land} {\Box} [ NextEx ]_{ varsEx}}%
- \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{16.4} \.{\land}\@s{4.02}
+ \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{16.4} \.{\land}\@s{4.02}
  {\WF}_{ varsEx} ( SRevEx \.{\lor} \E\, c \.{\in} Client \.{:} RevEx ( c ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Wed}
- \ensuremath{Nov} 07 12:38:23 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Fri}
+ \ensuremath{Nov} 09 17:16:28 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

@@ -50,7 +50,6 @@ RevEx(c) ==
     /\ commCJ!CRev(c)
     /\ commSerial!CRev(c)
     /\ serial' = [serial EXCEPT ![c] = Head(cincomingSerial[c])]
-    /\ UNCHANGED <<s2ss>>
 
 SRevEx == 
     /\ SRev
@@ -69,5 +68,5 @@ SpecEx == InitEx /\ [][NextEx]_varsEx
     /\ WF_varsEx(SRevEx \/ \E c \in Client: RevEx(c))
 =============================================================================
 \* Modification History
-\* Last modified Wed Nov 07 13:40:54 CST 2018 by hengxin
+\* Last modified Fri Nov 09 17:16:28 CST 2018 by hengxin
 \* Created Tue Oct 30 20:32:27 CST 2018 by hengxin
