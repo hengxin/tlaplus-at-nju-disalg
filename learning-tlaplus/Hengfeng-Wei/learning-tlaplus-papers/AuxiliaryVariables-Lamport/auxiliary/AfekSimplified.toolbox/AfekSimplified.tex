@@ -940,243 +940,313 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} Linearizability}\moduleRightDash\@xx{}%
+ {\MODULE} AfekSimplified}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{Linearizability} was introduced by \ensuremath{Herlihy} and Wing
- in their 1987 \ensuremath{POPL
-} paper ``Axioms for Concurrent Objects''. It is used here as part of the
- snapshot algorithm example in Section 6 of the paper ``Auxiliary
- Variables in TLA+''.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-A data object, also called a state machine, executes commands from user
- processes. It is described by an initial state \ensuremath{InitObj} of the
- object
- and an operator \ensuremath{Apply}, where \ensuremath{Apply(i,\, cmd,\, st)}
- describes the output and
- new state of the object that results from process \ensuremath{i} executing
- command
- \ensuremath{cmd} when the object has state \ensuremath{st}. It is formally
- described by \ensuremath{Apply},
- \ensuremath{InitObj}, a set \ensuremath{Procs} of processes, sets
- \ensuremath{Commands(i)} and \ensuremath{Outputs(i)} of
- possible commands and possible outputs for each process \ensuremath{i}, a set
- \ensuremath{ObjValues} of all possible states of the object, and an initial
- process
- \ensuremath{i} output value \ensuremath{InitOutput(i)} whose use is
- explained below. Here are
- the declarations of these constants and constant operators and the
- property they are assumed to satisfy. The requirement that
- \ensuremath{Outputs(i)
- } and \ensuremath{Commands(i)} are disjoint sets is not essential, but makes
- our
- specification of linearizability simpler.
+ This module specifies the simplified \ensuremath{Afek} et al. snapshot
+ algorithm
+ algorithm described in Section 6.3 of the paper ``Auxiliary Variables in
+ TLA+''. This is a simplified version of an algorithm in the 1993 paper
+ ``Atomic snapshots of Shared Memory'' by \ensuremath{Afek},
+ \ensuremath{Attiya}, \ensuremath{Dolev}, \ensuremath{Gafni},
+ Merritt, and \ensuremath{Shavit}. It will be shown to satisfy the safety
+ specification of a linearizable snapshot object in module
+ \ensuremath{NewLinearSnapshot}. (The actual algorithm by \ensuremath{Afek}
+ et al. also
+ satisfies the specification\mbox{'}s liveness property, but our simplified
+ version does not.)
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} {\CONSTANTS}\@s{4.1} Procs
- ,\, Commands ( \_ ) ,\, Outputs ( \_ ) ,\, InitOutput ( \_ ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{58.85} ObjValues ,\,
- InitObj ,\, Apply ( \_ ,\, \_ ,\, \_ )}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} {\ASSUME} LinearAssumps
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{46.44} \.{\land} InitObj
- \.{\in} ObjValues}%
- \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{46.44} \.{\land} \A\, i
- \.{\in} Procs \.{:} InitOutput ( i ) \.{\in} Outputs ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{46.44} \.{\land} \A\, i
- \.{\in} Procs \.{:} Outputs ( i ) \.{\cap} Commands ( i ) \.{=} \{ \}}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{46.44} \.{\land} \A\, i
- \.{\in} Procs ,\, obj \.{\in} ObjValues \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{65.75} \A\, cmd \.{\in}
- Commands ( i ) \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{77.07} \.{\land}\@s{3.71}
- Apply ( i ,\, cmd ,\, obj ) . output \.{\in} Outputs ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{77.07} \.{\land}\@s{3.71}
- Apply ( i ,\, cmd ,\, obj ) . newState \.{\in} ObjValues}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} {\EXTENDS} Integers}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-A linearizable implementation of a data object is one in which each
- operation execution by a process \ensuremath{i} is performed by three steps:
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{T}{T}{2.5}{2.5}{%
--}%
-An externally visible \ensuremath{BeginOp(i,\, cmd)} step that begins an
- operation with command \ensuremath{cmd}.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{T}{T}{2.5}{2.5}{%
--}%
- An internal \ensuremath{DoOp(i)} step that performs the operation on the
- object
- and obtains the output.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{T}{F}{2.5}{0}{}%
-- An externally visible \ensuremath{EndOp(i)} step that displays the output.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{F}{F}{0}{0}{}%
-These actions are described with three variables:
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{T}{F}{5.0}{0}{}%
-\ensuremath{object
-}%
-\end{cpar}%
-\begin{cpar}{0}{T}{F}{7.5}{0}{}%
-An internal variable whose value is the current state of
- the object.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{F}{F}{0}{0}{}%
-\ensuremath{interface
-}%
-\end{cpar}%
-\begin{cpar}{0}{T}{F}{7.5}{0}{}%
-An externally visible variable whose value is a function with
- domain \ensuremath{Procs} that describes the issuing of commands and the
- return of values. The value of \ensuremath{interface[i]} is initially
- \ensuremath{InitOutput(i)}, it is set to \ensuremath{cmd} by the
- \ensuremath{BeginOp(i,\, cmd)} step,
- and is set to the command\mbox{'}s output by the \ensuremath{EndOp(i)} step.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{F}{F}{0}{0}{}%
-\ensuremath{istate
-}%
-\end{cpar}%
-\begin{cpar}{0}{T}{F}{7.5}{0}{}%
-An internal variable whose value is a function with domain \ensuremath{Procs}.
- The element \ensuremath{istate[i]} is used to remember, when process
- \ensuremath{i} is
- executing a command, if it has executed the \ensuremath{DoOp(i)} step and,
- if so, what the output value is. It initially equals
- \ensuremath{InitOutput(i)}, is set to \ensuremath{cmd} by a
- \ensuremath{BeginOp(i,\, cmd)} step, and is
- set to the output value by a \ensuremath{DoOp(i)} step.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{2}{F}{F}{0}{0}{}%
-The definitions of the initial predicate and next-state action should
- be easy to understand.
+We begin by declaring and defining the same constants as in module
+ \ensuremath{NewLinearSnapshot}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}} {\VARIABLES} object ,\,
- interface ,\, istate}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}} vars \.{\defeq} {\langle}
- object ,\, interface ,\, istate {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} {\CONSTANTS} Readers ,\,
+ Writers ,\, RegVals ,\, InitRegVal}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}} TypeOK \.{\defeq} \.{\land}
- object \.{\in} ObjValues}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{56.14} \.{\land} \A\, i
- \.{\in} Procs \.{:} \.{\land} interface [ i ] \.{\in} Outputs ( i ) \.{\cup}
- Commands ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{124.82} \.{\land} istate
- [ i ] \.{\in} Outputs ( i ) \.{\cup} Commands ( i )}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} {\ASSUME} \.{\land} Readers
+ \.{\cap} Writers \.{=} \{ \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{38.24} \.{\land}
+ InitRegVal \.{\in} RegVals}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}} Init \.{\defeq} \.{\land}
- object\@s{6.00} \.{=} InitObj}%
- \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{35.70} \.{\land}
- interface \.{=} [ i \.{\in} Procs \.{\mapsto} InitOutput ( i ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{35.70} \.{\land} istate
- \.{=} [ i \.{\in} Procs \.{\mapsto} InitOutput ( i ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} MemVals \.{\defeq} [ Writers
+ \.{\rightarrow} RegVals ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} InitMem\@s{2.60} \.{\defeq}
+ [ i \.{\in} Writers \.{\mapsto} InitRegVal ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}} NotMemVal \.{\defeq}
+ {\CHOOSE} v \.{:} v \.{\notin} MemVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} NotRegVal\@s{6.27}
+ \.{\defeq} {\CHOOSE} v \.{:} v \.{\notin} RegVals}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}} BeginOp ( i ,\, cmd )
- \.{\defeq} \.{\land} interface [ i ] \.{\in} Outputs ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{93.61} \.{\land}
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Instead of the internal variable \ensuremath{mem} of the specification, the
+ algorithm maintains an internal variable \ensuremath{imem} such that for
+ each writer
+ \ensuremath{i}, the value of \ensuremath{imem[i]} is a pair
+ \ensuremath{{\langle}v,\, k{\rangle}}, where \ensuremath{v} is the last
+ register value written by \ensuremath{i}, and \ensuremath{k} is the number
+ of times the register
+ has been written by \ensuremath{i}. The purpose of the second component of
+ \ensuremath{imem[i]
+ } is to ensure that values written to \ensuremath{imem[i]} by writer
+ \ensuremath{i} in different
+ write operations are different.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+We now define some constants, including the set \ensuremath{IMemVals} of all
+ possible values of \ensuremath{imem}.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} IRegVals\@s{6.27} \.{\defeq}
+ RegVals \.{\times} Nat}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} IMemVals \.{\defeq} [
+ Writers \.{\rightarrow} IRegVals ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}} InitIMem\@s{2.60} \.{\defeq}
+ [ i \.{\in} Writers \.{\mapsto} {\langle} InitRegVal ,\, 0 {\rangle} ]}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ In addition to \ensuremath{imem}, the algorithm has three internal variables:
+ \ensuremath{wrNum},
+ \ensuremath{rdVal1}, and \ensuremath{rdVal2}. Each writer \ensuremath{i}
+ records in \ensuremath{wrNum[i]} the number of
+ times it has written \ensuremath{imem[i]}. Writer \ensuremath{i} acts pretty
+ much like the
+ writer in the specification, except that \ensuremath{DoWr(i)} writes a pair
+ of
+ values in \ensuremath{imem[i]} and increments \ensuremath{wrNum[i]}. The
+ writer needs no other
+ internal information because it knows that it has performed a
+ \ensuremath{BeginWr(i,\, cmd)} step but not the subsequent
+ \ensuremath{DoWr(i)} step if \ensuremath{wrNum[i]} is
+ different from \ensuremath{imem[i][2]}; and it doesn\mbox{'}t have to
+ remember the command
+ \ensuremath{cmd} because that\mbox{'}s in \ensuremath{interface[i]}.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Reader \ensuremath{i} keeps performing the following scan procedure until the
+ procedure succeeds in computing an output, whereupon the read operation
+ terminates by producing that output. The scan procedure reads
+ \ensuremath{imem} by
+ reading the elements \ensuremath{imem[j]} one at a time in any order, and it
+ then
+ reads \ensuremath{imem} again by reading its elements in any order. The scan
+ procedure succeeds if both reads obtain the same value of \ensuremath{imem},
+ in
+ which case it produces the output consisting of the register values of
+ that value of \ensuremath{imem}. (This procedure produces a correct output
+ only
+ because a writer \ensuremath{j} cannot write the same value twice in
+ \ensuremath{imem[j]}.) It\mbox{'}s
+ possible for the scan procedure never to succeed, in which case the
+ read operation never terminates. Afek et al. have a method for
+ terminating after a finite number of unsuccessful scans, but it
+ complicates the algorithm without significantly changing the structure
+ of its correctness proof.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ Reader \ensuremath{i} keeps in \ensuremath{rdVal1[i][j]} and
+ \ensuremath{rdVal2[i][j]} the values of \ensuremath{imem[j]
+} that it has read so far during the current scan procedure\mbox{'}s reads of
+ \ensuremath{imem}. The values of \ensuremath{rdVal1[i]} and
+ \ensuremath{rdVal2[i]} are each a function that
+ maps a subset of the writers to the values it has read for those
+ writer\mbox{'}s registers. They both equal the function
+ \ensuremath{{\langle} {\rangle}} with empty
+ domain when the writer is not performing a scan.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+With this explanation of how the algorithm works, it should be easy to
+ understand its TLA+ specification.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}} {\VARIABLES} imem ,\,
+ interface ,\, wrNum ,\, rdVal1 ,\, rdVal2}%
+ \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}} vars \.{\defeq} {\langle}
+ imem ,\, interface ,\, wrNum ,\, rdVal1 ,\, rdVal2 {\rangle}}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ We define \ensuremath{PartialFcns(U,\, V)} to be the set of functions from a
+ subset of
+ \ensuremath{U} to \ensuremath{V}. It is used only in the type-correctness
+ invariant.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}} PartialFcns ( U ,\, V )
+ \.{\defeq} {\UNION} \{ [ D \.{\rightarrow} V ] \.{:} D \.{\in} {\SUBSET} U
+ \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}} TypeOK \.{\defeq} \.{\land}
+ imem \.{\in} IMemVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{56.14} \.{\land}
+ \.{\land} {\DOMAIN} interface \.{=} Readers \.{\cup} Writers}%
+ \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{67.25} \.{\land} \A\, i
+ \.{\in} Readers \.{:} interface [ i ] \.{\in} MemVals \.{\cup} \{ NotMemVal
+ \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}\@s{67.25} \.{\land} \A\, i
+ \.{\in} Writers\@s{0.49} \.{:} interface [ i ] \.{\in} RegVals\@s{6.27}
+ \.{\cup} \{ NotRegVal \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}}\@s{56.14} \.{\land} wrNum
+ \.{\in} [ Writers \.{\rightarrow} Nat ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{56.14} \.{\land} rdVal1
+ \.{\in} [ Readers \.{\rightarrow} PartialFcns ( Writers ,\, IRegVals ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 95\hspace{1em}}\@s{56.14} \.{\land} rdVal2
+ \.{\in} [ Readers \.{\rightarrow} PartialFcns ( Writers ,\, IRegVals ) ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 97\hspace{1em}} Init \.{\defeq} \.{\land}
+ imem \.{=} InitIMem}%
+ \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}}\@s{35.70} \.{\land}
+ interface \.{=} [ i \.{\in} Readers \.{\cup} Writers \.{\mapsto}}%
+ \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{105.45} {\IF} i \.{\in}
+ Readers \.{\THEN} InitMem \.{\ELSE} NotRegVal ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{35.70} \.{\land} wrNum
+ \.{=} [ i \.{\in} Writers \.{\mapsto} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}}\@s{35.70} \.{\land} rdVal1
+ \.{=} [ i \.{\in} Readers \.{\mapsto} {\langle} {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}}\@s{35.70} \.{\land} rdVal2
+ \.{=} [ i \.{\in} Readers \.{\mapsto} {\langle} {\rangle} ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 104\hspace{1em}} BeginWr ( i ,\, cmd )
+ \.{\defeq} \.{\land} interface [ i ] \.{=} NotRegVal}%
+ \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}}\@s{95.48} \.{\land} wrNum
+ \.{'} \.{=} [ wrNum {\EXCEPT} {\bang} [ i ] \.{=} wrNum [ i ] \.{+} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 106\hspace{1em}}\@s{95.48} \.{\land}
  interface \.{'} \.{=} [ interface {\EXCEPT} {\bang} [ i ] \.{=} cmd ]}%
- \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{93.61} \.{\land} istate
- \.{'}\@s{1.47} \.{=} [ istate {\EXCEPT} {\bang} [ i ] \.{=} cmd ]}%
- \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{93.61} \.{\land} object
- \.{'} \.{=} object}%
+ \@x{\makebox[0pt][r]{\scriptsize 107\hspace{1em}}\@s{95.48} \.{\land}
+ {\UNCHANGED} {\langle} imem ,\, rdVal1 ,\, rdVal2 {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}} DoOp ( i ) \.{\defeq}
- \.{\land} interface [ i ] \.{\in} Commands ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{56.82} \.{\land} istate [
- i ] \.{=} interface [ i ]}%
- \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{56.82} \.{\land} \.{\LET}
- result \.{\defeq} Apply ( i ,\, interface [ i ] ,\, object )}%
- \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{67.93} \.{\IN} \.{\land}
- object \.{'} \.{=} result . newState}%
- \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{88.33} \.{\land} istate
- \.{'}\@s{1.47} \.{=} [ istate {\EXCEPT} {\bang} [ i ] \.{=} result . output
- ]}%
- \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{56.82} \.{\land}
- interface \.{'} \.{=} interface}%
+ \@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}} DoWr ( i ) \.{\defeq}
+ \.{\land} interface [ i ] \.{\in} RegVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}}\@s{58.69} \.{\land} imem [
+ i ] [ 2 ] \.{\neq} wrNum [ i ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}}\@s{58.69} \.{\land} imem
+ \.{'} \.{=} [ imem {\EXCEPT} {\bang} [ i ] \.{=} {\langle} interface [ i ]
+ ,\, wrNum [ i ] {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 112\hspace{1em}}\@s{58.69} \.{\land}
+ {\UNCHANGED} {\langle} interface ,\, wrNum ,\, rdVal1 ,\, rdVal2 {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}} EndOp ( i ) \.{\defeq}
- \.{\land} interface [ i ] \.{\in} Commands ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{61.67} \.{\land} istate [
- i ] \.{\in} Outputs ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 95\hspace{1em}}\@s{61.67} \.{\land}
- interface \.{'} \.{=} [ interface {\EXCEPT} {\bang} [ i ] \.{=} istate [ i ]
- ]}%
- \@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}}\@s{61.67} \.{\land}
- {\UNCHANGED} {\langle} object ,\, istate {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 114\hspace{1em}} EndWr ( i ) \.{\defeq}
+ \.{\land} interface [ i ] \.{\in} RegVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 115\hspace{1em}}\@s{63.55} \.{\land} imem [
+ i ] [ 2 ] \.{=} wrNum [ i ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 116\hspace{1em}}\@s{63.55} \.{\land}
+ interface \.{'}\@s{3.73} \.{=} [ interface {\EXCEPT} {\bang} [ i ] \.{=}
+ NotRegVal ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}}\@s{63.55} \.{\land}
+ {\UNCHANGED} {\langle} imem ,\, wrNum ,\, rdVal1 ,\, rdVal2 {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}} Next \.{\defeq} \E\, i
- \.{\in} Procs \.{:} \.{\lor} \E\, cmd \.{\in} Commands ( i ) \.{:} BeginOp (
- i ,\, cmd )}%
- \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{97.40} \.{\lor} DoOp ( i
- )}%
- \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{97.40} \.{\lor} EndOp (
- i )}%
+ \@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}} BeginRd ( i ) \.{\defeq}
+ \.{\land} interface [ i ] \.{\in} MemVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 120\hspace{1em}}\@s{68.09} \.{\land}
+ interface \.{'} \.{=} [ interface {\EXCEPT} {\bang} [ i ] \.{=} NotMemVal ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 121\hspace{1em}}\@s{68.09} \.{\land}
+ {\UNCHANGED} {\langle} imem ,\, wrNum ,\, rdVal1 ,\, rdVal2 {\rangle}}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-For later use, we give a name to the safety part of the spec.
+ If \ensuremath{x} is not in the domain of the function \ensuremath{v}, then
+ \ensuremath{AddToFcn(f,\, x,\, v)} is
+ the function obtained from \ensuremath{f} by adding \ensuremath{x} to its
+ domain and letting \ensuremath{x} be
+ mapped to \ensuremath{v}. This could be written as as \ensuremath{f
+ \.{\,@@\,}} (\ensuremath{x \.{\colongt} v}), where the
+ operators \ensuremath{\.{\colongt}} and \ensuremath{\.{\,@@\,}} are defined
+ in the standard \ensuremath{TLC} module.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}} SafeSpec \.{\defeq} Init
+ \@x{\makebox[0pt][r]{\scriptsize 129\hspace{1em}} AddToFcn ( f ,\, x ,\, v )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 130\hspace{1em}}\@s{8.2} [ y \.{\in} (
+ {\DOMAIN} f ) \.{\cup} \{ x \} \.{\mapsto} {\IF} y \.{=} x \.{\THEN} v
+ \.{\ELSE} f [ y ] ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 132\hspace{1em}} Rd1 ( i ) \.{\defeq}
+ \.{\land} interface [ i ] \.{=} NotMemVal}%
+ \@x{\makebox[0pt][r]{\scriptsize 133\hspace{1em}}\@s{48.67} \.{\land} \E\, j
+ \.{\in} Writers \.{\,\backslash\,} {\DOMAIN} rdVal1 [ i ] \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 134\hspace{1em}}\@s{67.01} rdVal1 \.{'}
+ \.{=} [ rdVal1 {\EXCEPT} {\bang} [ i ] \.{=} AddToFcn ( rdVal1 [ i ] ,\, j
+ ,\, imem [ j ] ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 135\hspace{1em}}\@s{48.67} \.{\land}
+ {\UNCHANGED} {\langle} interface ,\, imem ,\, wrNum ,\, rdVal2 {\rangle}}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 137\hspace{1em}} Rd2 ( i ) \.{\defeq}
+ \.{\land} interface [ i ] \.{=} NotMemVal}%
+ \@x{\makebox[0pt][r]{\scriptsize 138\hspace{1em}}\@s{48.67} \.{\land}
+ {\DOMAIN} rdVal1 [ i ] \.{=} Writers}%
+ \@x{\makebox[0pt][r]{\scriptsize 139\hspace{1em}}\@s{48.67} \.{\land} \E\, j
+ \.{\in} Writers \.{\,\backslash\,} {\DOMAIN} rdVal2 [ i ] \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 140\hspace{1em}}\@s{67.01} rdVal2 \.{'}
+ \.{=} [ rdVal2 {\EXCEPT} {\bang} [ i ] \.{=} AddToFcn ( rdVal2 [ i ] ,\, j
+ ,\, imem [ j ] ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 141\hspace{1em}}\@s{48.67} \.{\land}
+ {\UNCHANGED} {\langle} interface ,\, imem ,\, wrNum ,\, rdVal1 {\rangle}}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 143\hspace{1em}} TryEndRd ( i ) \.{\defeq}
+ \.{\land} interface [ i ] \.{=} NotMemVal}%
+ \@x{\makebox[0pt][r]{\scriptsize 144\hspace{1em}}\@s{76.65} \.{\land}
+ {\DOMAIN} rdVal1 [ i ] \.{=} Writers}%
+ \@x{\makebox[0pt][r]{\scriptsize 145\hspace{1em}}\@s{76.65} \.{\land}
+ {\DOMAIN} rdVal2 [ i ] \.{=} Writers}%
+ \@x{\makebox[0pt][r]{\scriptsize 146\hspace{1em}}\@s{76.65} \.{\land} {\IF}
+ rdVal1 [ i ] \.{=} rdVal2 [ i ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 147\hspace{1em}}\@s{95.96} \.{\THEN}
+ \.{\land} interface \.{'} \.{=}}%
+ \@x{\makebox[0pt][r]{\scriptsize 148\hspace{1em}}\@s{146.59} [ interface
+ {\EXCEPT}}%
+ \@x{\makebox[0pt][r]{\scriptsize 149\hspace{1em}}\@s{153.46} {\bang} [ i ]
+ \.{=} [ j \.{\in} Writers \.{\mapsto} rdVal1 [ i ] [ j ] [ 1 ] ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 150\hspace{1em}}\@s{95.96} \.{\ELSE}
+ \.{\land} interface \.{'} \.{=} interface}%
+ \@x{\makebox[0pt][r]{\scriptsize 151\hspace{1em}}\@s{76.65} \.{\land} rdVal1
+ \.{'} \.{=} [ rdVal1 {\EXCEPT} {\bang} [ i ] \.{=} {\langle} {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 152\hspace{1em}}\@s{76.65} \.{\land} rdVal2
+ \.{'} \.{=} [ rdVal2 {\EXCEPT} {\bang} [ i ] \.{=} {\langle} {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 153\hspace{1em}}\@s{76.65} \.{\land}
+ {\UNCHANGED} {\langle} imem ,\, wrNum {\rangle}}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 155\hspace{1em}} Next \.{\defeq} \.{\lor}
+ \E\, i \.{\in} Readers \.{:} BeginRd ( i ) \.{\lor} Rd1 ( i ) \.{\lor} Rd2 (
+ i ) \.{\lor} TryEndRd ( i )}%
+ \@x{\makebox[0pt][r]{\scriptsize 156\hspace{1em}}\@s{39.83} \.{\lor} \E\, i
+ \.{\in} Writers\@s{0.49} \.{:} \.{\lor} \E\, cmd \.{\in} RegVals \.{:}
+ BeginWr ( i ,\, cmd )}%
+ \@x{\makebox[0pt][r]{\scriptsize 157\hspace{1em}}\@s{118.73} \.{\lor} DoWr (
+ i ) \.{\lor} EndWr ( i )}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Since a read need never terminate, the algorithm doesn\mbox{'}t satisfy the
+ \ensuremath{NewLinearSnapshot} specification\mbox{'}s liveness requirements,
+ so we don\mbox{'}t
+ bother specifying any fairness of the actions.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 164\hspace{1em}} Spec \.{\defeq} Init
  \.{\land} {\Box} [ Next ]_{ vars}}%
-\@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The liveness requirement is that an operation that has begun (by
- executing a \ensuremath{BeginOp(i,\, cmd)} step) must eventually finish (by
- executing
- an \ensuremath{EndOp(i)} step). This is expressed by the formulas
- \ensuremath{Fairness} defined
- below. The equivalent specification is obtained by defining
- \ensuremath{Fairness
-} to equal this formula:
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{T}{F}{7.5}{0}{}%
- \ensuremath{\A\, i \.{\in} Procs} : \ensuremath{{\WF}\_vars(DoOp(i) \.{\lor}
- EndOp(i))
-}%
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 116\hspace{1em}} Fairness \.{\defeq} \A\, i
- \.{\in} Procs \.{:} {\WF}_{ vars} ( DoOp ( i ) ) \.{\land} {\WF}_{ vars} (
- EndOp ( i ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}} Spec \.{\defeq} SafeSpec
- \.{\land} Fairness}%
-\@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 165\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
- \ensuremath{Nov} 08 17:15:41 \ensuremath{CST} 2018 by \ensuremath{hengxin
-}%
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Oct} 22
- 01:28:13 \ensuremath{PDT} 2016 by \ensuremath{lamport
+ 01:58:50 \ensuremath{PDT} 2016 by \ensuremath{lamport
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Tue} \ensuremath{Oct} 04
- 02:01:02 \ensuremath{PDT} 2016 by \ensuremath{lamport
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Wed} \ensuremath{Oct} 05
+ 08:23:18 \ensuremath{PDT} 2016 by \ensuremath{lamport
 }%
 \end{cpar}%
 \end{lcom}%

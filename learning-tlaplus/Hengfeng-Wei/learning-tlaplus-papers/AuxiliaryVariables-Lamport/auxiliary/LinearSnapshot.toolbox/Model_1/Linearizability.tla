@@ -117,5 +117,6 @@ Fairness == \A i \in Procs : WF_vars(DoOp(i)) /\ WF_vars(EndOp(i))
 Spec == SafeSpec /\ Fairness
 =============================================================================
 \* Modification History
+\* Last modified Thu Nov 08 17:15:41 CST 2018 by hengxin
 \* Last modified Sat Oct 22 01:28:13 PDT 2016 by lamport
 \* Created Tue Oct 04 02:01:02 PDT 2016 by lamport
