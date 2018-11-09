@@ -940,243 +940,271 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} Linearizability}\moduleRightDash\@xx{}%
+ {\MODULE} NewLinearSnapshot}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{Linearizability} was introduced by \ensuremath{Herlihy} and Wing
- in their 1987 \ensuremath{POPL
-} paper ``Axioms for Concurrent Objects''. It is used here as part of the
- snapshot algorithm example in Section 6 of the paper ``Auxiliary
- Variables in TLA+''.
+ This module is part of the \ensuremath{AfekSimplified} example in Section 6
+ of the
+ paper ``Auxiliary Variables in TLA+''. It is equivalent to the
+ specification in module \ensuremath{LinearSnapshot} of a linearizable
+ snapshot
+ algorithm, in the sense that it permits the same behaviors of the
+ externally visible variable \ensuremath{interface} . You should understand
+ that
+ specification before reading this module.
 \end{cpar}%
 \vshade{5.0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-A data object, also called a state machine, executes commands from user
- processes. It is described by an initial state \ensuremath{InitObj} of the
- object
- and an operator \ensuremath{Apply}, where \ensuremath{Apply(i,\, cmd,\, st)}
- describes the output and
- new state of the object that results from process \ensuremath{i} executing
- command
- \ensuremath{cmd} when the object has state \ensuremath{st}. It is formally
- described by \ensuremath{Apply},
- \ensuremath{InitObj}, a set \ensuremath{Procs} of processes, sets
- \ensuremath{Commands(i)} and \ensuremath{Outputs(i)} of
- possible commands and possible outputs for each process \ensuremath{i}, a set
- \ensuremath{ObjValues} of all possible states of the object, and an initial
- process
- \ensuremath{i} output value \ensuremath{InitOutput(i)} whose use is
- explained below. Here are
- the declarations of these constants and constant operators and the
- property they are assumed to satisfy. The requirement that
- \ensuremath{Outputs(i)
- } and \ensuremath{Commands(i)} are disjoint sets is not essential, but makes
- our
- specification of linearizability simpler.
+ This specification differs from the one in \ensuremath{LinearSnapshot} by
+ deferring
+ the choice of a reader\mbox{'}s output as long as possible--namely, the
+ choice
+ is made only in the \ensuremath{EndRd} action. The reader maintains a list
+ of all
+ the values that the memory \ensuremath{mem} had while the read operation is
+ being
+ performed, and has the \ensuremath{EndRd} action choose an arbitrary element
+ of that
+ list to return as the output.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+The equivalence of the two linearizable snapshot algorithms means that
+ if \ensuremath{Spec\_NL} is formula \ensuremath{Spec} of this module and
+ \ensuremath{Spec\_L} is formula \ensuremath{Spec} of
+ module \ensuremath{LinearSnapshot}, then \ensuremath{{\EE} mem},
+ \ensuremath{rstate}, \ensuremath{wstate} : \ensuremath{Spec\_NL} is
+ equivalent to \ensuremath{{\EE} mem}, istate : \ensuremath{Spec\_L}. We only
+ show that the first
+ implies the second, since that is all we need for our example of the
+ simplified \ensuremath{Afek} et al. snapshot algorithm.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} {\CONSTANTS}\@s{4.1} Procs
- ,\, Commands ( \_ ) ,\, Outputs ( \_ ) ,\, InitOutput ( \_ ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{58.85} ObjValues ,\,
- InitObj ,\, Apply ( \_ ,\, \_ ,\, \_ )}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} {\ASSUME} LinearAssumps
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{46.44} \.{\land} InitObj
- \.{\in} ObjValues}%
- \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{46.44} \.{\land} \A\, i
- \.{\in} Procs \.{:} InitOutput ( i ) \.{\in} Outputs ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{46.44} \.{\land} \A\, i
- \.{\in} Procs \.{:} Outputs ( i ) \.{\cap} Commands ( i ) \.{=} \{ \}}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{46.44} \.{\land} \A\, i
- \.{\in} Procs ,\, obj \.{\in} ObjValues \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{65.75} \A\, cmd \.{\in}
- Commands ( i ) \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{77.07} \.{\land}\@s{3.71}
- Apply ( i ,\, cmd ,\, obj ) . output \.{\in} Outputs ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{77.07} \.{\land}\@s{3.71}
- Apply ( i ,\, cmd ,\, obj ) . newState \.{\in} ObjValues}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} {\EXTENDS} Integers ,\,
+ Sequences}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-A linearizable implementation of a data object is one in which each
- operation execution by a process \ensuremath{i} is performed by three steps:
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{T}{T}{2.5}{2.5}{%
--}%
-An externally visible \ensuremath{BeginOp(i,\, cmd)} step that begins an
- operation with command \ensuremath{cmd}.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{T}{T}{2.5}{2.5}{%
--}%
- An internal \ensuremath{DoOp(i)} step that performs the operation on the
- object
- and obtains the output.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{T}{F}{2.5}{0}{}%
-- An externally visible \ensuremath{EndOp(i)} step that displays the output.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{F}{F}{0}{0}{}%
-These actions are described with three variables:
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{T}{F}{5.0}{0}{}%
-\ensuremath{object
-}%
-\end{cpar}%
-\begin{cpar}{0}{T}{F}{7.5}{0}{}%
-An internal variable whose value is the current state of
- the object.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{F}{F}{0}{0}{}%
-\ensuremath{interface
-}%
-\end{cpar}%
-\begin{cpar}{0}{T}{F}{7.5}{0}{}%
-An externally visible variable whose value is a function with
- domain \ensuremath{Procs} that describes the issuing of commands and the
- return of values. The value of \ensuremath{interface[i]} is initially
- \ensuremath{InitOutput(i)}, it is set to \ensuremath{cmd} by the
- \ensuremath{BeginOp(i,\, cmd)} step,
- and is set to the command\mbox{'}s output by the \ensuremath{EndOp(i)} step.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{1}{F}{F}{0}{0}{}%
-\ensuremath{istate
-}%
-\end{cpar}%
-\begin{cpar}{0}{T}{F}{7.5}{0}{}%
-An internal variable whose value is a function with domain \ensuremath{Procs}.
- The element \ensuremath{istate[i]} is used to remember, when process
- \ensuremath{i} is
- executing a command, if it has executed the \ensuremath{DoOp(i)} step and,
- if so, what the output value is. It initially equals
- \ensuremath{InitOutput(i)}, is set to \ensuremath{cmd} by a
- \ensuremath{BeginOp(i,\, cmd)} step, and is
- set to the output value by a \ensuremath{DoOp(i)} step.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{2}{F}{F}{0}{0}{}%
-The definitions of the initial predicate and next-state action should
- be easy to understand.
+The declared and defined constants are the same as in module
+ \ensuremath{LinearSnapshot}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}} {\VARIABLES} object ,\,
- interface ,\, istate}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}} vars \.{\defeq} {\langle}
- object ,\, interface ,\, istate {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} {\CONSTANTS} Readers ,\,
+ Writers ,\, RegVals ,\, InitRegVal}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}} TypeOK \.{\defeq} \.{\land}
- object \.{\in} ObjValues}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{56.14} \.{\land} \A\, i
- \.{\in} Procs \.{:} \.{\land} interface [ i ] \.{\in} Outputs ( i ) \.{\cup}
- Commands ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{124.82} \.{\land} istate
- [ i ] \.{\in} Outputs ( i ) \.{\cup} Commands ( i )}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} {\ASSUME} \.{\land} Readers
+ \.{\cap} Writers \.{=} \{ \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{38.24} \.{\land}
+ InitRegVal \.{\in} RegVals}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}} Init \.{\defeq} \.{\land}
- object\@s{6.00} \.{=} InitObj}%
- \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{35.70} \.{\land}
- interface \.{=} [ i \.{\in} Procs \.{\mapsto} InitOutput ( i ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{35.70} \.{\land} istate
- \.{=} [ i \.{\in} Procs \.{\mapsto} InitOutput ( i ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} InitMem\@s{2.60} \.{\defeq}
+ [ i \.{\in} Writers \.{\mapsto} InitRegVal ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} MemVals \.{\defeq} [ Writers
+ \.{\rightarrow} RegVals ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}} NotMemVal \.{\defeq}
+ {\CHOOSE} v \.{:} v \.{\notin} MemVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}} NotRegVal\@s{6.27}
+ \.{\defeq} {\CHOOSE} v \.{:} v \.{\notin} RegVals}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}} BeginOp ( i ,\, cmd )
- \.{\defeq} \.{\land} interface [ i ] \.{\in} Outputs ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{93.61} \.{\land}
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ The variables \ensuremath{mem} and \ensuremath{interface} are the same as in
+ \ensuremath{LinearSnapshot}.
+ The variable \ensuremath{wstate} is a function with domain
+ \ensuremath{Writers}, where \ensuremath{wstate[i]
+ } assumes the same value as \ensuremath{istate[i]} does for the
+ \ensuremath{LinearSnapshot} spec,
+ for all \ensuremath{i \.{\in} Writers}. The variable \ensuremath{rstate} is
+ a function with domain
+ \ensuremath{Readers} such that \ensuremath{rstate[i] \.{=} {\langle}
+ {\rangle}} when reader \ensuremath{i} is not performing a
+ read operation, and while performing a read it equals the sequence of
+ values that \ensuremath{mem} has assumed since the \ensuremath{BeginRd(i)}
+ step.
+\end{cpar}%
+\vshade{5.0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+We will not bother explaining the assertions that the spec makes about
+ \ensuremath{mem}, \ensuremath{interface} , and \ensuremath{wstate}, since
+ they are exactly the same as in
+ \ensuremath{LinearSnapshot} for \ensuremath{mem} and \ensuremath{interface}
+ , and every condition on
+ \ensuremath{wstate[i]} is the same as the corresponding condition on
+ \ensuremath{istate[i]} in
+ \ensuremath{LinearSnapshot}, for \ensuremath{i \.{\in} Writers}.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}} {\VARIABLES} mem ,\,
+ interface ,\, rstate ,\, wstate}%
+ \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}} vars \.{\defeq} {\langle}
+ mem ,\, interface ,\, rstate ,\, wstate {\rangle}}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}} TypeOK \.{\defeq} \.{\land}
+ mem \.{\in} MemVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{56.14} \.{\land}
+ \.{\land} {\DOMAIN} interface \.{=} Readers \.{\cup} Writers}%
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{67.25} \.{\land} \A\, i
+ \.{\in} Readers \.{:} interface [ i ] \.{\in} MemVals \.{\cup} \{ NotMemVal
+ \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{67.25} \.{\land} \A\, i
+ \.{\in} Writers\@s{0.49} \.{:} interface [ i ] \.{\in} RegVals\@s{6.27}
+ \.{\cup} \{ NotRegVal \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{56.14} \.{\land}
+ \.{\land} rstate \.{\in} [ Readers \.{\rightarrow} Seq ( MemVals ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{67.25} \.{\land} \A\, i
+ \.{\in} Readers \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{89.68} ( rstate [ i ]
+ \.{=} {\langle} {\rangle} ) \.{\equiv} ( interface [ i ] \.{\in} MemVals )}%
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{56.14} \.{\land} wstate
+ \.{\in} [ Writers \.{\rightarrow} RegVals \.{\cup} \{ NotRegVal \} ]}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Since no reader is initially executing a read command, \ensuremath{rstate[i]
+} initially equals the empty sequence for each reader \ensuremath{i}.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}} Init \.{\defeq} \.{\land}
+ mem \.{=} InitMem}%
+ \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{35.70} \.{\land}
+ interface \.{=} [ i \.{\in} Readers \.{\cup} Writers \.{\mapsto}}%
+ \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{105.45} {\IF} i \.{\in}
+ Readers \.{\THEN} InitMem \.{\ELSE} NotRegVal ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{35.70} \.{\land}
+ rstate\@s{2.42} \.{=} [ i \.{\in} Readers \.{\mapsto} {\langle} {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{35.70} \.{\land} wstate
+ \.{=} [ i \.{\in} Writers\@s{0.49} \.{\mapsto} NotRegVal ]}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ Since they leave \ensuremath{rstate} unchanged, \ensuremath{BeginWr} and
+ \ensuremath{EndWr} are the same as in
+ \ensuremath{LinearSnapshot}.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}} BeginWr ( i ,\, cmd )
+ \.{\defeq} \.{\land} interface [ i ] \.{=} NotRegVal}%
+ \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{95.48} \.{\land}
  interface \.{'} \.{=} [ interface {\EXCEPT} {\bang} [ i ] \.{=} cmd ]}%
- \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{93.61} \.{\land} istate
- \.{'}\@s{1.47} \.{=} [ istate {\EXCEPT} {\bang} [ i ] \.{=} cmd ]}%
- \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{93.61} \.{\land} object
- \.{'} \.{=} object}%
+ \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{95.48} \.{\land} wstate
+ \.{'} \.{=} [ wstate {\EXCEPT} {\bang} [ i ] \.{=} cmd ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{95.48} \.{\land}
+ {\UNCHANGED} {\langle} mem ,\, rstate {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}} DoOp ( i ) \.{\defeq}
- \.{\land} interface [ i ] \.{\in} Commands ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{56.82} \.{\land} istate [
- i ] \.{=} interface [ i ]}%
- \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{56.82} \.{\land} \.{\LET}
- result \.{\defeq} Apply ( i ,\, interface [ i ] ,\, object )}%
- \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{67.93} \.{\IN} \.{\land}
- object \.{'} \.{=} result . newState}%
- \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{88.33} \.{\land} istate
- \.{'}\@s{1.47} \.{=} [ istate {\EXCEPT} {\bang} [ i ] \.{=} result . output
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ The \ensuremath{BeginRd(i)} action sets \ensuremath{rstate[i]} to
+ \ensuremath{{\langle}mem{\rangle}}, since the current
+ value of \ensuremath{mem} is the only output value \ensuremath{EndRd(i)} can
+ return if executed
+ immediately afterwards.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}} BeginRd ( i ) \.{\defeq}
+ \.{\land} interface [ i ] \.{\in} MemVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}\@s{68.09} \.{\land}
+ interface \.{'} \.{=} [ interface {\EXCEPT} {\bang} [ i ] \.{=} NotMemVal ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}}\@s{68.09} \.{\land} rstate
+ \.{'} \.{=} [ rstate {\EXCEPT} {\bang} [ i ] \.{=} {\langle} mem {\rangle}
  ]}%
- \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{56.82} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{68.09} \.{\land}
+ {\UNCHANGED} {\langle} mem ,\, wstate {\rangle}}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ The \ensuremath{DoWr(i)} action appends the new value of \ensuremath{mem} to
+ \ensuremath{rstate[j]} for each
+ reader \ensuremath{j} currently performing a read operation, since each of
+ those
+ readers can return that value as their output.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}} DoWr ( i ) \.{\defeq}
+ \.{\land} interface [ i ] \.{\in} RegVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}}\@s{58.69} \.{\land} wstate
+ [ i ] \.{=} interface [ i ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}}\@s{58.69} \.{\land} mem
+ \.{'} \.{=} [ mem {\EXCEPT} {\bang} [ i ] \.{=} interface [ i ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 104\hspace{1em}}\@s{58.69} \.{\land} wstate
+ \.{'} \.{=} [ wstate {\EXCEPT} {\bang} [ i ] \.{=} NotRegVal ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}}\@s{58.69} \.{\land} rstate
+ \.{'}\@s{2.42} \.{=} [ j \.{\in} Readers \.{\mapsto}}%
+ \@x{\makebox[0pt][r]{\scriptsize 106\hspace{1em}}\@s{125.17} {\IF} rstate [ j
+ ] \.{=} {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 107\hspace{1em}}\@s{133.37} \.{\THEN}
+ {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}}\@s{133.37} \.{\ELSE} Append
+ ( rstate [ j ] ,\, mem \.{'} ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 109\hspace{1em}}\@s{58.69} \.{\land}
  interface \.{'} \.{=} interface}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}} EndOp ( i ) \.{\defeq}
- \.{\land} interface [ i ] \.{\in} Commands ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{61.67} \.{\land} istate [
- i ] \.{\in} Outputs ( i )}%
- \@x{\makebox[0pt][r]{\scriptsize 95\hspace{1em}}\@s{61.67} \.{\land}
- interface \.{'} \.{=} [ interface {\EXCEPT} {\bang} [ i ] \.{=} istate [ i ]
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{EndRd(i)} can set as its output any element of
+ \ensuremath{rstate[i]}. It resets
+ \ensuremath{rstate[i]} to the empty sequence.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 115\hspace{1em}} EndRd ( i )\@s{2.35}
+ \.{\defeq} \.{\land} interface [ i ] \.{=} NotMemVal}%
+ \@x{\makebox[0pt][r]{\scriptsize 116\hspace{1em}}\@s{63.55} \.{\land} \E\, j
+ \.{\in} 1 \.{\dotdot} Len ( rstate [ i ] ) \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}}\@s{85.98} interface \.{'}
+ \.{=} [ interface {\EXCEPT} {\bang} [ i ] \.{=} rstate [ i ] [ j ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}\@s{63.55} \.{\land} rstate
+ \.{'} \.{=} [ rstate {\EXCEPT} {\bang} [ i ] \.{=} {\langle} {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 119\hspace{1em}}\@s{63.55} \.{\land}
+ {\UNCHANGED} {\langle} mem ,\, wstate {\rangle}}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 121\hspace{1em}} EndWr ( i ) \.{\defeq}
+ \.{\land} interface [ i ] \.{\in} RegVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 122\hspace{1em}}\@s{63.55} \.{\land} wstate
+ [ i ] \.{=} NotRegVal}%
+ \@x{\makebox[0pt][r]{\scriptsize 123\hspace{1em}}\@s{63.55} \.{\land}
+ interface \.{'} \.{=} [ interface {\EXCEPT} {\bang} [ i ] \.{=} wstate [ i ]
  ]}%
- \@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}}\@s{61.67} \.{\land}
- {\UNCHANGED} {\langle} object ,\, istate {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 124\hspace{1em}}\@s{63.55} \.{\land}
+ {\UNCHANGED} {\langle} mem ,\, rstate ,\, wstate {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}} Next \.{\defeq} \E\, i
- \.{\in} Procs \.{:} \.{\lor} \E\, cmd \.{\in} Commands ( i ) \.{:} BeginOp (
- i ,\, cmd )}%
- \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{97.40} \.{\lor} DoOp ( i
- )}%
- \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{97.40} \.{\lor} EndOp (
- i )}%
+ \@x{\makebox[0pt][r]{\scriptsize 126\hspace{1em}} Next \.{\defeq} \.{\lor}
+ \E\, i \.{\in} Readers \.{:} BeginRd ( i ) \.{\lor} EndRd ( i )}%
+ \@x{\makebox[0pt][r]{\scriptsize 127\hspace{1em}}\@s{39.83} \.{\lor} \E\, i
+ \.{\in} Writers\@s{0.49} \.{:} \.{\lor} \E\, cmd \.{\in} RegVals \.{:}
+ BeginWr ( i ,\, cmd )}%
+ \@x{\makebox[0pt][r]{\scriptsize 128\hspace{1em}}\@s{118.73} \.{\lor} DoWr (
+ i ) \.{\lor} EndWr ( i )}%
 \@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-For later use, we give a name to the safety part of the spec.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}} SafeSpec \.{\defeq} Init
- \.{\land} {\Box} [ Next ]_{ vars}}%
+ \@x{\makebox[0pt][r]{\scriptsize 130\hspace{1em}} SafeSpec \.{\defeq}\@s{4.1}
+ Init \.{\land} {\Box} [ Next ]_{ vars}}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-The liveness requirement is that an operation that has begun (by
- executing a \ensuremath{BeginOp(i,\, cmd)} step) must eventually finish (by
- executing
- an \ensuremath{EndOp(i)} step). This is expressed by the formulas
- \ensuremath{Fairness} defined
- below. The equivalent specification is obtained by defining
- \ensuremath{Fairness
-} to equal this formula:
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{T}{F}{7.5}{0}{}%
- \ensuremath{\A\, i \.{\in} Procs} : \ensuremath{{\WF}\_vars(DoOp(i) \.{\lor}
- EndOp(i))
-}%
+The fairness condition implies that every read or write operation that
+ has begun must eventually finish.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 116\hspace{1em}} Fairness \.{\defeq} \A\, i
- \.{\in} Procs \.{:} {\WF}_{ vars} ( DoOp ( i ) ) \.{\land} {\WF}_{ vars} (
- EndOp ( i ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 117\hspace{1em}} Spec \.{\defeq} SafeSpec
- \.{\land} Fairness}%
-\@x{\makebox[0pt][r]{\scriptsize 118\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 136\hspace{1em}} Fairness \.{\defeq}
+ \.{\land} \A\, i \.{\in} Readers \.{:} {\WF}_{ vars} ( EndRd ( i ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 137\hspace{1em}}\@s{56.26} \.{\land} \A\, i
+ \.{\in} Writers\@s{0.49} \.{:} {\WF}_{ vars} ( DoWr ( i ) ) \.{\land}
+ {\WF}_{ vars} ( EndWr ( i ) )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 139\hspace{1em}} Spec \.{\defeq} Init
+ \.{\land} {\Box} [ Next ]_{ vars} \.{\land} Fairness}%
+\@x{\makebox[0pt][r]{\scriptsize 140\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
- \ensuremath{Nov} 08 17:15:41 \ensuremath{CST} 2018 by \ensuremath{hengxin
-}%
-\end{cpar}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Oct} 22
- 01:28:13 \ensuremath{PDT} 2016 by \ensuremath{lamport
+ 01:41:33 \ensuremath{PDT} 2016 by \ensuremath{lamport
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Tue} \ensuremath{Oct} 04
- 02:01:02 \ensuremath{PDT} 2016 by \ensuremath{lamport
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Wed} \ensuremath{Oct} 05
+ 01:23:41 \ensuremath{PDT} 2016 by \ensuremath{lamport
 }%
 \end{cpar}%
 \end{lcom}%

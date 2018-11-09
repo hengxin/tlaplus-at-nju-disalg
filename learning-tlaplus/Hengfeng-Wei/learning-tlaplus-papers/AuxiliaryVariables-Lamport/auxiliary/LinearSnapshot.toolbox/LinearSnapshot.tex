@@ -939,7 +939,8 @@
 \begin{document}
 \tlatex
 \setboolean{shading}{true}
-\@x{}\moduleLeftDash\@xx{ {\MODULE} LinearSnapshot}\moduleRightDash\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
+ {\MODULE} LinearSnapshot}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 This module is part of the \ensuremath{AfekSimplified} example in Section 6 of
@@ -973,17 +974,20 @@ This module is part of the \ensuremath{AfekSimplified} example in Section 6 of
  We declare the constants \ensuremath{Readers}, \ensuremath{Writers}, and
  \ensuremath{RegVals} to be the sets
  of readers, writers, and register values, and we declare the initial
- value \ensuremath{InitVal} of the registers. Readers and writers should be
- thought
+ value \ensuremath{InitRegVal} of the registers. Readers and writers should
+ be thought
  of as roles rather than processes, since a physical process can act as
  both a reader and a writer. We assume that the sets \ensuremath{Readers} and
  Writers are disjoint.
 \end{cpar}%
 \end{lcom}%
-\@x{ {\CONSTANTS} Readers ,\, Writers ,\, RegVals ,\, InitRegVal}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} {\CONSTANTS} Readers ,\,
+ Writers ,\, RegVals ,\, InitRegVal}%
 \@pvspace{8.0pt}%
-\@x{ {\ASSUME} \.{\land} Readers \.{\cap} Writers \.{=} \{ \}}%
-\@x{\@s{38.24} \.{\land} InitRegVal \.{\in} RegVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}} {\ASSUME} \.{\land} Readers
+ \.{\cap} Writers \.{=} \{ \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{38.24} \.{\land}
+ InitRegVal \.{\in} RegVals}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -992,7 +996,8 @@ This module is part of the \ensuremath{AfekSimplified} example in Section 6 of
  parameter of that name in the \ensuremath{Linearizability} module.
 \end{cpar}%
 \end{lcom}%
-\@x{ Procs \.{\defeq} Readers \.{\cup} Writers}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}} Procs \.{\defeq} Readers
+ \.{\cup} Writers}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1003,9 +1008,10 @@ This module is part of the \ensuremath{AfekSimplified} example in Section 6 of
  \ensuremath{Linearizability} module.
 \end{cpar}%
 \end{lcom}%
-\@x{ MemVals \.{\defeq} [ Writers \.{\rightarrow} RegVals ]}%
- \@x{ InitMem\@s{2.60} \.{\defeq} [ i \.{\in} Writers \.{\mapsto} InitRegVal
- ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} MemVals \.{\defeq} [ Writers
+ \.{\rightarrow} RegVals ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} InitMem\@s{2.60} \.{\defeq}
+ [ i \.{\in} Writers \.{\mapsto} InitRegVal ]}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1014,8 +1020,10 @@ This module is part of the \ensuremath{AfekSimplified} example in Section 6 of
  the command issued by a reader.
 \end{cpar}%
 \end{lcom}%
-\@x{ NotMemVal \.{\defeq} {\CHOOSE} v \.{:} v \.{\notin} MemVals}%
-\@x{ NotRegVal\@s{6.27} \.{\defeq} {\CHOOSE} v \.{:} v \.{\notin} RegVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} NotMemVal \.{\defeq}
+ {\CHOOSE} v \.{:} v \.{\notin} MemVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}} NotRegVal\@s{6.27}
+ \.{\defeq} {\CHOOSE} v \.{:} v \.{\notin} RegVals}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1023,22 +1031,27 @@ We now define the values to be instantiated for the remaining constant
  paramters of module \ensuremath{Linearizability}.
 \end{cpar}%
 \end{lcom}%
- \@x{ Commands ( i ) \.{\defeq} {\IF} i \.{\in} Readers \.{\THEN} \{ NotMemVal
- \}}%
-\@x{\@s{144.52} \.{\ELSE} RegVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}} Commands ( i ) \.{\defeq}
+ {\IF} i \.{\in} Readers \.{\THEN} \{ NotMemVal \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{144.52} \.{\ELSE}
+ RegVals}%
 \@pvspace{8.0pt}%
-\@x{ Outputs ( i ) \.{\defeq} {\IF} i \.{\in} Readers \.{\THEN} MemVals}%
-\@x{\@s{130.21} \.{\ELSE} \{ NotRegVal \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}} Outputs ( i ) \.{\defeq}
+ {\IF} i \.{\in} Readers \.{\THEN} MemVals}%
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{130.21} \.{\ELSE} \{
+ NotRegVal \}}%
 \@pvspace{8.0pt}%
- \@x{ InitOutput ( i ) \.{\defeq} {\IF} i \.{\in} Readers \.{\THEN} InitMem
- \.{\ELSE} NotRegVal}%
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}} InitOutput ( i ) \.{\defeq}
+ {\IF} i \.{\in} Readers \.{\THEN} InitMem \.{\ELSE} NotRegVal}%
 \@pvspace{8.0pt}%
-\@x{ Apply ( i ,\, cmd ,\, obj ) \.{\defeq} {\IF} i \.{\in} Readers}%
- \@x{\@s{118.32} \.{\THEN} [ newState \.{\mapsto} obj ,\, output \.{\mapsto}
- obj ]}%
- \@x{\@s{118.32} \.{\ELSE} [ newState \.{\mapsto} [ obj {\EXCEPT} {\bang} [ i
- ] \.{=} cmd ] ,\,}%
-\@x{\@s{152.41} output\@s{11.04} \.{\mapsto} NotRegVal ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}} Apply ( i ,\, cmd ,\, obj )
+ \.{\defeq} {\IF} i \.{\in} Readers}%
+ \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{118.32} \.{\THEN} [
+ newState \.{\mapsto} obj ,\, output \.{\mapsto} obj ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{118.32} \.{\ELSE} [
+ newState \.{\mapsto} [ obj {\EXCEPT} {\bang} [ i ] \.{=} cmd ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{152.41} output\@s{11.04}
+ \.{\mapsto} NotRegVal ]}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1046,7 +1059,8 @@ We prefer to use a variable named \ensuremath{mem} to instantiate the variable
  object of module \ensuremath{Linearizability}.
 \end{cpar}%
 \end{lcom}%
-\@x{ {\VARIABLES} mem ,\, interface ,\, istate}%
+ \@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}} {\VARIABLES} mem ,\,
+ interface ,\, istate}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1056,9 +1070,11 @@ Remember that parameters of an instantiated module whose instantiated
  identifiers with the same name in the current module.
 \end{cpar}%
 \end{lcom}%
- \@x{ {\INSTANCE} Linearizability {\WITH} ObjValues \.{\leftarrow} MemVals ,\,
- InitObj \.{\leftarrow} InitMem ,\,}%
-\@x{\@s{140.48} object \.{\leftarrow} mem}%
+ \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}} {\INSTANCE} Linearizability
+ {\WITH} ObjValues \.{\leftarrow} MemVals ,\, InitObj \.{\leftarrow} InitMem
+ ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{140.48} object
+ \.{\leftarrow} mem}%
 \@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1066,12 +1082,17 @@ Remember that parameters of an instantiated module whose instantiated
  modules.
 \end{cpar}%
 \end{lcom}%
-\@x{ {\ASSUME} LinearAssumps}%
-\@x{}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}} {\ASSUME} LinearAssumps}%
+\@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
+\end{cpar}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
+ \ensuremath{Nov} 08 17:10:01 \ensuremath{CST} 2018 by \ensuremath{hengxin
+}%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Oct} 22

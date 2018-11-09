@@ -21,7 +21,7 @@
 (*                                                                         *)
 (* We declare the constants Readers, Writers, and RegVals to be the sets   *)
 (* of readers, writers, and register values, and we declare the initial    *)
-(* value InitVal of the registers.  Readers and writers should be thought  *)
+(* value InitRegVal of the registers.  Readers and writers should be thought  *)
 (* of as roles rather than processes, since a physical process can act as  *)
 (* both a reader and a writer.  We assume that the sets Readers and        *)
 (* Writers are disjoint.                                                   *)
@@ -89,5 +89,6 @@ INSTANCE Linearizability WITH ObjValues <- MemVals, InitObj <- InitMem,
 ASSUME LinearAssumps
 =============================================================================
 \* Modification History
+\* Last modified Thu Nov 08 17:10:01 CST 2018 by hengxin
 \* Last modified Sat Oct 22 01:36:13 PDT 2016 by lamport
 \* Created Tue Oct 04 02:26:20 PDT 2016 by lamport
