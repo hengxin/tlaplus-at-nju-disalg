@@ -8,32 +8,32 @@ a, b
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-c1, c2
+c1
 ----
 
 \* MV CONSTANT definitions Char
-const_1541756814570144000 == 
+const_15418606536138000 == 
 {a, b}
 ----
 
 \* MV CONSTANT definitions Client
-const_1541756814570145000 == 
-{c1, c2}
+const_15418606536139000 == 
+{c1}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1InitState
-const_1541756814570146000 == 
+const_154186065361310000 == 
 <<>>
 ----
 
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_1541756814570148000 ==
+spec_154186065361312000 ==
 SpecImpl
 ----
 \* PROPERTY definition @modelCorrectnessProperties:0
-prop_1541756814570149000 ==
+prop_154186065361413000 ==
 CJ!Spec
 ----
 =============================================================================
 \* Modification History
-\* Created Fri Nov 09 17:46:54 CST 2018 by hengxin
+\* Created Sat Nov 10 22:37:33 CST 2018 by hengxin

@@ -31,7 +31,7 @@
 <listAttribute key="modelParameterConstants">
 <listEntry value="Char;;{a, b};1;0"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
-<listEntry value="Client;;{c1, c2};1;0"/>
+<listEntry value="Client;;{c1};1;0"/>
 <listEntry value="Server;;Server;1;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>

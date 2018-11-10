@@ -145,7 +145,7 @@ Init ==
 (* 
 Locate the node in the 2D state space ss which matches the context ctx of cop.    
 *)
-Locate(cop, ss) == CHOOSE n \in (ss.node) : n = cop.ctx
+Locate(cop, ss) == CHOOSE n \in ss.node : n = cop.ctx
 (* 
 xForm: iteratively transform cop with a path
 through the 2D state space ss at some client, 
@@ -264,5 +264,5 @@ CSSync ==
     \forall c \in Client: (cur[c] = cur[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Wed Nov 07 13:35:57 CST 2018 by hengxin
+\* Last modified Sat Nov 10 22:32:48 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

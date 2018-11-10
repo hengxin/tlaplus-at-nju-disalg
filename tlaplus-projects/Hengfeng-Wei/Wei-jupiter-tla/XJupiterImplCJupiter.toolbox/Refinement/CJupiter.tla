@@ -2,7 +2,6 @@
 (*
 Model of our own CJupiter protocol.
 *)
-
 EXTENDS Integers, OT, TLC, AdditionalFunctionOperators, AdditionalSequenceOperators
 -----------------------------------------------------------------------------
 CONSTANTS
@@ -83,16 +82,12 @@ VARIABLES
     *)
     chins   \* a set of chars to insert
 -----------------------------------------------------------------------------
+serialVars == <<serial, cincomingSerial, sincomingSerial>>
+vars == <<chins, cseq, css, cur, state, cincoming, sincoming, serialVars>>
+-----------------------------------------------------------------------------
 comm == INSTANCE CSComm WITH Msg <- Cop
 commSerial == INSTANCE CSComm WITH Msg <- Seq(Oid), 
                 cincoming <- cincomingSerial, sincoming <- sincomingSerial
------------------------------------------------------------------------------
-eVars == <<chins>>  \* variables for the environment
-cVars == <<cseq>>   \* variables for the clients
-dsVars == <<css, cur, state>>           \* variables for the data structure: the n-ary ordered state space
-commVars == <<cincoming, sincoming>>    \* variables for communication
-serialVars == <<serial, cincomingSerial, sincomingSerial>>
-vars == <<eVars, cVars, commVars, serialVars, dsVars>> \* all variables
 -----------------------------------------------------------------------------
 (*
 A css is a directed graph with labeled edges, 
@@ -111,7 +106,7 @@ TypeOK ==
     *)
     /\ cseq \in [Client -> Nat]
     (*
-    For edge ordering in CSS:
+      For edge ordering in CSS:
     *)
     /\ serial \in [Replica -> Seq(Oid)]
     /\ commSerial!TypeOK
@@ -161,7 +156,13 @@ Init ==
 (*
 Locate the node in rcss (the css at replica r \in Replica) that matches the context ctx of cop.     
 *)
-Locate(cop, rcss) == CHOOSE n \in (rcss.node) : n = cop.ctx
+Locate(cop, rcss) == CHOOSE n \in rcss.node : n = cop.ctx
+(*
+Take union of two state spaces ss1 and ss2.
+*)
+ss1 (+) ss2 ==
+    [ss1 EXCEPT !.node = @ \cup ss2.node,
+                !.edge = @ \cup ss2.edge]
 (*
 xForm: Iteratively transform cop with a path through the css 
 at replica r \in Replica, following the first edges.
@@ -170,11 +171,11 @@ xForm(cop, r) ==
     LET rcss == css[r]
         u == Locate(cop, rcss)
         v == u \cup {cop.oid}
-        RECURSIVE xFormHelper(_, _, _, _)
+        RECURSIVE xFormHelper(_, _, _, _, _, _)
         \* 'h' stands for "helper"; xcss: eXtra css created during transformation
-        xFormHelper(uh, vh, coph, xcss) ==  
+        xFormHelper(uh, vh, coph, xcss, xcoph, xcurh) ==  
             IF uh = cur[r]
-            THEN xcss
+            THEN <<xcss, xcoph, xcurh>>
             ELSE LET fedge == CHOOSE e \in rcss.edge: 
                                 /\ e.from = uh
                                 /\ \A uhe \in rcss.edge: 
@@ -185,23 +186,22 @@ xForm(cop, r) ==
                      fcop2coph == COT(fcop, coph)
                      vprime == vh \cup {fcop.oid}
                  IN  xFormHelper(uprime, vprime, coph2fcop,
-                        [xcss EXCEPT !.node = @ \o <<vprime>>,
-                         \* the order of recording edges here is important; used in Perform(cop, r)
-                          !.edge = @ \o <<[from |-> vh, to |-> vprime, cop |-> fcop2coph],
-                                         [from |-> uprime, to |-> vprime, cop |-> coph2fcop]>>])  
-   IN  xFormHelper(u, v, cop, [node |-> <<v>>, 
-                               edge |-> <<[from |-> u, to |-> v, cop |-> cop]>>])
+                        [xcss EXCEPT !.node = @ \cup {vprime},
+                          !.edge = @ \cup {[from |-> vh, to |-> vprime, cop |-> fcop2coph],
+                                           [from |-> uprime, to |-> vprime, cop |-> coph2fcop]}],
+                        coph2fcop, vprime)
+   IN  xFormHelper(u, v, cop, [node |-> {v}, 
+                               edge |-> {[from |-> u, to |-> v, cop |-> cop]}],
+                  cop, v)
 (*
 Perform cop at replica r \in Replica.                             
 *)
 Perform(cop, r) ==
-    LET xcss == xForm(cop, r)
-        xn == xcss.node
-        xe == xcss.edge
-        xcur == Last(xn)
-        xcop == Last(xe).cop
-    IN /\ css' = [css EXCEPT ![r].node = @ \cup Range(xn),
-                             ![r].edge = @ \cup Range(xe)]
+    LET xform == xForm(cop, r)
+        xcss == xform[1]
+        xcop == xform[2]
+        xcur == xform[3]
+    IN /\ css' = [css EXCEPT ![r].node = @ (+) xcss]
        /\ cur' = [cur EXCEPT ![r] = xcur]
        /\ state' = [state EXCEPT ![r] = Apply(xcop.op, @)]
 -----------------------------------------------------------------------------
@@ -223,7 +223,7 @@ DoIns(c) ==
 DoDel(c) == 
     \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
         /\ DoOp(c, del)
-        /\ UNCHANGED <<eVars, serialVars>>
+        /\ UNCHANGED <<chins, serialVars>>
 
 Do(c) == 
     \/ DoIns(c)
@@ -236,7 +236,7 @@ Rev(c) ==
     /\ Perform(Head(cincoming[c]), c)
     /\ commSerial!CRev(c)
     /\ serial' = [serial EXCEPT ![c] = Head(cincomingSerial[c])]
-    /\ UNCHANGED <<eVars, cVars>>
+    /\ UNCHANGED <<chins, cseq>>
 -----------------------------------------------------------------------------
 (*
 The Server receives a message.
@@ -248,7 +248,7 @@ SRev ==
            /\ comm!SSendSame(cop.oid.c, cop)  \* broadcast the original operation
            /\ serial' = [serial EXCEPT ![Server] = Append(@, cop.oid)]
            /\ commSerial!SSendSame(cop.oid.c, serial'[Server])
-    /\ UNCHANGED <<eVars, cVars, sincomingSerial>>
+    /\ UNCHANGED <<chins, cseq, sincomingSerial>>
 -----------------------------------------------------------------------------
 (*
 The next-state relation.
@@ -271,5 +271,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Tue Nov 06 21:10:38 CST 2018 by hengxin
+\* Last modified Sat Nov 10 22:37:29 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin
