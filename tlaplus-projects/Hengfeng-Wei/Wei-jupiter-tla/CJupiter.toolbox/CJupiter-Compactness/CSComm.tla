@@ -34,7 +34,7 @@ CSend(msg) ==
 (* A client receives a message from the Server.                  *)
 (*********************************************************************)
 CRev(c) ==
-    /\ cincoming[c] # <<>>  \* there are messages to handle with
+    /\ cincoming[c] # <<>>
     /\ cincoming' = [cincoming EXCEPT ![c] = Tail(@)]   \* consume a message
     /\ UNCHANGED sincoming
 -----------------------------------------------------------------------------
@@ -70,5 +70,5 @@ SSendSame(c, msg) ==
 EmptyChannel == Init
 =============================================================================
 \* Modification History
-\* Last modified Sat Sep 08 17:00:33 CST 2018 by hengxin
+\* Last modified Fri Nov 16 13:00:32 CST 2018 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

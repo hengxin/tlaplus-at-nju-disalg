@@ -100,6 +100,8 @@ IsCSS(G) ==
     /\ G.node \subseteq (SUBSET Oid)
     /\ G.edge \subseteq [from: G.node, to: G.node, cop: Cop]
 
+EmptySS == [node |-> {{}}, edge |-> {}]
+
 TypeOK == 
     (*
       For the client replicas:
@@ -116,13 +118,13 @@ TypeOK ==
     /\ \A r \in Replica: IsCSS(css[r])
     /\ cur \in [Replica -> SUBSET Oid]
     /\ state \in [Replica -> List]
-    (*****************************************************************)
-    (* For communication between the server and the clients:         *)
-    (*****************************************************************)
+    (*
+     For communication between the server and the clients:
+    *)
     /\ comm!TypeOK
-    (*****************************************************************)
-    (* For model checking:                                           *)
-    (*****************************************************************)
+    (*
+     For model checking:
+    *)
     /\ chins \subseteq Char
 -----------------------------------------------------------------------------
 (*
@@ -141,7 +143,7 @@ Init ==
     (*****************************************************************)
     (* For all replicas: the n-ary ordered state space                                      *)
     (*****************************************************************)
-    /\ css = [r \in Replica |-> [node |-> {{}}, edge |-> {}]]
+    /\ css = [r \in Replica |-> EmptySS]
     /\ cur = [r \in Replica |-> {}]
     /\ state = [r \in Replica |-> InitState]
     (*****************************************************************)
@@ -160,9 +162,7 @@ Locate(cop, rcss) == CHOOSE n \in rcss.node : n = cop.ctx
 (*
 Take union of two state spaces ss1 and ss2.
 *)
-ss1 (+) ss2 ==
-    [ss1 EXCEPT !.node = @ \cup ss2.node,
-                !.edge = @ \cup ss2.edge]
+ss1 (+) ss2 == [node |-> ss1.node \cup ss2.node, edge |-> ss1.edge \cup ss2.edge]
 (*
 xForm: Iteratively transform cop with a path through the css 
 at replica r \in Replica, following the first edges.
@@ -195,7 +195,7 @@ xForm(cop, r) ==
 Perform cop at replica r \in Replica.                             
 *)
 Perform(cop, r) ==
-    LET xform == xForm(cop, r)
+    LET xform == xForm(cop, r)  \* xform: <<xcss, xcop, xcur>>
         xcss == xform[1]
         xcop == xform[2]
         xcur == xform[3]
@@ -269,5 +269,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Fri Nov 16 12:52:13 CST 2018 by hengxin
+\* Last modified Fri Nov 16 14:47:14 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

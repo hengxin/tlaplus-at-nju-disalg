@@ -6,7 +6,7 @@
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="192.168.1.104"/>
+<stringAttribute key="distributedNetworkInterface" value="114.212.86.249"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
@@ -30,7 +30,7 @@
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Client;;{c1};1;0"/>
+<listEntry value="Client;;{c1, c2};1;0"/>
 <listEntry value="Char;;{a, b};1;0"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
 <listEntry value="Server;;Server;1;0"/>

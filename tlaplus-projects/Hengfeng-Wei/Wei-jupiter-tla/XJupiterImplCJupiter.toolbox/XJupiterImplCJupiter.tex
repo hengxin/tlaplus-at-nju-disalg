@@ -989,8 +989,7 @@
  \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land}
  op2ss\@s{2.50} \.{=} {\langle} {\rangle}}%
  \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} c2ssX
- \.{=} [ c \.{\in} Client \.{\mapsto} [ node \.{\mapsto} \{ \{ \} \} ,\, edge
- \.{\mapsto} \{ \} ] ]}%
+ \.{=} [ c \.{\in} Client \.{\mapsto} EmptySS ]}%
 \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1064,15 +1063,13 @@
  \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{113.19} {\IF} r \.{=}
  Server}%
  \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{113.19} \.{\THEN}
- IgnoreDir ( SetReduce ( \.{\oplus} ,\, Range ( s2ss ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{156.81} [ node
- \.{\mapsto} \{ \{ \} \} ,\, edge \.{\mapsto} \{ \} ] ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{113.19} \.{\ELSE}
+ IgnoreDir ( SetReduce ( \.{\oplus} ,\, Range ( s2ss ) ,\, EmptySS ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{113.19} \.{\ELSE}
  IgnoreDir ( c2ss [ r ] \.{\oplus} c2ssX [ r ] ) ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}} {\THEOREM} SpecImpl
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}} {\THEOREM} SpecImpl
  \.{\implies} CJ {\bang} Spec}%
-\@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1080,7 +1077,7 @@
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Fri}
- \ensuremath{Nov} 16 14:15:59 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{Nov} 16 14:54:12 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

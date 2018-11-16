@@ -77,13 +77,10 @@ VARIABLES
       For model checking:                                           
     *)
     chins   \* a set of chars to insert
+
+vars == <<chins, cseq, cur, cincoming, sincoming, c2ss, s2ss, state>>
 -----------------------------------------------------------------------------
 comm == INSTANCE CSComm WITH Msg <- Cop
------------------------------------------------------------------------------
-eVars == <<chins>>  \* variables for the environment
-cVars == <<cseq>>   \* variables for the clients
-commVars == <<cincoming, sincoming>>    \* variables for communication
-vars == <<eVars, cVars, cur, commVars, c2ss, s2ss, state>> \* all variables
 -----------------------------------------------------------------------------
 (* 
 A 2D state space is a directed graph with labeled edges.
@@ -97,6 +94,8 @@ IsSS(G) ==
     /\ G = [node |-> G.node, edge |-> G.edge]
     /\ G.node \subseteq (SUBSET Oid)
     /\ G.edge \subseteq [from: G.node, to: G.node, cop: Cop, lr: {Local, Remote}]
+
+EmptySS == [node |-> {{}}, edge |-> {}]
 (*
 Take union of two state spaces ss1 and ss2.
 *) 
@@ -130,8 +129,8 @@ Init ==
     (* 
       For the 2D state spaces:
     *)
-    /\ c2ss = [c \in Client |-> [node |-> {{}}, edge |-> {}]]
-    /\ s2ss = [c \in Client |-> [node |-> {{}}, edge |-> {}]]
+    /\ c2ss = [c \in Client |-> EmptySS]
+    /\ s2ss = [c \in Client |-> EmptySS]
     /\ cur  = [r \in Replica |-> {}]
     (*
       For all replicas:
@@ -204,7 +203,7 @@ DoIns(c) ==
 DoDel(c) == 
     \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
         /\ DoOp(c, del)
-        /\ UNCHANGED <<eVars>>
+        /\ UNCHANGED <<chins>>
 
 Do(c) == 
     /\ \/ DoIns(c) 
@@ -217,7 +216,7 @@ Rev(c) ==
     /\ comm!CRev(c)
     /\ LET cop == Head(cincoming[c]) \* the received (transformed) operation
         IN ClientPerform(cop, c, Local)
-    /\ UNCHANGED <<eVars, cVars, s2ss>>
+    /\ UNCHANGED <<chins, cseq, s2ss>>
 -----------------------------------------------------------------------------
 (*
 The Server performs operation cop.
@@ -246,7 +245,7 @@ SRev ==
     /\ comm!SRev
     /\ LET cop == Head(sincoming)
         IN ServerPerform(cop)
-    /\ UNCHANGED <<eVars, cVars, c2ss>>
+    /\ UNCHANGED <<chins, cseq, c2ss>>
 -----------------------------------------------------------------------------
 Next == 
     \/ \E c \in Client: Do(c) \/ Rev(c)
@@ -262,5 +261,5 @@ CSSync ==
     \forall c \in Client: (cur[c] = cur[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Fri Nov 16 13:57:18 CST 2018 by hengxin
+\* Last modified Fri Nov 16 14:41:52 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

@@ -21,7 +21,7 @@ TypeOKImpl ==
 InitImpl ==
     /\ InitEx
     /\ op2ss = <<>>
-    /\ c2ssX = [c \in Client |-> [node |-> {{}}, edge |-> {}]]
+    /\ c2ssX = [c \in Client |-> EmptySS]
 -----------------------------------------------------------------------------
 (*
 Ignore the lr field in edges of 2D state space ss.
@@ -59,12 +59,11 @@ CJ == INSTANCE CJupiter
         WITH cincoming <- cincomingCJ, \* sincoming needs no substitution
              css <- [r \in Replica |-> 
                         IF r = Server 
-                        THEN IgnoreDir(SetReduce((+), Range(s2ss), 
-                                [node |-> {{}}, edge |-> {}])) 
+                        THEN IgnoreDir(SetReduce((+), Range(s2ss), EmptySS))
                         ELSE IgnoreDir(c2ss[r] (+) c2ssX[r])]
 
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Fri Nov 16 14:15:59 CST 2018 by hengxin
+\* Last modified Fri Nov 16 14:54:12 CST 2018 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin
