@@ -3,7 +3,9 @@
 We show that XJupiter (XJupiterExtended) implements CJupiter.
 *)
 EXTENDS XJupiterExtended
-
+(*
+Variables for defining refinement mapping from XJupiter to CJupiter.
+*)
 VARIABLES
     op2ss,  \* a function from an operation (represented by its Oid) 
             \* to the part of 2D state space produced while the operation is transformed
@@ -22,18 +24,10 @@ InitImpl ==
     /\ c2ssX = [c \in Client |-> [node |-> {{}}, edge |-> {}]]
 -----------------------------------------------------------------------------
 (*
-Take union of 2D state spaces ss1 and ss2.
-*)
-ss1 (+) ss2 ==
-    [ss1 EXCEPT !.node = @ \cup ss2.node,
-                !.edge = @ \cup ss2.edge]
-(*
 Ignore the lr field in edges of 2D state space ss.
 *)
-IgnoreDir(ss) ==
-    [ss EXCEPT !.edge = 
-        \* {[field \in (DOMAIN e \ {"lr"}) |-> e.field] : e \in @}]
-        {[from |-> e.from, to |-> e.to, cop |-> e.cop] : e \in @}]
+IgnoreDir(ss) == 
+    [ss EXCEPT !.edge = {[from |-> e.from, to |-> e.to, cop |-> e.cop] : e \in @}]
 -----------------------------------------------------------------------------
 DoImpl(c) ==
     /\ DoEx(c)
@@ -42,15 +36,16 @@ DoImpl(c) ==
 RevImpl(c) ==
     /\ RevEx(c)
     /\ LET cop == Head(cincoming[c])
-        IN c2ssX' = [c2ssX EXCEPT ![c] = @ (+) op2ss[cop.oid]]
+       IN  c2ssX' = [c2ssX EXCEPT ![c] = @ (+) op2ss[cop.oid]]
     /\ UNCHANGED <<op2ss>>
 
 SRevImpl == 
     /\ SRevEx
     /\ LET cop == Head(sincoming)
              c == cop.oid.c
-            ss == xForm(cop, s2ss[c], cur[Server], Remote)  \* TODO: performance!!!
-        IN op2ss' = op2ss @@ (cop.oid :> [node |-> Range(ss.node), edge |-> Range(ss.edge)])
+         xform == xForm(cop, s2ss[c], cur[Server], Remote)  \* TODO: performance!!!
+            ss == xform[1]
+       IN op2ss' = op2ss @@ (cop.oid :> [node |-> ss.node, edge |-> ss.edge])
     /\ UNCHANGED <<c2ssX>>
 -----------------------------------------------------------------------------
 NextImpl ==
@@ -71,5 +66,5 @@ CJ == INSTANCE CJupiter
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Sat Nov 10 22:33:20 CST 2018 by hengxin
+\* Last modified Fri Nov 16 14:15:59 CST 2018 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

@@ -264,10 +264,10 @@ Spec == Init /\ [][Next]_vars /\ WF_vars(SRev \/ \E c \in Client: Rev(c))
 The compactness of CJupiter: the CSSes at all replicas are the same.
 *)
 Compactness == 
-    comm!EmptyChannel => Cardinality({css[r] : r \in Replica}) = 1
+    comm!EmptyChannel => Cardinality(Range(css)) = 1
 
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Sat Nov 10 22:46:01 CST 2018 by hengxin
+\* Last modified Fri Nov 16 12:52:13 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

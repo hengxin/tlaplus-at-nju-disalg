@@ -3,37 +3,37 @@ EXTENDS XJupiterImplCJupiter, TLC
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-a, b
+a
 ----
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-c1
+c1, c2
 ----
 
 \* MV CONSTANT definitions Char
-const_15423438738672000 == 
-{a, b}
+const_154234885621897000 == 
+{a}
 ----
 
 \* MV CONSTANT definitions Client
-const_15423438738673000 == 
-{c1}
+const_154234885621898000 == 
+{c1, c2}
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1InitState
-const_15423438738674000 == 
+const_154234885621899000 == 
 <<>>
 ----
 
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_15423438738676000 ==
+spec_1542348856219101000 ==
 SpecImpl
 ----
 \* PROPERTY definition @modelCorrectnessProperties:0
-prop_15423438738677000 ==
+prop_1542348856219102000 ==
 CJ!Spec
 ----
 =============================================================================
 \* Modification History
-\* Created Fri Nov 16 12:51:13 CST 2018 by hengxin
+\* Created Fri Nov 16 14:14:16 CST 2018 by hengxin

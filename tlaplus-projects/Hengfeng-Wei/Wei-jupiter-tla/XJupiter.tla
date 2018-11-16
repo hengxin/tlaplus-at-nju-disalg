@@ -97,6 +97,10 @@ IsSS(G) ==
     /\ G = [node |-> G.node, edge |-> G.edge]
     /\ G.node \subseteq (SUBSET Oid)
     /\ G.edge \subseteq [from: G.node, to: G.node, cop: Cop, lr: {Local, Remote}]
+(*
+Take union of two state spaces ss1 and ss2.
+*) 
+ss1 (+) ss2 == [node |-> ss1.node \cup ss2.node, edge |-> ss1.edge \cup ss2.edge]
 
 TypeOK == 
     (* 
@@ -154,11 +158,11 @@ following the edges with the direction flag d.
 xForm(cop, ss, current, d) ==
     LET u == Locate(cop, ss)
         v == u \cup {cop.oid}
-        RECURSIVE xFormHelper(_, _, _, _)
+        RECURSIVE xFormHelper(_, _, _, _, _, _)
         \* 'h' stands for "helper"; xss: eXtra ss created during transformation
-        xFormHelper(uh, vh, coph, xss) ==  
+        xFormHelper(uh, vh, coph, xss, xcoph, xcurh) ==  
             IF uh = current
-            THEN xss
+            THEN <<xss, xcoph, xcurh>>
             ELSE LET e == CHOOSE e \in ss.edge: e.from = uh /\ e.lr = d
                      uprime == e.to
                      copprime == e.cop
@@ -166,25 +170,21 @@ xForm(cop, ss, current, d) ==
                      copprime2coph == COT(copprime, coph)
                      vprime == vh \cup {copprime.oid}
                   IN xFormHelper(uprime, vprime, coph2copprime,
-                        [xss EXCEPT !.node = @ \o <<vprime>>,
-                                    \* the order of recording edges here is important
-                                    \* so that the last one is labeled with the final transformed operation
-                                    !.edge = @ \o <<[from |-> vh, to |-> vprime, cop |-> copprime2coph, lr |-> d],
-                                                    [from |-> uprime, to |-> vprime, cop |-> coph2copprime, lr |-> 1 - d]>>])  
-    IN xFormHelper(u, v, cop, [node |-> <<v>>, 
-                               edge |-> <<[from |-> u, to |-> v, cop |-> cop, lr |-> 1 - d]>>])
+                        [node |-> xss.node \cup {vprime}, 
+                         edge |-> xss.edge \cup {[from |-> vh, to |-> vprime, cop |-> copprime2coph, lr |-> d], 
+                                    [from |-> uprime, to |-> vprime, cop |-> coph2copprime, lr |-> 1 - d]}],
+                                 coph2copprime, vprime)
+    IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop, lr |-> 1 - d]}], cop, v)
 -----------------------------------------------------------------------------
 (* 
 Client c \in Client perform operation cop guided by the direction flag d.
 *)
 ClientPerform(cop, c, d) ==
-    LET xss == xForm(cop, c2ss[c], cur[c], d)
-        xn == xss.node
-        xe == xss.edge
-        xcur == Last(xn)
-        xcop == Last(xe).cop
-    IN /\ c2ss' = [c2ss EXCEPT ![c].node = @ \cup Range(xn),
-                             ![c].edge = @ \cup Range(xe)]
+    LET xform == xForm(cop, c2ss[c], cur[c], d) \* xform: <<xss, xcop, xcur>>
+          xss == xform[1]
+         xcop == xform[2]
+         xcur == xform[3]
+    IN /\ c2ss' = [c2ss EXCEPT ![c] = @ (+) xss]
        /\ cur' = [cur EXCEPT ![c] = xcur]
        /\ state' = [state EXCEPT ![c] = Apply(xcop.op, @)]
 (* 
@@ -225,18 +225,16 @@ The Server performs operation cop.
 ServerPerform(cop) == 
     LET c == cop.oid.c
      scur == cur[Server]
-      xss == xForm(cop, s2ss[c], scur, Remote)
-       xn == xss.node
-       xe == xss.edge
-     xcur == Last(xn)
-     xcop == Last(xe).cop 
+    xform == xForm(cop, s2ss[c], scur, Remote) \* xform: <<xss, xcop, xcur>>
+      xss == xform[1]
+     xcop == xform[2]
+     xcur == xform[3]
     IN /\ s2ss' = [cl \in Client |-> 
                     IF cl = c 
-                    THEN [s2ss[cl] EXCEPT !.node = @ \cup Range(xn),
-                                          !.edge = @ \cup Range(xe)]
-                    ELSE [s2ss[cl] EXCEPT !.node = @ \cup {xcur},
-                                          !.edge = @ \cup {[from |-> scur, to |-> xcur,
-                                                             cop |-> xcop, lr |-> Remote]}]
+                    THEN s2ss[cl] (+) xss
+                    ELSE s2ss[cl] (+) [node |-> {xcur}, 
+                                       edge |-> {[from |-> scur, to |-> xcur, 
+                                                   cop |-> xcop, lr |-> Remote]}]
                   ]
        /\ cur' = [cur EXCEPT ![Server] = xcur]
        /\ state' = [state EXCEPT ![Server] = Apply(xcop.op, @)]
@@ -264,5 +262,5 @@ CSSync ==
     \forall c \in Client: (cur[c] = cur[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Sat Nov 10 22:32:48 CST 2018 by hengxin
+\* Last modified Fri Nov 16 13:57:18 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin
