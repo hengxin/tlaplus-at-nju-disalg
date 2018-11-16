@@ -190,9 +190,7 @@ xForm(cop, r) ==
                           !.edge = @ \cup {[from |-> vh, to |-> vprime, cop |-> fcop2coph],
                                            [from |-> uprime, to |-> vprime, cop |-> coph2fcop]}],
                         coph2fcop, vprime)
-   IN  xFormHelper(u, v, cop, [node |-> {v}, 
-                               edge |-> {[from |-> u, to |-> v, cop |-> cop]}],
-                  cop, v)
+   IN  xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}], cop, v)
 (*
 Perform cop at replica r \in Replica.                             
 *)
@@ -201,7 +199,7 @@ Perform(cop, r) ==
         xcss == xform[1]
         xcop == xform[2]
         xcur == xform[3]
-    IN /\ css' = [css EXCEPT ![r].node = @ (+) xcss]
+    IN /\ css' = [css EXCEPT ![r] = @ (+) xcss]
        /\ cur' = [cur EXCEPT ![r] = xcur]
        /\ state' = [state EXCEPT ![r] = Apply(xcop.op, @)]
 -----------------------------------------------------------------------------
@@ -271,5 +269,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Sat Nov 10 22:37:29 CST 2018 by hengxin
+\* Last modified Sat Nov 10 22:46:01 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin
