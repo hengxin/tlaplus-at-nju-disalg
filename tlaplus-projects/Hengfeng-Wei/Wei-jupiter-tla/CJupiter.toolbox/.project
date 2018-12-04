@@ -16,21 +16,6 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>AdditionalFunctionOperators.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AdditionalFunctionOperators.tla</locationURI>
-		</link>
-		<link>
-			<name>AdditionalSequenceOperators.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AdditionalSequenceOperators.tla</locationURI>
-		</link>
-		<link>
-			<name>AdditionalSetOperators.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AdditionalSetOperators.tla</locationURI>
-		</link>
-		<link>
 			<name>CJupiter.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/CJupiter.tla</locationURI>
@@ -41,6 +26,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/CSComm.tla</locationURI>
 		</link>
 		<link>
+			<name>FunctionUtils.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/FunctionUtils.tla</locationURI>
+		</link>
+		<link>
 			<name>OT.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/OT.tla</locationURI>
@@ -49,6 +39,16 @@
 			<name>OpOperators.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/OpOperators.tla</locationURI>
+		</link>
+		<link>
+			<name>SequenceUtils.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/SequenceUtils.tla</locationURI>
+		</link>
+		<link>
+			<name>SetUtils.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/SetUtils.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>
