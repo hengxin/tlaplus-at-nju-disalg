@@ -69,20 +69,47 @@ vars == <<chins, cbuf, crec, sbuf, srec, cincoming, sincoming, state>>
 comm == INSTANCE CSComm \* WITH Msg <- Msg
 -----------------------------------------------------------------------------
 TypeOK == 
+    (*****************************************************************)
+    (* For the client replicas:                                      *)
+    (*****************************************************************)
     /\ cbuf \in [Client -> Seq(Op \cup {Nop})]
     /\ crec \in [Client -> Int]
+    (*****************************************************************)
+    (* For the server replica:                                       *)
+    (*****************************************************************)
     /\ sbuf \in [Client -> Seq(Op \cup {Nop})]
     /\ srec \in [Client -> Int]
+    (*
+      For all replicas.
+    *)
     /\ state \in [Replica -> List]
+    (*****************************************************************)
+    (* For communication between the server and the clients:         *)
+    (*****************************************************************)
     /\ comm!TypeOK
+    (*****************************************************************)
+    (* For model checking:                                           *)
+    (*****************************************************************)
     /\ chins \in SUBSET Char
 -----------------------------------------------------------------------------
 Init == 
+    (*****************************************************************)
+    (* For the client replicas:                                      *)
+    (*****************************************************************)
     /\ cbuf = [c \in Client |-> <<>>]
     /\ crec = [c \in Client |-> 0]
+    (*****************************************************************)
+    (* For the server replica:                                       *)
+    (*****************************************************************)
     /\ sbuf = [c \in Client |-> <<>>]
     /\ srec = [c \in Client |-> 0]
+    (*
+      For all replicas.
+    *)
     /\ state = [r \in Replica |-> InitState]
+    (*****************************************************************)
+    (* For communication between the server and the clients:         *)
+    (*****************************************************************)
     /\ comm!Init
     /\ chins = Char
 -----------------------------------------------------------------------------
@@ -160,11 +187,10 @@ Spec == Init /\ [][Next]_vars \* /\ Fairness
 (* 
 Quiescent Consistency (QC)                                        
 *)
-QC == 
-    comm!EmptyChannel => Cardinality(Range(state)) = 1
+QC == comm!EmptyChannel => Cardinality(Range(state)) = 1
 
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Tue Dec 04 18:35:18 CST 2018 by hengxin
+\* Last modified Tue Dec 04 17:16:53 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

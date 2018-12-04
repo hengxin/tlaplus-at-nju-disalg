@@ -127,32 +127,29 @@ TypeOK ==
     *)
     /\ chins \subseteq Char
 -----------------------------------------------------------------------------
-(*
-The Init predicate.
-*)
 Init == 
-    (*****************************************************************)
-    (* For the client replicas:                                      *)
-    (*****************************************************************)
+    (* 
+      For the client replicas:                                      
+    *)
     /\ cseq = [c \in Client |-> 0]
-    (*****************************************************************)
-    (* For the server replica:                                       *)
-    (*****************************************************************)
+    (* 
+      For the server replica:                                       
+    *)
     /\ serial = [r \in Replica |-> <<>>]
     /\ commSerial!Init
-    (*****************************************************************)
-    (* For all replicas: the n-ary ordered state space                                      *)
-    (*****************************************************************)
+    (* 
+      For all replicas: the n-ary ordered state space                                      
+    *)
     /\ css = [r \in Replica |-> EmptySS]
     /\ cur = [r \in Replica |-> {}]
     /\ state = [r \in Replica |-> InitState]
-    (*****************************************************************)
-    (* For communication between the server and the clients:         *)
-    (*****************************************************************)
+    (* 
+      For communication between the server and the clients:         
+    *)
     /\ comm!Init
-    (*****************************************************************)
-    (* For model checking:                                           *)
-    (*****************************************************************)
+    (* 
+      For model checking:                                           
+    *)
     /\ chins = Char
 -----------------------------------------------------------------------------
 (*
@@ -268,5 +265,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 03 20:15:05 CST 2018 by hengxin
+\* Last modified Tue Dec 04 18:34:22 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin
