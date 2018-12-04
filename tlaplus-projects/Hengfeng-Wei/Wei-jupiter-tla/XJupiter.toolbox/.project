@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>AJupiter</name>
+	<name>XJupiter</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -15,11 +15,6 @@
 		<nature>toolbox.natures.TLANature</nature>
 	</natures>
 	<linkedResources>
-		<link>
-			<name>AJupiter.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/AJupiter.tla</locationURI>
-		</link>
 		<link>
 			<name>CSComm.tla</name>
 			<type>1</type>
@@ -54,6 +49,16 @@
 			<name>SetUtils.tla</name>
 			<type>1</type>
 			<location>/home/hengxin/hfwei/github-projects-public/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/SetUtils.tla</location>
+		</link>
+		<link>
+			<name>TLCUtils.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/hfwei/github-projects-public/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/TLCUtils.tla</location>
+		</link>
+		<link>
+			<name>XJupiter.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/XJupiter.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

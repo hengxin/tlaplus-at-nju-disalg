@@ -4,41 +4,13 @@ Specification of the Jupiter protocol described in CSCW'2014
 by Yi Xu, Chengzheng Sun, and Mo Li.
 We call it XJupiter, with 'X' for "Xu".
 *)
-EXTENDS Integers, OT, TLCUtils, FunctionUtils, SequenceUtils
+EXTENDS JupiterInterface
 -----------------------------------------------------------------------------
-CONSTANTS
-    Client,     \* the set of client replicas
-    Server,     \* the (unique) server replica
-    Char,       \* set of characters allowed
-    InitState   \* the initial state of each replica
-
-Replica == Client \cup {Server}
-
-List == Seq(Char \cup Range(InitState))      \* all possible lists/strings
-MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any states;
-    \* We assume that all inserted elements are unique.
-
-ClientNum == Cardinality(Client)
-Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
 (*
 Direction flags for edges in 2D state spaces and OT.
 *)
 Local == 0 
 Remote == 1
-----------------------------------------------------------------------
-ASSUME 
-    /\ Range(InitState) \cap Char = {}  \* due to the uniqueness requirement
-    /\ Priority \in [Client -> 1 .. ClientNum]
------------------------------------------------------------------------------
-(* 
-The set of all operations.                                        
-Note: The positions are indexed from 1.
-*)
-Rd == [type: {"Rd"}]
-Del == [type: {"Del"}, pos: 1 .. MaxLen]
-Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
-
-Op == Ins \cup Del
 -----------------------------------------------------------------------------
 (* 
 Cop: operation of type Op with context                            
@@ -251,7 +223,10 @@ Next ==
     \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
 
-Spec == Init /\ [][Next]_vars /\ WF_vars(SRev \/ \E c \in Client: Rev(c))
+Fairness == 
+    WF_vars(SRev \/ \E c \in Client: Rev(c))
+
+Spec == Init /\ [][Next]_vars \* /\ Fairness
 -----------------------------------------------------------------------------
 (*
 In Jupiter (not limited to XJupiter), each client synchronizes with the server.
@@ -261,5 +236,5 @@ CSSync ==
     \forall c \in Client: (cur[c] = cur[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 03 20:11:02 CST 2018 by hengxin
+\* Last modified Tue Dec 04 19:34:37 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

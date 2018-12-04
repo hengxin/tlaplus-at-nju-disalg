@@ -31,6 +31,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/FunctionUtils.tla</locationURI>
 		</link>
 		<link>
+			<name>JupiterInterface.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/hfwei/github-projects-public/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/JupiterInterface.tla</location>
+		</link>
+		<link>
 			<name>OT.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/OT.tla</locationURI>

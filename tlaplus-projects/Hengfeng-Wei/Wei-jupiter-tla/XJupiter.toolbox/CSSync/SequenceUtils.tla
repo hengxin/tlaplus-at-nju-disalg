@@ -1,29 +1,43 @@
 -------------------- MODULE SequenceUtils --------------------
-(* 
-Copyright: https://github.com/bringhurst/tlaplus/blob/master/org.lamport.tla.toolbox.uitest/farsite/AdditionalSequenceOperators.tla
-*)
+
+(* Copyright: https://github.com/bringhurst/tlaplus/blob/master/org.lamport.tla.toolbox.uitest/farsite/AdditionalSequenceOperators.tla *)
+(*`^\addcontentsline{toc}{section}{AdditionalSequenceOperators}^'*)
 
 EXTENDS FiniteSets, Sequences, SetUtils, FunctionUtils
+
 LOCAL INSTANCE Naturals
 
 (* 
-IsSequenceOfSetElements is a predicate that is true when the specified
-sequence contains all and only elements of the specified set.
+    The TLA+ Sequences module defines the operators Head and Tail for
+    retrieving the first element of a sequence and all-but-the-first elements
+    of a sequence, respectively.
+    This module provides four operators that slightly generalize the notions
+    of Head and Tail:
+        First returns the first element of a sequence, equivalently to Head.
+        Last returns the last element of a sequence.
+        AllButFirst returns all-but-the-first elements of a sequence,
+            equivalently to Tail.
+        AllButLast returns all-but-the-last elements of a sequence.
+    This module also provides several additional operators on sequences:
+    IsElementInSeq is a predicate that is true when the specified value is an element
+    of the specified sequence.
+    IsSequenceOfSetElements is a predicate that is true when the specified
+    sequence contains all and only elements of the specified set.
+    IsSortedSequenceOfSetElements is a predicate that is true when the
+    IsSequenceOfSetElements is true and the sequence is also sorted in increasing order.
+    DeleteElement produces a sequence by deleting an indicated element from another
+    sequence.
+ *)
 
-IsSortedSequenceOfSetElements is a predicate that is true when the
+Prepend(s,e)== <<e>>\o s
 
-IsSequenceOfSetElements is true and the sequence is also sorted in increasing order.
-*)
+First(seq)==seq[1]
 
-Prepend(s,e) == <<e>> \o s
+Last(seq)==seq[Len(seq)]
 
-First(seq) == seq[1]
+AllButFirst(seq)==[i \in 1..(Len(seq)-1)|->seq[(i+1)]]
 
-Last(seq) == seq[Len(seq)]
-
-AllButFirst(seq) == [i \in 1..(Len(seq)-1) |-> seq[(i+1)]]
-
-AllButLast(seq) == [i \in 1..(Len(seq)-1) |-> seq[i]]
+AllButLast(seq)==[i \in 1..(Len(seq)-1)|->seq[i]]
 
 DoesSeqPrefixSeq(seq1,seq2)==
   /\ Len(seq1)\leq Len(seq2)
@@ -179,5 +193,5 @@ LCSCompatibleTest(S) ==
     \A seq1, seq2 \in PermsWithin(S): LCSCompatible(seq1, seq2)
 =============================================================================
 \* Modification History
-\* Last modified Tue Dec 04 19:42:23 CST 2018 by hengxin
+\* Last modified Tue Dec 04 19:17:13 CST 2018 by hengxin
 \* Created Tue Jul 03 15:21:02 CST 2018 by hengxin

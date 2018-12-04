@@ -2,35 +2,7 @@
 (* 
 Specification of the Jupiter protocol presented by Hagit Attiya and others.
 *)
-EXTENDS Integers, OT, TLC, FunctionUtils
------------------------------------------------------------------------------
-CONSTANTS
-    Client,     \* the set of client replicas
-    Server,     \* the (unique) server replica
-    Char,       \* set of characters allowed
-    InitState   \* the initial state of each replica
-    
-Replica == Client \cup {Server}
-
-List == Seq(Char \cup Range(InitState))   \* all possible lists/strings
-MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any states;
-    \* We assume that all inserted elements are unique.
-
-ClientNum == Cardinality(Client)
-Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
-----------------------------------------------------------------------
-ASSUME 
-    /\ Range(InitState) \cap Char = {}
-    /\ Priority \in [Client -> 1 .. ClientNum]
------------------------------------------------------------------------------
-(* 
-The set of all operations (the positions are indexed from 1.)
-*)
-Rd == [type: {"Rd"}]
-Del == [type: {"Del"}, pos: 1 .. MaxLen]
-Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
-
-Op == Ins \cup Del  \* Now we don't consider Rd operations.
+EXTENDS JupiterInterface
 -----------------------------------------------------------------------------
 (* 
 Messages between the Server and the Clients.
@@ -166,5 +138,5 @@ QC ==
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Tue Dec 04 18:35:18 CST 2018 by hengxin
+\* Last modified Tue Dec 04 19:34:10 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

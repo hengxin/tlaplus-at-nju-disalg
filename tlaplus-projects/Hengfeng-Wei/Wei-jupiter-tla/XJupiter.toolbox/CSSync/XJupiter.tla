@@ -4,7 +4,7 @@ Specification of the Jupiter protocol described in CSCW'2014
 by Yi Xu, Chengzheng Sun, and Mo Li.
 We call it XJupiter, with 'X' for "Xu".
 *)
-EXTENDS JupiterInterface
+EXTENDS JupiterInterface, OT
 -----------------------------------------------------------------------------
 (*
 Direction flags for edges in 2D state spaces and OT.
@@ -236,5 +236,5 @@ CSSync ==
     \forall c \in Client: (cur[c] = cur[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Tue Dec 04 19:34:37 CST 2018 by hengxin
+\* Last modified Tue Dec 04 19:29:26 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

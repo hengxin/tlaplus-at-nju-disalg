@@ -2,36 +2,7 @@
 (*
 Model of our own CJupiter protocol.
 *)
-EXTENDS Integers, OT, TLC, FunctionUtils, SequenceUtils
------------------------------------------------------------------------------
-CONSTANTS
-    Client,     \* the set of client replicas
-    Server,     \* the (unique) server replica
-    Char,       \* set of characters allowed
-    InitState   \* the initial state of each replica
-
-Replica == Client \cup {Server}
-
-List == Seq(Char \cup Range(InitState))      \* all possible lists/strings
-MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any states;
-    \* We assume that all inserted elements are unique.
-
-ClientNum == Cardinality(Client)
-Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
-----------------------------------------------------------------------
-ASSUME 
-    /\ Range(InitState) \cap Char = {}  \* due to the uniqueness requirement
-    /\ Priority \in [Client -> 1 .. ClientNum]
------------------------------------------------------------------------------
-(*
-The set of all operations. Note: The positions are indexed from 1.
-*)
-(*********************************************************************)
-Rd == [type: {"Rd"}]
-Del == [type: {"Del"}, pos: 1 .. MaxLen]
-Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
-
-Op == Ins \cup Del
+EXTENDS JupiterInterface
 -----------------------------------------------------------------------------
 (*********************************************************************)
 (* Cop: operation of type Op with context                            *)
@@ -265,5 +236,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Tue Dec 04 18:34:22 CST 2018 by hengxin
+\* Last modified Tue Dec 04 19:34:24 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin
