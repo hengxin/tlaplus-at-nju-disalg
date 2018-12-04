@@ -11,6 +11,14 @@ CONSTANTS
     Char,       \* set of characters allowed
     InitState   \* the initial state of each replica
 
+VARIABLES 
+    state,  \* state[r]: state (the list content) of replica r \in Replica
+    cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
+    sincoming,  \* incoming channel at the Server    
+    chins   \* a set of chars allowed to insert; this is for model checking
+
+Comm(Msg) == INSTANCE CSComm
+
 Replica == Client \cup {Server}
 
 List == Seq(Char \cup Range(InitState))      \* all possible lists/strings
@@ -22,12 +30,18 @@ Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
 ----------------------------------------------------------------------
 ASSUME 
     /\ Range(InitState) \cap Char = {}  \* due to the uniqueness requirement
-    /\ Priority \in [Client -> 1 .. ClientNum]
+-----------------------------------------------------------------------------
+TypeOKInt ==
+    /\ state \in [Replica -> List]
+    /\ chins \subseteq Char
+
+InitInt ==
+    /\ state = [r \in Replica |-> InitState]
+    /\ chins = Char
 -----------------------------------------------------------------------------
 (*
 The set of all operations. Note: The positions are indexed from 1.
 *)
-(*********************************************************************)
 Rd == [type: {"Rd"}]
 Del == [type: {"Del"}, pos: 1 .. MaxLen]
 Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
@@ -35,5 +49,5 @@ Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* 
 Op == Ins \cup Del  \* Now we don't consider Rd operations
 =============================================================================
 \* Modification History
-\* Last modified Tue Dec 04 19:33:47 CST 2018 by hengxin
+\* Last modified Tue Dec 04 20:56:30 CST 2018 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin

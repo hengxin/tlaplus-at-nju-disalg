@@ -16,6 +16,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>CSComm.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/hfwei/github-projects-public/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/CSComm.tla</location>
+		</link>
+		<link>
 			<name>FunctionUtils.tla</name>
 			<type>1</type>
 			<location>/home/hengxin/hfwei/github-projects-public/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/FunctionUtils.tla</location>
