@@ -33,7 +33,7 @@
 		<link>
 			<name>JupiterInterface.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/hfwei/github-projects-public/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/JupiterInterface.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/JupiterInterface.tla</locationURI>
 		</link>
 		<link>
 			<name>OT.tla</name>
