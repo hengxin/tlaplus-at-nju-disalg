@@ -2,92 +2,17 @@
 (*
 Model of our own CJupiter protocol.
 *)
-EXTENDS Integers, OT, TLC, FunctionUtils, SequenceUtils
------------------------------------------------------------------------------
-CONSTANTS
-    Client,     \* the set of client replicas
-    Server,     \* the (unique) server replica
-    Char,       \* set of characters allowed
-    InitState   \* the initial state of each replica
-
-Replica == Client \cup {Server}
-
-List == Seq(Char \cup Range(InitState))      \* all possible lists/strings
-MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any states;
-    \* We assume that all inserted elements are unique.
-
-ClientNum == Cardinality(Client)
-Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
-----------------------------------------------------------------------
-ASSUME 
-    /\ Range(InitState) \cap Char = {}  \* due to the uniqueness requirement
-    /\ Priority \in [Client -> 1 .. ClientNum]
------------------------------------------------------------------------------
-(*
-The set of all operations. Note: The positions are indexed from 1.
-*)
-(*********************************************************************)
-Rd == [type: {"Rd"}]
-Del == [type: {"Del"}, pos: 1 .. MaxLen]
-Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
-
-Op == Ins \cup Del
------------------------------------------------------------------------------
-(*********************************************************************)
-(* Cop: operation of type Op with context                            *)
-(*********************************************************************)
-Oid == [c: Client, seq: Nat]  \* operation identifier
-Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid]
-    
-(* 
-tb: Is cop1 totally ordered before cop2?
-
-This can be determined according to the serial view (sv) of any replica.
-*)
-tb(cop1, cop2, sv) == 
-    LET pos1 == FirstIndexOfElementSafe(sv, cop1.oid)
-        pos2 == FirstIndexOfElementSafe(sv, cop2.oid)
-     IN IF pos1 # 0 /\ pos2 # 0 \* at the server or both are remote operations
-        THEN pos1 < pos2        \* at a client: one is a remote operation and the other is a local operation
-        ELSE pos1 # 0
-(*********************************************************************)
-(* OT of two operations of type Cop.                                 *)
-(*********************************************************************)
-COT(lcop, rcop) == [lcop EXCEPT !.op = Xform(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
+EXTENDS JupiterSerial
 -----------------------------------------------------------------------------
 VARIABLES
-    (*
-      For the client replicas:
-    *)
     cseq,   \* cseq[c]: local sequence number at client c \in Client
     (*
       For all replicas: the n-ary ordered state space
     *)
     css,    \* css[r]: the n-ary ordered state space at replica r \in Replica
-    cur,    \* cur[r]: the current node of css at replica r \in Replica
-    state,  \* state[r]: state (the list content) of replica r \in Replica
-    (*
-      For edge ordering in CSS
-    *)
-    serial, \* serial[r]: the serial view of replica r \in Replica about the server
-    cincomingSerial,
-    sincomingSerial,
-    (*
-      For communication between the Server and the Clients:
-    *)
-    cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
-    sincoming,  \* incoming channel at the Server
-    (*
-      For model checking:
-    *)
-    chins   \* a set of chars to insert
------------------------------------------------------------------------------
-serialVars == <<serial, cincomingSerial, sincomingSerial>>
+    cur     \* cur[r]: the current node of css at replica r \in Replica
+
 vars == <<chins, cseq, css, cur, state, cincoming, sincoming, serialVars>>
------------------------------------------------------------------------------
-comm == INSTANCE CSComm WITH Msg <- Cop
-commSerial == INSTANCE CSComm WITH Msg <- Seq(Oid), 
-                cincoming <- cincomingSerial, sincoming <- sincomingSerial
 -----------------------------------------------------------------------------
 (*
 A css is a directed graph with labeled edges, 
@@ -103,57 +28,26 @@ IsCSS(G) ==
 EmptySS == [node |-> {{}}, edge |-> {}]
 
 TypeOK == 
-    (*
-      For the client replicas:
-    *)
+    /\ TypeOKInt
+    /\ TypeOKSerial
+    /\ Comm(Cop)!TypeOK
     /\ cseq \in [Client -> Nat]
-    (*
-      For edge ordering in CSS:
-    *)
-    /\ serial \in [Replica -> Seq(Oid)]
-    /\ commSerial!TypeOK
     (*
       For all replicas: the n-ary ordered state space
     *)
     /\ \A r \in Replica: IsCSS(css[r])
     /\ cur \in [Replica -> SUBSET Oid]
-    /\ state \in [Replica -> List]
-    (*
-     For communication between the server and the clients:
-    *)
-    /\ comm!TypeOK
-    (*
-     For model checking:
-    *)
-    /\ chins \subseteq Char
 -----------------------------------------------------------------------------
-(*
-The Init predicate.
-*)
 Init == 
-    (*****************************************************************)
-    (* For the client replicas:                                      *)
-    (*****************************************************************)
+    /\ InitInt
+    /\ InitSerial
+    /\ Comm(Cop)!Init
     /\ cseq = [c \in Client |-> 0]
-    (*****************************************************************)
-    (* For the server replica:                                       *)
-    (*****************************************************************)
-    /\ serial = [r \in Replica |-> <<>>]
-    /\ commSerial!Init
-    (*****************************************************************)
-    (* For all replicas: the n-ary ordered state space                                      *)
-    (*****************************************************************)
+    (* 
+      For all replicas: the n-ary ordered state space                                      
+    *)
     /\ css = [r \in Replica |-> EmptySS]
     /\ cur = [r \in Replica |-> {}]
-    /\ state = [r \in Replica |-> InitState]
-    (*****************************************************************)
-    (* For communication between the server and the clients:         *)
-    (*****************************************************************)
-    /\ comm!Init
-    (*****************************************************************)
-    (* For model checking:                                           *)
-    (*****************************************************************)
-    /\ chins = Char
 -----------------------------------------------------------------------------
 (*
 Locate the node in rcss (the css at replica r \in Replica) that matches the context ctx of cop.     
@@ -210,43 +104,41 @@ DoOp(c, op) == \* op: the raw operation generated by the client c \in Client
     /\ cseq' = [cseq EXCEPT ![c] = @ + 1]
     /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> cur[c]]
        IN  /\ Perform(cop, c)
-           /\ comm!CSend(cop)
+           /\ Comm(Cop)!CSend(cop)
 
 DoIns(c) ==
     \E ins \in {op \in Ins: op.pos \in 1 .. (Len(state[c]) + 1) /\ op.ch \in chins /\ op.pr = Priority[c]}:
         /\ DoOp(c, ins)
         /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
-        /\ UNCHANGED <<serialVars>>
 
 DoDel(c) == 
     \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
         /\ DoOp(c, del)
-        /\ UNCHANGED <<chins, serialVars>>
+        /\ UNCHANGED chins
 
 Do(c) == 
-    \/ DoIns(c)
-    \/ DoDel(c)
+    /\ DoSerial(c)
+    /\ \/ DoIns(c) 
+       \/ DoDel(c)
 (*
 Client c \in Client receives a message from the Server.
 *)
 Rev(c) == 
-    /\ comm!CRev(c)
+    /\ Comm(Cop)!CRev(c)
     /\ Perform(Head(cincoming[c]), c)
-    /\ commSerial!CRev(c)
-    /\ serial' = [serial EXCEPT ![c] = Head(cincomingSerial[c])]
+    /\ RevSerial(c)
     /\ UNCHANGED <<chins, cseq>>
 -----------------------------------------------------------------------------
 (*
 The Server receives a message.
 *)
 SRev == 
-    /\ comm!SRev
+    /\ Comm(Cop)!SRev
     /\ LET cop == Head(sincoming)
        IN  /\ Perform(cop, Server)
-           /\ comm!SSendSame(cop.oid.c, cop)  \* broadcast the original operation
-           /\ serial' = [serial EXCEPT ![Server] = Append(@, cop.oid)]
-           /\ commSerial!SSendSame(cop.oid.c, serial'[Server])
-    /\ UNCHANGED <<chins, cseq, sincomingSerial>>
+           /\ Comm(Cop)!SSendSame(cop.oid.c, cop)  \* broadcast the original operation
+    /\ SRevSerial
+    /\ UNCHANGED <<chins, cseq>>
 -----------------------------------------------------------------------------
 Next == 
     \/ \E c \in Client: Do(c) \/ Rev(c)
@@ -263,10 +155,10 @@ Spec == Init /\ [][Next]_vars \* /\ Fairness (We care more about safety.)
 The compactness of CJupiter: the CSSes at all replicas are the same.
 *)
 Compactness == 
-    comm!EmptyChannel => Cardinality(Range(css)) = 1
+    Comm(Cop)!EmptyChannel => Cardinality(Range(css)) = 1
 
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 03 20:15:05 CST 2018 by hengxin
+\* Last modified Wed Dec 12 20:17:44 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

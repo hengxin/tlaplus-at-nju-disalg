@@ -1,7 +1,7 @@
 ----------------------------- MODULE JupiterCtx -----------------------------
 (*
 Definitions and operators for context-based Jupiter protocols,
-including AbsJupiter, CJupiter, and XJupiter.
+including AbsJupiter, XJupiter, and CJupiter.
 *)
 EXTENDS JupiterInterface
 -----------------------------------------------------------------------------
@@ -16,5 +16,5 @@ OT of two operations of type Cop.
 COT(lcop, rcop) == [lcop EXCEPT !.op = Xform(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 12 20:11:40 CST 2018 by hengxin
+\* Last modified Thu Dec 06 10:37:41 CST 2018 by hengxin
 \* Created Wed Dec 05 20:03:50 CST 2018 by hengxin

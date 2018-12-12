@@ -100,8 +100,11 @@ Fairness ==
 
 Spec == Init /\ [][Next]_vars \* /\ Fairness
 -----------------------------------------------------------------------------
-CSSync == TRUE
+Compactness == 
+    Comm(Cop)!EmptyChannel => Cardinality(Range(copss)) = 1
+    
+THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Fri Dec 07 14:59:07 CST 2018 by hengxin
+\* Last modified Sat Dec 08 17:34:44 CST 2018 by hengxin
 \* Created Wed Dec 05 19:55:52 CST 2018 by hengxin

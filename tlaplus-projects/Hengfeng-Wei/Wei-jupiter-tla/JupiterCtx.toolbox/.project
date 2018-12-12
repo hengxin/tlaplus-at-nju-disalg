@@ -18,12 +18,12 @@
 		<link>
 			<name>CSComm.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Public/jupiter-tla/CSComm.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/CSComm.tla</locationURI>
 		</link>
 		<link>
 			<name>FunctionUtils.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Public/jupiter-tla/FunctionUtils.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/FunctionUtils.tla</locationURI>
 		</link>
 		<link>
 			<name>JupiterCtx.tla</name>
@@ -33,27 +33,27 @@
 		<link>
 			<name>JupiterInterface.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Public/jupiter-tla/JupiterInterface.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/JupiterInterface.tla</locationURI>
 		</link>
 		<link>
 			<name>OT.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Public/jupiter-tla/OT.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/OT.tla</locationURI>
 		</link>
 		<link>
 			<name>OpOperators.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Public/jupiter-tla/OpOperators.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/OpOperators.tla</locationURI>
 		</link>
 		<link>
 			<name>SequenceUtils.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Public/jupiter-tla/SequenceUtils.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/SequenceUtils.tla</locationURI>
 		</link>
 		<link>
 			<name>SetUtils.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Public/jupiter-tla/SetUtils.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/SetUtils.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

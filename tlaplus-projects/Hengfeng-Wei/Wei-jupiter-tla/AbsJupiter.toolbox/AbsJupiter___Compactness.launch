@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
-<stringAttribute key="TLCCmdLineParameters" value="-coverage 99999"/>
+<stringAttribute key="TLCCmdLineParameters" value=""/>
 <stringAttribute key="configurationName" value="Compactness"/>
 <booleanAttribute key="deferLiveness" value="false"/>
 <intAttribute key="dfidDepth" value="100"/>
@@ -12,14 +12,14 @@
 <stringAttribute key="distributedTLCVMArgs" value=""/>
 <intAttribute key="fpBits" value="1"/>
 <intAttribute key="fpIndex" value="1"/>
-<intAttribute key="maxHeapSize" value="90"/>
+<intAttribute key="maxHeapSize" value="80"/>
 <intAttribute key="maxSetSize" value="1000000"/>
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value=""/>
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="sincoming, sincomingSerial, chins, serial, cseq, cincoming, cincomingSerial, css, state, cur"/>
+<stringAttribute key="modelBehaviorVars" value="sincoming, sincomingSerial, ds, copss, chins, serial, cseq, cincoming, cincomingSerial, state"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -32,7 +32,7 @@
 <listEntry value="Server;;Server;1;0"/>
 <listEntry value="Client;;{c1, c2};1;0"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
-<listEntry value="Char;;{a, b};1;1"/>
+<listEntry value="Char;;{a, b, c};1;1"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
@@ -46,7 +46,11 @@
 <intAttribute key="simuAril" value="-1"/>
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
-<stringAttribute key="specName" value="CJupiter"/>
+<stringAttribute key="specName" value="AbsJupiter"/>
+<listAttribute key="traceExploreExpressions">
+<listEntry value="1Comm(Cop)!EmptyChannel"/>
+<listEntry value="1Cardinality(Range(copss))"/>
+</listAttribute>
 <stringAttribute key="view" value=""/>
 <booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>
