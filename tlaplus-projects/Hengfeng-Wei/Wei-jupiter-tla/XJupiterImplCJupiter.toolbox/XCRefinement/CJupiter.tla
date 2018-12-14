@@ -73,7 +73,7 @@ xForm(cop, r) ==
             ELSE LET fedge == CHOOSE e \in rcss.edge: 
                                 /\ e.from = uh
                                 /\ \A uhe \in rcss.edge: 
-                                    (uhe.from = uh /\ uhe # e) => tb(e.cop, uhe.cop, serial[r])
+                                    (uhe.from = uh /\ uhe # e) => tb(e.cop.oid, uhe.cop.oid, serial[r])
                      uprime == fedge.to
                      fcop == fedge.cop
                      coph2fcop == COT(coph, fcop)
@@ -160,5 +160,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 12 20:17:44 CST 2018 by hengxin
+\* Last modified Thu Dec 13 09:31:36 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

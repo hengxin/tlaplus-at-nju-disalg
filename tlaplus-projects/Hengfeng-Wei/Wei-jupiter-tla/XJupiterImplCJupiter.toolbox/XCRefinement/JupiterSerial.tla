@@ -20,7 +20,7 @@ tb(cop1, cop2, sv) ==
              ELSE pos1 # 0           \* at a client: one is a remote operation and the other is a local operation
 -----------------------------------------------------------------------------
 VARIABLES
-    serial, \* serial[r]: the serial view of replica r \in Replica about the server
+    serial, \* serial[r]: the serial view of replica r \in Replica about the Server
     cincomingSerial, sincomingSerial
 
 serialVars == <<serial, cincomingSerial, sincomingSerial>>
@@ -49,5 +49,5 @@ SRevSerial ==
     /\ UNCHANGED <<sincomingSerial>>
 =============================================================================
 \* Modification History
-\* Last modified Fri Dec 07 14:14:19 CST 2018 by hengxin
+\* Last modified Wed Dec 12 21:04:36 CST 2018 by hengxin
 \* Created Wed Dec 05 21:03:01 CST 2018 by hengxin
