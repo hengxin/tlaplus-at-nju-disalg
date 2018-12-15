@@ -940,142 +940,114 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} XJupiterImplCJupiter}\moduleRightDash\@xx{}%
+ {\MODULE} XJupiterExtended}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- We show that \ensuremath{XJupiter} (\ensuremath{XJupiterExtended}) implements
+\ensuremath{XJupiter} extended with serial views.
+ This is used to show that \ensuremath{XJupiter} implements
  \ensuremath{CJupiter}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} XJupiterExtended}%
-\begin{lcom}{0}%
+ \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} XJupiter ,\,
+ JupiterSerial}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\VARIABLES}}%
+\begin{lcom}{15.0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- Variables for defining refinement mapping from \ensuremath{XJupiter} to
+ Simulating the behavior of propagating original operations in
  \ensuremath{CJupiter}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} {\VARIABLES}}%
-\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} op2ss ,\,\@s{4.1}}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4} cincomingCJ ,\,}%
 \@y{\@s{0}%
- a function from an operation (represented by its \ensuremath{Oid})
+ \ensuremath{cincoming} for \ensuremath{CJupiter} which contains original
+ operations
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{51.95}}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{80.27}}%
 \@y{\@s{0}%
- to the part of \ensuremath{2D} state space produced while the operation is
- transformed
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4} c2ssX\@s{7.70}}%
-\@y{\@s{0}%
- \ensuremath{c2ssX[c]}: redundant (\ensuremath{eXtra}) \ensuremath{2D} state
- space maintained for client \ensuremath{c \.{\in} Client
+ instead of transformed ones in \ensuremath{XJupiter
 }}%
 \@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4}
+ sincomingCJ\@s{6.62}}%
+\@y{\@s{0}%
+ (not used)
+}%
+\@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} varsImpl \.{\defeq}
- {\langle} varsEx ,\, op2ss ,\, c2ssX {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} TypeOKImpl \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{16.4} \.{\land} TypeOKEx}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land} \A\, oid
- \.{\in} {\DOMAIN} op2ss \.{:} oid \.{\in} Oid \.{\land} IsSS ( op2ss [ oid ]
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} commCJVars \.{\defeq}
+ {\langle} cincomingCJ ,\, sincomingCJ {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} varsEx \.{\defeq} {\langle}
+ commCJVars ,\, serialVars ,\, vars {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} commCJ \.{\defeq}
+ {\INSTANCE} CSComm {\WITH} Msg \.{\leftarrow} Seq ( Cop ) ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{82.85} cincoming
+ \.{\leftarrow} cincomingCJ ,\, sincoming \.{\leftarrow} sincomingCJ}%
+\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} TypeOKEx \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land} TypeOK}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} commCJ
+ {\bang} TypeOK}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land}
+ TypeOKSerial}%
+\@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} InitEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+ Init}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+ commCJ {\bang} Init}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+ InitSerial}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} DoEx ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{25.28} \.{\land} Do ( c
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\land} \A\, c
- \.{\in} Client \.{:} IsSS ( c2ssX [ c ] )}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} InitImpl \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land} InitEx}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land}
- op2ss\@s{2.50} \.{=} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} c2ssX
- \.{=} [ c \.{\in} Client \.{\mapsto} EmptySS ]}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Ignore the \ensuremath{lr} field in edges of \ensuremath{2D} state space
- \ensuremath{ss}.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} IgnoreDir ( ss ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} [ ss {\EXCEPT}
- {\bang} . edge \.{=} \{ [ from \.{\mapsto} e . from ,\, to \.{\mapsto} e .
- to ,\, cop \.{\mapsto} e . cop ] \.{:} e \.{\in} @ \} ]}%
-\@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} DoImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\land} DoEx ( c
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{25.28} \.{\land} DoSerial
+ ( c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{25.28} \.{\land}
+ {\UNCHANGED} commCJVars}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}} RevEx ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{16.4} \.{\land} Rev ( c
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} {\langle} op2ss ,\, c2ssX {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{16.4} \.{\land} commCJ
+ {\bang} CRev ( c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land} RevSerial
+ ( c )}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} RevImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
- RevEx ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
- \.{\LET} cop \.{\defeq} Head ( cincoming [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{36.71} \.{\IN} c2ssX
- \.{'} \.{=} [ c2ssX {\EXCEPT} {\bang} [ c ] \.{=} @ \.{\oplus} op2ss [ cop .
- oid ] ]}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
- {\UNCHANGED} op2ss}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} SRevImpl \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land} SRevEx}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
- cop \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{56.11} c\@s{1.57}
+\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} SRevEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ SRev}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ \.{\LET} cop \.{\defeq} Head ( sincoming )}%
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{62.83} c\@s{1.57}
  \.{\defeq} cop . oid . c}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{35.71} xform\@s{1.16}
- \.{\defeq} xForm ( cop ,\, s2ss [ c ] ,\, cur [ Server ] ,\, Remote
- )\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{TODO}: performance\.{!!}!
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{48.01} ss\@s{5.84}
- \.{\defeq} xform [ 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{27.51} \.{\IN} op2ss
- \.{'} \.{=} op2ss \.{\,@@\,} ( cop . oid \.{\colongt} [ node \.{\mapsto} ss
- . node ,\, edge \.{\mapsto} ss . edge ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} c2ssX}%
-\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}} NextImpl \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
- \.{\in} Client \.{:} DoImpl ( c ) \.{\lor} RevImpl ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{16.4} \.{\lor} SRevImpl}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{34.23} \.{\IN} \.{\land}
+ commCJ {\bang} SSendSame ( c ,\, cop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ SRevSerial}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ {\UNCHANGED} sincomingCJ}%
+\@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}} NextEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+ \E\, c \.{\in} Client \.{:} DoEx ( c ) \.{\lor} RevEx ( c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+ SRevEx}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}} FairnessImpl \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{16.4} \.{\land} {\WF}_{
- varsImpl} ( SRevImpl \.{\lor} \E\, c \.{\in} Client \.{:} RevImpl ( c ) )}%
+\@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}} FairnessEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{16.4} \.{\land} {\WF}_{
+ varsEx} ( SRevEx \.{\lor} \E\, c \.{\in} Client \.{:} RevEx ( c ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}} SpecImpl \.{\defeq} InitImpl
- \.{\land} {\Box} [ NextImpl ]_{ varsImpl}}%
+ \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} SpecEx \.{\defeq} InitEx
+ \.{\land} {\Box} [ NextEx ]_{ varsEx}}%
 \@y{\@s{0}%
- \ensuremath{\.{\land} FairnessImpl
+ \ensuremath{\.{\land} FairnessEx
 }}%
 \@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}} CJ \.{\defeq} {\INSTANCE}
- CJupiter}%
- \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{40.89} {\WITH} cincoming
- \.{\leftarrow} cincomingCJ ,\,}%
-\@y{\@s{0}%
- \ensuremath{sincoming} needs no substitution
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{71.87} css \.{\leftarrow}
- [ r \.{\in} Replica \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{113.19} {\IF} r \.{=}
- Server}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{113.19} \.{\THEN}
- IgnoreDir ( SetReduce ( \.{\oplus} ,\, Range ( s2ss ) ,\, EmptySS ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{113.19} \.{\ELSE}
- IgnoreDir ( c2ss [ r ] \.{\oplus} c2ssX [ r ] ) ]}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}} {\THEOREM} SpecImpl
- \.{\implies} CJ {\bang} Spec}%
-\@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1083,12 +1055,12 @@
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Dec} 15
- 17:56:39 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ 18:01:37 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Fri} \ensuremath{Oct} 26
- 15:00:19 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Tue} \ensuremath{Oct} 30
+ 20:32:27 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%

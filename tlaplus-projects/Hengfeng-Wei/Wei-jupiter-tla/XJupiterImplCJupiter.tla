@@ -37,7 +37,7 @@ RevImpl(c) ==
     /\ RevEx(c)
     /\ LET cop == Head(cincoming[c])
        IN  c2ssX' = [c2ssX EXCEPT ![c] = @ (+) op2ss[cop.oid]]
-    /\ UNCHANGED <<op2ss>>
+    /\ UNCHANGED op2ss
 
 SRevImpl == 
     /\ SRevEx
@@ -46,14 +46,16 @@ SRevImpl ==
          xform == xForm(cop, s2ss[c], cur[Server], Remote)  \* TODO: performance!!!
             ss == xform[1]
        IN op2ss' = op2ss @@ (cop.oid :> [node |-> ss.node, edge |-> ss.edge])
-    /\ UNCHANGED <<c2ssX>>
+    /\ UNCHANGED c2ssX
 -----------------------------------------------------------------------------
 NextImpl ==
     \/ \E c \in Client: DoImpl(c) \/ RevImpl(c)
     \/ SRevImpl
-
-SpecImpl == InitImpl /\ [][NextImpl]_varsImpl 
+    
+FairnessImpl ==
     /\ WF_varsImpl(SRevImpl \/ \E c \in Client: RevImpl(c)) 
+
+SpecImpl == InitImpl /\ [][NextImpl]_varsImpl \* /\ FairnessImpl
 
 CJ == INSTANCE CJupiter 
         WITH cincoming <- cincomingCJ, \* sincoming needs no substitution
@@ -65,5 +67,5 @@ CJ == INSTANCE CJupiter
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Fri Nov 16 14:54:12 CST 2018 by hengxin
+\* Last modified Sat Dec 15 17:56:39 CST 2018 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

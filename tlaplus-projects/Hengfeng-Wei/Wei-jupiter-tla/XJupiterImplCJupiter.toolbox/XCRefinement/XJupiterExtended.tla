@@ -3,7 +3,7 @@
 XJupiter extended with serial views. 
 This is used to show that XJupiter implements CJupiter.
 *)
-EXTENDS XJupiter
+EXTENDS XJupiter, JupiterSerial
 -----------------------------------------------------------------------------
 VARIABLES
     (*
@@ -11,62 +11,51 @@ VARIABLES
     *)
     cincomingCJ, \* cincoming for CJupiter which contains original operations 
                  \* instead of transformed ones in XJupiter
-    sincomingCJ, \* (not used)
-    (*
-      For edge ordering in CSS. 
-    *)
-    serial, \* serial[r]: the serial view of replica r \in Replica about the server
-    cincomingSerial, \* cincomingSerial[c]: the serival view received by client c \in Client 
-                     \* from the Server
-    sincomingSerial  \* (not used)
+    sincomingCJ  \* (not used)
 
 commCJVars == <<cincomingCJ, sincomingCJ>>
-serialVars == <<serial, cincomingSerial, sincomingSerial>>
 varsEx == <<commCJVars, serialVars, vars>>
 -----------------------------------------------------------------------------
 commCJ == INSTANCE CSComm WITH Msg <- Seq(Cop), 
                 cincoming <- cincomingCJ, sincoming <- sincomingCJ
-commSerial == INSTANCE CSComm WITH Msg <- Seq(Oid), 
-                cincoming <- cincomingSerial, sincoming <- sincomingSerial
 -----------------------------------------------------------------------------
 TypeOKEx == 
     /\ TypeOK
     /\ commCJ!TypeOK
-    /\ serial \in [Replica -> Seq(Oid)]
-    /\ commSerial!TypeOK
+    /\ TypeOKSerial
 -----------------------------------------------------------------------------
 InitEx == 
     /\ Init
     /\ commCJ!Init
-    /\ serial = [r \in Replica |-> <<>>]
-    /\ commSerial!Init
------------------------------------------------------------------------------
+    /\ InitSerial
+
 DoEx(c) == 
     /\ Do(c)
-    /\ UNCHANGED <<commCJVars, serialVars>>
+    /\ DoSerial(c)
+    /\ UNCHANGED commCJVars
 
 RevEx(c) == 
     /\ Rev(c)
     /\ commCJ!CRev(c)
-    /\ commSerial!CRev(c)
-    /\ serial' = [serial EXCEPT ![c] = Head(cincomingSerial[c])]
+    /\ RevSerial(c)
 
 SRevEx == 
     /\ SRev
     /\ LET cop == Head(sincoming)
              c == cop.oid.c
        IN  /\ commCJ!SSendSame(c, cop)
-           /\ serial' = [serial EXCEPT ![Server] = Append(@, cop.oid)] 
-           /\ commSerial!SSendSame(c, serial'[Server])
-    /\ UNCHANGED <<sincomingCJ, sincomingSerial>>
+    /\ SRevSerial
+    /\ UNCHANGED sincomingCJ
 -----------------------------------------------------------------------------
 NextEx == 
     \/ \E c \in Client: DoEx(c) \/ RevEx(c)
     \/ SRevEx
 
-SpecEx == InitEx /\ [][NextEx]_varsEx 
+FairnessEx ==
     /\ WF_varsEx(SRevEx \/ \E c \in Client: RevEx(c))
+
+SpecEx == InitEx /\ [][NextEx]_varsEx \* /\ FairnessEx
 =============================================================================
 \* Modification History
-\* Last modified Fri Nov 09 17:16:28 CST 2018 by hengxin
+\* Last modified Sat Dec 15 18:01:37 CST 2018 by hengxin
 \* Created Tue Oct 30 20:32:27 CST 2018 by hengxin

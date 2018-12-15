@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
-<stringAttribute key="TLCCmdLineParameters" value="-coverage 99999 -checkpoint 30"/>
-<stringAttribute key="configurationName" value="XCRefinement"/>
+<stringAttribute key="TLCCmdLineParameters" value=""/>
+<stringAttribute key="configurationName" value="WLSpec"/>
 <booleanAttribute key="deferLiveness" value="false"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
@@ -17,26 +17,26 @@
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value=""/>
 <stringAttribute key="modelBehaviorNext" value=""/>
-<stringAttribute key="modelBehaviorSpec" value="SpecImpl"/>
+<stringAttribute key="modelBehaviorSpec" value="SpecH"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="chins, c2ss, sincomingSerial, state, c2ssX, cur, cincomingCJ, cseq, sincoming, s2ss, op2ss, cincomingSerial, sincomingCJ, cincoming, serial"/>
+<stringAttribute key="modelBehaviorVars" value="sincoming, s2ss, list, chins, cseq, cincoming, c2ss, state, cur"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
-<listAttribute key="modelCorrectnessInvariants"/>
-<listAttribute key="modelCorrectnessProperties">
-<listEntry value="1CJ!Spec"/>
+<listAttribute key="modelCorrectnessInvariants">
+<listEntry value="1WLSpec"/>
 </listAttribute>
+<listAttribute key="modelCorrectnessProperties"/>
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
-<listEntry value="Char;;{a, b, c};1;1"/>
-<listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
-<listEntry value="Client;;{c1, c2};1;0"/>
 <listEntry value="Server;;Server;1;0"/>
+<listEntry value="Client;;{c1, c2};1;0"/>
+<listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
+<listEntry value="Char;;{a, b};1;1"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
-<listEntry value="CJ!Nop;;CJ!Nop;1;0"/>
+<listEntry value="Nop;;Nop;1;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
@@ -46,7 +46,7 @@
 <intAttribute key="simuAril" value="-1"/>
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
-<stringAttribute key="specName" value="XJupiterImplCJupiter"/>
+<stringAttribute key="specName" value="XJupiterH"/>
 <stringAttribute key="view" value=""/>
 <booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>
