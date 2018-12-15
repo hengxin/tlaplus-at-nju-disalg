@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>CJupiterH</name>
+	<name>AbsJupiterH</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,14 +16,14 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>CJupiter.tla</name>
+			<name>AbsJupiter.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/hfwei/github-projects-public/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/CJupiter.tla</location>
+			<location>/home/hengxin/hfwei/github-projects-public/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/AbsJupiter.tla</location>
 		</link>
 		<link>
-			<name>CJupiterH.tla</name>
+			<name>AbsJupiterH.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/CJupiterH.tla</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/AbsJupiterH.tla</locationURI>
 		</link>
 		<link>
 			<name>CSComm.tla</name>
