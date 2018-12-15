@@ -4,7 +4,7 @@ Specification of the Jupiter protocol described in CSCW'2014
 by Yi Xu, Chengzheng Sun, and Mo Li.
 We call it XJupiter, with 'X' for "Xu".
 *)
-EXTENDS JupiterInterface
+EXTENDS JupiterCtx 
 -----------------------------------------------------------------------------
 (*
 Direction flags for edges in 2D state spaces and OT.
@@ -12,19 +12,7 @@ Direction flags for edges in 2D state spaces and OT.
 Local == 0 
 Remote == 1
 -----------------------------------------------------------------------------
-(* 
-Cop: operation of type Op with context                            
-*)
-Oid == [c: Client, seq: Nat]  \* operation identifier
-Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid]
-
-(* 
-OT of two operations of type Cop.                                 
-*)
-COT(lcop, rcop) == [lcop EXCEPT !.op = Xform(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
------------------------------------------------------------------------------
 VARIABLES
-    cseq,   \* cseq[c]: local sequence number at client c \in Client
     (*
       The 2D state spaces (ss, for short).
       Each client maintains one 2D state space.
@@ -34,7 +22,7 @@ VARIABLES
     s2ss,   \* s2ss[c]: the 2D state space maintained by the Server for client c \in Client
     cur     \* cur[r]: the current node of the 2D state space at replica r \in Replica
 
-vars == <<chins, cseq, cur, cincoming, sincoming, c2ss, s2ss, state>>
+vars == <<intVars, ctxVars, cur, c2ss, s2ss>>
 -----------------------------------------------------------------------------
 (* 
 A 2D state space is a directed graph with labeled edges.
@@ -57,30 +45,18 @@ ss1 (+) ss2 == [node |-> ss1.node \cup ss2.node, edge |-> ss1.edge \cup ss2.edge
 
 TypeOK == 
     /\ TypeOKInt
-    /\ cseq \in [Client -> Nat]
-    (* 
-      For the 2D state spaces:
-    *)
+    /\ TypeOKCtx
+    /\ Comm(Cop)!TypeOK
     /\ \A c \in Client: IsSS(c2ss[c]) /\ IsSS(s2ss[c])
     /\ cur \in [Replica -> SUBSET Oid]
-    (* 
-      For communication between the server and the clients:
-    *)
-    /\ Comm(Cop)!TypeOK
 -----------------------------------------------------------------------------
 Init == 
     /\ InitInt
-    /\ cseq = [c \in Client |-> 0]
-    (* 
-      For the 2D state spaces:
-    *)
+    /\ InitCtx
+    /\ Comm(Cop)!Init
     /\ c2ss = [c \in Client |-> EmptySS]
     /\ s2ss = [c \in Client |-> EmptySS]
     /\ cur  = [r \in Replica |-> {}]
-    (* 
-      For communication between the server and the clients:
-    *)
-    /\ Comm(Cop)!Init
 -----------------------------------------------------------------------------
 (* 
 Locate the node in the 2D state space ss which matches the context ctx of cop.    
@@ -127,7 +103,6 @@ ClientPerform(cop, c, d) ==
 Client c \in Client generates an operation op.
 *)
 DoOp(c, op) ==
-    /\ cseq' = [cseq EXCEPT ![c] = @ + 1]
     /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> cur[c]]
         IN /\ ClientPerform(cop, c, Remote)
            /\ Comm(Cop)!CSend(cop)
@@ -140,12 +115,13 @@ DoIns(c) ==
 DoDel(c) == 
     \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
         /\ DoOp(c, del)
-        /\ UNCHANGED <<chins>>
+        /\ UNCHANGED chins
 
 Do(c) == 
+    /\ DoCtx(c)
     /\ \/ DoIns(c) 
        \/ DoDel(c)
-    /\ UNCHANGED <<s2ss>>
+    /\ UNCHANGED s2ss
 (* 
 Client c \in Client receives a message from the Server.
 *)
@@ -153,7 +129,8 @@ Rev(c) ==
     /\ Comm(Cop)!CRev(c)
     /\ LET cop == Head(cincoming[c]) \* the received (transformed) operation
         IN ClientPerform(cop, c, Local)
-    /\ UNCHANGED <<chins, cseq, s2ss>>
+    /\ RevCtx(c)
+    /\ UNCHANGED <<chins, s2ss>>
 -----------------------------------------------------------------------------
 (*
 The Server performs operation cop.
@@ -182,7 +159,8 @@ SRev ==
     /\ Comm(Cop)!SRev
     /\ LET cop == Head(sincoming)
         IN ServerPerform(cop)
-    /\ UNCHANGED <<chins, cseq, c2ss>>
+    /\ SRevCtx
+    /\ UNCHANGED <<chins, c2ss>>
 -----------------------------------------------------------------------------
 Next == 
     \/ \E c \in Client: Do(c) \/ Rev(c)
@@ -201,5 +179,5 @@ CSSync ==
     \forall c \in Client: (cur[c] = cur[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Tue Dec 04 21:12:08 CST 2018 by hengxin
+\* Last modified Sat Dec 15 17:39:52 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

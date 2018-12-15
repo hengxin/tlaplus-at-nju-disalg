@@ -8,37 +8,37 @@ c1, c2
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-a, b, c
+a, b
 ----
 
 \* MV CONSTANT definitions Client
-const_1544836359616194000 == 
+const_154486601622223000 == 
 {c1, c2}
 ----
 
 \* MV CONSTANT definitions Char
-const_1544836359616195000 == 
-{a, b, c}
+const_154486601622224000 == 
+{a, b}
 ----
 
 \* SYMMETRY definition
-symm_1544836359616196000 == 
-Permutations(const_1544836359616195000)
+symm_154486601622225000 == 
+Permutations(const_154486601622224000)
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2InitState
-const_1544836359616197000 == 
+const_154486601622226000 == 
 <<>>
 ----
 
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_1544836359617199000 ==
+spec_154486601622228000 ==
 SpecH
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_1544836359617200000 ==
+inv_154486601622229000 ==
 WLSpec
 ----
 =============================================================================
 \* Modification History
-\* Created Sat Dec 15 09:12:39 CST 2018 by hengxin
+\* Created Sat Dec 15 17:26:56 CST 2018 by hengxin

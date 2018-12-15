@@ -27,7 +27,7 @@ Comm(Msg) == INSTANCE CSComm
 Replica == Client \cup {Server}
 
 List == Seq(Char \cup Range(InitState))      \* all possible lists
-MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any states
+MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any state
 
 ClientNum == Cardinality(Client)
 Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
@@ -50,5 +50,5 @@ Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* 
 Op == Ins \cup Del  \* Now we don't consider Rd operations
 =============================================================================
 \* Modification History
-\* Last modified Thu Dec 06 10:35:54 CST 2018 by hengxin
+\* Last modified Wed Dec 12 20:20:43 CST 2018 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin

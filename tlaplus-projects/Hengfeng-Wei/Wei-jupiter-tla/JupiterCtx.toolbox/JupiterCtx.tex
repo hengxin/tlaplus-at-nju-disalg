@@ -950,36 +950,73 @@ Definitions and operators for context-based \ensuremath{Jupiter} protocols,
 \end{lcom}%
 \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} JupiterInterface}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\VARIABLES}}%
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} cseq\@s{8.2}}%
+\@y{\@s{0}%
+ \ensuremath{cseq[c]}: local sequence number at client \ensuremath{c \.{\in}
+ Client
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4}}%
+\@y{\@s{0}%
+ \ensuremath{ds\@s{15.0}\.{\,\backslash\,}}* \ensuremath{ds[r]}: document
+ state (a set of \ensuremath{Oids}) of replica \ensuremath{r \.{\in} Replica
+}}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} ctxVars \.{\defeq} {\langle}
+ cseq {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 Cop: operation of type \ensuremath{Op} with context
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}} Oid\@s{1.13} \.{\defeq} [ c
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} Oid\@s{1.13} \.{\defeq} [ c
  \.{:} Client ,\, seq \.{:} Nat ]\@s{4.1}}%
 \@y{\@s{0}%
  operation identifier
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} Cop \.{\defeq} [ op \.{:} Op
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} Cop \.{\defeq} [ op \.{:} Op
  \.{\cup} \{ Nop \} ,\, oid \.{:} Oid ,\, ctx \.{:} {\SUBSET} Oid ]}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{OT} of two operations of type \ensuremath{Cop}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} COT ( lcop ,\, rcop )
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} COT ( lcop ,\, rcop )
  \.{\defeq} [ lcop {\EXCEPT} {\bang} . op \.{=} Xform ( lcop . op ,\, rcop .
  op ) ,\, {\bang} . ctx \.{=} @ \.{\cup} \{ rcop . oid \} ]}%
-\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} TypeOKCtx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land} cseq
+ \.{\in} [ Client \.{\rightarrow} Nat ]}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} InitCtx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{16.4} \.{\land} cseq
+ \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} DoCtx ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\land} cseq
+ \.{'} \.{=} [ cseq {\EXCEPT} {\bang} [ c ] \.{=} @ \.{+} 1 ]}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} RevCtx ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land}
+ {\UNCHANGED} cseq}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} SRevCtx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land}
+ {\UNCHANGED} cseq}%
+\@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
- \ensuremath{Dec} 12 20:11:40 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Dec} 15
+ 17:20:47 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
