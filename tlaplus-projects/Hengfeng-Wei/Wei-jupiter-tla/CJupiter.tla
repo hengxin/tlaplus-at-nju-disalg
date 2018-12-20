@@ -2,41 +2,27 @@
 (*
 Model of our own CJupiter protocol.
 *)
-EXTENDS JupiterSerial, GraphsUtil
+EXTENDS StateSpace, JupiterSerial
 -----------------------------------------------------------------------------
 VARIABLES
     css    \* css[r]: the n-ary ordered state space at replica r \in Replica
 
 vars == <<intVars, ctxVars, serialVars, css>>
 -----------------------------------------------------------------------------
-(*
-A css is a directed graph (defined in moudule GraphsUtil) with labeled edges, 
-Each node is characterized by its context, a set of oids. 
-Each edge is labeled with an operation.                       
-*)
-IsCSS(G) ==
-    /\ G = [node |-> G.node, edge |-> G.edge]
-    /\ G.node \subseteq (SUBSET Oid)
-    /\ G.edge \subseteq [from: G.node, to: G.node, cop: Cop]
-
 TypeOK == 
     /\ TypeOKInt
     /\ TypeOKCtx
     /\ TypeOKSerial
     /\ Comm(Cop)!TypeOK
-    /\ \A r \in Replica: IsCSS(css[r])
+    /\ \A r \in Replica: IsSS(css[r])
 -----------------------------------------------------------------------------
 Init == 
     /\ InitInt
     /\ InitCtx
     /\ InitSerial
     /\ Comm(Cop)!Init
-    /\ css = [r \in Replica |-> EmptyGraph]
+    /\ css = [r \in Replica |-> EmptySS]
 -----------------------------------------------------------------------------
-(*
-Locate the node in rcss (the css at replica r \in Replica) that matches the context ctx of cop.     
-*)
-Locate(cop, rcss) == CHOOSE n \in rcss.node : n = cop.ctx
 (*
 xForm: Iteratively transform cop with a path through the css 
 at replica r \in Replica, following the first edges.
@@ -141,5 +127,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 19 11:35:32 CST 2018 by hengxin
+\* Last modified Wed Dec 19 18:38:03 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

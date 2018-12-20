@@ -22,13 +22,7 @@ InitImpl ==
     /\ InitEx
     /\ op2ss = <<>>
     /\ c2ssX = [c \in Client |-> EmptyGraph]
------------------------------------------------------------------------------
-(*
-Ignore the lr field in edges of 2D state space ss.
-*)
-IgnoreDir(ss) == 
-    [ss EXCEPT !.edge = {[from |-> e.from, to |-> e.to, cop |-> e.cop] : e \in @}]
------------------------------------------------------------------------------
+
 DoImpl(c) ==
     /\ DoEx(c)
     /\ UNCHANGED <<op2ss, c2ssX>>
@@ -43,7 +37,7 @@ SRevImpl ==
     /\ SRevEx
     /\ LET cop == Head(sincoming)
              c == cop.oid.c
-         xform == xForm(cop, s2ss[c], ds[Server], Remote)  \* TODO: performance!!!
+         xform == xForm(cop, s2ss[c], ds[Server])  \* TODO: performance!!!
             ss == xform[1]
        IN op2ss' = op2ss @@ (cop.oid :> [node |-> ss.node, edge |-> ss.edge])
     /\ UNCHANGED c2ssX
@@ -61,11 +55,11 @@ CJ == INSTANCE CJupiter
         WITH cincoming <- cincomingCJ, \* sincoming needs no substitution
              css <- [r \in Replica |-> 
                         IF r = Server 
-                        THEN IgnoreDir(SetReduce((+), Range(s2ss), EmptyGraph))
-                        ELSE IgnoreDir(c2ss[r] (+) c2ssX[r])]
+                        THEN SetReduce((+), Range(s2ss), EmptyGraph)
+                        ELSE c2ss[r] (+) c2ssX[r]]
 
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 19 11:45:17 CST 2018 by hengxin
+\* Last modified Wed Dec 19 18:52:44 CST 2018 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

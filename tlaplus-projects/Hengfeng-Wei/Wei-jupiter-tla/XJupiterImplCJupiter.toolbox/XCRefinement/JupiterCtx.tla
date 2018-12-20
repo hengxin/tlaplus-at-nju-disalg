@@ -14,6 +14,8 @@ ctxVars == <<cseq, ds>>
 Oid == [c: Client, seq: Nat]  \* operation identifier
 Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid] \* contexted-based op
 
+ClientOf(cop) == cop.oid.c
+
 COT(lcop, rcop) == \* OT of two Cop(s).                                 
     [lcop EXCEPT !.op = Xform(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
 
@@ -41,5 +43,5 @@ SRevCtx ==
     /\ UNCHANGED cseq
 =============================================================================
 \* Modification History
-\* Last modified Tue Dec 18 22:21:38 CST 2018 by hengxin
+\* Last modified Wed Dec 19 18:05:26 CST 2018 by hengxin
 \* Created Wed Dec 05 20:03:50 CST 2018 by hengxin

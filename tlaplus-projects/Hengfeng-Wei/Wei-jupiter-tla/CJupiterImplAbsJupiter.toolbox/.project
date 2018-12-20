@@ -41,6 +41,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/FunctionUtils.tla</locationURI>
 		</link>
 		<link>
+			<name>GraphsUtil.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/Documents/ubuntu/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/GraphsUtil.tla</location>
+		</link>
+		<link>
 			<name>JupiterCtx.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/JupiterCtx.tla</locationURI>
@@ -74,6 +79,11 @@
 			<name>SetUtils.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/SetUtils.tla</locationURI>
+		</link>
+		<link>
+			<name>StateSpace.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/Documents/ubuntu/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/StateSpace.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>
