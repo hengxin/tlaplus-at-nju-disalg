@@ -21,7 +21,7 @@ TypeOKImpl ==
 InitImpl ==
     /\ InitEx
     /\ op2ss = <<>>
-    /\ c2ssX = [c \in Client |-> EmptySS]
+    /\ c2ssX = [c \in Client |-> EmptyGraph]
 -----------------------------------------------------------------------------
 (*
 Ignore the lr field in edges of 2D state space ss.
@@ -43,7 +43,7 @@ SRevImpl ==
     /\ SRevEx
     /\ LET cop == Head(sincoming)
              c == cop.oid.c
-         xform == xForm(cop, s2ss[c], cur[Server], Remote)  \* TODO: performance!!!
+         xform == xForm(cop, s2ss[c], ds[Server], Remote)  \* TODO: performance!!!
             ss == xform[1]
        IN op2ss' = op2ss @@ (cop.oid :> [node |-> ss.node, edge |-> ss.edge])
     /\ UNCHANGED c2ssX
@@ -61,11 +61,11 @@ CJ == INSTANCE CJupiter
         WITH cincoming <- cincomingCJ, \* sincoming needs no substitution
              css <- [r \in Replica |-> 
                         IF r = Server 
-                        THEN IgnoreDir(SetReduce((+), Range(s2ss), EmptySS))
+                        THEN IgnoreDir(SetReduce((+), Range(s2ss), EmptyGraph))
                         ELSE IgnoreDir(c2ss[r] (+) c2ssX[r])]
 
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Sat Dec 15 17:56:39 CST 2018 by hengxin
+\* Last modified Wed Dec 19 11:45:17 CST 2018 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

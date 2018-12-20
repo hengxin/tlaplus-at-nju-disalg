@@ -4,13 +4,7 @@ Specification of the Jupiter protocol described in CSCW'2014
 by Yi Xu, Chengzheng Sun, and Mo Li.
 We call it XJupiter, with 'X' for "Xu".
 *)
-EXTENDS JupiterCtx 
------------------------------------------------------------------------------
-(*
-Direction flags for edges in 2D state spaces and OT.
-*)
-Local == 0 
-Remote == 1
+EXTENDS JupiterCtx, GraphsUtil
 -----------------------------------------------------------------------------
 VARIABLES
     (*
@@ -19,11 +13,15 @@ VARIABLES
       The server maintains n 2D state spaces, one for each client.
     *)
     c2ss,   \* c2ss[c]: the 2D state space at client c \in Client
-    s2ss,   \* s2ss[c]: the 2D state space maintained by the Server for client c \in Client
-    cur     \* cur[r]: the current node of the 2D state space at replica r \in Replica
+    s2ss    \* s2ss[c]: the 2D state space maintained by the Server for client c \in Client
 
-vars == <<intVars, ctxVars, cur, c2ss, s2ss>>
+vars == <<intVars, ctxVars, c2ss, s2ss>>
 -----------------------------------------------------------------------------
+(*
+Direction flags for edges in 2D state spaces and OT.
+*)
+Local == 0 
+Remote == 1
 (* 
 A 2D state space is a directed graph with labeled edges.
 It is represented by a record with node field and edge field.
@@ -37,26 +35,18 @@ IsSS(G) ==
     /\ G.node \subseteq (SUBSET Oid)
     /\ G.edge \subseteq [from: G.node, to: G.node, cop: Cop, lr: {Local, Remote}]
 
-EmptySS == [node |-> {{}}, edge |-> {}]
-(*
-Take union of two state spaces ss1 and ss2.
-*) 
-ss1 (+) ss2 == [node |-> ss1.node \cup ss2.node, edge |-> ss1.edge \cup ss2.edge]
-
 TypeOK == 
     /\ TypeOKInt
     /\ TypeOKCtx
     /\ Comm(Cop)!TypeOK
     /\ \A c \in Client: IsSS(c2ss[c]) /\ IsSS(s2ss[c])
-    /\ cur \in [Replica -> SUBSET Oid]
 -----------------------------------------------------------------------------
 Init == 
     /\ InitInt
     /\ InitCtx
     /\ Comm(Cop)!Init
-    /\ c2ss = [c \in Client |-> EmptySS]
-    /\ s2ss = [c \in Client |-> EmptySS]
-    /\ cur  = [r \in Replica |-> {}]
+    /\ c2ss = [c \in Client |-> EmptyGraph]
+    /\ s2ss = [c \in Client |-> EmptyGraph]
 -----------------------------------------------------------------------------
 (* 
 Locate the node in the 2D state space ss which matches the context ctx of cop.    
@@ -70,11 +60,11 @@ following the edges with the direction flag d.
 xForm(cop, ss, current, d) ==
     LET u == Locate(cop, ss)
         v == u \cup {cop.oid}
-        RECURSIVE xFormHelper(_, _, _, _, _, _)
+        RECURSIVE xFormHelper(_, _, _, _, _)
         \* 'h' stands for "helper"; xss: eXtra ss created during transformation
-        xFormHelper(uh, vh, coph, xss, xcoph, xcurh) ==  
+        xFormHelper(uh, vh, coph, xss, xcoph) ==  
             IF uh = current
-            THEN <<xss, xcoph, xcurh>>
+            THEN <<xss, xcoph>>
             ELSE LET e == CHOOSE e \in ss.edge: e.from = uh /\ e.lr = d
                      uprime == e.to
                      copprime == e.cop
@@ -85,26 +75,25 @@ xForm(cop, ss, current, d) ==
                         [node |-> xss.node \cup {vprime}, 
                          edge |-> xss.edge \cup {[from |-> vh, to |-> vprime, cop |-> copprime2coph, lr |-> d], 
                                     [from |-> uprime, to |-> vprime, cop |-> coph2copprime, lr |-> 1 - d]}],
-                                 coph2copprime, vprime)
-    IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop, lr |-> 1 - d]}], cop, v)
+                                 coph2copprime)
+    IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop, lr |-> 1 - d]}], cop)
 -----------------------------------------------------------------------------
 (* 
 Client c \in Client perform operation cop guided by the direction flag d.
 *)
 ClientPerform(cop, c, d) ==
-    LET xform == xForm(cop, c2ss[c], cur[c], d) \* xform: <<xss, xcop, xcur>>
+    LET xform == xForm(cop, c2ss[c], ds[c], d) \* xform: <<xss, xcop>>
           xss == xform[1]
          xcop == xform[2]
-         xcur == xform[3]
     IN /\ c2ss' = [c2ss EXCEPT ![c] = @ (+) xss]
-       /\ cur' = [cur EXCEPT ![c] = xcur]
        /\ state' = [state EXCEPT ![c] = Apply(xcop.op, @)]
 (* 
 Client c \in Client generates an operation op.
 *)
-DoOp(c, op) ==
-    /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> cur[c]]
+DoOp(c, op) == 
+    LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]] 
         IN /\ ClientPerform(cop, c, Remote)
+           /\ UpdateDS(c, cop)
            /\ Comm(Cop)!CSend(cop)
 
 DoIns(c) ==
@@ -137,11 +126,11 @@ The Server performs operation cop.
 *)
 ServerPerform(cop) == 
     LET c == cop.oid.c
-     scur == cur[Server]
-    xform == xForm(cop, s2ss[c], scur, Remote) \* xform: <<xss, xcop, xcur>>
+     scur == ds[Server]
+    xform == xForm(cop, s2ss[c], scur, Remote) \* xform: <<xss, xcop>>
       xss == xform[1]
      xcop == xform[2]
-     xcur == xform[3]
+     xcur == scur \cup {cop.oid}
     IN /\ s2ss' = [cl \in Client |-> 
                     IF cl = c 
                     THEN s2ss[cl] (+) xss
@@ -149,7 +138,6 @@ ServerPerform(cop) ==
                                        edge |-> {[from |-> scur, to |-> xcur, 
                                                    cop |-> xcop, lr |-> Remote]}]
                   ]
-       /\ cur' = [cur EXCEPT ![Server] = xcur]
        /\ state' = [state EXCEPT ![Server] = Apply(xcop.op, @)]
        /\ Comm(Cop)!SSendSame(c, xcop)  \* broadcast the transformed operation
 (* 
@@ -176,8 +164,8 @@ In Jupiter (not limited to XJupiter), each client synchronizes with the server.
 In XJupiter, this is expressed as the following CSSync property.
 *)
 CSSync == 
-    \forall c \in Client: (cur[c] = cur[Server]) => c2ss[c] = s2ss[c]
+    \forall c \in Client: (ds[c] = ds[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Sat Dec 15 17:39:52 CST 2018 by hengxin
+\* Last modified Wed Dec 19 11:41:44 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

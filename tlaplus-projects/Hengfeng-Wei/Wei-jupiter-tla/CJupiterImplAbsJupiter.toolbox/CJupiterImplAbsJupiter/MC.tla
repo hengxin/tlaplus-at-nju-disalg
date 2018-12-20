@@ -3,7 +3,7 @@ EXTENDS CJupiterImplAbsJupiter, TLC
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-a, b, c
+a, b
 ----
 
 \* MV CONSTANT declarations@modelParameterConstants
@@ -12,36 +12,36 @@ c1, c2
 ----
 
 \* MV CONSTANT definitions Char
-const_1544846276141201000 == 
-{a, b, c}
+const_154514435688116000 == 
+{a, b}
 ----
 
 \* MV CONSTANT definitions Client
-const_1544846276141202000 == 
+const_154514435688117000 == 
 {c1, c2}
 ----
 
 \* SYMMETRY definition
-symm_1544846276141203000 == 
-Permutations(const_1544846276141201000)
+symm_154514435688118000 == 
+Permutations(const_154514435688116000)
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1InitState
-const_1544846276141204000 == 
+const_154514435688119000 == 
 <<>>
 ----
 
 \* CONSTANT definition @modelParameterDefinitions:0
-CONSTANT def_ov_1544846276141205000
+CONSTANT def_ov_154514435688120000
 ----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_1544846276141206000 ==
+spec_154514435688121000 ==
 Spec
 ----
 \* PROPERTY definition @modelCorrectnessProperties:0
-prop_1544846276141207000 ==
+prop_154514435688122000 ==
 AbsJ!Spec
 ----
 =============================================================================
 \* Modification History
-\* Created Sat Dec 15 11:57:56 CST 2018 by hengxin
+\* Created Tue Dec 18 22:45:56 CST 2018 by hengxin

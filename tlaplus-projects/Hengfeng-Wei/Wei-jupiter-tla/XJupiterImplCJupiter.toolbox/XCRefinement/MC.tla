@@ -3,45 +3,45 @@ EXTENDS XJupiterImplCJupiter, TLC
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-a, b, c
+a, b
 ----
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
-c1, c2
+c1, c2, c3
 ----
 
 \* MV CONSTANT definitions Char
-const_1544871245405128000 == 
-{a, b, c}
+const_154519116121637000 == 
+{a, b}
 ----
 
 \* MV CONSTANT definitions Client
-const_1544871245405129000 == 
-{c1, c2}
+const_154519116121638000 == 
+{c1, c2, c3}
 ----
 
 \* SYMMETRY definition
-symm_1544871245405130000 == 
-Permutations(const_1544871245405128000)
+symm_154519116121639000 == 
+Permutations(const_154519116121637000)
 ----
 
 \* CONSTANT definitions @modelParameterConstants:1InitState
-const_1544871245405131000 == 
+const_154519116121640000 == 
 <<>>
 ----
 
 \* CONSTANT definition @modelParameterDefinitions:0
-CONSTANT def_ov_1544871245405132000
+CONSTANT def_ov_154519116121641000
 ----
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_1544871245406133000 ==
+spec_154519116121642000 ==
 SpecImpl
 ----
 \* PROPERTY definition @modelCorrectnessProperties:0
-prop_1544871245406134000 ==
+prop_154519116121643000 ==
 CJ!Spec
 ----
 =============================================================================
 \* Modification History
-\* Created Sat Dec 15 18:54:05 CST 2018 by hengxin
+\* Created Wed Dec 19 11:46:01 CST 2018 by hengxin
