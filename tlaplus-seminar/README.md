@@ -28,6 +28,7 @@
 | 15		| The TLC Model Checker |	易星辰		| 2018-09-25 (周二)  	| Video Lecture, SS Chapter 14		|		|
 | 16		| TLA+ for Jupiter Family |	唐瑞泽		| 2018-10-30 (周二)  	| 			|		|
 | 17		| Refinement (3)	|	易星辰		| 2018-11-06 (周二)  	| Auxiliary Variables in TLA+ (Section 4) |		|
+| 18		| RGA protocol的TLA表达和验证 |	纪业 		| 2018-12-18 (周二)  	|  |		|
 | | Composing Specifications |	| 2018-xx-XX   	|  Paper |		|
 | | Animation Module    |	| 2018-xx-XX   	|  Paper |		|
 | | The TLA+ Language	|	| 2018-xx-XX   	|  Paper |		|
