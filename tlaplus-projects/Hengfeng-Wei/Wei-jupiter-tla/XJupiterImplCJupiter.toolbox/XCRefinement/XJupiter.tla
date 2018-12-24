@@ -34,36 +34,31 @@ Init ==
 xForm: iteratively transform cop with a path
 through the 2D state space ss at some client.
 *)
-xForm(cop, ss, current) ==
+xForm(cop, ss, cur) ==
     LET u == Locate(cop, ss)
         v == u \cup {cop.oid}
-        RECURSIVE xFormHelper(_, _, _, _, _)
-        \* 'h' stands for "helper"; xss: eXtra ss created during transformation
-        xFormHelper(uh, vh, coph, xss, xcoph) ==  
-            IF uh = current
-            THEN <<xss, xcoph>>
+        RECURSIVE xFormHelper(_, _, _, _)
+        xFormHelper(uh, vh, coph, xss) == \* xss: eXtra ss created during transformation
+            IF uh = cur THEN [xss |-> xss, xcop |-> coph]
             ELSE LET e == CHOOSE e \in ss.edge: e.from = uh /\ ClientOf(e.cop) # ClientOf(cop)
-                     uprime == e.to
                      copprime == e.cop
+                     uprime == e.to
+                     vprime == vh \cup {copprime.oid}
                      coph2copprime == COT(coph, copprime)
                      copprime2coph == COT(copprime, coph)
-                     vprime == vh \cup {copprime.oid}
                   IN xFormHelper(uprime, vprime, coph2copprime,
-                        [node |-> xss.node \cup {vprime}, 
-                         edge |-> xss.edge \cup {[from |-> vh, to |-> vprime, cop |-> copprime2coph], 
-                                    [from |-> uprime, to |-> vprime, cop |-> coph2copprime]}],
-                                 coph2copprime)
-    IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}], cop)
+                        xss (+) [node |-> {vprime},
+                                 edge |-> {[from |-> vh, to |-> vprime, cop |-> copprime2coph], 
+                                           [from |-> uprime, to |-> vprime, cop |-> coph2copprime]}])
+    IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
 -----------------------------------------------------------------------------
 (* 
 Client c \in Client perform operation cop.
 *)
 ClientPerform(cop, c) ==
-    LET xform == xForm(cop, c2ss[c], ds[c]) \* xform: <<xss, xcop>>
-          xss == xform[1]
-         xcop == xform[2]
-    IN /\ c2ss' = [c2ss EXCEPT ![c] = @ (+) xss]
-       /\ state' = [state EXCEPT ![c] = Apply(xcop.op, @)]
+    LET xform == xForm(cop, c2ss[c], ds[c]) \* xform: [xss, xcop]
+    IN /\ c2ss' = [c2ss EXCEPT ![c] = @ (+) xform.xss]
+       /\ state' = [state EXCEPT ![c] = Apply(xform.xcop.op, @)]
 (* 
 Client c \in Client generates an operation op.
 *)
@@ -104,13 +99,12 @@ The Server performs operation cop.
 ServerPerform(cop) == 
     LET c == ClientOf(cop)
      scur == ds[Server]
-    xform == xForm(cop, s2ss[c], scur) \* xform: <<xss, xcop>>
-      xss == xform[1]
-     xcop == xform[2]
+    xform == xForm(cop, s2ss[c], scur) \* xform: [xss, xcop]
+     xcop == xform.xcop
      xcur == scur \cup {cop.oid}
     IN /\ s2ss' = [cl \in Client |-> 
                     IF cl = c 
-                    THEN s2ss[cl] (+) xss
+                    THEN s2ss[cl] (+) xform.xss
                     ELSE s2ss[cl] (+) [node |-> {xcur}, 
                        edge |-> {[from |-> scur, to |-> xcur, cop |-> xcop]}]
                   ]
@@ -143,5 +137,5 @@ CSSync ==
     \forall c \in Client: (ds[c] = ds[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 19 18:38:40 CST 2018 by hengxin
+\* Last modified Mon Dec 24 11:38:04 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

@@ -38,7 +38,7 @@ SRevImpl ==
     /\ LET cop == Head(sincoming)
              c == cop.oid.c
          xform == xForm(cop, s2ss[c], ds[Server])  \* TODO: performance!!!
-            ss == xform[1]
+            ss == xform.xss
        IN op2ss' = op2ss @@ (cop.oid :> [node |-> ss.node, edge |-> ss.edge])
     /\ UNCHANGED c2ssX
 -----------------------------------------------------------------------------
@@ -61,5 +61,5 @@ CJ == INSTANCE CJupiter
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 19 18:52:44 CST 2018 by hengxin
+\* Last modified Mon Dec 24 11:38:49 CST 2018 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin
