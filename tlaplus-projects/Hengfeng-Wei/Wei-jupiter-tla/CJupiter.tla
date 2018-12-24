@@ -35,7 +35,7 @@ xForm(cop, r) ==
         \* 'h' stands for "helper"; xcss: eXtra css created during transformation
         xFormHelper(uh, vh, coph, xcss) ==  
             IF uh = ds[r]
-            THEN <<xcss, coph>>
+            THEN [xcss |-> xcss, xcop |-> coph]
             ELSE LET fedge == CHOOSE e \in rcss.edge: 
                                 /\ e.from = uh
                                 /\ \A uhe \in rcss.edge: 
@@ -54,11 +54,9 @@ xForm(cop, r) ==
 Perform cop at replica r \in Replica.                             
 *)
 Perform(cop, r) ==
-    LET xform == xForm(cop, r)  \* xform: <<xcss, xcop>>
-        xcss == xform[1]
-        xcop == xform[2]
-    IN /\ css' = [css EXCEPT ![r] = @ (+) xcss]
-       /\ state' = [state EXCEPT ![r] = Apply(xcop.op, @)]
+    LET xform == xForm(cop, r)  \* xform: [xcss, xcop]
+    IN /\ css' = [css EXCEPT ![r] = @ (+) xform.xcss]
+       /\ state' = [state EXCEPT ![r] = Apply(xform.xcop.op, @)]
 -----------------------------------------------------------------------------
 (*
 Client c \in Client issues an operation op.
@@ -126,5 +124,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 24 10:17:00 CST 2018 by hengxin
+\* Last modified Mon Dec 24 10:33:33 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin
