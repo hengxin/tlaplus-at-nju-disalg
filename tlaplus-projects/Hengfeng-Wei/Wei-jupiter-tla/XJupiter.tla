@@ -37,11 +37,11 @@ through the 2D state space ss at some client.
 xForm(cop, ss, current) ==
     LET u == Locate(cop, ss)
         v == u \cup {cop.oid}
-        RECURSIVE xFormHelper(_, _, _, _, _)
+        RECURSIVE xFormHelper(_, _, _, _)
         \* 'h' stands for "helper"; xss: eXtra ss created during transformation
-        xFormHelper(uh, vh, coph, xss, xcoph) ==  
+        xFormHelper(uh, vh, coph, xss) ==  
             IF uh = current
-            THEN <<xss, xcoph>>
+            THEN <<xss, coph>>
             ELSE LET e == CHOOSE e \in ss.edge: e.from = uh /\ ClientOf(e.cop) # ClientOf(cop)
                      uprime == e.to
                      copprime == e.cop
@@ -51,9 +51,8 @@ xForm(cop, ss, current) ==
                   IN xFormHelper(uprime, vprime, coph2copprime,
                         [node |-> xss.node \cup {vprime}, 
                          edge |-> xss.edge \cup {[from |-> vh, to |-> vprime, cop |-> copprime2coph], 
-                                    [from |-> uprime, to |-> vprime, cop |-> coph2copprime]}],
-                                 coph2copprime)
-    IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}], cop)
+                                    [from |-> uprime, to |-> vprime, cop |-> coph2copprime]}])
+    IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
 -----------------------------------------------------------------------------
 (* 
 Client c \in Client perform operation cop.
@@ -143,5 +142,5 @@ CSSync ==
     \forall c \in Client: (ds[c] = ds[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 19 18:38:40 CST 2018 by hengxin
+\* Last modified Mon Dec 24 10:27:03 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

@@ -31,11 +31,11 @@ xForm(cop, r) ==
     LET rcss == css[r]
         u == Locate(cop, rcss)
         v == u \cup {cop.oid}
-        RECURSIVE xFormHelper(_, _, _, _, _)
+        RECURSIVE xFormHelper(_, _, _, _)
         \* 'h' stands for "helper"; xcss: eXtra css created during transformation
-        xFormHelper(uh, vh, coph, xcss, xcoph) ==  
+        xFormHelper(uh, vh, coph, xcss) ==  
             IF uh = ds[r]
-            THEN <<xcss, xcoph>>
+            THEN <<xcss, coph>>
             ELSE LET fedge == CHOOSE e \in rcss.edge: 
                                 /\ e.from = uh
                                 /\ \A uhe \in rcss.edge: 
@@ -48,9 +48,8 @@ xForm(cop, r) ==
                  IN  xFormHelper(uprime, vprime, coph2fcop,
                         [xcss EXCEPT !.node = @ \cup {vprime},
                           !.edge = @ \cup {[from |-> vh, to |-> vprime, cop |-> fcop2coph],
-                                           [from |-> uprime, to |-> vprime, cop |-> coph2fcop]}],
-                            coph2fcop)
-   IN  xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}], cop)
+                                           [from |-> uprime, to |-> vprime, cop |-> coph2fcop]}])
+   IN  xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
 (*
 Perform cop at replica r \in Replica.                             
 *)
@@ -127,5 +126,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 19 18:38:03 CST 2018 by hengxin
+\* Last modified Mon Dec 24 10:17:00 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin
