@@ -29,10 +29,10 @@
 | 16		| TLA+ for Jupiter Family |	唐瑞泽		| 2018-10-30 (周二)  	| 			|		|
 | 17		| Refinement (3)	|	易星辰		| 2018-11-06 (周二)  	| Auxiliary Variables in TLA+ (Section 4) |		|
 | 18		| RGA protocol的TLA表达和验证 |	纪业 		| 2018-12-18 (周二)  	|  |		|
+| 19		| TLAPLUS Proof System 	|	唐瑞泽		| 2018-12-25 (周二)	|  HB Chapter 10, 11		|		|
 | | Composing Specifications |	| 2018-xx-XX   	|  Paper |		|
 | | Animation Module    |	| 2018-xx-XX   	|  Paper |		|
 | | The TLA+ Language	|	| 2018-xx-XX   	|  Paper |		|
 | | Liveness and Fairness |	| 2018-xx-XX   	|  Paper |		|
 | | PlusCal |	| 2018-xx-XX   	|  Paper |		|
 | | Mutual Exclusion |	| 2018-xx-XX   	|  Paper |		|
-| | TLAPLUS Proof System |	| 2018-xx-XX   	|  Paper |		|
