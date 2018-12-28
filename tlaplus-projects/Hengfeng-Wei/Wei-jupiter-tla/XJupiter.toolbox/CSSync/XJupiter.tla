@@ -34,12 +34,12 @@ Init ==
 xForm: iteratively transform cop with a path
 through the 2D state space ss at some client.
 *)
-xForm(cop, ss, current) ==
+xForm(cop, ss, cur) ==
     LET u == Locate(cop, ss)
         v == u \cup {cop.oid}
         RECURSIVE xFormHelper(_, _, _, _)
         xFormHelper(uh, vh, coph, xss) == \* xss: eXtra ss created during transformation
-            IF uh = current THEN [xss |-> xss, xcop |-> coph]
+            IF uh = cur THEN [xss |-> xss, xcop |-> coph]
             ELSE LET e == CHOOSE e \in ss.edge: e.from = uh /\ ClientOf(e.cop) # ClientOf(cop)
                      copprime == e.cop
                      uprime == e.to
@@ -65,7 +65,6 @@ Client c \in Client generates an operation op.
 DoOp(c, op) == 
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]] 
         IN /\ ClientPerform(cop, c)
-           /\ UpdateDS(c, cop)
            /\ Comm(Cop)!CSend(cop)
 
 DoIns(c) ==
@@ -137,5 +136,5 @@ CSSync ==
     \forall c \in Client: (ds[c] = ds[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 24 11:34:42 CST 2018 by hengxin
+\* Last modified Fri Dec 28 10:53:07 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

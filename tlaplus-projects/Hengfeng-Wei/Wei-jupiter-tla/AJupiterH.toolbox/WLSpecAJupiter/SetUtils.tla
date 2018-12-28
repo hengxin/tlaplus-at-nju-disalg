@@ -3,14 +3,12 @@
 (* Copyright: https://www.learntla.com/libraries/sets/                     *)
 (***************************************************************************)
 EXTENDS TLC
-
 LOCAL INSTANCE Naturals
 
 (***************************************************************************)
 (* Pick an element from the set S.                                         *)
 (***************************************************************************)
 Pick(S) == CHOOSE s \in S : TRUE
-
 (***************************************************************************)
 (* Pick an element that is not in the set S.                               *)
 (***************************************************************************)
@@ -22,7 +20,6 @@ SetReduce(Op(_, _), S, value) ==
     THEN value 
     ELSE LET s == Pick(S) 
          IN  SetReduce(Op, S \ {s}, Op(s, value)) 
-         
 (***************************************************************************)
 (* This version will report an error if                                    *)
 (* the operation applied is not commutative as required.                   *)
@@ -53,5 +50,5 @@ MinOfSet(set) == CHOOSE min \in set:(\A x \in set: min \leq x)
 MaxOfSet(set) == CHOOSE max \in set:(\A x \in set: max \geq x)
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 03 20:15:41 CST 2018 by hengxin
+\* Last modified Tue Dec 04 19:43:16 CST 2018 by hengxin
 \* Created Fri Jul 06 13:21:26 CST 2018 by hengxin

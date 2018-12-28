@@ -1,6 +1,7 @@
------------------------------- MODULE AJupiter ------------------------------
-(* 
-Specification of the Jupiter protocol presented by Hagit Attiya and others.
+-------------------------- MODULE AJupiterExtended --------------------------
+(*
+AJupiter extended with JupiterCtx.
+This is used to show that AJupiter implements XJupiter.
 *)
 EXTENDS JupiterInterface
 -----------------------------------------------------------------------------
@@ -105,15 +106,7 @@ Fairness ==
     WF_vars(SRev \/ \E c \in Client: Rev(c))
     
 Spec == Init /\ [][Next]_vars \* /\ Fairness
------------------------------------------------------------------------------
-(* 
-Quiescent Consistency (QC)                                        
-*)
-QC == 
-    Comm(Msg)!EmptyChannel => Cardinality(Range(state)) = 1
-
-THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Thu Dec 27 20:29:07 CST 2018 by hengxin
-\* Created Sat Jun 23 17:14:18 CST 2018 by hengxin
+\* Last modified Fri Dec 28 10:35:28 CST 2018 by hengxin
+\* Created Thu Dec 27 21:15:09 CST 2018 by hengxin

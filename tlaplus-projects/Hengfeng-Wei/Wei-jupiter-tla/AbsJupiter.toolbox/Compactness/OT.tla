@@ -25,7 +25,6 @@ XformII(lins, rins) ==
               ELSE IF lins.pr > rins.pr
                    THEN [lins EXCEPT !.pos = @+1]
                    ELSE lins
-
 (***************************************************************************)
 (* The left "Ins" ins transformed against the right "Del" del.             *)
 (***************************************************************************)
@@ -33,7 +32,6 @@ XformID(ins, del) ==
     IF ins.pos <= del.pos
     THEN ins
     ELSE [ins EXCEPT !.pos = @-1]
-
 (***************************************************************************)
 (* The left "Del" del transformed against the right "Ins" ins.             *)
 (***************************************************************************)
@@ -41,7 +39,6 @@ XformDI(del, ins) ==
     IF del.pos < ins.pos
     THEN del
     ELSE [del EXCEPT !.pos = @+1]
-
 (***************************************************************************)
 (* The left "Del" ldel transformed against the right "Del" rdel.           *)
 (***************************************************************************)
@@ -76,7 +73,6 @@ XformOpOps(op, ops) ==
     IF ops = <<>>
         THEN op
         ELSE XformOpOps(Xform(op, Head(ops)), Tail(ops))
-
 (***************************************************************************)
 (* Iteratively/recursively transforms the operation op                     *)
 (* against an operation sequence ops.                                      *)
@@ -88,7 +84,6 @@ XformOpOpsX(op, ops) ==
     IF ops = <<>>
         THEN <<op>>
         ELSE <<op>> \o XformOpOpsX(Xform(op, Head(ops)), Tail(ops))
-
 (***************************************************************************)
 (* Iteratively/recursively transforms the operation sequence ops           *)
 (* against an operation op.                                                *)
@@ -96,7 +91,6 @@ XformOpOpsX(op, ops) ==
 XformOpsOp(ops, op) == 
     LET opX == XformOpOpsX(op, ops)
     IN  [i \in 1 .. Len(ops) |-> Xform(ops[i], opX[i])]
-
 (***************************************************************************)
 (* Iteratively/recursively transforms an operation sequence ops1           *)
 (* against another operation sequence ops2.                                *)
@@ -110,5 +104,5 @@ XformOpsOps(ops1, ops2) ==
     ELSE XformOpsOps(XformOpsOp(ops1, Head(ops2)), Tail(ops2))
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 03 20:13:36 CST 2018 by hengxin
+\* Last modified Fri Dec 28 10:37:02 CST 2018 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin

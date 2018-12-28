@@ -940,149 +940,28 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} CSComm}\moduleRightDash\@xx{}%
+ {\MODULE} AJupiterExtended}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Specification of communication in a Client-Server system model.
+\ensuremath{AJupiter} extended with \ensuremath{JupiterCtx}.
+ This is used to show that \ensuremath{AJupiter} implements
+ \ensuremath{XJupiter}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} SequenceUtils}%
-\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\CONSTANTS}}%
- \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} Client
- ,\,\@s{13.96}}%
-\@y{\@s{0}%
- the set of clients
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Server
- ,\,\@s{12.30}}%
-\@y{\@s{0}%
- the (unique) server
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Msg\@s{28.80}}%
-\@y{\@s{0}%
- the set of possible messages
-}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} {\VARIABLES}}%
- \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{16.4} cincoming
- ,\,\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{cincoming[c]}: incoming channel at client \ensuremath{c \.{\in}
- Client
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4}
- sincoming\@s{10.72}}%
-\@y{\@s{0}%
- incoming channel at the \ensuremath{Server
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} TypeOK \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
- cincoming \.{\in} [ Client \.{\rightarrow} Seq ( Msg ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
- sincoming\@s{0.51} \.{\in} Seq ( Msg )}%
-\@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} Init \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land} cincoming
- \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land}
- sincoming\@s{0.51} \.{=} {\langle} {\rangle}}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} EmptyChannel \.{\defeq}
- Init}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-A client sends a message \ensuremath{msg} to the \ensuremath{Server}.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} CSend ( msg ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land} sincoming
- \.{'} \.{=} Append ( sincoming ,\, msg )}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} cincoming}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Client \ensuremath{c} receives a message from the \ensuremath{Server}.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} CRev ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{24.21} \.{\land}
- cincoming [ c ] \.{\neq} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{24.21} \.{\land}
- cincoming \.{'} \.{=} [ cincoming {\EXCEPT} {\bang} [ c ] \.{=} Tail ( @ )
- ]\@s{8.2}}%
-\@y{\@s{0}%
- consume a message
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{24.21} \.{\land}
- {\UNCHANGED} sincoming}%
-\@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{SRev}/\ensuremath{SSend} below is often used as a subaction.
- No \ensuremath{{\UNCHANGED}} in their definitions.
-\end{cpar}%
-\vshade{10.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-The \ensuremath{Server} receives a message.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}} SRev \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\land} sincoming
- \.{\neq} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{16.4} \.{\land} sincoming
- \.{'} \.{=} Tail ( sincoming )}%
-\@y{\@s{0}%
- consume a message
-}%
-\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The \ensuremath{Server} sents a message \ensuremath{cmsg} to each client
- other than \ensuremath{c \.{\in} Client}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}} SSend ( c ,\, cmsg )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{16.4} \.{\land} cincoming
- \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
-\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{99.45} {\IF} cl \.{=} c}%
- \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{99.45} \.{\THEN}
- cincoming [ cl ]}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{99.45} \.{\ELSE} Append (
- cincoming [ cl ] ,\, cmsg [ cl ] ) ]}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The \ensuremath{Server} broadcasts the same message \ensuremath{msg} to all
- Clients other than \ensuremath{c \.{\in} Client}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}} SSendSame ( c ,\, msg )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \.{\land} SSend ( c
- ,\, [ cl \.{\in} Client \.{\mapsto} msg ] )}%
-\@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Tue}
- \ensuremath{Dec} 04 20:49:02 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
+ \ensuremath{Dec} 27 21:16:08 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jun} 24 10:25:34
- \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Thu} \ensuremath{Dec} 27
+ 21:15:09 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%

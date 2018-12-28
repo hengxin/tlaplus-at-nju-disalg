@@ -19,8 +19,8 @@ ClientOf(cop) == cop.oid.c
 COT(lcop, rcop) == \* OT of two Cop(s).                                 
     [lcop EXCEPT !.op = Xform(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
 
-UpdateDS(r, cop) == \* update ds to include new Cop (in terms of oid)
-    ds' = [ds EXCEPT ![r] = @ \cup {cop.oid}]
+UpdateDS(r, oid) == \* update ds to include new oid \in Oid
+    ds' = [ds EXCEPT ![r] = @ \cup {oid}]
 -----------------------------------------------------------------------------
 TypeOKCtx ==
     /\ cseq \in [Client -> Nat]
@@ -32,16 +32,16 @@ InitCtx ==
     
 DoCtx(c) ==
     /\ cseq' = [cseq EXCEPT ![c] = @ + 1]
-    \* /\ don't know the generated cop; no way to update ds
+    /\ UpdateDS(c, [c |-> c, seq |-> cseq'[c]])
 
 RevCtx(c) ==
-    /\ UpdateDS(c, Head(cincoming[c]))
+    /\ UpdateDS(c, Head(cincoming[c]).oid)
     /\ UNCHANGED cseq
     
 SRevCtx ==
-    /\ UpdateDS(Server, Head(sincoming))
+    /\ UpdateDS(Server, Head(sincoming).oid)
     /\ UNCHANGED cseq
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 19 18:05:26 CST 2018 by hengxin
+\* Last modified Fri Dec 28 11:02:31 CST 2018 by hengxin
 \* Created Wed Dec 05 20:03:50 CST 2018 by hengxin

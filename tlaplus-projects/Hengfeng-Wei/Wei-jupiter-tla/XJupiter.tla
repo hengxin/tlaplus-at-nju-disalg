@@ -65,7 +65,6 @@ Client c \in Client generates an operation op.
 DoOp(c, op) == 
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]] 
         IN /\ ClientPerform(cop, c)
-           /\ UpdateDS(c, cop)
            /\ Comm(Cop)!CSend(cop)
 
 DoIns(c) ==
@@ -137,5 +136,5 @@ CSSync ==
     \forall c \in Client: (ds[c] = ds[Server]) => c2ss[c] = s2ss[c]
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 24 11:38:04 CST 2018 by hengxin
+\* Last modified Fri Dec 28 10:53:07 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

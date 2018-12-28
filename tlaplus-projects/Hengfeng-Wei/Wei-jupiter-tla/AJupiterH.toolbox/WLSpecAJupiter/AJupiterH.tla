@@ -29,7 +29,7 @@ SpecH == InitH /\ [][NextH]_varsH \* /\ FairnessH
 (*********************************************************************)
 (* Weak List Consistency (WLSpec)                                    *)
 (*********************************************************************)
-WLSpec == comm!EmptyChannel 
+WLSpec == Comm(Msg)!EmptyChannel 
             => \A l1, l2 \in list: 
                 /\ Injective(l1) 
                 /\ Injective(l2) 
@@ -41,5 +41,5 @@ THEOREM SpecH => WLSpec
 (*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Tue Dec 04 18:44:55 CST 2018 by hengxin
+\* Last modified Tue Dec 04 21:13:19 CST 2018 by hengxin
 \* Created Thu Aug 30 21:26:18 CST 2018 by hengxin

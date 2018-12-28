@@ -20,6 +20,8 @@ TypeOK ==
 Init == 
     /\ cincoming = [c \in Client |-> <<>>]
     /\ sincoming = <<>>
+
+EmptyChannel == Init
 -----------------------------------------------------------------------------
 (* 
 A client sends a message msg to the Server.
@@ -58,12 +60,7 @@ The Server broadcasts the same message msg to all Clients other than c \in Clien
 *)
 SSendSame(c, msg) ==
     /\ SSend(c, [cl \in Client |-> msg])
------------------------------------------------------------------------------
-(*
-Properties of communication channels.
-*)
-EmptyChannel == Init
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 03 20:15:18 CST 2018 by hengxin
+\* Last modified Tue Dec 04 20:49:02 CST 2018 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin
