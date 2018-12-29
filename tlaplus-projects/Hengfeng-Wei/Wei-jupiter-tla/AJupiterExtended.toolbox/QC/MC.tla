@@ -1,5 +1,5 @@
 ---- MODULE MC ----
-EXTENDS AbsJupiter, TLC
+EXTENDS AJupiterExtended, TLC
 
 \* MV CONSTANT declarations@modelParameterConstants
 CONSTANTS
@@ -12,33 +12,33 @@ a, b
 ----
 
 \* MV CONSTANT definitions Client
-const_1545982932174106000 == 
+const_154607670213444000 == 
 {c1, c2}
 ----
 
 \* MV CONSTANT definitions Char
-const_1545982932174107000 == 
+const_154607670213445000 == 
 {a, b}
 ----
 
 \* SYMMETRY definition
-symm_1545982932174108000 == 
-Permutations(const_1545982932174107000)
+symm_154607670213446000 == 
+Permutations(const_154607670213445000)
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2InitState
-const_1545982932174109000 == 
+const_154607670213447000 == 
 <<>>
 ----
 
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_1545982932174111000 ==
+spec_154607670213449000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_1545982932174112000 ==
-TypeOK
+inv_154607670213450000 ==
+QC
 ----
 =============================================================================
 \* Modification History
-\* Created Fri Dec 28 15:42:12 CST 2018 by hengxin
+\* Created Sat Dec 29 17:45:02 CST 2018 by hengxin

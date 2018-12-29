@@ -940,203 +940,253 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} OT}\moduleRightDash\@xx{}%
+ {\MODULE} AJupiter}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Specification of \ensuremath{OT} (Operational Transformation) functions.
- It consists of the basic \ensuremath{OT} functions for two operations and
- more general ones involving operation sequences.
+ Specification of the \ensuremath{Jupiter} protocol presented by
+ \ensuremath{Hagit} \ensuremath{Attiya} and others.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\EXTENDS} OpOperators ,\,
- SetUtils}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{OT} (Operational Transformation) functions.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Naming convention: I for \ensuremath{\@w{Ins}} and \ensuremath{D} for
- \ensuremath{\@w{Del}}.
-\end{cpar}%
-\end{lcom}%
+\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} JupiterInterface}%
+\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\VARIABLES}}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} cbuf ,\,\@s{12.29}}%
+\@y{\@s{0}%
+ \ensuremath{cbuf[c]}: buffer for locally generated operations at client
+ \ensuremath{c \.{\in} Client
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} crec ,\,\@s{14.49}}%
+\@y{\@s{0}%
+ \ensuremath{crec[c]}: number of remote operations received by client
+ \ensuremath{c \.{\in} Client
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{83.26}}%
+\@y{\@s{0}%
+ since the last time a local operation was generated
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} sbuf ,\,\@s{12.29}}%
+\@y{\@s{0}%
+ \ensuremath{sbuf[c]}: buffer for transformed remote operations
+ \ensuremath{w.r.t} client \ensuremath{c \.{\in} Client
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4} srec\@s{20.60}}%
+\@y{\@s{0}%
+ \ensuremath{srec[c]}: number of locally generated operations by client
+ \ensuremath{c \.{\in} Client
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{82.75}}%
+\@y{\@s{0}%
+ since the last time a remote operation was transformed at the
+ \ensuremath{Server
+}}%
+\@xx{}%
 \@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The left \ensuremath{\@w{Ins}} \ensuremath{lins} transformed against the
- right \ensuremath{\@w{Ins}} \ensuremath{rins}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} XformII ( lins ,\, rins )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} {\IF} lins . pos
- \.{<} rins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} \.{\THEN} lins}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\ELSE} {\IF}
- lins . pos \.{>} rins . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{47.71} \.{\THEN} [ lins
- {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{47.71} \.{\ELSE} {\IF}
- lins . ch \.{=} rins . ch}%
-\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{79.02} \.{\THEN} Nop}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{79.02} \.{\ELSE} {\IF}
- lins . pr \.{>} rins . pr}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{110.33} \.{\THEN} [ lins
- {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
-\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{110.33} \.{\ELSE} lins}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The left \ensuremath{\@w{Ins}} \ensuremath{ins} transformed against the right
- \ensuremath{\@w{Del}} \ensuremath{del}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}} XformID ( ins ,\, del )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{16.4} {\IF} ins . pos
- \.{\leq} del . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\THEN} ins}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\ELSE} [ ins
- {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The left \ensuremath{\@w{Del}} \ensuremath{del} transformed against the right
- \ensuremath{\@w{Ins}} \ensuremath{ins}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}} XformDI ( del ,\, ins )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{16.4} {\IF} del . pos
- \.{<} ins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\THEN} del}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} \.{\ELSE} [ del
- {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- The left \ensuremath{\@w{Del}} \ensuremath{ldel} transformed against the
- right \ensuremath{\@w{Del}} \ensuremath{rdel}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} XformDD ( ldel ,\, rdel )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} {\IF} ldel . pos
- \.{<} rdel . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} \.{\THEN} ldel}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\ELSE} {\IF}
- ldel . pos \.{>} rdel . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{47.71} \.{\THEN} [ ldel
- {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{47.71} \.{\ELSE} Nop}%
-\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Transform the left operation \ensuremath{lop} against the right operation
- \ensuremath{rop
-} with appropriate \ensuremath{OT} function.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}} Xform ( lop ,\, rop )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{16.4} {\CASE} lop \.{=}
- Nop \.{\lor} rop \.{=} Nop \.{\rightarrow} lop}%
- \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{28.69} {\Box}\@s{4.1} lop
- . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
- \.{\rightarrow} XformII ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
- lop . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Del}
- \.{\rightarrow} XformID ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
- lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
- \.{\rightarrow} XformDI ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
- lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Del} \.{\rightarrow}
- XformDD ( lop ,\, rop )}%
-\@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Generalized \ensuremath{OT} functions on operation sequences.
-\end{cpar}%
-\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} vars \.{\defeq} {\langle}
+ intVars ,\, cbuf ,\, crec ,\, sbuf ,\, srec {\rangle}}%
 \@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} Msg \.{\defeq} [ c \.{:}
+ Client ,\, ack \.{:} Int ,\, op \.{:} Op \.{\cup} \{ Nop \} ] \.{\cup}}%
+\@y{\@s{0}%
+ messages sent to the \ensuremath{Server} from a client \ensuremath{c \.{\in}
+ Client
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{37.42} [ ack \.{:} Int
+ ,\, op \.{:} Op \.{\cup} \{ Nop \} ]}%
+\@y{\@s{0}%
+ messages broadcast to Clients from the \ensuremath{Server
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} TypeOK \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ TypeOKInt}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ Comm ( Msg ) {\bang} TypeOK}%
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ cbuf \.{\in} [ Client \.{\rightarrow} Seq ( Op \.{\cup} \{ Nop \} ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ crec\@s{2.19} \.{\in} [ Client \.{\rightarrow} Int ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ sbuf\@s{0.51} \.{\in} [ Client \.{\rightarrow} Seq ( Op \.{\cup} \{ Nop \} )
+ ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ srec\@s{2.70} \.{\in} [ Client \.{\rightarrow} Int ]}%
+\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} Init \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land} InitInt}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land} Comm (
+ Msg ) {\bang} Init}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\land} cbuf
+ \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{16.4} \.{\land}
+ crec\@s{2.19} \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\land}
+ sbuf\@s{0.51} \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land}
+ srec\@s{2.70} \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
+\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Iteratively/recursively transforms the operation \ensuremath{op
-} against an operation sequence \ensuremath{ops}.
+Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}} {\RECURSIVE} XformOpOps ( \_
- ,\, \_ ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}} XformOpOps ( xform ( \_ ,\,
- \_ ) ,\, op ,\, ops ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
- {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{16.4} \.{\THEN} op}%
- \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}\@s{16.4} \.{\ELSE}
- XformOpOps ( xform ,\, xform ( op ,\, Head ( ops ) ) ,\, Tail ( ops ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}} DoOp ( c ,\, op )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{26.06} \.{\land} state
+ \.{'} \.{=} [ state {\EXCEPT} {\bang} [ c ] \.{=} Apply ( op ,\, @ ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{26.06} \.{\land} cbuf
+ \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} Append ( @ ,\, op ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{26.06} \.{\land} crec
+ \.{'}\@s{2.19} \.{=} [ crec {\EXCEPT} {\bang} [ c ]\@s{2.19} \.{=} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{26.06} \.{\land} Comm (
+ Msg ) {\bang} CSend ( [ c \.{\mapsto} c ,\, ack \.{\mapsto} crec [ c ] ,\,
+ op \.{\mapsto} op ] )}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} DoIns ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} \E\, ins \.{\in} \{
+ op \.{\in} Ins \.{:} op . pos \.{\in} 1 \.{\dotdot} ( Len ( state [ c ] )
+ \.{+} 1 ) \.{\land} op . ch \.{\in} chins \.{\land} op . pr \.{=} Priority [
+ c ] \} \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{27.72} \.{\land} DoOp ( c
+ ,\, ins )}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{27.72} \.{\land} chins
+ \.{'} \.{=} chins \.{\,\backslash\,} \{ ins . ch \}}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}} DoDel ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \E\, del \.{\in} \{
+ op \.{\in} Del \.{:} op . pos \.{\in} 1 \.{\dotdot} Len ( state [ c ] ) \}
+ \.{:}}%
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{27.72} \.{\land} DoOp ( c
+ ,\, del )}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{27.72} \.{\land}
+ {\UNCHANGED} chins}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}} Do ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{22.34} \.{\land} \.{\lor}
+ DoIns ( c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{33.45} \.{\lor} DoDel ( c
+ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{22.34} \.{\land}
+ {\UNCHANGED} {\langle} sbuf ,\, srec {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Iteratively/recursively transforms the operation \ensuremath{op
-} against an operation sequence \ensuremath{ops}.
- Being different from \ensuremath{XformOpOps},
- \ensuremath{XformOpOpsX} maintains the intermediate transformed operation
+ Client \ensuremath{c \.{\in} Client} receives a message from the
+ \ensuremath{Server}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}} {\RECURSIVE} XformOpOpsX (
- \_ ,\, \_ ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}} XformOpOpsX ( xform ( \_ ,\,
- \_ ) ,\, op ,\, ops ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
- {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{16.4} \.{\THEN} {\langle}
- op {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{16.4} \.{\ELSE} {\langle}
- op {\rangle} \.{\circ} XformOpOpsX ( xform ,\, xform ( op ,\, Head ( ops ) )
- ,\, Tail ( ops ) )}%
+\@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}} Rev ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{20.94} \.{\land} Comm (
+ Msg ) {\bang} CRev ( c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{20.94} \.{\land} crec
+ \.{'} \.{=} [ crec {\EXCEPT} {\bang} [ c ] \.{=} @ \.{+} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{20.94} \.{\land} \.{\LET}
+ m \.{\defeq} Head ( cincoming [ c ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{52.45} cBuf \.{\defeq}
+ cbuf [ c ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{52.45} cShiftedBuf
+ \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{52.45} xop \.{\defeq}
+ XformOpOps ( Xform ,\, m . op ,\, cShiftedBuf )}%
+ \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{56.55} xcBuf \.{\defeq}
+ XformOpsOp ( Xform ,\, cShiftedBuf ,\, m . op )}%
+ \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{36.15} \.{\IN} \.{\land}
+ cbuf \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} xcBuf ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{56.55} \.{\land} state
+ \.{'} \.{=} [ state {\EXCEPT} {\bang} [ c ] \.{=} Apply ( xop ,\, @ ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{20.94} \.{\land}
+ {\UNCHANGED} {\langle} chins ,\, sbuf ,\, srec {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Iteratively/recursively transforms the operation sequence \ensuremath{ops
-} against an operation \ensuremath{op}.
+The \ensuremath{Server} receives a message.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}} XformOpsOp ( xform ( \_ ,\,
- \_ ) ,\, ops ,\, op ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}\@s{16.4} \.{\LET} opX
- \.{\defeq} XformOpOpsX ( xform ,\, op ,\, ops )}%
- \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}}\@s{16.4} \.{\IN} [ i \.{\in}
- 1 \.{\dotdot} Len ( ops ) \.{\mapsto} xform ( ops [ i ] ,\, opX [ i ] ) ]}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Iteratively/recursively transforms an operation sequence \ensuremath{ops1
-} against another operation sequence \ensuremath{ops2}.
-\end{cpar}%
-\vshade{5.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-See also Definition 2.13 of the paper ``Imine @ \ensuremath{TCS06}''.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}} {\RECURSIVE} XformOpsOps (
- \_ ,\, \_ ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 101\hspace{1em}} XformOpsOps ( xform ( \_
- ,\, \_ ) ,\, ops1 ,\, ops2 ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}}\@s{16.4} {\IF} ops2 \.{=}
- {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}}\@s{16.4} \.{\THEN} ops1}%
- \@x{\makebox[0pt][r]{\scriptsize 104\hspace{1em}}\@s{16.4} \.{\ELSE}
- XformOpsOps ( xform ,\, XformOpsOp ( xform ,\, ops1 ,\, Head ( ops2 ) ) ,\,
- Tail ( ops2 ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}} SRev \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{16.4} \.{\land} Comm (
+ Msg ) {\bang} SRev}%
+ \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
+ m \.{\defeq} Head ( sincoming )}%
+ \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{47.91} c\@s{3.77}
+ \.{\defeq} m . c}%
+ \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
+ sbuf [ c ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{47.91} cShiftedBuf
+ \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{47.91} xop \.{\defeq}
+ XformOpOps ( Xform ,\, m . op ,\, cShiftedBuf )}%
+ \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{52.01} xcBuf \.{\defeq}
+ XformOpsOp ( Xform ,\, cShiftedBuf ,\, m . op )}%
+ \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
+ srec \.{'}\@s{2.19} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
+\@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{117.66} {\IF} cl \.{=} c}%
+ \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{117.66} \.{\THEN} srec [
+ cl ] \.{+} 1}%
+\@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{117.66} \.{\ELSE} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{52.01} \.{\land} sbuf
+ \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
+\@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{117.66} {\IF} cl \.{=} c}%
+\@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}\@s{117.66} \.{\THEN} xcBuf}%
+ \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}}\@s{117.66} \.{\ELSE} Append
+ ( sbuf [ cl ] ,\, xop ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{52.01} \.{\land} state
+ \.{'} \.{=} [ state {\EXCEPT} {\bang} [ Server ] \.{=} Apply ( xop ,\, @ )
+ ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 95\hspace{1em}}\@s{52.01} \.{\land} Comm (
+ Msg ) {\bang} SSend ( c ,\, [ cl \.{\in} Client \.{\mapsto} [ ack
+ \.{\mapsto} srec [ cl ] ,\, op \.{\mapsto} xop ] ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}}\@s{16.4} \.{\land}
+ {\UNCHANGED} {\langle} chins ,\, cbuf ,\, crec {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 97\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}} Next \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
+ \.{\in} Client \.{:} Do ( c ) \.{\lor} Rev ( c )}%
+\@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}} Fairness \.{\defeq}}%
+\@y{\@s{0}%
+ There is no requirement that the clients ever generate operations.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}}\@s{16.4} {\WF}_{ vars} (
+ SRev \.{\lor} \E\, c \.{\in} Client \.{:} Rev ( c ) )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}} Spec \.{\defeq} Init
+ \.{\land} {\Box} [ Next ]_{ vars}}%
+\@y{\@s{0}%
+ \ensuremath{\.{\land} Fairness
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 106\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 107\hspace{1em}} QC \.{\defeq}}%
+\@y{\@s{0}%
+ Quiescent Consistency
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}}\@s{20.37} Comm ( Msg )
+ {\bang} EmptyChannel \.{\implies} Cardinality ( Range ( state ) ) \.{=} 1}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}} {\THEOREM} Spec
+ \.{\implies} {\Box} QC}%
+\@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Fri}
- \ensuremath{Dec} 28 14:58:58 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Dec} 29
+ 17:25:40 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jun} 24 15:57:48
+ \ensuremath{\.{\,\backslash\,}}* Created Sat \ensuremath{Jun} 23 17:14:18
  \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%

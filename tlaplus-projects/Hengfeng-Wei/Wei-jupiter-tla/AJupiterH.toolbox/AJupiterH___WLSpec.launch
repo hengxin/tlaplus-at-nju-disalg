@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="org.lamport.tla.toolbox.tool.tlc.modelCheck">
 <stringAttribute key="TLCCmdLineParameters" value=""/>
-<stringAttribute key="configurationName" value="QC"/>
+<stringAttribute key="configurationName" value="WLSpec"/>
 <booleanAttribute key="deferLiveness" value="false"/>
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
@@ -17,20 +17,20 @@
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value=""/>
 <stringAttribute key="modelBehaviorNext" value=""/>
-<stringAttribute key="modelBehaviorSpec" value="Spec"/>
+<stringAttribute key="modelBehaviorSpec" value="SpecH"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="crec, chins, cbuf, sincoming, state, cincoming, srec, sbuf"/>
+<stringAttribute key="modelBehaviorVars" value="crec, chins, cbuf, sincoming, state, cincoming, srec, list, sbuf"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
-<listEntry value="1QC"/>
+<listEntry value="1WLSpec"/>
 </listAttribute>
 <listAttribute key="modelCorrectnessProperties"/>
 <stringAttribute key="modelExpressionEval" value=""/>
 <stringAttribute key="modelParameterActionConstraint" value=""/>
 <listAttribute key="modelParameterConstants">
 <listEntry value="Client;;{c1, c2};1;0"/>
-<listEntry value="Char;;{a, b};1;1"/>
+<listEntry value="Char;;{a, b, c};1;1"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
 <listEntry value="Server;;Server;1;0"/>
 </listAttribute>
@@ -40,13 +40,13 @@
 </listAttribute>
 <stringAttribute key="modelParameterModelValues" value="{}"/>
 <stringAttribute key="modelParameterNewDefinitions" value=""/>
-<intAttribute key="numberOfWorkers" value="2"/>
+<intAttribute key="numberOfWorkers" value="10"/>
 <booleanAttribute key="recover" value="false"/>
 <stringAttribute key="result.mail.address" value=""/>
 <intAttribute key="simuAril" value="-1"/>
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
-<stringAttribute key="specName" value="AJupiter"/>
+<stringAttribute key="specName" value="AJupiterH"/>
 <stringAttribute key="view" value=""/>
 <booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>

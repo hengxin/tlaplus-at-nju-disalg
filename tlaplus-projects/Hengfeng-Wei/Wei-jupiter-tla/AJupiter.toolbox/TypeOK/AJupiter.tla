@@ -48,16 +48,16 @@ DoIns(c) ==
     \E ins \in {op \in Ins: op.pos \in 1 .. (Len(state[c]) + 1) /\ op.ch \in chins /\ op.pr = Priority[c]}:
         /\ DoOp(c, ins)
         /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
-        /\ UNCHANGED <<sbuf, srec>>
 
 DoDel(c) == 
     \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
         /\ DoOp(c, del)
-        /\ UNCHANGED <<chins, sbuf, srec>>
+        /\ UNCHANGED chins
 
 Do(c) == 
-    \/ DoIns(c)
-    \/ DoDel(c)
+    /\ \/ DoIns(c) 
+       \/ DoDel(c)
+    /\ UNCHANGED <<sbuf, srec>>
 (* 
 Client c \in Client receives a message from the Server.           
 *)
@@ -67,8 +67,8 @@ Rev(c) ==
     /\ LET m == Head(cincoming[c]) 
            cBuf == cbuf[c]  \* the buffer at client c \in Client
            cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))  \* buffer shifted
-           xop == XformOpOps(m.op, cShiftedBuf) \* transform op vs. shifted buffer
-           xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
+           xop == XformOpOps(Xform, m.op, cShiftedBuf) \* transform op vs. shifted buffer
+           xcBuf == XformOpsOp(Xform, cShiftedBuf, m.op) \* transform shifted buffer vs. op
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
            /\ state' = [state EXCEPT ![c] = Apply(xop, @)] \* apply the transformed operation xop
     /\ UNCHANGED <<chins, sbuf, srec>>
@@ -81,8 +81,8 @@ SRev ==
            c == m.c             \* the client c \in Client that sends this message
            cBuf == sbuf[c]      \* the buffer at the Server for client c \in Client
            cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf)) \* buffer shifted
-           xop == XformOpOps(m.op, cShiftedBuf) \* transform op vs. shifted buffer
-           xcBuf == XformOpsOp(cShiftedBuf, m.op) \* transform shifted buffer vs. op
+           xop == XformOpOps(Xform, m.op, cShiftedBuf) \* transform op vs. shifted buffer
+           xcBuf == XformOpsOp(Xform, cShiftedBuf, m.op) \* transform shifted buffer vs. op
         IN /\ srec' = [cl \in Client |-> 
                             IF cl = c
                             THEN srec[cl] + 1 \* receive one more operation from client c \in Client
@@ -115,5 +115,5 @@ QC ==
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Thu Dec 27 20:29:07 CST 2018 by hengxin
+\* Last modified Fri Dec 28 18:06:40 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin

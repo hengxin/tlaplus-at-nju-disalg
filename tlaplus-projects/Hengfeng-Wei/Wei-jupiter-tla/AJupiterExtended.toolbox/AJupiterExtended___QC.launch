@@ -19,7 +19,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="crec, chins, cbuf, sincoming, state, cincoming, srec, sbuf"/>
+<stringAttribute key="modelBehaviorVars" value="crec, chins, cbuf, sincoming, state, ds, cincoming, srec, cseq, sbuf"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -46,7 +46,7 @@
 <intAttribute key="simuAril" value="-1"/>
 <intAttribute key="simuDepth" value="100"/>
 <intAttribute key="simuSeed" value="-1"/>
-<stringAttribute key="specName" value="AJupiter"/>
+<stringAttribute key="specName" value="AJupiterExtended"/>
 <stringAttribute key="view" value=""/>
 <booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>

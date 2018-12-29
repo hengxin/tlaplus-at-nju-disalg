@@ -9,7 +9,7 @@ VARIABLES cbuf, crec, sbuf, srec
 
 vars == <<intVars, ctxVars, cbuf, crec, sbuf, srec>>
 
-Msg == [ack: Int, cop: Cop, oid: Oid] 
+Msg == [c: Client, ack: Int, cop: Cop, oid: Oid] \cup [ack: Int, cop: Cop, oid: Oid] 
 -----------------------------------------------------------------------------
 TypeOK == 
     /\ TypeOKInt
@@ -110,5 +110,5 @@ QC == \* Quiescent Consistency
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Sat Dec 29 17:43:58 CST 2018 by hengxin
+\* Last modified Sat Dec 29 17:42:49 CST 2018 by hengxin
 \* Created Thu Dec 27 21:15:09 CST 2018 by hengxin

@@ -314,3 +314,5 @@ doc/latex-suite-quickstart.html
 ## Pathogen (to make it easier to use vim-latex-git)
 doc/tags
 *.pyc
+
+*.dot
