@@ -84,13 +84,9 @@ SRev ==
            xop == XformOpOps(Xform, m.op, cShiftedBuf) 
            xcBuf == XformOpsOp(Xform, cShiftedBuf, m.op) 
         IN /\ srec' = [cl \in Client |-> 
-                            IF cl = c
-                            THEN srec[cl] + 1 
-                            ELSE 0] 
+                            IF cl = c THEN srec[cl] + 1 ELSE 0] 
            /\ sbuf' = [cl \in Client |->
-                            IF cl = c
-                            THEN xcBuf  
-                            ELSE Append(sbuf[cl], xop)] 
+                            IF cl = c THEN xcBuf ELSE Append(sbuf[cl], xop)] 
            /\ state' = [state EXCEPT ![Server] = Apply(xop, @)]  
            /\ Comm(Msg)!SSend(c, [cl \in Client |-> [ack |-> srec[cl], op |-> xop]])
     /\ UNCHANGED <<chins, cbuf, crec>>
@@ -110,5 +106,5 @@ QC == \* Quiescent Consistency
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Sat Dec 29 17:25:40 CST 2018 by hengxin
+\* Last modified Sun Dec 30 16:02:35 CST 2018 by hengxin
 \* Created Sat Jun 23 17:14:18 CST 2018 by hengxin
