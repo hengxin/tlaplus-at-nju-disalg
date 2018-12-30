@@ -17,7 +17,7 @@
 <booleanAttribute key="mcMode" value="true"/>
 <stringAttribute key="modelBehaviorInit" value=""/>
 <stringAttribute key="modelBehaviorNext" value=""/>
-<stringAttribute key="modelBehaviorSpec" value="Spec"/>
+<stringAttribute key="modelBehaviorSpec" value="SpecEx"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
 <stringAttribute key="modelBehaviorVars" value="crec, chins, cbuf, sincoming, state, ds, cincoming, srec, cseq, sbuf"/>
 <stringAttribute key="modelComments" value=""/>

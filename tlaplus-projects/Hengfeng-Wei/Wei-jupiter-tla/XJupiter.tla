@@ -7,12 +7,7 @@ We call it XJupiter, with 'X' for "Xu".
 EXTENDS StateSpace
 -----------------------------------------------------------------------------
 VARIABLES
-    (*
-      The 2D state spaces (2ss, for short).
-      Each client maintains one 2D state space.
-      The server maintains n 2D state spaces, one for each client.
-    *)
-    c2ss,   \* c2ss[c]: the 2D state space at client c \in Client
+    c2ss,   \* c2ss[c]: the 2D state space (2ss, for short) at client c \in Client
     s2ss    \* s2ss[c]: the 2D state space maintained by the Server for client c \in Client
 
 vars == <<intVars, ctxVars, c2ss, s2ss>>
@@ -70,7 +65,7 @@ DoOp(c, op) ==
 DoIns(c) ==
     \E ins \in {op \in Ins: op.pos \in 1 .. (Len(state[c]) + 1) /\ op.ch \in chins /\ op.pr = Priority[c]}:
         /\ DoOp(c, ins)
-        /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
+        /\ chins' = chins \ {ins.ch} 
 
 DoDel(c) == 
     \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
@@ -87,7 +82,7 @@ Client c \in Client receives a message from the Server.
 *)
 Rev(c) == 
     /\ Comm(Cop)!CRev(c)
-    /\ LET cop == Head(cincoming[c]) \* the received (transformed) operation
+    /\ LET cop == Head(cincoming[c])
         IN ClientPerform(cop, c)
     /\ RevCtx(c)
     /\ UNCHANGED <<chins, s2ss>>
@@ -108,7 +103,7 @@ ServerPerform(cop) ==
                        edge |-> {[from |-> scur, to |-> xcur, cop |-> xcop]}]
                   ]
        /\ state' = [state EXCEPT ![Server] = Apply(xcop.op, @)]
-       /\ Comm(Cop)!SSendSame(c, xcop)  \* broadcast the transformed operation
+       /\ Comm(Cop)!SSendSame(c, xcop) 
 (* 
 The Server receives a message.
 *)
@@ -123,18 +118,16 @@ Next ==
     \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
 
-Fairness == 
+Fairness == \* There is no requirement that the clients ever generate operations.
     WF_vars(SRev \/ \E c \in Client: Rev(c))
 
 Spec == Init /\ [][Next]_vars \* /\ Fairness
 -----------------------------------------------------------------------------
-(*
-In Jupiter (not limited to XJupiter), each client synchronizes with the server.
-In XJupiter, this is expressed as the following CSSync property.
-*)
-CSSync == 
+CSSync == \* Each client c \in Client is synchonized with the Server.
     \forall c \in Client: (ds[c] = ds[Server]) => c2ss[c] = s2ss[c]
+    
+THEOREM Spec => []CSSync
 =============================================================================
 \* Modification History
-\* Last modified Fri Dec 28 10:53:07 CST 2018 by hengxin
+\* Last modified Sat Dec 29 18:50:10 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

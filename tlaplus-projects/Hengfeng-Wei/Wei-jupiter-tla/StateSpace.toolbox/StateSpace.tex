@@ -966,23 +966,60 @@ A state space is a directed graph with labeled edges.
  \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{20.38} \.{\land} G .
  edge\@s{1.53} \.{\subseteq} [ from \.{:} G . node ,\, to \.{:} G . node ,\,
  cop \.{:} Cop ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} EmptySS \.{\defeq}
+ EmptyGraph}%
+\@pvspace{8.0pt}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  Locate the node in a state space that matches the context \ensuremath{ctx} of
  cop.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} Locate ( cop ,\, ss )
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} Locate ( cop ,\, ss )
  \.{\defeq} {\CHOOSE} n \.{\in} ss . node \.{:} n \.{=} cop . ctx}%
-\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}}\bottombar\@xx{}%
+\@pvspace{8.0pt}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+Do transformation on state space.
+ Return the extra state space.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} xFormSS ( cop ,\, copprime )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\LET} u
+ \.{\defeq} cop . ctx}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{36.79} v\@s{0.45}
+ \.{\defeq} u \.{\cup} \{ cop . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{36.79} uprime \.{\defeq}
+ u \.{\cup} \{ copprime . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{36.79} vprime\@s{0.76}
+ \.{\defeq} u \.{\cup} \{ cop . oid ,\, copprime . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{36.79}
+ cop2copprime\@s{4.09} \.{\defeq} COT ( cop ,\, copprime )}%
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{40.89} copprime2cop
+ \.{\defeq} COT ( copprime ,\, cop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{20.5} \.{\IN} [ node
+ \.{\mapsto} \{ u ,\, v ,\, uprime ,\, vprime \} ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{43.67} edge\@s{1.53}
+ \.{\mapsto} \{ [ from \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto}
+ cop ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{84.91} [ from \.{\mapsto}
+ u ,\, to \.{\mapsto} uprime ,\, cop \.{\mapsto} copprime ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{84.91} [ from \.{\mapsto}
+ v ,\, to\@s{0.45} \.{\mapsto} vprime ,\, cop\@s{0.76} \.{\mapsto}
+ copprime2cop ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{84.91} [ from \.{\mapsto}
+ uprime ,\, to \.{\mapsto} vprime ,\, cop \.{\mapsto} cop2copprime ] \} ]}%
+\@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
- \ensuremath{Dec} 19 18:31:28 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Dec} 29
+ 20:12:37 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

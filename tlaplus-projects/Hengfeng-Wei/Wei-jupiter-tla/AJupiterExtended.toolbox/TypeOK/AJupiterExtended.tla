@@ -7,11 +7,11 @@ EXTENDS JupiterCtx
 -----------------------------------------------------------------------------
 VARIABLES cbuf, crec, sbuf, srec     
 
-vars == <<intVars, ctxVars, cbuf, crec, sbuf, srec>>
+varsEx == <<intVars, ctxVars, cbuf, crec, sbuf, srec>>
 
-Msg == [c: Client, ack: Int, cop: Cop, oid: Oid] \cup [ack: Int, cop: Cop, oid: Oid] 
+Msg == [ack: Int, cop: Cop, oid: Oid] 
 -----------------------------------------------------------------------------
-TypeOK == 
+TypeOKEx == 
     /\ TypeOKInt
     /\ TypeOKCtx
     /\ Comm(Msg)!TypeOK
@@ -20,7 +20,7 @@ TypeOK ==
     /\ cbuf \in [Client -> Seq(Cop)]
     /\ sbuf \in [Client -> Seq(Cop)]
 -----------------------------------------------------------------------------
-Init == 
+InitEx == 
     /\ InitInt
     /\ InitCtx
     /\ Comm(Msg)!Init
@@ -49,7 +49,7 @@ DoDel(c) ==
         /\ DoOp(c, del)
         /\ UNCHANGED chins
 
-Do(c) == 
+DoEx(c) == 
     /\ DoCtx(c)
     /\ \/ DoIns(c) 
        \/ DoDel(c)
@@ -58,7 +58,7 @@ Do(c) ==
 (* 
 Client c \in Client receives a message from the Server.           
 *)
-Rev(c) == 
+RevEx(c) == 
     /\ Comm(Msg)!CRev(c)
     /\ crec' = [crec EXCEPT ![c] = @ + 1]
     /\ LET m == Head(cincoming[c]) 
@@ -74,7 +74,7 @@ Rev(c) ==
 (* 
 The Server receives a message.                                    
 *)
-SRev == 
+SRevEx == 
     /\ Comm(Msg)!SRev
     /\ LET m == Head(sincoming) 
            c == ClientOf(m.cop)
@@ -95,20 +95,20 @@ SRev ==
     /\ SRevCtx
     /\ UNCHANGED <<chins, cbuf, crec>>
 -----------------------------------------------------------------------------
-Next == 
-    \/ \E c \in Client: Do(c) \/ Rev(c)
-    \/ SRev
+NextEx == 
+    \/ \E c \in Client: DoEx(c) \/ RevEx(c)
+    \/ SRevEx
 
-Fairness == \* There is no requirement that the clients ever generate operations.
-    WF_vars(SRev \/ \E c \in Client: Rev(c))
+FairnessEx == \* There is no requirement that the clients ever generate operations.
+    WF_varsEx(SRevEx \/ \E c \in Client: RevEx(c))
     
-Spec == Init /\ [][Next]_vars \* /\ Fairness
+SpecEx == InitEx /\ [][NextEx]_varsEx \* /\ FairnessEx
 -----------------------------------------------------------------------------
 QC == \* Quiescent Consistency 
     Comm(Msg)!EmptyChannel => Cardinality(Range(state)) = 1
 
-THEOREM Spec => []QC
+THEOREM SpecEx => []QC
 =============================================================================
 \* Modification History
-\* Last modified Sat Dec 29 17:42:49 CST 2018 by hengxin
+\* Last modified Sat Dec 29 18:55:12 CST 2018 by hengxin
 \* Created Thu Dec 27 21:15:09 CST 2018 by hengxin

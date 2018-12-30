@@ -953,40 +953,42 @@
  \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\VARIABLES} cbuf ,\, crec
  ,\, sbuf ,\, srec}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}} vars \.{\defeq} {\langle}
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}} varsEx \.{\defeq} {\langle}
  intVars ,\, ctxVars ,\, cbuf ,\, crec ,\, sbuf ,\, srec {\rangle}}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} Msg \.{\defeq} [ ack \.{:}
  Int ,\, cop \.{:} Cop ,\, oid \.{:} Oid ]}%
 \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} TypeOK \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} TypeOKEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land}
  TypeOKInt}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} \.{\land}
  TypeOKCtx}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
- Comm ( Msg ) {\bang} TypeOK}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{16.4} \.{\land} Comm (
+ Msg ) {\bang} TypeOK}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land}
  crec\@s{2.19} \.{\in} [ Client \.{\rightarrow} Int ]}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\land}
  srec\@s{2.70} \.{\in} [ Client \.{\rightarrow} Int ]}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
- cbuf \.{\in} [ Client \.{\rightarrow} Seq ( Cop ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} \.{\land} cbuf
+ \.{\in} [ Client \.{\rightarrow} Seq ( Cop ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land}
  sbuf\@s{0.51} \.{\in} [ Client \.{\rightarrow} Seq ( Cop ) ]}%
 \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} Init \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} InitInt}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land} InitCtx}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\land} Comm (
- Msg ) {\bang} Init}%
- \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{16.4} \.{\land}
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} InitEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+ InitInt}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+ InitCtx}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+ Comm ( Msg ) {\bang} Init}%
+ \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
  crec\@s{2.19} \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
  srec\@s{2.70} \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land} cbuf
- \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+ cbuf \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
  sbuf\@s{0.51} \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
 \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
@@ -1028,14 +1030,14 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{27.72} \.{\land}
  {\UNCHANGED} chins}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} Do ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{22.34} \.{\land} DoCtx (
+\@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} DoEx ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{25.28} \.{\land} DoCtx (
  c )}%
- \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{22.34} \.{\land} \.{\lor}
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{25.28} \.{\land} \.{\lor}
  DoIns ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{33.45} \.{\lor} DoDel ( c
+ \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{36.39} \.{\lor} DoDel ( c
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{22.34} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{25.28} \.{\land}
  {\UNCHANGED} {\langle} sbuf ,\, srec {\rangle}}%
 \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
@@ -1044,29 +1046,29 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
  \ensuremath{Server}.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}} Rev ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{20.94} \.{\land} Comm (
+\@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}} RevEx ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \.{\land} Comm (
  Msg ) {\bang} CRev ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{20.94} \.{\land} crec
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{16.4} \.{\land} crec
  \.{'} \.{=} [ crec {\EXCEPT} {\bang} [ c ] \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{20.94} \.{\land} \.{\LET}
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
  m \.{\defeq} Head ( cincoming [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{52.45} cBuf \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
  cbuf [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{52.45} cShiftedBuf
+ \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{47.91} cShiftedBuf
  \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{52.45} xcop \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{47.91} xcop \.{\defeq}
  XformOpOps ( COT ,\, m . cop ,\, cShiftedBuf )}%
- \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{56.55} xcBuf \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{52.01} xcBuf \.{\defeq}
  XformOpsOp ( COT ,\, cShiftedBuf ,\, m . cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{36.15} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
  cbuf \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} xcBuf ]}%
- \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{56.55} \.{\land} state
+ \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{52.01} \.{\land} state
  \.{'} \.{=} [ state {\EXCEPT} {\bang} [ c ] \.{=} Apply ( xcop . op ,\, @ )
  ]}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{20.94} \.{\land} RevCtx (
+ \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{16.4} \.{\land} RevCtx (
  c )}%
- \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{20.94} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} {\langle} chins ,\, sbuf ,\, srec {\rangle}}%
 \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
@@ -1074,61 +1076,63 @@ Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
 The \ensuremath{Server} receives a message.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}} SRev \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{16.4} \.{\land} Comm (
- Msg ) {\bang} SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
- m \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{47.91} c\@s{3.77}
+\@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}} SRevEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ Comm ( Msg ) {\bang} SRev}%
+ \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ \.{\LET} m \.{\defeq} Head ( sincoming )}%
+ \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{54.63} c\@s{3.77}
  \.{\defeq} ClientOf ( m . cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{54.63} cBuf \.{\defeq}
  sbuf [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{47.91} cShiftedBuf
+ \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{54.63} cShiftedBuf
  \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{47.91} xcop \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{54.63} xcop \.{\defeq}
  XformOpOps ( COT ,\, m . cop ,\, cShiftedBuf )}%
- \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{52.01} xcBuf \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{58.73} xcBuf \.{\defeq}
  XformOpsOp ( COT ,\, cShiftedBuf ,\, m . cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{38.33} \.{\IN} \.{\land}
  srec \.{'}\@s{2.19} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
-\@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{117.66} {\IF} cl \.{=} c}%
- \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{117.66} \.{\THEN} srec [
+\@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{124.38} {\IF} cl \.{=} c}%
+ \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{124.38} \.{\THEN} srec [
  cl ] \.{+} 1}%
-\@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{117.66} \.{\ELSE} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{52.01} \.{\land} sbuf
+\@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{124.38} \.{\ELSE} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{58.73} \.{\land} sbuf
  \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
-\@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{117.66} {\IF} cl \.{=} c}%
-\@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{117.66} \.{\THEN} xcBuf}%
- \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}\@s{117.66} \.{\ELSE} Append
+\@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{124.38} {\IF} cl \.{=} c}%
+\@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{124.38} \.{\THEN} xcBuf}%
+ \@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}\@s{124.38} \.{\ELSE} Append
  ( sbuf [ cl ] ,\, xcop ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}}\@s{52.01} \.{\land} state
+ \@x{\makebox[0pt][r]{\scriptsize 93\hspace{1em}}\@s{58.73} \.{\land} state
  \.{'} \.{=} [ state {\EXCEPT} {\bang} [ Server ] \.{=} Apply ( xcop . op ,\,
  @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{52.01} \.{\land} Comm (
+ \@x{\makebox[0pt][r]{\scriptsize 94\hspace{1em}}\@s{58.73} \.{\land} Comm (
  Msg ) {\bang} SSend ( c ,\, [ cl \.{\in} Client \.{\mapsto} [ ack
  \.{\mapsto} srec [ cl ] ,\, cop \.{\mapsto} xcop ,\, oid \.{\mapsto} xcop .
  oid ] ] )}%
-\@x{\makebox[0pt][r]{\scriptsize 95\hspace{1em}}\@s{16.4} \.{\land} SRevCtx}%
- \@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 95\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ SRevCtx}%
+ \@x{\makebox[0pt][r]{\scriptsize 96\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  {\UNCHANGED} {\langle} chins ,\, cbuf ,\, crec {\rangle}}%
 \@x{\makebox[0pt][r]{\scriptsize 97\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}} Next \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
- \.{\in} Client \.{:} Do ( c ) \.{\lor} Rev ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
+\@x{\makebox[0pt][r]{\scriptsize 98\hspace{1em}} NextEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 99\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+ \E\, c \.{\in} Client \.{:} DoEx ( c ) \.{\lor} RevEx ( c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 100\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+ SRevEx}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}} Fairness \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 102\hspace{1em}} FairnessEx \.{\defeq}}%
 \@y{\@s{0}%
  There is no requirement that the clients ever generate operations.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}}\@s{16.4} {\WF}_{ vars} (
- SRev \.{\lor} \E\, c \.{\in} Client \.{:} Rev ( c ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 103\hspace{1em}}\@s{16.4} {\WF}_{ varsEx} (
+ SRevEx \.{\lor} \E\, c \.{\in} Client \.{:} RevEx ( c ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}} Spec \.{\defeq} Init
- \.{\land} {\Box} [ Next ]_{ vars}}%
+ \@x{\makebox[0pt][r]{\scriptsize 105\hspace{1em}} SpecEx \.{\defeq} InitEx
+ \.{\land} {\Box} [ NextEx ]_{ varsEx}}%
 \@y{\@s{0}%
- \ensuremath{\.{\land} Fairness
+ \ensuremath{\.{\land} FairnessEx
 }}%
 \@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 106\hspace{1em}}}\midbar\@xx{}%
@@ -1140,7 +1144,7 @@ The \ensuremath{Server} receives a message.
  \@x{\makebox[0pt][r]{\scriptsize 108\hspace{1em}}\@s{20.37} Comm ( Msg )
  {\bang} EmptyChannel \.{\implies} Cardinality ( Range ( state ) ) \.{=} 1}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}} {\THEOREM} Spec
+ \@x{\makebox[0pt][r]{\scriptsize 110\hspace{1em}} {\THEOREM} SpecEx
  \.{\implies} {\Box} QC}%
 \@x{\makebox[0pt][r]{\scriptsize 111\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
@@ -1150,7 +1154,7 @@ The \ensuremath{Server} receives a message.
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Dec} 29
- 17:43:58 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ 18:55:12 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
