@@ -1012,7 +1012,7 @@
  \.{\in} [ Replica \.{\rightarrow} Seq ( Oid ) ]}%
  \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{16.4} \.{\land}
  commSerial {\bang} TypeOK}%
-\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}}\midbar\@xx{}%
+\@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}} InitSerial \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{16.4} \.{\land} serial
  \.{=} [ r \.{\in} Replica \.{\mapsto} {\langle} {\rangle} ]}%
@@ -1033,10 +1033,10 @@
 \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} SRevSerial \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
  cop \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{27.51} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
  serial \.{'} \.{=} [ serial {\EXCEPT} {\bang} [ Server ] \.{=} Append ( @
  ,\, cop . oid ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{47.91} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{52.01} \.{\land}
  commSerial {\bang} SSendSame ( cop . oid . c ,\, serial \.{'} [ Server ] )}%
  \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} {\langle} sincomingSerial {\rangle}}%
@@ -1047,8 +1047,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
- \ensuremath{Dec} 12 21:04:36 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Dec} 31 18:54:56 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

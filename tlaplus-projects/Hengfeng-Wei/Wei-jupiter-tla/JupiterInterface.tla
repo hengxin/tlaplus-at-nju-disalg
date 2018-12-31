@@ -6,9 +6,9 @@ the interface of a family of Jupiter specs.
 EXTENDS Integers, SequenceUtils, OT
 -----------------------------------------------------------------------------
 CONSTANTS
+    Char,       \* the set of characters
     Client,     \* the set of client replicas
     Server,     \* the (unique) server replica
-    Char,       \* the set of characters allowed to be inserted
     InitState   \* the initial state of each replica
 
 ASSUME \* We assume that all inserted elements are unique.
@@ -50,5 +50,5 @@ Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* 
 Op == Ins \cup Del  \* Now we don't consider Rd operations
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 12 20:20:43 CST 2018 by hengxin
+\* Last modified Mon Dec 31 18:51:58 CST 2018 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin

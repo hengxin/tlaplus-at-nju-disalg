@@ -972,42 +972,44 @@
  \.{\in} Client \.{:} DoH ( c ) \.{\lor} RevH ( c )}%
 \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\lor} SRevH}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} SpecH \.{\defeq} InitH
- \.{\land} {\Box} [ NextH ]_{ varsH} \.{\land} {\WF}_{ varsH} ( SRevH
- \.{\lor} \E\, c \.{\in} Client \.{:} RevH ( c ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{WLSpec}: the weak list specification
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} WLSpec \.{\defeq} Comm ( Cop
- ) {\bang} EmptyChannel}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{62.82} \.{\implies} \A\,
+\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} FairnessH \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} {\WF}_{ varsH} (
+ SRevH \.{\lor} \E\, c \.{\in} Client \.{:} RevH ( c ) )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} SpecH \.{\defeq} InitH
+ \.{\land} {\Box} [ NextH ]_{ varsH}}%
+\@y{\@s{0}%
+ \ensuremath{\.{\land} FairenessH
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} WLSpec \.{\defeq}}%
+\@y{\@s{0}%
+ the weak list specification
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} Comm ( Cop )
+ {\bang} EmptyChannel}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{45.78} \.{\implies} \A\,
  l1 ,\, l2 \.{\in} list \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{82.48} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{65.44} \.{\land}
  Injective ( l1 )}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{82.48} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{65.44} \.{\land}
  Injective ( l2 )}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{82.48} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{65.44} \.{\land}
  Compatible ( l1 ,\, l2 )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} {\THEOREM} SpecH
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} {\THEOREM} SpecH
  \.{\implies} WLSpec}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{SLSpec}: the strong list specification
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Tue}
- \ensuremath{Dec} 04 21:14:37 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Dec} 31 18:58:29 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

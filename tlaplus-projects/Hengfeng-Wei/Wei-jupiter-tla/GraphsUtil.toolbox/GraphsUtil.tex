@@ -943,47 +943,40 @@
  {\MODULE} GraphsUtil}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-A module that defines graphs and the operations on them.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-A directed graph is a pair consisting of a set of nodes
+A graph is a pair consisting of a set of nodes
  and a set of directed edges, each of which is a pair of nodes.
  It is represented by a record with node field and edge field.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}} IsDirectedGraph ( G )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4} \.{\land} G \.{=} [
- node \.{\mapsto} G . node ,\, edge \.{\mapsto} G . edge ]}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} IsGraph ( G ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} \.{\land}\@s{7.97} G
+ \.{=} [ node \.{\mapsto} G . node ,\, edge \.{\mapsto} G . edge ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} EmptyGraph \.{\defeq} [ node
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}} EmptyGraph \.{\defeq} [ node
  \.{\mapsto} \{ \{ \} \} ,\, edge \.{\mapsto} \{ \} ]}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} g \.{\oplus} h \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} g \.{\oplus} h \.{\defeq}}%
 \@y{\@s{0}%
  A union (in terms of set) of two graphs \ensuremath{g} and \ensuremath{h}.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{13.68} [ node \.{\mapsto}
- g . node \.{\cup} h . node ,\, edge \.{\mapsto} g . edge \.{\cup} h . node
+ \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{13.68} [ node \.{\mapsto}
+ g . node \.{\cup} h . node ,\, edge \.{\mapsto} g . edge \.{\cup} h . edge
  ]}%
-\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{\.{\,\backslash\,}}* Modification History
+\ensuremath{\.{\,\backslash\,}\.{*}} Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
- \ensuremath{Dec} 19 11:34:58 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}\.{*} Last} modified \ensuremath{Mon}
+ \ensuremath{Dec} 31 19:47:39 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Wed} \ensuremath{Dec} 19
- 11:11:25 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}\.{*}} Created \ensuremath{Wed}
+ \ensuremath{Dec} 19 11:11:25 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%

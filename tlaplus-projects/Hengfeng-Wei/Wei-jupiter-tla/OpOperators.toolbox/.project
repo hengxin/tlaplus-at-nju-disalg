@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>JupiterInterface</name>
+	<name>OpOperators</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -16,24 +16,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>CSComm.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/CSComm.tla</locationURI>
-		</link>
-		<link>
 			<name>FunctionUtils.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/FunctionUtils.tla</locationURI>
-		</link>
-		<link>
-			<name>JupiterInterface.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/JupiterInterface.tla</locationURI>
-		</link>
-		<link>
-			<name>OT.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/OT.tla</locationURI>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/FunctionUtils.tla</location>
 		</link>
 		<link>
 			<name>OpOperators.tla</name>
@@ -43,12 +28,12 @@
 		<link>
 			<name>SequenceUtils.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/SequenceUtils.tla</locationURI>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/SequenceUtils.tla</location>
 		</link>
 		<link>
 			<name>SetUtils.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/SetUtils.tla</locationURI>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/SetUtils.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>

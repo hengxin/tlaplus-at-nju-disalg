@@ -19,7 +19,7 @@ ClientOf(cop) == cop.oid.c
 COT(lcop, rcop) == \* OT of two Cop(s).                                 
     [lcop EXCEPT !.op = Xform(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
 
-UpdateDS(r, oid) == \* update ds to include new oid \in Oid
+UpdateDS(r, oid) == \* update ds[r] to include new oid \in Oid
     ds' = [ds EXCEPT ![r] = @ \cup {oid}]
 -----------------------------------------------------------------------------
 TypeOKCtx ==
@@ -43,5 +43,5 @@ SRevCtx ==
     /\ UNCHANGED cseq
 =============================================================================
 \* Modification History
-\* Last modified Fri Dec 28 14:38:39 CST 2018 by hengxin
+\* Last modified Mon Dec 31 18:52:44 CST 2018 by hengxin
 \* Created Wed Dec 05 20:03:50 CST 2018 by hengxin
