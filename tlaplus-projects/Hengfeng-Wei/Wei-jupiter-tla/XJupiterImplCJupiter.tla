@@ -3,9 +3,7 @@
 We show that XJupiter (XJupiterExtended) implements CJupiter.
 *)
 EXTENDS XJupiterExtended
-(*
-Variables for defining refinement mapping from XJupiter to CJupiter.
-*)
+-----------------------------------------------------------------------------
 VARIABLES
     op2ss,  \* a function from an operation (represented by its Oid) 
             \* to the part of 2D state space produced while the operation is transformed
@@ -61,5 +59,5 @@ CJ == INSTANCE CJupiter
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 24 11:38:49 CST 2018 by hengxin
+\* Last modified Mon Dec 31 11:09:14 CST 2018 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

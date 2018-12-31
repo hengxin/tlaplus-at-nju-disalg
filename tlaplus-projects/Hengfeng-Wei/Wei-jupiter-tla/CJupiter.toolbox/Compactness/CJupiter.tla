@@ -32,14 +32,13 @@ xForm(cop, r) ==
         u == Locate(cop, rcss)
         v == u \cup {cop.oid}
         RECURSIVE xFormHelper(_, _, _, _)
-        \* 'h' stands for "helper"; xcss: eXtra css created during transformation
-        xFormHelper(uh, vh, coph, xcss) ==  
+        xFormHelper(uh, vh, coph, xcss) == \* xcss: eXtra css created during transformation
             IF uh = ds[r]
             THEN [xcss |-> xcss, xcop |-> coph]
             ELSE LET fedge == CHOOSE e \in rcss.edge: 
                                 /\ e.from = uh
-                                /\ \A uhe \in rcss.edge: 
-                                    (uhe.from = uh /\ uhe # e) => tb(e.cop.oid, uhe.cop.oid, serial[r])
+                                /\ \A uhe \in rcss.edge \ {e}: 
+                                     (uhe.from = uh) => tb(e.cop.oid, uhe.cop.oid, serial[r])
                      uprime == fedge.to
                      fcop == fedge.cop
                      coph2fcop == COT(coph, fcop)
@@ -123,5 +122,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Fri Dec 28 11:06:01 CST 2018 by hengxin
+\* Last modified Mon Dec 31 10:57:39 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

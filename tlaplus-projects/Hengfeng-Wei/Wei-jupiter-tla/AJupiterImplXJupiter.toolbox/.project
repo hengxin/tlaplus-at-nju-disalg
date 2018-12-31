@@ -78,7 +78,7 @@
 		<link>
 			<name>XJupiter.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/XJupiter.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/XJupiter.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

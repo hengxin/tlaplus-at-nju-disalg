@@ -45,7 +45,7 @@ xForm(cop, ss, cur) ==
                         xss (+) [node |-> {vprime},
                                  edge |-> {[from |-> vh, to |-> vprime, cop |-> copprime2coph], 
                                            [from |-> uprime, to |-> vprime, cop |-> coph2copprime]}])
-    IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
+     IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
 -----------------------------------------------------------------------------
 (* 
 Client c \in Client perform operation cop.
@@ -129,5 +129,5 @@ CSSync == \* Each client c \in Client is synchonized with the Server.
 THEOREM Spec => []CSSync
 =============================================================================
 \* Modification History
-\* Last modified Sat Dec 29 18:50:10 CST 2018 by hengxin
+\* Last modified Mon Dec 31 11:05:08 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

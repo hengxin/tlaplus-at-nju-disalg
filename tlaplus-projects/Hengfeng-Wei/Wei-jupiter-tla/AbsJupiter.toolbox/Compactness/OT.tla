@@ -68,41 +68,41 @@ Xform(lop, rop) ==
 (* Iteratively/recursively transforms the operation op                     *)
 (* against an operation sequence ops.                                      *)
 (***************************************************************************)
-RECURSIVE XformOpOps(_,_)
-XformOpOps(op, ops) == 
-    IF ops = <<>>
-        THEN op
-        ELSE XformOpOps(Xform(op, Head(ops)), Tail(ops))
+RECURSIVE XformOpOps(_, _, _)
+XformOpOps(xform(_,_), op, ops) == 
+    IF ops = <<>> 
+    THEN op 
+    ELSE XformOpOps(xform, xform(op, Head(ops)), Tail(ops))
 (***************************************************************************)
 (* Iteratively/recursively transforms the operation op                     *)
 (* against an operation sequence ops.                                      *)
 (* Being different from XformOpOps,                                        *)
 (* XformOpOpsX maintains the intermediate transformed operation            *)
 (***************************************************************************)
-RECURSIVE XformOpOpsX(_,_)
-XformOpOpsX(op, ops) == 
-    IF ops = <<>>
-        THEN <<op>>
-        ELSE <<op>> \o XformOpOpsX(Xform(op, Head(ops)), Tail(ops))
+RECURSIVE XformOpOpsX(_, _,_)
+XformOpOpsX(xform(_, _), op, ops) == 
+    IF ops = <<>> 
+    THEN <<op>> 
+    ELSE <<op>> \o XformOpOpsX(xform, xform(op, Head(ops)), Tail(ops))
 (***************************************************************************)
 (* Iteratively/recursively transforms the operation sequence ops           *)
 (* against an operation op.                                                *)
 (***************************************************************************)
-XformOpsOp(ops, op) == 
-    LET opX == XformOpOpsX(op, ops)
-    IN  [i \in 1 .. Len(ops) |-> Xform(ops[i], opX[i])]
+XformOpsOp(xform(_, _), ops, op) == 
+    LET opX == XformOpOpsX(xform, op, ops)
+    IN  [i \in 1 .. Len(ops) |-> xform(ops[i], opX[i])]
 (***************************************************************************)
 (* Iteratively/recursively transforms an operation sequence ops1           *)
 (* against another operation sequence ops2.                                *)
 (*                                                                         *)
 (* See also Definition 2.13 of the paper "Imine @ TCS06".                  *)
 (***************************************************************************)
-RECURSIVE XformOpsOps(_,_)
-XformOpsOps(ops1, ops2) ==
+RECURSIVE XformOpsOps(_, _,_)
+XformOpsOps(xform(_, _), ops1, ops2) ==
     IF ops2 = <<>>
     THEN ops1
-    ELSE XformOpsOps(XformOpsOp(ops1, Head(ops2)), Tail(ops2))
+    ELSE XformOpsOps(xform, XformOpsOp(xform, ops1, Head(ops2)), Tail(ops2))
 =============================================================================
 \* Modification History
-\* Last modified Fri Dec 28 10:37:02 CST 2018 by hengxin
+\* Last modified Fri Dec 28 14:58:58 CST 2018 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin

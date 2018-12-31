@@ -1,7 +1,6 @@
 ----------------------------- MODULE AbsJupiter -----------------------------
 (*
-Abstract Jupiter, inspired by the COT algorithm proposed by Sun and Sun.
-See their paper published on TPDS'2009.
+Abstract Jupiter, inspired by the COT algorithm proposed by Sun and Sun; see TPDS'2009.
 *)
 EXTENDS JupiterSerial
 -----------------------------------------------------------------------------
@@ -28,25 +27,21 @@ RECURSIVE xForm(_, _)
 xForm(cop, r) ==
     LET ctxDiff == ds[r] \ cop.ctx  \* THEOREM: cop.ctx \subseteq ds[r]
         RECURSIVE xFormHelper(_, _, _)
-        xFormHelper(coph, ctxDiffh, copssr) ==  \* 'h' stands for "helper"
-            IF ctxDiffh = {} 
-            THEN <<coph, copssr>>
-            ELSE LET foph == CHOOSE op \in ctxDiffh: \* the first op (specifically, oid) in serial
-                                \A opprime \in ctxDiffh: 
-                                    opprime # op => tb(op, opprime, serial[r])
+        xFormHelper(coph, ctxDiffh, copssr) == \* copssr: state space generated during transformation
+            IF ctxDiffh = {} THEN [xcop |-> coph, xcopss |-> copssr]
+            ELSE LET foph == CHOOSE op \in ctxDiffh: \* the first op in serial
+                                \A opprime \in ctxDiffh \ {op}: tb(op, opprime, serial[r])
                      fcophDict == {op \in copssr: op.oid = foph /\ op.ctx = coph.ctx}
                      fcoph == CHOOSE op \in fcophDict: TRUE \* THEOREM: Cardinality(fophDict) = 1
-                     cophx == COT(coph, fcoph)
-                     fcophx == COT(fcoph, coph)
-                  IN xFormHelper(cophx, ctxDiffh \ {foph}, copssr \cup {cophx, fcophx})
+                     xcoph == COT(coph, fcoph)
+                     xfcoph == COT(fcoph, coph)
+                  IN xFormHelper(xcoph, ctxDiffh \ {foph}, copssr \cup {xcoph, xfcoph})
      IN xFormHelper(cop, ctxDiff, copss[r]) 
 
 Perform(cop, r) ==
-    LET xform == xForm(cop, r)  \* <<xcop, xcopss>> 
-        xcop == xform[1] 
-        xcopssr == xform[2]
-     IN /\ state' = [state EXCEPT ![r] = Apply(xcop.op, @)]
-        /\ copss' = [copss EXCEPT ![r] = xcopssr \cup {cop}]
+    LET xform == xForm(cop, r)  \* [xcop, xcopss] 
+     IN /\ state' = [state EXCEPT ![r] = Apply(xform.xcop.op, @)]
+        /\ copss' = [copss EXCEPT ![r] = xform.xcopss \cup {cop}]
 -----------------------------------------------------------------------------
 (*
 Client c \in Client issues an operation op.
@@ -103,5 +98,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Fri Dec 28 10:57:04 CST 2018 by hengxin
+\* Last modified Mon Dec 31 10:50:36 CST 2018 by hengxin
 \* Created Wed Dec 05 19:55:52 CST 2018 by hengxin
