@@ -943,119 +943,117 @@
  {\MODULE} XJupiterExtended}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{XJupiter} extended with serial views.
- This is used to show that \ensuremath{XJupiter} implements
- \ensuremath{CJupiter}.
+ \ensuremath{XJupiter} extended with serial views. This is used to show that
+ \ensuremath{XJupiter} implements \ensuremath{CJupiter}.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} XJupiter ,\,
+ \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} XJupiter ,\,
  JupiterSerial}%
-\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\VARIABLES}}%
-\begin{lcom}{15.0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Simulating the behavior of propagating original operations in
+\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\VARIABLES}\@s{8.2}}%
+\@y{\@s{0}%
+ Simulate the behavior of propagating original operations in
  \ensuremath{CJupiter}.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4} cincomingCJ ,\,}%
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} cincomingCJ ,\,}%
 \@y{\@s{0}%
  \ensuremath{cincoming} for \ensuremath{CJupiter} which contains original
  operations
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{80.27}}%
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{80.27}}%
 \@y{\@s{0}%
  instead of transformed ones in \ensuremath{XJupiter
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4}
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4}
  sincomingCJ\@s{6.62}}%
 \@y{\@s{0}%
  (not used)
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} commCJVars \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} commCJVars \.{\defeq}
  {\langle} cincomingCJ ,\, sincomingCJ {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} varsEx \.{\defeq} {\langle}
- commCJVars ,\, serialVars ,\, vars {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} commCJ \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} varsEx\@s{8.72} \.{\defeq}
+ {\langle} commCJVars ,\, serialVars ,\, vars {\rangle}}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} commCJ \.{\defeq}
  {\INSTANCE} CSComm {\WITH} Msg \.{\leftarrow} Seq ( Cop ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{82.85} cincoming
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{82.85} cincoming
  \.{\leftarrow} cincomingCJ ,\, sincoming \.{\leftarrow} sincomingCJ}%
-\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} TypeOKEx \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land} TypeOK}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} commCJ
+\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} TypeOKEx \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\land} TypeOK}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} \.{\land} commCJ
  {\bang} TypeOK}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land}
  TypeOKSerial}%
-\@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} InitEx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} InitEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
  Init}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
  commCJ {\bang} Init}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
  InitSerial}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} DoEx ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{25.28} \.{\land} Do ( c
+\@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} DoEx ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{25.28} \.{\land} Do ( c
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{25.28} \.{\land} DoSerial
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{25.28} \.{\land} DoSerial
  ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{25.28} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{25.28} \.{\land}
  {\UNCHANGED} commCJVars}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}} RevEx ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{16.4} \.{\land} Rev ( c
+\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} RevEx ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land} Rev ( c
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{16.4} \.{\land} commCJ
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{16.4} \.{\land} commCJ
  {\bang} CRev ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land} RevSerial
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{16.4} \.{\land} RevSerial
  ( c )}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} SRevEx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+\@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}} SRevEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  \.{\LET} cop \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{62.83} c\@s{1.57}
- \.{\defeq} cop . oid . c}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{34.23} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{62.83} c\@s{1.57}
+ \.{\defeq} ClientOf ( cop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{34.23} \.{\IN} \.{\land}
  commCJ {\bang} SSendSame ( c ,\, cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  SRevSerial}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  {\UNCHANGED} sincomingCJ}%
-\@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}} NextEx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+\@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} NextEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
  \E\, c \.{\in} Client \.{:} DoEx ( c ) \.{\lor} RevEx ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
  SRevEx}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}} FairnessEx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{16.4} \.{\land} {\WF}_{
+\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}} FairnessEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\land} {\WF}_{
  varsEx} ( SRevEx \.{\lor} \E\, c \.{\in} Client \.{:} RevEx ( c ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} SpecEx \.{\defeq} InitEx
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}} SpecEx \.{\defeq} InitEx
  \.{\land} {\Box} [ NextEx ]_{ varsEx}}%
 \@y{\@s{0}%
  \ensuremath{\.{\land} FairnessEx
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Dec} 15
- 18:01:37 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Dec} 31 20:52:00 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

@@ -43,7 +43,7 @@
 		<link>
 			<name>GraphsUtil.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Documents/ubuntu/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/GraphsUtil.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/GraphsUtil.tla</locationURI>
 		</link>
 		<link>
 			<name>JupiterCtx.tla</name>
@@ -83,7 +83,7 @@
 		<link>
 			<name>StateSpace.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Documents/ubuntu/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/StateSpace.tla</location>
+			<locationURI>PARENT-1-PROJECT_LOC/StateSpace.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

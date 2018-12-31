@@ -23,20 +23,15 @@ FairnessH ==
 
 SpecH == InitH /\ [][NextH]_varsH \* /\ FairnessH
 -------------------------------------------------------------
-(*********************************************************************)
-(* Weak List Consistency (WLSpec)                                    *)
-(*********************************************************************)
-WLSpec == Comm(Msg)!EmptyChannel 
-            => \A l1, l2 \in list: 
-                /\ Injective(l1) 
-                /\ Injective(l2) 
-                /\ Compatible(l1, l2)
+WLSpec == \* The weak list specification
+    Comm(Msg)!EmptyChannel 
+        => \A l1, l2 \in list: 
+            /\ Injective(l1) 
+            /\ Injective(l2) 
+            /\ Compatible(l1, l2)
 
 THEOREM SpecH => WLSpec
-(*********************************************************************)
-(* Strong List Consistency (SLSpec)                                  *)
-(*********************************************************************)
 =============================================================================
 \* Modification History
-\* Last modified Thu Dec 27 20:36:24 CST 2018 by hengxin
+\* Last modified Mon Dec 31 21:09:21 CST 2018 by hengxin
 \* Created Thu Aug 30 21:26:18 CST 2018 by hengxin

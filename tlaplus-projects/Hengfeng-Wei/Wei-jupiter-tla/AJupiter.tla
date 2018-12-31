@@ -33,33 +33,16 @@ Init ==
     /\ sbuf = [c \in Client |-> <<>>]
     /\ srec = [c \in Client |-> 0]
 -----------------------------------------------------------------------------
-(* 
-Client c \in Client issues an operation op.                       
-*)
 DoOp(c, op) == 
     /\ state' = [state EXCEPT ![c] = Apply(op, @)] 
     /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
     /\ crec' = [crec EXCEPT ![c] = 0]
     /\ Comm(Msg)!CSend([c |-> c, ack |-> crec[c], op |-> op])
 
-DoIns(c) ==
-    \E ins \in {op \in Ins: op.pos \in 1 .. (Len(state[c]) + 1) /\ op.ch \in chins /\ op.pr = Priority[c]}:
-        /\ DoOp(c, ins)
-        /\ chins' = chins \ {ins.ch}
-
-DoDel(c) == 
-    \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
-        /\ DoOp(c, del)
-        /\ UNCHANGED chins
-
 Do(c) == 
-    /\ \/ DoIns(c) 
-       \/ DoDel(c)
+    /\ DoInt(DoOp, c)
     /\ UNCHANGED <<sbuf, srec>>
------------------------------------------------------------------------------
-(* 
-Client c \in Client receives a message from the Server.           
-*)
+
 Rev(c) == 
     /\ Comm(Msg)!CRev(c)
     /\ crec' = [crec EXCEPT ![c] = @ + 1]
@@ -70,11 +53,9 @@ Rev(c) ==
            xcBuf == XformOpsOp(Xform, cShiftedBuf, m.op)
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
            /\ state' = [state EXCEPT ![c] = Apply(xop, @)] 
-    /\ UNCHANGED <<chins, sbuf, srec>>
------------------------------------------------------------------------------
-(* 
-The Server receives a message.                                    
-*)
+    /\ RevInt(c)
+    /\ UNCHANGED <<sbuf, srec>>
+
 SRev == 
     /\ Comm(Msg)!SRev
     /\ LET m == Head(sincoming) 
@@ -89,7 +70,8 @@ SRev ==
                             IF cl = c THEN xcBuf ELSE Append(sbuf[cl], xop)] 
            /\ state' = [state EXCEPT ![Server] = Apply(xop, @)]  
            /\ Comm(Msg)!SSend(c, [cl \in Client |-> [ack |-> srec[cl], op |-> xop]])
-    /\ UNCHANGED <<chins, cbuf, crec>>
+    /\ SRevInt
+    /\ UNCHANGED <<cbuf, crec>>
 -----------------------------------------------------------------------------
 Next == 
     \/ \E c \in Client: Do(c) \/ Rev(c)
@@ -106,5 +88,5 @@ QC == \* Quiescent Consistency
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Sun Dec 30 16:02:35 CST 2018 by hengxin
-\* Created Sat Jun 23 17:14:18 CST 2018 by hengxin
+\* Last modified Mon Dec 31 21:02:17 CST 2018 by hengxin
+\* Created Satchins,  Jun 23 17:14:18 CST 2018 by hengxin

@@ -26,7 +26,7 @@ FairnessH ==
     
 SpecH == InitH /\ [][NextH]_varsH \* /\ FairnessH
 -------------------------------------------------------------
-WLSpec == \* the weak list specification 
+WLSpec == \* The weak list specification 
     Comm(Cop)!EmptyChannel 
         => \A l1, l2 \in list: 
             /\ Injective(l1) 
@@ -36,5 +36,5 @@ WLSpec == \* the weak list specification
 THEOREM SpecH => WLSpec
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 18:56:37 CST 2018 by hengxin
+\* Last modified Mon Dec 31 20:38:09 CST 2018 by hengxin
 \* Created Sat Dec 15 09:00:46 CST 2018 by hengxin

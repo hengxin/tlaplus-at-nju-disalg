@@ -17,38 +17,19 @@ InitImpl ==
     /\ c2ss = [c \in Client |-> EmptySS]    
     /\ s2ss = [c \in Client |-> EmptySS]    
 -----------------------------------------------------------------------------
-(* 
-Client c \in Client issues an operation op.                       
-*)
 DoOpImpl(c, op) == 
-    LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]]
-    IN /\ crec' = [crec EXCEPT ![c] = 0] 
-       /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, cop)] 
-       /\ state' = [state EXCEPT ![c] = Apply(op, @)] 
-       /\ Comm(Msg)!CSend([ack |-> crec[c], cop |-> cop, oid |-> cop.oid])
-       /\ commXJ!CSend(cop)
-       /\ c2ss' = [c2ss EXCEPT ![c] = 
+    /\ DoOpEx(c, op)
+    /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]] 
+        IN c2ss' = [c2ss EXCEPT ![c] = 
                         @ (+) [node |-> {ds'[c]},
-                               edge |-> {[from |-> ds[c], to |-> ds'[c], cop |-> cop]}]
-                  ]
-       /\ UNCHANGED s2ss
-
-DoInsImpl(c) ==
-    \E ins \in {op \in Ins: op.pos \in 1 .. (Len(state[c]) + 1) /\ op.ch \in chins /\ op.pr = Priority[c]}:
-        /\ DoOpImpl(c, ins)
-        /\ chins' = chins \ {ins.ch} 
-
-DoDelImpl(c) == 
-    \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
-        /\ DoOpImpl(c, del)
-        /\ UNCHANGED chins
+                               edge |-> {[from |-> ds[c], to |-> ds'[c], cop |-> cop]}]]
+    /\ UNCHANGED s2ss
 
 DoImpl(c) == 
     /\ DoCtx(c)
-    /\ \/ DoInsImpl(c) 
-       \/ DoDelImpl(c)
+    /\ DoInt(DoOpImpl, c) \* TODO: refactor to use DoEx(c)
     /\ UNCHANGED <<sbuf, srec>>
------------------------------------------------------------------------------
+
 RevImpl(c) ==
     /\ RevEx(c)
     /\ LET m == Head(cincoming[c])
@@ -57,7 +38,7 @@ RevImpl(c) ==
            xform == xFormCopCopsSS(m.cop, cShiftedBuf) \* [lss, xss]
         IN c2ss' = [c2ss EXCEPT ![c] = @ (+) xform.xss]
     /\ UNCHANGED s2ss
------------------------------------------------------------------------------
+
 SRevImpl ==
     /\ SRevEx
     /\ LET m == Head(sincoming)
@@ -77,12 +58,12 @@ FairnessImpl ==
     WF_varsImpl(SRevImpl \/ \E c \in Client: RevImpl(c)) 
 
 SpecImpl == InitImpl /\ [][NextImpl]_varsImpl \* /\ FairnessImpl
-
+-----------------------------------------------------------------------------
 XJ == INSTANCE XJupiter WITH
             cincoming <- cincomingXJ, sincoming <- sincomingXJ
 
 THEOREM SpecImpl => XJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Sun Dec 30 16:48:09 CST 2018 by hengxin
+\* Last modified Mon Dec 31 21:24:30 CST 2018 by hengxin
 \* Created Sat Dec 29 18:36:51 CST 2018 by hengxin

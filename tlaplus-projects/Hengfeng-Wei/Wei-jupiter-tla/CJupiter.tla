@@ -48,50 +48,29 @@ xForm(cop, r) ==
                                   edge |-> {[from |-> vh, to |-> vprime, cop |-> fcop2coph],
                                             [from |-> uprime, to |-> vprime, cop |-> coph2fcop]}])
      IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
-(*
-Perform cop at replica r \in Replica.                             
-*)
-Perform(cop, r) ==
+
+Perform(cop, r) == \* Perform cop at replica r \in Replica.                             
     LET xform == xForm(cop, r)  \* xform: [xcss, xcop]
     IN /\ css' = [css EXCEPT ![r] = @ (+) xform.xcss]
        /\ state' = [state EXCEPT ![r] = Apply(xform.xcop.op, @)]
 -----------------------------------------------------------------------------
-(*
-Client c \in Client issues an operation op.
-*)
 DoOp(c, op) == 
     /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]]
        IN  /\ Perform(cop, c)
            /\ Comm(Cop)!CSend(cop)
 
-DoIns(c) ==
-    \E ins \in {op \in Ins: op.pos \in 1 .. (Len(state[c]) + 1) /\ op.ch \in chins /\ op.pr = Priority[c]}:
-        /\ DoOp(c, ins)
-        /\ chins' = chins \ {ins.ch}
-
-DoDel(c) == 
-    \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
-        /\ DoOp(c, del)
-        /\ UNCHANGED chins
-
 Do(c) == 
     /\ DoCtx(c)
     /\ DoSerial(c)
-    /\ \/ DoIns(c) 
-       \/ DoDel(c)
-(*
-Client c \in Client receives a message from the Server.
-*)
+    /\ DoInt(DoOp, c) 
+
 Rev(c) == 
     /\ Comm(Cop)!CRev(c)
     /\ Perform(Head(cincoming[c]), c)
     /\ RevSerial(c)
     /\ RevCtx(c)
-    /\ UNCHANGED chins 
------------------------------------------------------------------------------
-(*
-The Server receives a message.
-*)
+    /\ RevInt(c)
+
 SRev == 
     /\ Comm(Cop)!SRev
     /\ LET cop == Head(sincoming)
@@ -99,7 +78,7 @@ SRev ==
            /\ Comm(Cop)!SSendSame(cop.oid.c, cop)  \* broadcast the original operation
     /\ SRevSerial
     /\ SRevCtx
-    /\ UNCHANGED chins
+    /\ SRevInt
 -----------------------------------------------------------------------------
 Next == 
     \/ \E c \in Client: Do(c) \/ Rev(c)
@@ -110,11 +89,11 @@ Fairness == \* There is no requirement that the clients ever generate operations
 
 Spec == Init /\ [][Next]_vars \* /\ Fairness (We care more about safety.)
 -----------------------------------------------------------------------------
-Compactness == \* The compactness of CJupiter: the CSSes at all replicas are the same.
+Compactness == \* Compactness of CJupiter: the CSSes at all replicas are the same.
     Comm(Cop)!EmptyChannel => Cardinality(Range(css)) = 1
 
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 11:02:07 CST 2018 by hengxin
+\* Last modified Mon Dec 31 20:36:31 CST 2018 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

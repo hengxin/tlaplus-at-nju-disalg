@@ -32,14 +32,6 @@ MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any s
 ClientNum == Cardinality(Client)
 Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
 -----------------------------------------------------------------------------
-TypeOKInt ==
-    /\ state \in [Replica -> List]
-    /\ chins \subseteq Char
-
-InitInt ==
-    /\ state = [r \in Replica |-> InitState]
-    /\ chins = Char
------------------------------------------------------------------------------
 (*
 The set of all operations. Note: The positions are indexed from 1.
 *)
@@ -48,7 +40,37 @@ Del == [type: {"Del"}, pos: 1 .. MaxLen]
 Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
 
 Op == Ins \cup Del  \* Now we don't consider Rd operations
+-----------------------------------------------------------------------------
+TypeOKInt ==
+    /\ state \in [Replica -> List]
+    /\ chins \subseteq Char
+
+InitInt ==
+    /\ state = [r \in Replica |-> InitState]
+    /\ chins = Char
+    
+DoIns(DoOp(_, _), c) == \* Client c \in Client generates an "Ins" operation.
+    \E ins \in {op \in Ins: 
+                    /\ op.pos \in 1 .. (Len(state[c]) + 1) 
+                    /\ op.ch \in chins /\ op.pr = Priority[c]}:
+        /\ DoOp(c, ins)
+        /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
+
+DoDel(DoOp(_, _), c) == \* Client c \in Client generates a "Del" operation.
+    \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
+        /\ DoOp(c, del)
+        /\ UNCHANGED chins
+
+DoInt(DoOp(_, _), c) == \* Client c \in Client issues an operation.
+    \/ DoIns(DoOp, c)
+    \/ DoDel(DoOp, c)
+    
+RevInt(c) == \* Client c \in Client receives a message from the Server.
+    /\UNCHANGED chins
+
+SRevInt == \* The Server receives a message.
+    /\ UNCHANGED chins
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 18:51:58 CST 2018 by hengxin
+\* Last modified Mon Dec 31 20:27:25 CST 2018 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin

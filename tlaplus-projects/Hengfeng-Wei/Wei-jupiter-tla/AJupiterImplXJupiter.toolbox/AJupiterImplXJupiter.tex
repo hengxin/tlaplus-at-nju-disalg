@@ -967,143 +967,111 @@
  \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land}
  s2ss\@s{0.25} \.{=} [ c \.{\in} Client \.{\mapsto} EmptySS ]}%
 \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Client \ensuremath{c \.{\in} Client} issues an operation \ensuremath{op}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} DoOpImpl ( c ,\, op )
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} DoOpImpl ( c ,\, op )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\LET}\@s{9.37}
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land} DoOpEx (
+ c ,\, op )}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
  cop \.{\defeq} [ op \.{\mapsto} op ,\, oid \.{\mapsto} [ c \.{\mapsto} c ,\,
  seq \.{\mapsto} cseq \.{'} [ c ] ] ,\, ctx \.{\mapsto} ds [ c ] ]}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\IN} \.{\land}
- crec \.{'}\@s{2.19} \.{=} [ crec {\EXCEPT} {\bang} [ c ]\@s{2.19} \.{=} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{36.79} \.{\land} cbuf
- \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} Append ( @ ,\, cop ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{36.79} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ c ] \.{=} Apply ( op ,\, @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{36.79} \.{\land} Comm (
- Msg ) {\bang} CSend ( [ ack \.{\mapsto} crec [ c ] ,\, cop \.{\mapsto} cop
- ,\, oid \.{\mapsto} cop . oid ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{36.79} \.{\land} commXJ
- {\bang} CSend ( cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{36.79} \.{\land} c2ss
- \.{'} \.{=} [ c2ss {\EXCEPT} {\bang} [ c ] \.{=}}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{105.15} @ \.{\oplus} [
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{31.61} \.{\IN} c2ss \.{'}
+ \.{=} [ c2ss {\EXCEPT} {\bang} [ c ] \.{=}}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{106.49} @ \.{\oplus} [
  node \.{\mapsto} \{ ds \.{'} [ c ] \} ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{127.93} edge\@s{1.53}
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{129.26} edge\@s{1.53}
  \.{\mapsto} \{ [ from \.{\mapsto} ds [ c ] ,\, to \.{\mapsto} ds \.{'} [ c ]
- ,\, cop \.{\mapsto} cop ] \} ]}%
-\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{83.21} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{36.79} \.{\land}
+ ,\, cop \.{\mapsto} cop ] \} ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} s2ss}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} DoInsImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \E\, ins \.{\in} \{
- op \.{\in} Ins \.{:} op . pos \.{\in} 1 \.{\dotdot} ( Len ( state [ c ] )
- \.{+} 1 ) \.{\land} op . ch \.{\in} chins \.{\land} op . pr \.{=} Priority [
- c ] \} \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{27.72} \.{\land} DoOpImpl
- ( c ,\, ins )}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{27.72} \.{\land} chins
- \.{'} \.{=} chins \.{\,\backslash\,} \{ ins . ch \}}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} DoDelImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \E\, del \.{\in} \{
- op \.{\in} Del \.{:} op . pos \.{\in} 1 \.{\dotdot} Len ( state [ c ] ) \}
- \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{27.72} \.{\land} DoOpImpl
- ( c ,\, del )}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{27.72} \.{\land}
- {\UNCHANGED} chins}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} DoImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} \.{\land} DoCtx ( c
+\@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} DoImpl ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land} DoCtx ( c
  )}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\land} \.{\lor}
- DoInsImpl ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{27.51} \.{\lor} DoDelImpl
- ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land} DoInt (
+ DoOpImpl ,\, c )}%
+\@y{\@s{0}%
+ \ensuremath{TODO}: refactor to use \ensuremath{DoEx(c)
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} {\langle} sbuf ,\, srec {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} RevImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} RevImpl ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
  RevEx ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
  \.{\LET} m \.{\defeq} Head ( cincoming [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{57.11} cBuf \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{57.11} cBuf \.{\defeq}
  cbuf [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{57.11} cShiftedBuf
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{57.11} cShiftedBuf
  \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{61.21} xform \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{61.21} xform \.{\defeq}
  xFormCopCopsSS ( m . cop ,\, cShiftedBuf )}%
 \@y{\@s{0}%
  [\ensuremath{lss}, \ensuremath{xss}]
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{40.81} \.{\IN} c2ss \.{'}
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{40.81} \.{\IN} c2ss \.{'}
  \.{=} [ c2ss {\EXCEPT} {\bang} [ c ] \.{=} @ \.{\oplus} xform . xss ]}%
- \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
  {\UNCHANGED} s2ss}%
-\@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}} SRevImpl \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \.{\land} SRevEx}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} SRevImpl \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land} SRevEx}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
  m \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{47.91} c\@s{3.77}
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{47.91} c\@s{3.77}
  \.{\defeq} ClientOf ( m . cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
  sbuf [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{47.91} cShiftedBuf
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{47.91} cShiftedBuf
  \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{52.01} xform \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{52.01} xform \.{\defeq}
  xFormCopCopsSS ( m . cop ,\, cShiftedBuf )}%
 \@y{\@s{0}%
  [\ensuremath{lss}, \ensuremath{xss}]
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{31.61} \.{\IN} s2ss \.{'}
+ \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{31.61} \.{\IN} s2ss \.{'}
  \.{=} [ cl \.{\in} Client \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{102.12} {\IF} cl \.{=} c
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{102.12} {\IF} cl \.{=} c
  \.{\THEN} s2ss [ cl ] \.{\oplus} xform . xss \.{\ELSE} s2ss [ cl ]
  \.{\oplus} xform . lss ]}%
- \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} c2ss}%
-\@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}} NextImpl \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
+\@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}} NextImpl \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
  \.{\in} Client \.{:} DoImpl ( c ) \.{\lor} RevImpl ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{16.4} \.{\lor} SRevImpl}%
+\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{16.4} \.{\lor} SRevImpl}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}} FairnessImpl \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{16.4} {\WF}_{ varsImpl} (
+\@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} FairnessImpl \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{16.4} {\WF}_{ varsImpl} (
  SRevImpl \.{\lor} \E\, c \.{\in} Client \.{:} RevImpl ( c ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}} SpecImpl \.{\defeq} InitImpl
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}} SpecImpl \.{\defeq} InitImpl
  \.{\land} {\Box} [ NextImpl ]_{ varsImpl}}%
 \@y{\@s{0}%
  \ensuremath{\.{\land} FairnessImpl
 }}%
 \@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}} XJ \.{\defeq} {\INSTANCE}
+\@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}} XJ \.{\defeq} {\INSTANCE}
  XJupiter {\WITH}}%
- \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{57.57} cincoming
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{57.57} cincoming
  \.{\leftarrow} cincomingXJ ,\, sincoming \.{\leftarrow} sincomingXJ}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}} {\THEOREM} SpecImpl
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}} {\THEOREM} SpecImpl
  \.{\implies} XJ {\bang} Spec}%
-\@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Dec} 30
- 16:48:09 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Dec} 31 21:24:30 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

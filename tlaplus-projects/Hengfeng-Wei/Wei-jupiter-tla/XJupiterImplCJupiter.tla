@@ -15,7 +15,7 @@ TypeOKImpl ==
     /\ TypeOKEx
     /\ \A oid \in DOMAIN op2ss: oid \in Oid /\ IsSS(op2ss[oid])
     /\ \A c \in Client: IsSS(c2ssX[c])
------------------------------------------------------------------------------
+
 InitImpl ==
     /\ InitEx
     /\ op2ss = <<>>
@@ -34,7 +34,7 @@ RevImpl(c) ==
 SRevImpl == 
     /\ SRevEx
     /\ LET cop == Head(sincoming)
-             c == cop.oid.c
+             c == ClientOf(cop)
          xform == xForm(cop, s2ss[c], ds[Server])  \* TODO: performance!!!
             ss == xform.xss
        IN op2ss' = op2ss @@ (cop.oid :> [node |-> ss.node, edge |-> ss.edge])
@@ -48,7 +48,7 @@ FairnessImpl ==
     /\ WF_varsImpl(SRevImpl \/ \E c \in Client: RevImpl(c)) 
 
 SpecImpl == InitImpl /\ [][NextImpl]_varsImpl \* /\ FairnessImpl
-
+-----------------------------------------------------------------------------
 CJ == INSTANCE CJupiter 
         WITH cincoming <- cincomingCJ, \* sincoming needs no substitution
              css <- [r \in Replica |-> 
@@ -59,5 +59,5 @@ CJ == INSTANCE CJupiter
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 11:09:14 CST 2018 by hengxin
+\* Last modified Mon Dec 31 20:55:05 CST 2018 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

@@ -1,7 +1,6 @@
 -------------------------- MODULE AJupiterExtended --------------------------
 (*
-AJupiter extended with JupiterCtx.
-This is used to show that AJupiter implements XJupiter.
+AJupiter extended with JupiterCtx. This is used to show that AJupiter implements XJupiter.
 *)
 EXTENDS JupiterCtx
 -----------------------------------------------------------------------------
@@ -35,10 +34,7 @@ InitEx ==
     /\ cbuf = [c \in Client |-> <<>>]
     /\ sbuf = [c \in Client |-> <<>>]
 -----------------------------------------------------------------------------
-(* 
-Client c \in Client issues an operation op.                       
-*)
-DoOp(c, op) == 
+DoOpEx(c, op) == 
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]]
     IN /\ crec' = [crec EXCEPT ![c] = 0] 
        /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, cop)] 
@@ -46,25 +42,11 @@ DoOp(c, op) ==
        /\ Comm(Msg)!CSend([ack |-> crec[c], cop |-> cop, oid |-> cop.oid])
        /\ commXJ!CSend(cop)
 
-DoIns(c) ==
-    \E ins \in {op \in Ins: op.pos \in 1 .. (Len(state[c]) + 1) /\ op.ch \in chins /\ op.pr = Priority[c]}:
-        /\ DoOp(c, ins)
-        /\ chins' = chins \ {ins.ch} 
-
-DoDel(c) == 
-    \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
-        /\ DoOp(c, del)
-        /\ UNCHANGED chins
-
 DoEx(c) == 
     /\ DoCtx(c)
-    /\ \/ DoIns(c) 
-       \/ DoDel(c)
+    /\ DoInt(DoOpEx, c)
     /\ UNCHANGED <<sbuf, srec>>
------------------------------------------------------------------------------
-(* 
-Client c \in Client receives a message from the Server.           
-*)
+
 RevEx(c) == 
     /\ Comm(Msg)!CRev(c)
     /\ commXJ!CRev(c)
@@ -77,11 +59,9 @@ RevEx(c) ==
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
            /\ state' = [state EXCEPT ![c] = Apply(xcop.op, @)] 
     /\ RevCtx(c)
-    /\ UNCHANGED <<chins, sbuf, srec>>
------------------------------------------------------------------------------
-(* 
-The Server receives a message.                                    
-*)
+    /\ RevInt(c)
+    /\ UNCHANGED <<sbuf, srec>>
+
 SRevEx == 
     /\ Comm(Msg)!SRev
     /\ commXJ!SRev
@@ -99,7 +79,8 @@ SRevEx ==
            /\ Comm(Msg)!SSend(c, [cl \in Client |-> [ack |-> srec[cl], cop |-> xcop, oid |-> xcop.oid]])
            /\ commXJ!SSendSame(c, xcop)
     /\ SRevCtx
-    /\ UNCHANGED <<chins, cbuf, crec>>
+    /\ SRevInt
+    /\ UNCHANGED <<cbuf, crec>>
 -----------------------------------------------------------------------------
 NextEx == 
     \/ \E c \in Client: DoEx(c) \/ RevEx(c)
@@ -116,5 +97,5 @@ QC == \* Quiescent Consistency
 THEOREM SpecEx => []QC
 =============================================================================
 \* Modification History
-\* Last modified Sun Dec 30 16:43:20 CST 2018 by hengxin
+\* Last modified Mon Dec 31 21:21:44 CST 2018 by hengxin
 \* Created Thu Dec 27 21:15:09 CST 2018 by hengxin

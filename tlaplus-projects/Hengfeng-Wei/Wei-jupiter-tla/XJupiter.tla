@@ -25,11 +25,7 @@ Init ==
     /\ c2ss = [c \in Client |-> EmptySS]
     /\ s2ss = [c \in Client |-> EmptySS]
 -----------------------------------------------------------------------------
-(* 
-xForm: iteratively transform cop with a path
-through the 2D state space ss at some client.
-*)
-xForm(cop, ss, cur) ==
+xForm(cop, ss, cur) == \* Transform cop with a path (i.e., operation sequence) through 2D state space ss.
     LET u == Locate(cop, ss)
         v == u \cup {cop.oid}
         RECURSIVE xFormHelper(_, _, _, _)
@@ -47,72 +43,49 @@ xForm(cop, ss, cur) ==
                                            [from |-> uprime, to |-> vprime, cop |-> coph2copprime]}])
      IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
 -----------------------------------------------------------------------------
-(* 
-Client c \in Client perform operation cop.
-*)
-ClientPerform(cop, c) ==
+ClientPerform(cop, c) == \* Client c \in Client perform operation cop.
     LET xform == xForm(cop, c2ss[c], ds[c]) \* xform: [xss, xcop]
     IN /\ c2ss' = [c2ss EXCEPT ![c] = @ (+) xform.xss]
        /\ state' = [state EXCEPT ![c] = Apply(xform.xcop.op, @)]
-(* 
-Client c \in Client generates an operation op.
-*)
+
 DoOp(c, op) == 
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]] 
         IN /\ ClientPerform(cop, c)
            /\ Comm(Cop)!CSend(cop)
 
-DoIns(c) ==
-    \E ins \in {op \in Ins: op.pos \in 1 .. (Len(state[c]) + 1) /\ op.ch \in chins /\ op.pr = Priority[c]}:
-        /\ DoOp(c, ins)
-        /\ chins' = chins \ {ins.ch} 
-
-DoDel(c) == 
-    \E del \in {op \in Del: op.pos \in 1 .. Len(state[c])}:
-        /\ DoOp(c, del)
-        /\ UNCHANGED chins
-
 Do(c) == 
     /\ DoCtx(c)
-    /\ \/ DoIns(c) 
-       \/ DoDel(c)
+    /\ DoInt(DoOp, c)
     /\ UNCHANGED s2ss
-(* 
-Client c \in Client receives a message from the Server.
-*)
+
 Rev(c) == 
     /\ Comm(Cop)!CRev(c)
-    /\ LET cop == Head(cincoming[c])
-        IN ClientPerform(cop, c)
+    /\ ClientPerform(Head(cincoming[c]), c)
     /\ RevCtx(c)
-    /\ UNCHANGED <<chins, s2ss>>
------------------------------------------------------------------------------
-(*
-The Server performs operation cop.
-*)
+    /\ RevInt(c)
+    /\ UNCHANGED s2ss
+
 ServerPerform(cop) == 
     LET c == ClientOf(cop)
      scur == ds[Server]
     xform == xForm(cop, s2ss[c], scur) \* xform: [xss, xcop]
      xcop == xform.xcop
      xcur == scur \cup {cop.oid}
-    IN /\ s2ss' = [cl \in Client |-> 
+     IN /\ s2ss' = [cl \in Client |-> 
                     IF cl = c 
                     THEN s2ss[cl] (+) xform.xss
                     ELSE s2ss[cl] (+) [node |-> {xcur}, 
-                       edge |-> {[from |-> scur, to |-> xcur, cop |-> xcop]}]
-                  ]
-       /\ state' = [state EXCEPT ![Server] = Apply(xcop.op, @)]
-       /\ Comm(Cop)!SSendSame(c, xcop) 
-(* 
-The Server receives a message.
-*)
+                        edge |-> {[from |-> scur, to |-> xcur, cop |-> xcop]}]
+                   ]
+        /\ state' = [state EXCEPT ![Server] = Apply(xcop.op, @)]
+        /\ Comm(Cop)!SSendSame(c, xcop) 
+
 SRev == 
     /\ Comm(Cop)!SRev
-    /\ LET cop == Head(sincoming)
-        IN ServerPerform(cop)
+    /\ ServerPerform(Head(sincoming))
     /\ SRevCtx
-    /\ UNCHANGED <<chins, c2ss>>
+    /\ SRevInt
+    /\ UNCHANGED c2ss
 -----------------------------------------------------------------------------
 Next == 
     \/ \E c \in Client: Do(c) \/ Rev(c)
@@ -129,5 +102,5 @@ CSSync == \* Each client c \in Client is synchonized with the Server.
 THEOREM Spec => []CSSync
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 11:05:08 CST 2018 by hengxin
+\* Last modified Mon Dec 31 20:46:54 CST 2018 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

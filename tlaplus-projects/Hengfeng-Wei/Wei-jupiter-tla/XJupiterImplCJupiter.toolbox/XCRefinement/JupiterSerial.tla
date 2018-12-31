@@ -30,7 +30,7 @@ commSerial == INSTANCE CSComm WITH Msg <- Seq(Oid),
 TypeOKSerial ==
     /\ serial \in [Replica -> Seq(Oid)]
     /\ commSerial!TypeOK
------------------------------------------------------------------------------
+
 InitSerial ==
     /\ serial = [r \in Replica |-> <<>>]
     /\ commSerial!Init
@@ -44,10 +44,10 @@ RevSerial(c) ==
 
 SRevSerial ==
     /\ LET cop == Head(sincoming)
-       IN  /\ serial' = [serial EXCEPT ![Server] = Append(@, cop.oid)]
+        IN /\ serial' = [serial EXCEPT ![Server] = Append(@, cop.oid)]
            /\ commSerial!SSendSame(cop.oid.c, serial'[Server])
     /\ UNCHANGED <<sincomingSerial>>
 =============================================================================
 \* Modification History
-\* Last modified Wed Dec 12 21:04:36 CST 2018 by hengxin
+\* Last modified Mon Dec 31 18:54:56 CST 2018 by hengxin
 \* Created Wed Dec 05 21:03:01 CST 2018 by hengxin
