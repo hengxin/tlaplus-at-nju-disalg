@@ -1052,12 +1052,11 @@
  \ensuremath{xform}: [\ensuremath{xss}, \ensuremath{xcop}]
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{20.5} \.{\IN} \.{\land}
  c2ss \.{'} \.{=} [ c2ss {\EXCEPT} {\bang} [ c ] \.{=} @ \.{\oplus} xform .
  xss ]}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{36.79} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ c ] \.{=} Apply ( xform . xcop . op
- ,\, @ ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{40.89} \.{\land}
+ SetNewAop ( c ,\, xform . xcop . op )}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}} DoOp ( c ,\, op )\@s{5.43}
  \.{\defeq}}%
@@ -1116,9 +1115,8 @@
  \{ [ from \.{\mapsto} scur ,\, to \.{\mapsto} xcur ,\, cop \.{\mapsto} xcop
  ] \} ]}%
 \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{87.05} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{40.89} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ Server ] \.{=} Apply ( xcop . op ,\,
- @ ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{40.89} \.{\land}
+ SetNewAop ( Server ,\, xcop . op )}%
  \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{40.89} \.{\land} Comm (
  Cop ) {\bang} SSendSame ( c ,\, xcop )}%
 \@pvspace{8.0pt}%
@@ -1171,8 +1169,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Dec} 31 20:46:54 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
+ \ensuremath{Jan} 01 11:41:17 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

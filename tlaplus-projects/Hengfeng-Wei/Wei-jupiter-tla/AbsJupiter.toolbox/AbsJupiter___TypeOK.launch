@@ -6,7 +6,7 @@
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="192.168.1.103"/>
+<stringAttribute key="distributedNetworkInterface" value="114.212.83.69"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
@@ -19,7 +19,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="Spec"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="sincoming, sincomingSerial, ds, copss, chins, serial, cseq, cincoming, cincomingSerial, state"/>
+<stringAttribute key="modelBehaviorVars" value="sincoming, sincomingSerial, aop, ds, copss, chins, serial, cseq, cincoming, cincomingSerial, state"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -48,5 +48,5 @@
 <intAttribute key="simuSeed" value="-1"/>
 <stringAttribute key="specName" value="AbsJupiter"/>
 <stringAttribute key="view" value=""/>
-<booleanAttribute key="visualizeStateGraph" value="true"/>
+<booleanAttribute key="visualizeStateGraph" value="false"/>
 </launchConfiguration>

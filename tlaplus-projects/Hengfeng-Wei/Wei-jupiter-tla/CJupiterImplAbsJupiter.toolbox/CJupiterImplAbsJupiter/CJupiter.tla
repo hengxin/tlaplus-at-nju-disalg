@@ -51,8 +51,8 @@ xForm(cop, r) ==
 
 Perform(cop, r) == \* Perform cop at replica r \in Replica.                             
     LET xform == xForm(cop, r)  \* xform: [xcss, xcop]
-    IN /\ css' = [css EXCEPT ![r] = @ (+) xform.xcss]
-       /\ state' = [state EXCEPT ![r] = Apply(xform.xcop.op, @)]
+     IN /\ css' = [css EXCEPT ![r] = @ (+) xform.xcss]
+        /\ SetNewAop(r, xform.xcop.op)
 -----------------------------------------------------------------------------
 DoOp(c, op) == 
     /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]]
@@ -95,5 +95,5 @@ Compactness == \* Compactness of CJupiter: the CSSes at all replicas are the sam
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 20:36:31 CST 2018 by hengxin
+\* Last modified Tue Jan 01 11:36:24 CST 2019 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

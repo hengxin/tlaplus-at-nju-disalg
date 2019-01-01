@@ -1002,28 +1002,28 @@
  \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{16.4} \.{\land}\@s{0.98}
  sbuf\@s{0.51} \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
 \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}} DoOp ( c ,\, op )\@s{5.43}
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}} DoOpEx ( c ,\, op )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{26.06} \.{\LET} cop
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{16.4} \.{\LET} cop
  \.{\defeq} [ op \.{\mapsto} op ,\, oid \.{\mapsto} [ c \.{\mapsto} c ,\, seq
  \.{\mapsto} cseq \.{'} [ c ] ] ,\, ctx \.{\mapsto} ds [ c ] ]}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{26.06} \.{\IN} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{16.4} \.{\IN} \.{\land}
  crec \.{'}\@s{2.19} \.{=} [ crec {\EXCEPT} {\bang} [ c ]\@s{2.19} \.{=} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{46.46} \.{\land} cbuf
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{36.79} \.{\land} cbuf
  \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} Append ( @ ,\, cop ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{46.46} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ c ] \.{=} Apply ( op ,\, @ ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{46.46} \.{\land} Comm (
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{36.79} \.{\land}
+ SetNewAop ( c ,\, op )}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{36.79} \.{\land} Comm (
  Msg ) {\bang} CSend ( [ ack \.{\mapsto} crec [ c ] ,\, cop \.{\mapsto} cop
  ,\, oid \.{\mapsto} cop . oid ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{46.46} \.{\land} commXJ
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{36.79} \.{\land} commXJ
  {\bang} CSend ( cop )}%
 \@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} DoEx ( c ) \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{25.28} \.{\land} DoCtx (
  c )}%
  \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{25.28} \.{\land} DoInt (
- DoOp ,\, c )}%
+ DoOpEx ,\, c )}%
  \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{25.28} \.{\land}
  {\UNCHANGED} {\langle} sbuf ,\, srec {\rangle}}%
 \@pvspace{8.0pt}%
@@ -1046,9 +1046,8 @@
  XformOpsOp ( COT ,\, cShiftedBuf ,\, m . cop )}%
  \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
  cbuf \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} xcBuf ]}%
- \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{52.01} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ c ] \.{=} Apply ( xcop . op ,\, @ )
- ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{52.01} \.{\land}
+ SetNewAop ( c ,\, xcop . op )}%
  \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{16.4} \.{\land} RevCtx (
  c )}%
  \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \.{\land} RevInt (
@@ -1081,9 +1080,8 @@
  \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
  \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{124.38} {\IF} cl \.{=} c
  \.{\THEN} xcBuf \.{\ELSE} Append ( sbuf [ cl ] ,\, xcop ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{58.73} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ Server ] \.{=} Apply ( xcop . op ,\,
- @ ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{58.73} \.{\land}
+ SetNewAop ( Server ,\, xcop . op )}%
  \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{58.73} \.{\land} Comm (
  Msg ) {\bang} SSend ( c ,\, [ cl \.{\in} Client \.{\mapsto} [ ack
  \.{\mapsto} srec [ cl ] ,\, cop \.{\mapsto} xcop ,\, oid \.{\mapsto} xcop .
@@ -1135,8 +1133,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Dec} 31 21:05:54 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
+ \ensuremath{Jan} 01 11:48:24 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

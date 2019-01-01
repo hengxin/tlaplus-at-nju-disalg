@@ -45,8 +45,8 @@ xForm(cop, ss, cur) == \* Transform cop with a path (i.e., operation sequence) t
 -----------------------------------------------------------------------------
 ClientPerform(cop, c) == \* Client c \in Client perform operation cop.
     LET xform == xForm(cop, c2ss[c], ds[c]) \* xform: [xss, xcop]
-    IN /\ c2ss' = [c2ss EXCEPT ![c] = @ (+) xform.xss]
-       /\ state' = [state EXCEPT ![c] = Apply(xform.xcop.op, @)]
+     IN /\ c2ss' = [c2ss EXCEPT ![c] = @ (+) xform.xss]
+        /\ SetNewAop(c, xform.xcop.op)
 
 DoOp(c, op) == 
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]] 
@@ -77,7 +77,7 @@ ServerPerform(cop) ==
                     ELSE s2ss[cl] (+) [node |-> {xcur}, 
                         edge |-> {[from |-> scur, to |-> xcur, cop |-> xcop]}]
                    ]
-        /\ state' = [state EXCEPT ![Server] = Apply(xcop.op, @)]
+        /\ SetNewAop(Server, xcop.op)
         /\ Comm(Cop)!SSendSame(c, xcop) 
 
 SRev == 
@@ -102,5 +102,5 @@ CSSync == \* Each client c \in Client is synchonized with the Server.
 THEOREM Spec => []CSSync
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 20:46:54 CST 2018 by hengxin
+\* Last modified Tue Jan 01 11:41:17 CST 2019 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

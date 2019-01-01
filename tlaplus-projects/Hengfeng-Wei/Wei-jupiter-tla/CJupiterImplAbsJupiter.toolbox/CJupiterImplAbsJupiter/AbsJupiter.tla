@@ -40,8 +40,8 @@ xForm(cop, r) ==
 
 Perform(cop, r) ==
     LET xform == xForm(cop, r)  \* [xcop, xcopss] 
-     IN /\ state' = [state EXCEPT ![r] = Apply(xform.xcop.op, @)]
-        /\ copss' = [copss EXCEPT ![r] = xform.xcopss \cup {cop}]
+     IN /\ copss' = [copss EXCEPT ![r] = xform.xcopss \cup {cop}]
+        /\ SetNewAop(r, xform.xcop.op)
 -----------------------------------------------------------------------------
 DoOp(c, op) == \* Client c \in Client processes a locally generated operation op.
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]]
@@ -84,5 +84,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 20:27:49 CST 2018 by hengxin
+\* Last modified Tue Jan 01 11:52:27 CST 2019 by hengxin
 \* Created Wed Dec 05 19:55:52 CST 2018 by hengxin

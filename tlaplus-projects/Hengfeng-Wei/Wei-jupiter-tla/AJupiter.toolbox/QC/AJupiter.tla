@@ -34,7 +34,7 @@ Init ==
     /\ srec = [c \in Client |-> 0]
 -----------------------------------------------------------------------------
 DoOp(c, op) == 
-    /\ state' = [state EXCEPT ![c] = Apply(op, @)] 
+    /\ SetNewAop(c, op)
     /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, op)]
     /\ crec' = [crec EXCEPT ![c] = 0]
     /\ Comm(Msg)!CSend([c |-> c, ack |-> crec[c], op |-> op])
@@ -52,7 +52,7 @@ Rev(c) ==
            xop == XformOpOps(Xform, m.op, cShiftedBuf) 
            xcBuf == XformOpsOp(Xform, cShiftedBuf, m.op)
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
-           /\ state' = [state EXCEPT ![c] = Apply(xop, @)] 
+           /\ SetNewAop(c, xop)
     /\ RevInt(c)
     /\ UNCHANGED <<sbuf, srec>>
 
@@ -68,7 +68,7 @@ SRev ==
                             IF cl = c THEN srec[cl] + 1 ELSE 0] 
            /\ sbuf' = [cl \in Client |->
                             IF cl = c THEN xcBuf ELSE Append(sbuf[cl], xop)] 
-           /\ state' = [state EXCEPT ![Server] = Apply(xop, @)]  
+           /\ SetNewAop(Server, xop)
            /\ Comm(Msg)!SSend(c, [cl \in Client |-> [ack |-> srec[cl], op |-> xop]])
     /\ SRevInt
     /\ UNCHANGED <<cbuf, crec>>
@@ -88,5 +88,5 @@ QC == \* Quiescent Consistency
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 21:02:17 CST 2018 by hengxin
+\* Last modified Tue Jan 01 11:45:32 CST 2019 by hengxin
 \* Created Satchins,  Jun 23 17:14:18 CST 2018 by hengxin

@@ -1071,12 +1071,13 @@ The set of all operations. Note: The positions are indexed from 1.
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} SetNewOp ( r ,\, aopr )
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} SetNewAop ( r ,\, aopr )
  \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} aop \.{'} \.{=} [
  aop {\EXCEPT} {\bang} [ r ] \.{=} aopr ]}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}} ApplyNewOp ( r ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}} ApplyNewAop ( r )
+ \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{16.4} state \.{'} \.{=} [
  state {\EXCEPT} {\bang} [ r ] \.{=} Apply ( aop \.{'} [ r ] ,\, @ ) ]}%
 \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}}\midbar\@xx{}%
@@ -1147,7 +1148,7 @@ The set of all operations. Note: The positions are indexed from 1.
  \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{27.51} \.{\lor} DoDel (
  DoOp ,\, c )}%
  \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{16.4} \.{\land}
- ApplyNewOp ( c )}%
+ ApplyNewAop ( c )}%
 \@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}} RevInt ( c ) \.{\defeq}}%
 \@y{\@s{0}%
@@ -1156,7 +1157,7 @@ The set of all operations. Note: The positions are indexed from 1.
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{16.4} \.{\land}
- ApplyNewOp ( c )}%
+ ApplyNewAop ( c )}%
  \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} chins}%
 \@pvspace{8.0pt}%
@@ -1166,7 +1167,7 @@ The set of all operations. Note: The positions are indexed from 1.
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{16.4} \.{\land}
- ApplyNewOp ( Server )}%
+ ApplyNewAop ( Server )}%
  \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} chins}%
 \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}}\bottombar\@xx{}%
@@ -1177,7 +1178,7 @@ The set of all operations. Note: The positions are indexed from 1.
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
- \ensuremath{Jan} 01 11:32:36 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{Jan} 01 11:38:14 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

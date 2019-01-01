@@ -38,7 +38,7 @@ DoOpEx(c, op) ==
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]]
     IN /\ crec' = [crec EXCEPT ![c] = 0] 
        /\ cbuf' = [cbuf EXCEPT ![c] = Append(@, cop)] 
-       /\ state' = [state EXCEPT ![c] = Apply(op, @)] 
+       /\ SetNewAop(c, op)
        /\ Comm(Msg)!CSend([ack |-> crec[c], cop |-> cop, oid |-> cop.oid])
        /\ commXJ!CSend(cop)
 
@@ -57,7 +57,7 @@ RevEx(c) ==
            xcop == XformOpOps(COT, m.cop, cShiftedBuf) 
            xcBuf == XformOpsOp(COT, cShiftedBuf, m.cop) 
         IN /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
-           /\ state' = [state EXCEPT ![c] = Apply(xcop.op, @)] 
+           /\ SetNewAop(c, xcop.op)
     /\ RevCtx(c)
     /\ RevInt(c)
     /\ UNCHANGED <<sbuf, srec>>
@@ -75,7 +75,7 @@ SRevEx ==
                             IF cl = c THEN srec[cl] + 1 ELSE 0] 
            /\ sbuf' = [cl \in Client |-> 
                             IF cl = c THEN xcBuf ELSE Append(sbuf[cl], xcop)] 
-           /\ state' = [state EXCEPT ![Server] = Apply(xcop.op, @)]  
+           /\ SetNewAop(Server, xcop.op)
            /\ Comm(Msg)!SSend(c, [cl \in Client |-> [ack |-> srec[cl], cop |-> xcop, oid |-> xcop.oid]])
            /\ commXJ!SSendSame(c, xcop)
     /\ SRevCtx
@@ -97,5 +97,5 @@ QC == \* Quiescent Consistency
 THEOREM SpecEx => []QC
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 21:21:44 CST 2018 by hengxin
+\* Last modified Tue Jan 01 11:48:24 CST 2019 by hengxin
 \* Created Thu Dec 27 21:15:09 CST 2018 by hengxin
