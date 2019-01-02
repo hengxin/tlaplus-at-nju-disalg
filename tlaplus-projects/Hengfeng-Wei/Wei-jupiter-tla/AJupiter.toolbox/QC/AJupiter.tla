@@ -14,16 +14,16 @@ VARIABLES
 
 vars == <<intVars, cbuf, crec, sbuf, srec>>
 
-Msg == [c: Client, ack: Int, op: Op \cup {Nop}] \cup \* messages sent to the Server from a client c \in Client
-       [ack: Int, op: Op \cup {Nop}] \* messages broadcast to Clients from the Server
+Msg == [c: Client, ack: Nat, op: Op \cup {Nop}] \cup \* messages sent to the Server from a client c \in Client
+       [ack: Nat, op: Op \cup {Nop}] \* messages broadcast to Clients from the Server
 -----------------------------------------------------------------------------
 TypeOK == 
     /\ TypeOKInt
     /\ Comm(Msg)!TypeOK
     /\ cbuf \in [Client -> Seq(Op \cup {Nop})]
-    /\ crec \in [Client -> Int]
+    /\ crec \in [Client -> Nat]
     /\ sbuf \in [Client -> Seq(Op \cup {Nop})]
-    /\ srec \in [Client -> Int]
+    /\ srec \in [Client -> Nat]
 -----------------------------------------------------------------------------
 Init == 
     /\ InitInt
@@ -88,5 +88,5 @@ QC == \* Quiescent Consistency
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Tue Jan 01 11:45:32 CST 2019 by hengxin
+\* Last modified Wed Jan 02 14:25:36 CST 2019 by hengxin
 \* Created Satchins,  Jun 23 17:14:18 CST 2018 by hengxin

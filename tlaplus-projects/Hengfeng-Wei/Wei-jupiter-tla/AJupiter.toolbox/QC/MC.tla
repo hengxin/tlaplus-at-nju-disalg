@@ -12,33 +12,33 @@ a, b
 ----
 
 \* MV CONSTANT definitions Client
-const_154631435338572000 == 
+const_15464105228539000 == 
 {c1, c2}
 ----
 
 \* MV CONSTANT definitions Char
-const_154631435338573000 == 
+const_154641052285310000 == 
 {a, b}
 ----
 
 \* SYMMETRY definition
-symm_154631435338574000 == 
-Permutations(const_154631435338573000)
+symm_154641052285311000 == 
+Permutations(const_154641052285310000)
 ----
 
 \* CONSTANT definitions @modelParameterConstants:2InitState
-const_154631435338575000 == 
+const_154641052285312000 == 
 <<>>
 ----
 
 \* SPECIFICATION definition @modelBehaviorSpec:0
-spec_154631435338577000 ==
+spec_154641052285314000 ==
 Spec
 ----
 \* INVARIANT definition @modelCorrectnessInvariants:0
-inv_154631435338578000 ==
+inv_154641052285315000 ==
 QC
 ----
 =============================================================================
 \* Modification History
-\* Created Tue Jan 01 11:45:53 CST 2019 by hengxin
+\* Created Wed Jan 02 14:28:42 CST 2019 by hengxin

@@ -13,24 +13,24 @@ XformII(lins, rins) == \* lins is transformed against rins
          ELSE IF lins.ch = rins.ch
               THEN Nop
               ELSE IF lins.pr > rins.pr
-                   THEN [lins EXCEPT !.pos = @+1]
+                   THEN [lins EXCEPT !.pos = @ + 1]
                    ELSE lins
 
 XformID(ins, del) == \* ins is transformed against del
     IF ins.pos <= del.pos
     THEN ins
-    ELSE [ins EXCEPT !.pos = @-1]
+    ELSE [ins EXCEPT !.pos = @ - 1]
 
 XformDI(del, ins) == \* del is transformed against ins
     IF del.pos < ins.pos
     THEN del
-    ELSE [del EXCEPT !.pos = @+1]
+    ELSE [del EXCEPT !.pos = @ + 1]
 
 XformDD(ldel, rdel) == \* ldel is transformed against rdel
     IF ldel.pos < rdel.pos
     THEN ldel
     ELSE IF ldel.pos > rdel.pos
-         THEN [ldel EXCEPT !.pos = @-1]
+         THEN [ldel EXCEPT !.pos = @ - 1]
          ELSE Nop
 
 Xform(lop, rop) == \* lop is transformed against rop
@@ -69,5 +69,5 @@ XformOpsOps(xform(_, _), ops1, ops2) ==
     ELSE XformOpsOps(xform, XformOpsOp(xform, ops1, Head(ops2)), Tail(ops2))
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 19:45:16 CST 2018 by hengxin
+\* Last modified Wed Jan 02 14:26:19 CST 2019 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin

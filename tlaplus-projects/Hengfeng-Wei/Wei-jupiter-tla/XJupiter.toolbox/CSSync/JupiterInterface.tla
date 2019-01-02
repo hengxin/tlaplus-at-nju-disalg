@@ -3,7 +3,7 @@
 This module declares the parameters and defines the operators that describe
 the interface of a family of Jupiter specs.
 *)
-EXTENDS Integers, SequenceUtils, OT
+EXTENDS SequenceUtils, OT
 -----------------------------------------------------------------------------
 CONSTANTS
     Char,       \* the set of characters
@@ -86,5 +86,5 @@ SRevInt == \* The Server receives a message.
     /\ UNCHANGED chins
 =============================================================================
 \* Modification History
-\* Last modified Tue Jan 01 11:38:14 CST 2019 by hengxin
+\* Last modified Wed Jan 02 14:21:57 CST 2019 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin
