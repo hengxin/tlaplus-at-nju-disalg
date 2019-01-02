@@ -15,17 +15,15 @@ vars == <<intVars, ctxVars, c2ss, s2ss>>
 TypeOK == 
     /\ TypeOKInt
     /\ TypeOKCtx
-    /\ Comm(Cop)!TypeOK
     /\ \A c \in Client: IsSS(c2ss[c]) /\ IsSS(s2ss[c])
 -----------------------------------------------------------------------------
 Init == 
     /\ InitInt
     /\ InitCtx
-    /\ Comm(Cop)!Init
     /\ c2ss = [c \in Client |-> EmptySS]
     /\ s2ss = [c \in Client |-> EmptySS]
 -----------------------------------------------------------------------------
-xForm(cop, ss, cur) == \* Transform cop with a path (i.e., operation sequence) through 2D state space ss.
+xForm(cop, ss, cur) == \* Transform cop with an operation sequence in 2D state space ss.
     LET u == Locate(cop, ss)
         v == u \cup {cop.oid}
         RECURSIVE xFormHelper(_, _, _, _)
@@ -42,28 +40,11 @@ xForm(cop, ss, cur) == \* Transform cop with a path (i.e., operation sequence) t
                                  edge |-> {[from |-> vh, to |-> vprime, cop |-> copprime2coph], 
                                            [from |-> uprime, to |-> vprime, cop |-> coph2copprime]}])
      IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
------------------------------------------------------------------------------
-ClientPerform(cop, c) == \* Client c \in Client perform operation cop.
+
+ClientPerform(c, cop) == 
     LET xform == xForm(cop, c2ss[c], ds[c]) \* xform: [xss, xcop]
      IN /\ c2ss' = [c2ss EXCEPT ![c] = @ (+) xform.xss]
         /\ SetNewAop(c, xform.xcop.op)
-
-DoOp(c, op) == 
-    LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]] 
-        IN /\ ClientPerform(cop, c)
-           /\ Comm(Cop)!CSend(cop)
-
-Do(c) == 
-    /\ DoCtx(c)
-    /\ DoInt(DoOp, c)
-    /\ UNCHANGED s2ss
-
-Rev(c) == 
-    /\ Comm(Cop)!CRev(c)
-    /\ ClientPerform(Head(cincoming[c]), c)
-    /\ RevCtx(c)
-    /\ RevInt(c)
-    /\ UNCHANGED s2ss
 
 ServerPerform(cop) == 
     LET c == ClientOf(cop)
@@ -75,16 +56,28 @@ ServerPerform(cop) ==
                     IF cl = c 
                     THEN s2ss[cl] (+) xform.xss
                     ELSE s2ss[cl] (+) [node |-> {xcur}, 
-                        edge |-> {[from |-> scur, to |-> xcur, cop |-> xcop]}]
-                   ]
+                        edge |-> {[from |-> scur, to |-> xcur, cop |-> xcop]}]]
         /\ SetNewAop(Server, xcop.op)
-        /\ Comm(Cop)!SSendSame(c, xcop) 
+        /\ Comm!SSendSame(c, xcop) 
+-----------------------------------------------------------------------------
+DoOp(c, op) == 
+    LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq[c]], ctx |-> ds[c]] 
+     IN /\ ClientPerform(c, cop)
+        /\ Comm!CSend(cop)
+
+Do(c) == 
+    /\ DoInt(DoOp, c)
+    /\ DoCtx(c)
+    /\ UNCHANGED s2ss
+
+Rev(c) == 
+    /\ RevInt(ClientPerform, c)
+    /\ RevCtx(c)
+    /\ UNCHANGED s2ss
 
 SRev == 
-    /\ Comm(Cop)!SRev
-    /\ ServerPerform(Head(sincoming))
+    /\ SRevInt(ServerPerform)
     /\ SRevCtx
-    /\ SRevInt
     /\ UNCHANGED c2ss
 -----------------------------------------------------------------------------
 Next == 
@@ -102,5 +95,5 @@ CSSync == \* Each client c \in Client is synchonized with the Server.
 THEOREM Spec => []CSSync
 =============================================================================
 \* Modification History
-\* Last modified Tue Jan 01 11:41:17 CST 2019 by hengxin
+\* Last modified Wed Jan 02 21:11:22 CST 2019 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

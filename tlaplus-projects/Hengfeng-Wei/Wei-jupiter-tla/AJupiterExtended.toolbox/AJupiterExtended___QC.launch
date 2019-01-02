@@ -19,7 +19,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="SpecEx"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="sincoming, sincomingXJ, ds, crec, sbuf, chins, cseq, cincoming, cincomingXJ, srec, state, cbuf"/>
+<stringAttribute key="modelBehaviorVars" value="sincoming, sincomingXJ, aop, ds, crec, sbuf, chins, cseq, cincoming, cincomingXJ, srec, state, cbuf"/>
 <stringAttribute key="modelComments" value="(30301, 14567)"/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -33,6 +33,7 @@
 <listEntry value="Char;;{a, b};1;1"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
 <listEntry value="Server;;Server;1;0"/>
+<listEntry value="Msg;;AJMsgEx;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">

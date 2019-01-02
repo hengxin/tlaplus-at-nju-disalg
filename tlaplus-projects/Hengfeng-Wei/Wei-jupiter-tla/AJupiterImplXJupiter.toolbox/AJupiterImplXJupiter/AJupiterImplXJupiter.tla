@@ -1,7 +1,4 @@
 ------------------------ MODULE AJupiterImplXJupiter ------------------------
-(*
-We show that AJupiter (specifically, AJupiterExtended) implements XJupiter.
-*)
 EXTENDS AJupiterExtended, StateSpace
 -----------------------------------------------------------------------------
 VARIABLES c2ss, s2ss
@@ -19,8 +16,8 @@ InitImpl ==
 -----------------------------------------------------------------------------
 DoOpImpl(c, op) == 
     /\ DoOpEx(c, op)
-    /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq'[c]], ctx |-> ds[c]] 
-        IN c2ss' = [c2ss EXCEPT ![c] = 
+    /\ LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq[c]], ctx |-> ds[c]] 
+       IN  c2ss' = [c2ss EXCEPT ![c] = 
                         @ (+) [node |-> {ds'[c]},
                                edge |-> {[from |-> ds[c], to |-> ds'[c], cop |-> cop]}]]
     /\ UNCHANGED s2ss
@@ -59,11 +56,11 @@ FairnessImpl ==
 
 SpecImpl == InitImpl /\ [][NextImpl]_varsImpl \* /\ FairnessImpl
 -----------------------------------------------------------------------------
-XJ == INSTANCE XJupiter WITH
+XJ == INSTANCE XJupiter WITH Msg <- Cop,
             cincoming <- cincomingXJ, sincoming <- sincomingXJ
 
 THEOREM SpecImpl => XJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 21:24:30 CST 2018 by hengxin
+\* Last modified Wed Jan 02 22:04:27 CST 2019 by hengxin
 \* Created Sat Dec 29 18:36:51 CST 2018 by hengxin

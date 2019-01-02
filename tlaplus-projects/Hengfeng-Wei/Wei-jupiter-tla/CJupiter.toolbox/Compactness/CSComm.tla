@@ -33,8 +33,7 @@ CRev(c) == \* Client c receives and consumes a message from the Server.
     /\ UNCHANGED sincoming
 -----------------------------------------------------------------------------
 (* 
-SRev/SSend below is often used as a subaction.      
-No UNCHANGED in their definitions.                                             
+SRev/SSend below is often used as a subaction. No UNCHANGED in their definitions.                                             
 *)
 SRev == \* The Server receives and consumes a message.      
     /\ sincoming # <<>>
@@ -50,5 +49,5 @@ SSendSame(c, msg) == \* The Server broadcasts the message msg to all clients oth
     /\ SSend(c, [cl \in Client |-> msg])
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 19:04:29 CST 2018 by hengxin
+\* Last modified Wed Jan 02 14:37:41 CST 2019 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

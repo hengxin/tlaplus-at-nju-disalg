@@ -1,7 +1,4 @@
 ------------------------ MODULE XJupiterImplCJupiter ------------------------
-(*
-We show that XJupiter (XJupiterExtended) implements CJupiter.
-*)
 EXTENDS XJupiterExtended
 -----------------------------------------------------------------------------
 VARIABLES
@@ -59,5 +56,5 @@ CJ == INSTANCE CJupiter
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 20:55:05 CST 2018 by hengxin
+\* Last modified Wed Jan 02 21:15:54 CST 2019 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

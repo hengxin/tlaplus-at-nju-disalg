@@ -6,9 +6,10 @@ the interface of a family of Jupiter specs.
 EXTENDS SequenceUtils, OT
 -----------------------------------------------------------------------------
 CONSTANTS
-    Char,       \* the set of characters
     Client,     \* the set of client replicas
     Server,     \* the (unique) server replica
+    Msg,        \* the set of messages
+    Char,       \* the set of characters
     InitState   \* the initial state of each replica
 
 ASSUME \* We assume that all inserted elements are unique.
@@ -23,7 +24,7 @@ VARIABLES
 
 intVars == <<aop, state, cincoming, sincoming, chins>>
 ----------------------------------------------------------------------
-Comm(Msg) == INSTANCE CSComm
+Comm == INSTANCE CSComm
 
 Replica == Client \cup {Server}
 
@@ -51,11 +52,13 @@ ApplyNewAop(r) ==
 TypeOKInt ==
     /\ aop \in [Replica -> Op \cup {Nop}]
     /\ state \in [Replica -> List]
+    /\ Comm!TypeOK
     /\ chins \subseteq Char
 
 InitInt ==
     /\ aop = [r \in Replica |-> Nop]
     /\ state = [r \in Replica |-> InitState]
+    /\ Comm!Init
     /\ chins = Char
     
 DoIns(DoOp(_, _), c) == \* Client c \in Client generates an "Ins" operation.
@@ -77,14 +80,18 @@ DoInt(DoOp(_, _), c) == \* Client c \in Client issues an operation.
        \/ DoDel(DoOp, c)
     /\ ApplyNewAop(c)
     
-RevInt(c) == \* Client c \in Client receives a message from the Server.
+RevInt(ClientPerformInt(_, _), c) == \* Client c \in Client receives and processes a message.
+    /\ Comm!CRev(c)
+    /\ ClientPerformInt(c, Head(cincoming[c]))
     /\ ApplyNewAop(c)
-    /\UNCHANGED chins
+    /\ UNCHANGED chins
 
-SRevInt == \* The Server receives a message.
+SRevInt(ServerPerformInt(_)) == \* The Server receives and processes a message.
+    /\ Comm!SRev
+    /\ ServerPerformInt(Head(sincoming))
     /\ ApplyNewAop(Server)
     /\ UNCHANGED chins
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 14:21:57 CST 2019 by hengxin
+\* Last modified Wed Jan 02 19:01:18 CST 2019 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin

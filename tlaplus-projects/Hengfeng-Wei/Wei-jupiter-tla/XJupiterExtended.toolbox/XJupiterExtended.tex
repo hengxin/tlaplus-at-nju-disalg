@@ -1020,40 +1020,38 @@
  SRev}%
  \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  \.{\LET} cop \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{62.83} c\@s{1.57}
- \.{\defeq} ClientOf ( cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{34.23} \.{\IN} \.{\land}
- commCJ {\bang} SSendSame ( c ,\, cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{38.33} \.{\IN} \.{\land}
+ commCJ {\bang} SSendSame ( ClientOf ( cop ) ,\, cop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  SRevSerial}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land}\@s{6.72}
  {\UNCHANGED} sincomingCJ}%
-\@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} NextEx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+\@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} NextEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
  \E\, c \.{\in} Client \.{:} DoEx ( c ) \.{\lor} RevEx ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} \.{\lor}\@s{5.10}
  SRevEx}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}} FairnessEx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\land} {\WF}_{
+\@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}} FairnessEx \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} \.{\land} {\WF}_{
  varsEx} ( SRevEx \.{\lor} \E\, c \.{\in} Client \.{:} RevEx ( c ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}} SpecEx \.{\defeq} InitEx
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} SpecEx \.{\defeq} InitEx
  \.{\land} {\Box} [ NextEx ]_{ varsEx}}%
 \@y{\@s{0}%
  \ensuremath{\.{\land} FairnessEx
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Dec} 31 20:52:00 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
+ \ensuremath{Jan} 02 21:13:58 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

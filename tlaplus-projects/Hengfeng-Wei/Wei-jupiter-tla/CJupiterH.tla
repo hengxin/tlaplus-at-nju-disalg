@@ -1,7 +1,4 @@
 ----------------------------- MODULE CJupiterH -----------------------------
-(*
-CJupiter with a history of all list states across the system.
-*)
 EXTENDS CJupiter
 -------------------------------------------------------------
 VARIABLE list
@@ -27,7 +24,7 @@ FairnessH ==
 SpecH == InitH /\ [][NextH]_varsH \* /\ FairenessH
 -------------------------------------------------------------
 WLSpec == \* The weak list specification 
-    Comm(Cop)!EmptyChannel 
+    Comm!EmptyChannel 
         => \A l1, l2 \in list: 
             /\ Injective(l1) 
             /\ Injective(l2) 
@@ -36,5 +33,5 @@ WLSpec == \* The weak list specification
 THEOREM SpecH => WLSpec
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 20:37:52 CST 2018 by hengxin
+\* Last modified Wed Jan 02 21:02:27 CST 2019 by hengxin
 \* Created Tue Oct 09 09:28:48 CST 2018 by hengxin

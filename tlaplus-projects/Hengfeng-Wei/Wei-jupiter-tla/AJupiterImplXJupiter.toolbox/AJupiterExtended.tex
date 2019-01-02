@@ -964,7 +964,7 @@
  commXJVars {\rangle}}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} Msg \.{\defeq} [ ack \.{:}
- Int ,\, cop \.{:} Cop ,\, oid \.{:} Oid ]}%
+ Nat ,\, cop \.{:} Cop ,\, oid \.{:} Oid ]}%
 \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} TypeOKEx \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land}
@@ -976,9 +976,9 @@
  \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land} commXJ
  {\bang} TypeOK}%
  \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land}
- crec\@s{2.19} \.{\in} [ Client \.{\rightarrow} Int ]}%
+ crec\@s{2.19} \.{\in} [ Client \.{\rightarrow} Nat ]}%
  \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land}
- srec\@s{2.70} \.{\in} [ Client \.{\rightarrow} Int ]}%
+ srec\@s{2.70} \.{\in} [ Client \.{\rightarrow} Nat ]}%
  \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} cbuf
  \.{\in} [ Client \.{\rightarrow} Seq ( Cop ) ]}%
  \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land}
@@ -1011,8 +1011,8 @@
  crec \.{'}\@s{2.19} \.{=} [ crec {\EXCEPT} {\bang} [ c ]\@s{2.19} \.{=} 0 ]}%
  \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{36.79} \.{\land} cbuf
  \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} Append ( @ ,\, cop ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{36.79} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ c ] \.{=} Apply ( op ,\, @ ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{36.79} \.{\land}
+ SetNewAop ( c ,\, op )}%
  \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{36.79} \.{\land} Comm (
  Msg ) {\bang} CSend ( [ ack \.{\mapsto} crec [ c ] ,\, cop \.{\mapsto} cop
  ,\, oid \.{\mapsto} cop . oid ] )}%
@@ -1046,9 +1046,8 @@
  XformOpsOp ( COT ,\, cShiftedBuf ,\, m . cop )}%
  \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
  cbuf \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} xcBuf ]}%
- \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{52.01} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ c ] \.{=} Apply ( xcop . op ,\, @ )
- ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{52.01} \.{\land}
+ SetNewAop ( c ,\, xcop . op )}%
  \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{16.4} \.{\land} RevCtx (
  c )}%
  \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \.{\land} RevInt (
@@ -1081,9 +1080,8 @@
  \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
  \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{124.38} {\IF} cl \.{=} c
  \.{\THEN} xcBuf \.{\ELSE} Append ( sbuf [ cl ] ,\, xcop ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{58.73} \.{\land} state
- \.{'} \.{=} [ state {\EXCEPT} {\bang} [ Server ] \.{=} Apply ( xcop . op ,\,
- @ ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{58.73} \.{\land}
+ SetNewAop ( Server ,\, xcop . op )}%
  \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{58.73} \.{\land} Comm (
  Msg ) {\bang} SSend ( c ,\, [ cl \.{\in} Client \.{\mapsto} [ ack
  \.{\mapsto} srec [ cl ] ,\, cop \.{\mapsto} xcop ,\, oid \.{\mapsto} xcop .
@@ -1135,8 +1133,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
- \ensuremath{Dec} 31 21:21:44 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
+ \ensuremath{Jan} 02 15:00:47 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

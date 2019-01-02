@@ -21,8 +21,7 @@ Locate the node in a state space that matches the context ctx of cop.
 *)
 Locate(cop, ss) == CHOOSE n \in ss.node : n = cop.ctx
 (*
-Do transformation on state space.
-Return the extra state space.
+Do transformation on state space. Return the extra state space.
 *)
 xFormSS(cop, copprime) == 
     LET u == cop.ctx
@@ -60,5 +59,5 @@ xFormCopCopsSS(cop, cops) ==
      IN xFormCopCopsSSHelper(cop, cops, EmptySS)
 =============================================================================
 \* Modification History
-\* Last modified Sun Dec 30 17:18:32 CST 2018 by hengxin
+\* Last modified Wed Jan 02 22:01:40 CST 2019 by hengxin
 \* Created Wed Dec 19 18:15:25 CST 2018 by hengxin

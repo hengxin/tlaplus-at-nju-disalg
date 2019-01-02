@@ -947,116 +947,120 @@ This module declares the parameters and defines the operators that describe
  the interface of a family of \ensuremath{Jupiter} specs.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} Integers ,\,
- SequenceUtils ,\, OT}%
+ \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} SequenceUtils ,\,
+ OT}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\CONSTANTS}}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Char ,\,\@s{24.59}}%
-\@y{\@s{0}%
- the set of characters
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Client
- ,\,\@s{20.00}}%
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Client ,\,\@s{16.4}}%
 \@y{\@s{0}%
  the set of client replicas
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} Server
- ,\,\@s{18.33}}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Server
+ ,\,\@s{14.73}}%
 \@y{\@s{0}%
  the (unique) server replica
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4}
- InitState\@s{14.78}}%
+\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} Msg ,\,\@s{25.13}}%
+\@y{\@s{0}%
+ the set of messages
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4} Char ,\,\@s{20.99}}%
+\@y{\@s{0}%
+ the set of characters
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{16.4}
+ InitState\@s{11.18}}%
 \@y{\@s{0}%
  the initial state of each replica
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} {\ASSUME}}%
+\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} {\ASSUME}}%
 \@y{\@s{0}%
  We assume that all inserted elements are unique.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land}\@s{10.73}
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} \.{\land}\@s{10.73}
  Range ( InitState ) \.{\cap} Char \.{=} \{ \}\@s{4.1}}%
 \@y{\@s{0}%
  due to the uniqueness requirement
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} {\VARIABLES}}%
-\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} aop ,\,\@s{12.29}}%
+\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} {\VARIABLES}}%
+\@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} aop ,\,\@s{12.29}}%
 \@y{\@s{0}%
  \ensuremath{op[r]}: the actual operation applied at replica \ensuremath{r
  \.{\in} Replica
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} state ,\,\@s{7.06}}%
+\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} state ,\,\@s{7.06}}%
 \@y{\@s{0}%
  \ensuremath{state[r]}: state (the list content) of replica \ensuremath{r
  \.{\in} Replica
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} cincoming
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} cincoming
  ,\,\@s{4.1}}%
 \@y{\@s{0}%
  \ensuremath{cincoming[c]}: incoming channel at the client \ensuremath{c
  \.{\in} Client
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} sincoming
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} sincoming
  ,\,\@s{4.61}}%
 \@y{\@s{0}%
  incoming channel at the \ensuremath{Server
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} chins\@s{8.2}}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} chins\@s{8.2}}%
 \@y{\@s{0}%
  a set of chars allowed to insert; this is for model checking
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} intVars \.{\defeq} {\langle}
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} intVars \.{\defeq} {\langle}
  aop ,\, state ,\, cincoming ,\, sincoming ,\, chins {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}} Comm ( Msg ) \.{\defeq}
- {\INSTANCE} CSComm}%
+\@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} Comm \.{\defeq} {\INSTANCE}
+ CSComm}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} Replica \.{\defeq} Client
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} Replica \.{\defeq} Client
  \.{\cup} \{ Server \}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} List \.{\defeq} Seq ( Char
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}} List \.{\defeq} Seq ( Char
  \.{\cup} Range ( InitState ) )\@s{42.53}}%
 \@y{\@s{0}%
  all possible lists
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}} MaxLen \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} MaxLen \.{\defeq}
  Cardinality ( Char ) \.{+} Len ( InitState )}%
 \@y{\@s{0}%
  the max length of lists in any state
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}} ClientNum \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}} ClientNum \.{\defeq}
  Cardinality ( Client )}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}} Priority \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} Priority \.{\defeq}
  {\CHOOSE} f \.{\in} [ Client \.{\rightarrow} 1 \.{\dotdot} ClientNum ] \.{:}
  Injective ( f )}%
-\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}}\midbar\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 The set of all operations. Note: The positions are indexed from 1.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}} Rd \.{\defeq} [ type \.{:}
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} Rd \.{\defeq} [ type \.{:}
  \{\@w{Rd} \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} Del \.{\defeq} [ type \.{:}
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} Del \.{\defeq} [ type \.{:}
  \{\@w{Del} \} ,\, pos \.{:} 1 \.{\dotdot} MaxLen ]}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} Ins\@s{1.35} \.{\defeq} [
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} Ins\@s{1.35} \.{\defeq} [
  type \.{:} \{\@w{Ins} \} ,\, pos\@s{2.27} \.{:} 1 \.{\dotdot} ( MaxLen \.{+}
  1 ) ,\, ch \.{:} Char ,\, pr \.{:} 1 \.{\dotdot} ClientNum ]}%
 \@y{\@s{0}%
@@ -1064,120 +1068,130 @@ The set of all operations. Note: The positions are indexed from 1.
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}} Op \.{\defeq} Ins \.{\cup}
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}} Op \.{\defeq} Ins \.{\cup}
  Del\@s{4.1}}%
 \@y{\@s{0}%
  Now we don\mbox{'}t consider \ensuremath{Rd} operations
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}} SetNewOp ( r ,\, aopr )
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} SetNewAop ( r ,\, aopr )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{16.4} aop \.{'} \.{=} [
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} aop \.{'} \.{=} [
  aop {\EXCEPT} {\bang} [ r ] \.{=} aopr ]}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}} ApplyNewOp ( r ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{16.4} state \.{'} \.{=} [
+ \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}} ApplyNewAop ( r )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} state \.{'} \.{=} [
  state {\EXCEPT} {\bang} [ r ] \.{=} Apply ( aop \.{'} [ r ] ,\, @ ) ]}%
-\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}} TypeOKInt \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{16.4} \.{\land} aop
+\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}} TypeOKInt \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{16.4} \.{\land} aop
  \.{\in} [ Replica \.{\rightarrow} Op \.{\cup} \{ Nop \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{16.4} \.{\land} state
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{16.4} \.{\land} state
  \.{\in} [ Replica \.{\rightarrow} List ]}%
- \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{16.4} \.{\land} chins
+ \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{16.4} \.{\land} chins
  \.{\subseteq} Char}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}} InitInt \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{16.4} \.{\land} aop \.{=}
+\@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} InitInt \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{16.4} \.{\land} aop \.{=}
  [ r \.{\in} Replica \.{\mapsto} Nop ]}%
- \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{16.4} \.{\land}
  state\@s{2.11} \.{=} [ r \.{\in} Replica \.{\mapsto} InitState ]}%
- \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{16.4} \.{\land} chins
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{16.4} \.{\land} chins
  \.{=} Char}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}} DoIns ( DoOp ( \_ ,\, \_ )
+ \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}} DoIns ( DoOp ( \_ ,\, \_ )
  ,\, c ) \.{\defeq}}%
 \@y{\@s{0}%
  Client \ensuremath{c \.{\in} Client} generates an \ensuremath{\@w{Ins}}
  operation.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{16.4} \E\, ins \.{\in}
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{16.4} \E\, ins \.{\in}
  Ins \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{27.72} \.{\land} ins .
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{27.72} \.{\land} ins .
  pos \.{\in} 1 \.{\dotdot} ( Len ( state [ c ] ) \.{+} 1 )}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{27.72} \.{\land} ins . ch
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{27.72} \.{\land} ins . ch
  \.{\in} chins}%
- \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{27.72} \.{\land} ins .
+ \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{27.72} \.{\land} ins .
  pr\@s{0.07} \.{=} Priority [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{27.72} \.{\land} DoOp ( c
+ \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{27.72} \.{\land} DoOp ( c
  ,\, ins )}%
- \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{27.72} \.{\land} chins
+ \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{27.72} \.{\land} chins
  \.{'} \.{=} chins \.{\,\backslash\,} \{ ins . ch \}}%
 \@y{\@s{0}%
  We assume that all inserted elements are unique.
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}} DoDel ( DoOp ( \_ ,\, \_ )
+ \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}} DoDel ( DoOp ( \_ ,\, \_ )
  ,\, c ) \.{\defeq}}%
 \@y{\@s{0}%
  Client \ensuremath{c \.{\in} Client} generates a \ensuremath{\@w{Del}}
  operation.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{16.4} \E\, del \.{\in}
+ \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{16.4} \E\, del \.{\in}
  Del \.{:}}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{27.72} \.{\land} del .
+ \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{27.72} \.{\land} del .
  pos \.{\in} 1 \.{\dotdot} Len ( state [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{27.72} \.{\land} DoOp ( c
+ \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{27.72} \.{\land} DoOp ( c
  ,\, del )}%
- \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{27.72} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{27.72} \.{\land}
  {\UNCHANGED} chins}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}} DoInt ( DoOp ( \_ ,\, \_ )
+ \@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}} DoInt ( DoOp ( \_ ,\, \_ )
  ,\, c ) \.{\defeq}}%
 \@y{\@s{0}%
  Client \ensuremath{c \.{\in} Client} issues an operation.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}\@s{16.4} \.{\land} \.{\lor}
+ \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{16.4} \.{\land} \.{\lor}
  DoIns ( DoOp ,\, c )}%
- \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{27.51} \.{\lor} DoDel (
+ \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{27.51} \.{\lor} DoDel (
  DoOp ,\, c )}%
- \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{16.4} \.{\land}
- ApplyNewOp ( c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{16.4} \.{\land}
+ ApplyNewAop ( c )}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}} RevInt ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}} RevInt ( ClientPerformInt (
+ \_ ,\, \_ ) ,\, c ) \.{\defeq}}%
 \@y{\@s{0}%
- Client \ensuremath{c \.{\in} Client} receives a message from the
- \ensuremath{Server}.
+ Client \ensuremath{c \.{\in} Client} receives and processes a message.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{16.4} \.{\land}
- ApplyNewOp ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} chins}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}} SRevInt \.{\defeq}}%
-\@y{\@s{0}%
- The \ensuremath{Server} receives a message.
-}%
-\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{16.4} \.{\land} Comm
+ {\bang} CRev ( c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}\@s{16.4} \.{\land}
+ ClientPerformInt ( c ,\, Head ( cincoming [ c ] ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}\@s{16.4} \.{\land}
+ ApplyNewAop ( c )}%
  \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{16.4} \.{\land}
- ApplyNewOp ( Server )}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} chins}%
-\@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}}\bottombar\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}} SRevInt ( ServerPerformInt (
+ \_ ) ) \.{\defeq}}%
+\@y{\@s{0}%
+ The \ensuremath{Server} receives and processes a message.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}\@s{16.4} \.{\land}\@s{7.84}
+ Comm {\bang} SRev}%
+ \@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}\@s{16.4} \.{\land}\@s{7.84}
+ ServerPerformInt ( Head ( sincoming ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 90\hspace{1em}}\@s{16.4} \.{\land}\@s{7.84}
+ ApplyNewAop ( Server )}%
+ \@x{\makebox[0pt][r]{\scriptsize 91\hspace{1em}}\@s{16.4} \.{\land}\@s{7.84}
+ {\UNCHANGED} chins}%
+\@x{\makebox[0pt][r]{\scriptsize 92\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
- \ensuremath{Jan} 01 11:32:36 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
+ \ensuremath{Jan} 02 18:56:22 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

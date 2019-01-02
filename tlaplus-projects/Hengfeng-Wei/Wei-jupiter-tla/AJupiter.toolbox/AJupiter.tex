@@ -944,7 +944,7 @@
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  Specification of the \ensuremath{Jupiter} protocol presented by
- \ensuremath{Hagit} \ensuremath{Attiya} and others.
+ \ensuremath{Attiya} et al.
 \end{cpar}%
 \end{lcom}%
 \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} JupiterInterface}%
@@ -989,25 +989,24 @@
  \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} vars \.{\defeq} {\langle}
  intVars ,\, cbuf ,\, crec ,\, sbuf ,\, srec {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} Msg \.{\defeq} [ c \.{:}
- Client ,\, ack \.{:} Nat ,\, op \.{:} Op \.{\cup} \{ Nop \} ] \.{\cup}}%
+\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} AJMsg \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} [ c \.{:} Client
+ ,\, ack \.{:} Nat ,\, op \.{:} Op \.{\cup} \{ Nop \} ] \.{\cup}}%
 \@y{\@s{0}%
- messages sent to the \ensuremath{Server} from a client \ensuremath{c \.{\in}
+ messages sent to the \ensuremath{Server} from client \ensuremath{c \.{\in}
  Client
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{37.42} [ ack \.{:} Nat
- ,\, op \.{:} Op \.{\cup} \{ Nop \} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} [ ack \.{:} Nat ,\,
+ op \.{:} Op \.{\cup} \{ Nop \} ]}%
 \@y{\@s{0}%
  messages broadcast to Clients from the \ensuremath{Server
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} TypeOK \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
- TypeOKInt}%
+\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} TypeOK \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
- Comm ( Msg ) {\bang} TypeOK}%
+ TypeOKInt}%
  \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
  cbuf \.{\in} [ Client \.{\rightarrow} Seq ( Op \.{\cup} \{ Nop \} ) ]}%
  \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
@@ -1020,130 +1019,124 @@
 \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} Init \.{\defeq}}%
 \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land} InitInt}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land} Comm (
- Msg ) {\bang} Init}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\land} cbuf
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land} cbuf
  \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\land}
  crec\@s{2.19} \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{16.4} \.{\land}
  sbuf\@s{0.51} \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\land}
  srec\@s{2.70} \.{=} [ c \.{\in} Client \.{\mapsto} 0 ]}%
-\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} DoOp ( c ,\, op )
+\@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} ClientPerform ( c ,\, m )
  \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{26.06} \.{\land}
- SetNewAop ( c ,\, op )}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{26.06} \.{\land} cbuf
- \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} Append ( @ ,\, op ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{26.06} \.{\land} crec
- \.{'}\@s{2.19} \.{=} [ crec {\EXCEPT} {\bang} [ c ]\@s{2.19} \.{=} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{26.06} \.{\land} Comm (
- Msg ) {\bang} CSend ( [ c \.{\mapsto} c ,\, ack \.{\mapsto} crec [ c ] ,\,
- op \.{\mapsto} op ] )}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} Do ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{22.34} \.{\land} DoInt (
- DoOp ,\, c )}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{22.34} \.{\land}
- {\UNCHANGED} {\langle} sbuf ,\, srec {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} Rev ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{20.94} \.{\land} Comm (
- Msg ) {\bang} CRev ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{20.94} \.{\land} crec
- \.{'} \.{=} [ crec {\EXCEPT} {\bang} [ c ] \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{20.94} \.{\land} \.{\LET}
- m \.{\defeq} Head ( cincoming [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{52.45} cBuf \.{\defeq}
- cbuf [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{52.45} cShiftedBuf
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{16.4} \.{\LET} cBuf
+ \.{\defeq} cbuf [ c ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{36.79} cShiftedBuf
  \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{52.45} xop \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{36.79} xop \.{\defeq}
  XformOpOps ( Xform ,\, m . op ,\, cShiftedBuf )}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{56.55} xcBuf \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{40.89} xcBuf \.{\defeq}
  XformOpsOp ( Xform ,\, cShiftedBuf ,\, m . op )}%
- \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{36.15} \.{\IN} \.{\land}
- cbuf \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} xcBuf ]}%
- \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{56.55} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\IN}\@s{4.09}
+ \.{\land} cbuf \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} xcBuf ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{40.89} \.{\land} crec
+ \.{'}\@s{2.19} \.{=} [ crec {\EXCEPT} {\bang} [ c ]\@s{2.19} \.{=} @ \.{+} 1
+ ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{40.89} \.{\land}
  SetNewAop ( c ,\, xop )}%
- \@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}\@s{20.94} \.{\land} RevInt (
- c )}%
- \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}\@s{20.94} \.{\land}
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}} ServerPerform ( m )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{16.4} \.{\LET} c
+ \.{\defeq} m . c}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{36.79} cBuf \.{\defeq}
+ sbuf [ c ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{36.79} cShiftedBuf
+ \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{36.79} xop \.{\defeq}
+ XformOpOps ( Xform ,\, m . op ,\, cShiftedBuf )}%
+ \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{40.89} xcBuf \.{\defeq}
+ XformOpsOp ( Xform ,\, cShiftedBuf ,\, m . op )}%
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} \.{\IN}\@s{4.09}
+ \.{\land} srec \.{'}\@s{2.19} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{110.65} {\IF} cl \.{=} c
+ \.{\THEN} srec [ cl ] \.{+} 1 \.{\ELSE} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{40.89} \.{\land} sbuf
+ \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{106.55} {\IF} cl \.{=} c
+ \.{\THEN} xcBuf \.{\ELSE} Append ( sbuf [ cl ] ,\, xop ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{40.89} \.{\land}
+ SetNewAop ( Server ,\, xop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}\@s{40.89} \.{\land} Comm
+ {\bang} SSend ( c ,\, [ cl \.{\in} Client \.{\mapsto} [ ack \.{\mapsto} srec
+ [ cl ] ,\, op \.{\mapsto} xop ] ] )}%
+\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}} DoOp ( c ,\, op )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}\@s{26.06} \.{\land}
+ SetNewAop ( c ,\, op )}%
+ \@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}\@s{26.06} \.{\land} cbuf
+ \.{'} \.{=} [ cbuf {\EXCEPT} {\bang} [ c ] \.{=} Append ( @ ,\, op ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{26.06} \.{\land} crec
+ \.{'}\@s{2.19} \.{=} [ crec {\EXCEPT} {\bang} [ c ]\@s{2.19} \.{=} 0 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{26.06} \.{\land} Comm
+ {\bang} CSend ( [ c \.{\mapsto} c ,\, ack \.{\mapsto} crec [ c ] ,\, op
+ \.{\mapsto} op ] )}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}} Do ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{22.34} \.{\land} DoInt (
+ DoOp ,\, c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{22.34} \.{\land}
  {\UNCHANGED} {\langle} sbuf ,\, srec {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}} SRev \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{16.4} \.{\land} Comm (
- Msg ) {\bang} SRev}%
- \@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
- m \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}\@s{47.91} c\@s{3.77}
- \.{\defeq} m . c}%
- \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
- sbuf [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{47.91} cShiftedBuf
- \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{47.91} xop \.{\defeq}
- XformOpOps ( Xform ,\, m . op ,\, cShiftedBuf )}%
- \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{52.01} xcBuf \.{\defeq}
- XformOpsOp ( Xform ,\, cShiftedBuf ,\, m . op )}%
- \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{31.61} \.{\IN} \.{\land}
- srec \.{'}\@s{2.19} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{117.66} {\IF} cl \.{=} c
- \.{\THEN} srec [ cl ] \.{+} 1 \.{\ELSE} 0 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{52.01} \.{\land} sbuf
- \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}\@s{117.66} {\IF} cl \.{=} c
- \.{\THEN} xcBuf \.{\ELSE} Append ( sbuf [ cl ] ,\, xop ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}\@s{52.01} \.{\land}
- SetNewAop ( Server ,\, xop )}%
- \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{52.01} \.{\land} Comm (
- Msg ) {\bang} SSend ( c ,\, [ cl \.{\in} Client \.{\mapsto} [ ack
- \.{\mapsto} srec [ cl ] ,\, op \.{\mapsto} xop ] ] )}%
-\@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{16.4} \.{\land} SRevInt}%
- \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} {\langle} cbuf ,\, crec {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}} Next \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
- \.{\in} Client \.{:} Do ( c ) \.{\lor} Rev ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
+\@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}} Rev ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{20.94} \.{\land} RevInt (
+ ClientPerform ,\, c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{20.94} \.{\land}
+ {\UNCHANGED} {\langle} sbuf ,\, srec {\rangle}}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}} Fairness \.{\defeq}}%
-\@y{\@s{0}%
- There is no requirement that the clients ever generate operations.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{16.4} {\WF}_{ vars} (
+\@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}} SRev \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}\@s{16.4} \.{\land} SRevInt (
+ ServerPerform )}%
+ \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}\@s{16.4} \.{\land}
+ {\UNCHANGED} {\langle} cbuf ,\, crec {\rangle}}%
+\@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}} Next \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
+ \.{\in} Client \.{:} Do ( c ) \.{\lor} Rev ( c )}%
+\@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}\@s{16.4} \.{\lor} SRev}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}} Fairness \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{16.4} {\WF}_{ vars} (
  SRev \.{\lor} \E\, c \.{\in} Client \.{:} Rev ( c ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}} Spec \.{\defeq} Init
+ \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}} Spec \.{\defeq} Init
  \.{\land} {\Box} [ Next ]_{ vars}}%
 \@y{\@s{0}%
  \ensuremath{\.{\land} Fairness
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}} QC \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 83\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}} QC \.{\defeq}}%
 \@y{\@s{0}%
  Quiescent Consistency
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{20.37} Comm ( Msg )
- {\bang} EmptyChannel \.{\implies} Cardinality ( Range ( state ) ) \.{=} 1}%
+ \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{20.37} Comm {\bang}
+ EmptyChannel \.{\implies} Cardinality ( Range ( state ) ) \.{=} 1}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}} {\THEOREM} Spec \.{\implies}
+ \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}} {\THEOREM} Spec \.{\implies}
  {\Box} QC}%
-\@x{\makebox[0pt][r]{\scriptsize 89\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 88\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Wed}
- \ensuremath{Jan} 02 14:25:36 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
+ \ensuremath{Jan} 02 21:37:02 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

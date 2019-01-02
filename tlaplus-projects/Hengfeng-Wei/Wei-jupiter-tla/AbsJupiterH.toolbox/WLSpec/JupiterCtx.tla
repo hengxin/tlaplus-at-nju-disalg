@@ -1,7 +1,6 @@
 ----------------------------- MODULE JupiterCtx -----------------------------
 (*
-Definitions and operators for context-based Jupiter protocols,
-including AbsJupiter, CJupiter, and XJupiter.
+Definitions for context-based Jupiter protocols, including AbsJupiter, CJupiter, and XJupiter.
 *)
 EXTENDS JupiterInterface
 -----------------------------------------------------------------------------
@@ -16,7 +15,7 @@ Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid] \* contexted-based op
 
 ClientOf(cop) == cop.oid.c
 
-COT(lcop, rcop) == \* OT of two Cop(s).                                 
+COT(lcop, rcop) == \* OT of two Cop(s)                                 
     [lcop EXCEPT !.op = Xform(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
 
 UpdateDS(r, oid) == \* update ds[r] to include new oid \in Oid
@@ -27,12 +26,12 @@ TypeOKCtx ==
     /\ ds \in [Replica -> SUBSET Oid]
 
 InitCtx ==
-    /\ cseq = [c \in Client |-> 0]
+    /\ cseq = [c \in Client |-> 1]
     /\ ds = [r \in Replica |-> {}]
     
 DoCtx(c) ==
     /\ cseq' = [cseq EXCEPT ![c] = @ + 1]
-    /\ UpdateDS(c, [c |-> c, seq |-> cseq'[c]])
+    /\ UpdateDS(c, [c |-> c, seq |-> cseq[c]])
 
 RevCtx(c) ==
     /\ UpdateDS(c, Head(cincoming[c]).oid)
@@ -43,5 +42,5 @@ SRevCtx ==
     /\ UNCHANGED cseq
 =============================================================================
 \* Modification History
-\* Last modified Mon Dec 31 18:52:44 CST 2018 by hengxin
+\* Last modified Wed Jan 02 20:44:02 CST 2019 by hengxin
 \* Created Wed Dec 05 20:03:50 CST 2018 by hengxin

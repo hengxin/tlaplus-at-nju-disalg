@@ -3,12 +3,13 @@
 This module declares the parameters and defines the operators that describe
 the interface of a family of Jupiter specs.
 *)
-EXTENDS Integers, SequenceUtils, OT
+EXTENDS SequenceUtils, OT
 -----------------------------------------------------------------------------
 CONSTANTS
-    Char,       \* the set of characters
     Client,     \* the set of client replicas
     Server,     \* the (unique) server replica
+    Msg,        \* the set of messages
+    Char,       \* the set of characters
     InitState   \* the initial state of each replica
 
 ASSUME \* We assume that all inserted elements are unique.
@@ -23,7 +24,7 @@ VARIABLES
 
 intVars == <<aop, state, cincoming, sincoming, chins>>
 ----------------------------------------------------------------------
-Comm(Msg) == INSTANCE CSComm
+Comm == INSTANCE CSComm
 
 Replica == Client \cup {Server}
 
@@ -42,17 +43,22 @@ Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* 
 
 Op == Ins \cup Del  \* Now we don't consider Rd operations
 
-ApplyNewOp(r) ==
-    state' = [state EXCEPT ![r] = Apply(aop', @)]
+SetNewAop(r, aopr) ==
+    aop' = [aop EXCEPT ![r] = aopr]
+
+ApplyNewAop(r) ==
+    state' = [state EXCEPT ![r] = Apply(aop'[r], @)]
 -----------------------------------------------------------------------------
 TypeOKInt ==
-    /\ aop \in Op \cup {Nop}
+    /\ aop \in [Replica -> Op \cup {Nop}]
     /\ state \in [Replica -> List]
+    /\ Comm!TypeOK
     /\ chins \subseteq Char
 
 InitInt ==
-    /\ aop = Nop
+    /\ aop = [r \in Replica |-> Nop]
     /\ state = [r \in Replica |-> InitState]
+    /\ Comm!Init
     /\ chins = Char
     
 DoIns(DoOp(_, _), c) == \* Client c \in Client generates an "Ins" operation.
@@ -72,16 +78,20 @@ DoDel(DoOp(_, _), c) == \* Client c \in Client generates a "Del" operation.
 DoInt(DoOp(_, _), c) == \* Client c \in Client issues an operation.
     /\ \/ DoIns(DoOp, c) 
        \/ DoDel(DoOp, c)
-    /\ ApplyNewOp(c)
+    /\ ApplyNewAop(c)
     
-RevInt(c) == \* Client c \in Client receives a message from the Server.
-    /\ ApplyNewOp(c)
-    /\UNCHANGED chins
+RevInt(ClientPerformInt(_, _), c) == \* Client c \in Client receives and processes a message.
+    /\ Comm!CRev(c)
+    /\ ClientPerformInt(c, Head(cincoming[c]))
+    /\ ApplyNewAop(c)
+    /\ UNCHANGED chins
 
-SRevInt == \* The Server receives a message.
-    /\ ApplyNewOp(Server)
+SRevInt(ServerPerformInt(_)) == \* The Server receives and processes a message.
+    /\ Comm!SRev
+    /\ ServerPerformInt(Head(sincoming))
+    /\ ApplyNewAop(Server)
     /\ UNCHANGED chins
 =============================================================================
 \* Modification History
-\* Last modified Tue Jan 01 11:21:25 CST 2019 by hengxin
+\* Last modified Wed Jan 02 19:01:18 CST 2019 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin
