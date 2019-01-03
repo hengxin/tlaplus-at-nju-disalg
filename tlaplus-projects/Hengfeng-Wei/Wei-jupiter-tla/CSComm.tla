@@ -16,7 +16,7 @@ VARIABLES
 TypeOK == 
     /\ cincoming \in [Client -> Seq(Msg)]
     /\ sincoming \in Seq(Msg)
------------------------------------------------------------------------------
+
 Init == 
     /\ cincoming = [c \in Client |-> <<>>]
     /\ sincoming = <<>>
@@ -32,22 +32,18 @@ CRev(c) == \* Client c receives and consumes a message from the Server.
     /\ cincoming' = [cincoming EXCEPT ![c] = Tail(@)]
     /\ UNCHANGED sincoming
 -----------------------------------------------------------------------------
-(* 
-SRev/SSend below is often used as a subaction. No UNCHANGED in their definitions.                                             
-*)
 SRev == \* The Server receives and consumes a message.      
     /\ sincoming # <<>>
     /\ sincoming' = Tail(sincoming)
 
 SSend(c, cmsg) == \* The Server sents a message cmsg to each client other than c \in Client.
-    /\ cincoming' = [cl \in Client |->
-                        IF cl = c
-                        THEN cincoming[cl]
-                        ELSE Append(cincoming[cl], cmsg[cl])]
+    /\ cincoming' = [cl \in Client |-> IF cl = c 
+                                       THEN cincoming[cl] 
+                                       ELSE Append(cincoming[cl], cmsg[cl])]
 
 SSendSame(c, msg) == \* The Server broadcasts the message msg to all clients other than c \in Client.
     /\ SSend(c, [cl \in Client |-> msg])
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 14:37:41 CST 2019 by hengxin
+\* Last modified Thu Jan 03 09:46:24 CST 2019 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin
