@@ -1,7 +1,6 @@
 -------------------------- MODULE JupiterInterface --------------------------
 (*
-This module declares the parameters and defines the operators that describe
-the interface of a family of Jupiter specs.
+Interface of a family of Jupiter protocols.
 *)
 EXTENDS SequenceUtils, OT
 -----------------------------------------------------------------------------
@@ -22,10 +21,9 @@ VARIABLES
     sincoming,  \* incoming channel at the Server    
     chins   \* a set of chars allowed to insert; this is for model checking
 
+Comm == INSTANCE CSComm
 intVars == <<aop, state, cincoming, sincoming, chins>>
 ----------------------------------------------------------------------
-Comm == INSTANCE CSComm
-
 Replica == Client \cup {Server}
 
 List == Seq(Char \cup Range(InitState))      \* all possible lists
@@ -34,14 +32,11 @@ MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any s
 ClientNum == Cardinality(Client)
 Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
 -----------------------------------------------------------------------------
-(*
-The set of all operations. Note: The positions are indexed from 1.
-*)
 Rd == [type: {"Rd"}]
-Del == [type: {"Del"}, pos: 1 .. MaxLen]
+Del == [type: {"Del"}, pos: 1 .. MaxLen] \* The positions (pos) are indexed from 1.
 Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
 
-Op == Ins \cup Del  \* Now we don't consider Rd operations
+Op == Ins \cup Del  \* The set of all operations (now we don't consider Rd operations).
 
 SetNewAop(r, aopr) ==
     aop' = [aop EXCEPT ![r] = aopr]
@@ -61,7 +56,7 @@ InitInt ==
     /\ Comm!Init
     /\ chins = Char
     
-DoIns(DoOp(_, _), c) == \* Client c \in Client generates an "Ins" operation.
+DoIns(DoOp(_, _), c) == \* Client c \in Client generates and processes an "Ins" operation.
     \E ins \in Ins: 
         /\ ins.pos \in 1 .. (Len(state[c]) + 1) 
         /\ ins.ch \in chins 
@@ -69,29 +64,29 @@ DoIns(DoOp(_, _), c) == \* Client c \in Client generates an "Ins" operation.
         /\ DoOp(c, ins)
         /\ chins' = chins \ {ins.ch} \* We assume that all inserted elements are unique.
 
-DoDel(DoOp(_, _), c) == \* Client c \in Client generates a "Del" operation.
+DoDel(DoOp(_, _), c) == \* Client c \in Client generates and processes a "Del" operation.
     \E del \in Del: 
         /\ del.pos \in 1 .. Len(state[c])
         /\ DoOp(c, del)
         /\ UNCHANGED chins
 
 DoInt(DoOp(_, _), c) == \* Client c \in Client issues an operation.
-    /\ \/ DoIns(DoOp, c) 
+    /\ \/ DoIns(DoOp, c)\* DoOp(c \in Client, op \in Op) 
        \/ DoDel(DoOp, c)
     /\ ApplyNewAop(c)
     
 RevInt(ClientPerformInt(_, _), c) == \* Client c \in Client receives and processes a message.
     /\ Comm!CRev(c)
-    /\ ClientPerformInt(c, Head(cincoming[c]))
+    /\ ClientPerformInt(c, Head(cincoming[c])) \* ClientPerformInt(c \in Client, m \in Msg)
     /\ ApplyNewAop(c)
     /\ UNCHANGED chins
 
 SRevInt(ServerPerformInt(_)) == \* The Server receives and processes a message.
     /\ Comm!SRev
-    /\ ServerPerformInt(Head(sincoming))
+    /\ ServerPerformInt(Head(sincoming)) \* ServerPerformInt(m \in Msg)
     /\ ApplyNewAop(Server)
     /\ UNCHANGED chins
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 19:01:18 CST 2019 by hengxin
+\* Last modified Thu Jan 03 16:39:10 CST 2019 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin

@@ -5,13 +5,11 @@ AJupiter extended with JupiterCtx. This is used to show that AJupiter implements
 EXTENDS JupiterCtx \* TODO: To extend AJupiter
 -----------------------------------------------------------------------------
 VARIABLES cbuf, crec, sbuf, srec, cincomingXJ, sincomingXJ
-
-commXJ == INSTANCE CSComm WITH Msg <- Seq(Cop),
-                cincoming <- cincomingXJ, sincoming <- sincomingXJ
-
 varsEx == <<intVars, ctxVars, cbuf, crec, sbuf, srec, cincomingXJ, sincomingXJ>>
 
 AJMsgEx == [ack: Nat, cop: Cop, oid: Oid] 
+commXJ == INSTANCE CSComm WITH Msg <- Seq(Cop),
+                cincoming <- cincomingXJ, sincoming <- sincomingXJ
 -----------------------------------------------------------------------------
 TypeOKEx == 
     /\ TypeOKInt
@@ -54,10 +52,8 @@ ServerPerformEx(m) ==
         cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf)) 
         xcop == XformOpOps(COT, m.cop, cShiftedBuf) 
         xcBuf == XformOpsOp(COT, cShiftedBuf, m.cop) 
-    IN  /\ srec' = [cl \in Client |-> 
-                        IF cl = c THEN srec[cl] + 1 ELSE 0] 
-        /\ sbuf' = [cl \in Client |-> 
-                        IF cl = c THEN xcBuf ELSE Append(sbuf[cl], xcop)] 
+    IN  /\ srec' = [cl \in Client |-> IF cl = c THEN srec[cl] + 1 ELSE 0] 
+        /\ sbuf' = [cl \in Client |-> IF cl = c THEN xcBuf ELSE Append(sbuf[cl], xcop)] 
         /\ SetNewAop(Server, xcop.op)
         /\ Comm!SSend(c, [cl \in Client |-> [ack |-> srec[cl], cop |-> xcop, oid |-> xcop.oid]])
         /\ commXJ!SSendSame(c, xcop)
@@ -94,5 +90,5 @@ QC == \* Quiescent Consistency
 THEOREM SpecEx => []QC
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 21:50:37 CST 2019 by hengxin
+\* Last modified Thu Jan 03 16:27:19 CST 2019 by hengxin
 \* Created Thu Dec 27 21:15:09 CST 2018 by hengxin

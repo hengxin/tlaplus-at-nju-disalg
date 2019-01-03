@@ -1,7 +1,4 @@
 ----------------------------- MODULE XJupiterH -----------------------------
-(* 
-XJupiterH: XJupiter with a history of all list states across the system.           
-*)
 EXTENDS XJupiter, TLCUtils
 -------------------------------------------------------------
 VARIABLE list
@@ -26,20 +23,15 @@ FairnessH ==
     
 SpecH == InitH /\ [][NextH]_varsH \* /\ FairnessH
 -------------------------------------------------------------
-(* 
-Weak List Consistency (WLSpec)                                    
-*)
-WLSpec == Comm(Cop)!EmptyChannel 
-            => \A l1, l2 \in list: 
-                /\ Injective(l1) 
-                /\ Injective(l2) 
-                /\ Compatible(l1, l2)
+WLSpec == \* The weak list specification
+    Comm!EmptyChannel 
+        => \A l1, l2 \in list: 
+            /\ Injective(l1) 
+            /\ Injective(l2) 
+            /\ Compatible(l1, l2)
 
 THEOREM SpecH => WLSpec
-(* 
-Strong List Consistency (SLSpec)                                  
-*)
 =============================================================================
 \* Modification History
-\* Last modified Sat Dec 15 17:53:03 CST 2018 by hengxin
+\* Last modified Thu Jan 03 16:44:52 CST 2019 by hengxin
 \* Created Wed Oct 10 15:40:13 CST 2018 by hengxin

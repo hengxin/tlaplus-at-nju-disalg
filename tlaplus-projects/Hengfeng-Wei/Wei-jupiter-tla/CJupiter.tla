@@ -81,7 +81,7 @@ Next ==
     \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
 
-Fairness == \* There is no requirement that the clients ever generate operations.
+Fairness == 
     WF_vars(SRev \/ \E c \in Client: Rev(c))
 
 Spec == Init /\ [][Next]_vars \* /\ Fairness
@@ -92,5 +92,5 @@ Compactness == \* Compactness of CJupiter: the CSSes at all replicas are the sam
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 21:01:46 CST 2019 by hengxin
+\* Last modified Thu Jan 03 16:35:20 CST 2019 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

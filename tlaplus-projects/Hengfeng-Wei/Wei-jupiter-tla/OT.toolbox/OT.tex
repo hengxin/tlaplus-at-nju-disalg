@@ -1085,36 +1085,39 @@ Generalized \ensuremath{OT} functions on operation sequences.
  \.{\defeq} XformOpOpsX ( xform ,\, op ,\, ops )}%
  \@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}\@s{16.4} \.{\IN} [ i \.{\in}
  1 \.{\dotdot} Len ( ops ) \.{\mapsto} xform ( ops [ i ] ,\, opX [ i ] ) ]}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Transforms an operation sequence \ensuremath{ops1} against another operation
- sequence \ensuremath{ops2};
- see Definition 2.13 of the paper ``Imine@\ensuremath{TCS06}''.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}} {\RECURSIVE} XformOpsOps (
- \_ ,\, \_ ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}} XformOpsOps ( xform ( \_ ,\,
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}} {\RECURSIVE} XformOpsOps (
+ \_ ,\, \_ ,\, \_ )\@s{12.29}}%
+\@y{\@s{0}%
+ Transforms an operation sequence \ensuremath{ops1} against another one
+ \ensuremath{ops2};
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}} XformOpsOps ( xform ( \_ ,\,
  \_ ) ,\, ops1 ,\, ops2 ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}\@s{16.4} {\IF} ops2 \.{=}
+\@y{\@s{0}%
+ see Definition 2.13 of the paper ``Imine@\ensuremath{TCS06}''.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}\@s{16.4} {\IF} ops2 \.{=}
  {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}\@s{16.4} \.{\THEN} ops1}%
- \@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}\@s{16.4} \.{\ELSE}
+\@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}\@s{16.4} \.{\THEN} ops1}%
+ \@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}\@s{16.4} \.{\ELSE}
  XformOpsOps ( xform ,\, XformOpsOp ( xform ,\, ops1 ,\, Head ( ops2 ) ) ,\,
  Tail ( ops2 ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-\ensuremath{\.{\,\backslash\,}\.{*}} Modification History
+\ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}\.{*} Last} modified \ensuremath{Mon}
- \ensuremath{Dec} 31 19:45:16 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
+ \ensuremath{Jan} 03 16:43:14 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}\.{*}} Created Sun \ensuremath{Jun} 24 15:57:48
+ \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jun} 24 15:57:48
  \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%

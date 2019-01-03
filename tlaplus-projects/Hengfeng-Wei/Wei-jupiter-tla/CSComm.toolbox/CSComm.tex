@@ -941,118 +941,113 @@
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
  {\MODULE} CSComm}\moduleRightDash\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Specification of communication in a Client-Server system model.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} SequenceUtils}%
-\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\CONSTANTS}}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} Client ,\,\@s{1.66}}%
+\@x{\makebox[0pt][r]{\scriptsize 2\hspace{1em}} {\EXTENDS} SequenceUtils}%
+\@x{\makebox[0pt][r]{\scriptsize 3\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 4\hspace{1em}} {\CONSTANTS}}%
+\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}}\@s{16.4} Client ,\,\@s{1.66}}%
 \@y{\@s{0}%
  the set of clients
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Server ,\,}%
+\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}\@s{16.4} Server ,\,}%
 \@y{\@s{0}%
  the (unique) server
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Msg\@s{16.50}}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}\@s{16.4} Msg\@s{16.50}}%
 \@y{\@s{0}%
  the set of messages
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} {\VARIABLES}}%
- \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{16.4} cincoming
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} {\VARIABLES}}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} cincoming
  ,\,\@s{4.1}}%
 \@y{\@s{0}%
  \ensuremath{cincoming[c]}: incoming channel at client \ensuremath{c \.{\in}
  Client
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4}
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4}
  sincoming\@s{10.72}}%
 \@y{\@s{0}%
  incoming channel at the \ensuremath{Server
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} TypeOK \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} TypeOK \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
  cincoming \.{\in} [ Client \.{\rightarrow} Seq ( Msg ) ]}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
  sincoming\@s{0.51} \.{\in} Seq ( Msg )}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} Init \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\land} cincoming
+\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} Init \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land} cincoming
  \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\land}
  sincoming\@s{0.51} \.{=} {\langle} {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} EmptyChannel \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} EmptyChannel \.{\defeq}
  Init}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}} CSend ( msg ) \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} CSend ( msg ) \.{\defeq}}%
 \@y{\@s{0}%
  A client sends a message \ensuremath{msg} to the \ensuremath{Server}.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{16.4} \.{\land} sincoming
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} sincoming
  \.{'} \.{=} Append ( sincoming ,\, msg )}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} cincoming}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} CRev ( c ) \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} CRev ( c ) \.{\defeq}}%
 \@y{\@s{0}%
  Client \ensuremath{c} receives and consumes a message from the
  \ensuremath{Server}.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{24.21} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{24.21} \.{\land}
  cincoming [ c ] \.{\neq} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{24.21} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{24.21} \.{\land}
  cincoming \.{'} \.{=} [ cincoming {\EXCEPT} {\bang} [ c ] \.{=} Tail ( @ )
  ]}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{24.21} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{24.21} \.{\land}
  {\UNCHANGED} sincoming}%
-\@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} SRev \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} SRev \.{\defeq}}%
 \@y{\@s{0}%
  The \ensuremath{Server} receives and consumes a message.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{16.4} \.{\land} sincoming
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\land} sincoming
  \.{\neq} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land} sincoming
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land} sincoming
  \.{'} \.{=} Tail ( sincoming )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}} SSend ( c ,\, cmsg )
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} SSend ( c ,\, cmsg )
  \.{\defeq}}%
 \@y{\@s{0}%
  The \ensuremath{Server} sents a message \ensuremath{cmsg} to each client
  other than \ensuremath{c \.{\in} Client}.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land} cincoming
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land} cincoming
  \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto} {\IF} cl \.{=} c}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{155.61} \.{\THEN}
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{155.61} \.{\THEN}
  cincoming [ cl ]}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{155.61} \.{\ELSE} Append
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{155.61} \.{\ELSE} Append
  ( cincoming [ cl ] ,\, cmsg [ cl ] ) ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}} SSendSame ( c ,\, msg )
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}} SSendSame ( c ,\, msg )
  \.{\defeq}}%
 \@y{\@s{0}%
  The \ensuremath{Server} broadcasts the message \ensuremath{msg} to all
  clients other than \ensuremath{c \.{\in} Client}.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{16.4} \.{\land} SSend ( c
+ \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\land} SSend ( c
  ,\, [ cl \.{\in} Client \.{\mapsto} msg ] )}%
-\@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1060,7 +1055,7 @@ Specification of communication in a Client-Server system model.
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
- \ensuremath{Jan} 03 09:46:24 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{Jan} 03 13:27:34 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

@@ -1,7 +1,4 @@
 ------------------------------- MODULE CSComm -------------------------------
-(* 
-Specification of communication in a Client-Server system model.
-*)
 EXTENDS SequenceUtils
 -----------------------------------------------------------------------------
 CONSTANTS
@@ -45,5 +42,5 @@ SSendSame(c, msg) == \* The Server broadcasts the message msg to all clients oth
     /\ SSend(c, [cl \in Client |-> msg])
 =============================================================================
 \* Modification History
-\* Last modified Thu Jan 03 09:46:24 CST 2019 by hengxin
+\* Last modified Thu Jan 03 13:27:34 CST 2019 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

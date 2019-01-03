@@ -34,13 +34,13 @@ DoCtx(c) ==
     /\ UpdateDS(c, [c |-> c, seq |-> cseq[c]])
 
 RevCtx(c) ==
-    /\ UpdateDS(c, Head(cincoming[c]).oid)
     /\ UNCHANGED cseq
+    /\ UpdateDS(c, Head(cincoming[c]).oid)
     
 SRevCtx ==
-    /\ UpdateDS(Server, Head(sincoming).oid)
     /\ UNCHANGED cseq
+    /\ UpdateDS(Server, Head(sincoming).oid)
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 20:44:02 CST 2019 by hengxin
+\* Last modified Thu Jan 03 13:42:36 CST 2019 by hengxin
 \* Created Wed Dec 05 20:03:50 CST 2018 by hengxin

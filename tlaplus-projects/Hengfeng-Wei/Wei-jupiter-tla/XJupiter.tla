@@ -1,7 +1,6 @@
 ------------------------------ MODULE XJupiter ------------------------------
 (*
 Specification of the Jupiter protocol described in CSCW'2014 by Xu, Sun, and Li.
-We call it XJupiter, with 'X' for "Xu".
 *)
 EXTENDS StateSpace
 -----------------------------------------------------------------------------
@@ -94,5 +93,5 @@ CSSync == \* Each client c \in Client is synchonized with the Server.
 THEOREM Spec => []CSSync
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 22:00:47 CST 2019 by hengxin
+\* Last modified Thu Jan 03 16:18:15 CST 2019 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

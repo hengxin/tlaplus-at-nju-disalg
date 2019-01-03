@@ -6,7 +6,7 @@
 <intAttribute key="dfidDepth" value="100"/>
 <booleanAttribute key="dfidMode" value="false"/>
 <intAttribute key="distributedFPSetCount" value="0"/>
-<stringAttribute key="distributedNetworkInterface" value="192.168.1.103"/>
+<stringAttribute key="distributedNetworkInterface" value="114.212.83.69"/>
 <intAttribute key="distributedNodesCount" value="1"/>
 <stringAttribute key="distributedTLC" value="off"/>
 <stringAttribute key="distributedTLCVMArgs" value=""/>
@@ -19,7 +19,7 @@
 <stringAttribute key="modelBehaviorNext" value=""/>
 <stringAttribute key="modelBehaviorSpec" value="SpecH"/>
 <intAttribute key="modelBehaviorSpecType" value="1"/>
-<stringAttribute key="modelBehaviorVars" value="crec, chins, cbuf, sincoming, state, cincoming, srec, list, sbuf"/>
+<stringAttribute key="modelBehaviorVars" value="crec, chins, cbuf, sincoming, state, cincoming, srec, aop, list, sbuf"/>
 <stringAttribute key="modelComments" value=""/>
 <booleanAttribute key="modelCorrectnessCheckDeadlock" value="false"/>
 <listAttribute key="modelCorrectnessInvariants">
@@ -33,6 +33,7 @@
 <listEntry value="Char;;{a, b, c};1;1"/>
 <listEntry value="InitState;;&lt;&lt;&gt;&gt;;0;0"/>
 <listEntry value="Server;;Server;1;0"/>
+<listEntry value="Msg;;Msg;0;0"/>
 </listAttribute>
 <stringAttribute key="modelParameterContraint" value=""/>
 <listAttribute key="modelParameterDefinitions">
