@@ -993,7 +993,7 @@ Interface of a family of \ensuremath{Jupiter} protocols.
 \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} {\VARIABLES}}%
 \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} aop ,\,\@s{12.29}}%
 \@y{\@s{0}%
- \ensuremath{op[r]}: the actual operation applied at replica \ensuremath{r
+ \ensuremath{aop[r]}: the actual operation applied at replica \ensuremath{r
  \.{\in} Replica
 }}%
 \@xx{}%
@@ -1146,7 +1146,7 @@ Interface of a family of \ensuremath{Jupiter} protocols.
  \@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}} DoInt ( DoOp ( \_ ,\, \_ )
  ,\, c ) \.{\defeq}}%
 \@y{\@s{0}%
- Client \ensuremath{c \.{\in} Client} issues an operation.
+ Client \ensuremath{c \.{\in} Client} generates an operation.
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}\@s{16.4} \.{\land} \.{\lor}
@@ -1160,8 +1160,8 @@ Interface of a family of \ensuremath{Jupiter} protocols.
  \@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}\@s{16.4} \.{\land}
  ApplyNewAop ( c )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}} RevInt ( ClientPerformInt (
- \_ ,\, \_ ) ,\, c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}} RevInt ( ClientPerform ( \_
+ ,\, \_ ) ,\, c ) \.{\defeq}}%
 \@y{\@s{0}%
  Client \ensuremath{c \.{\in} Client} receives and processes a message.
 }%
@@ -1169,9 +1169,9 @@ Interface of a family of \ensuremath{Jupiter} protocols.
  \@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}\@s{16.4} \.{\land} Comm
  {\bang} CRev ( c )}%
  \@x{\makebox[0pt][r]{\scriptsize 80\hspace{1em}}\@s{16.4} \.{\land}
- ClientPerformInt ( c ,\, Head ( cincoming [ c ] ) )}%
+ ClientPerform ( c ,\, Head ( cincoming [ c ] ) )}%
 \@y{\@s{0}%
- \ensuremath{ClientPerformInt(c \.{\in} Client,\, m \.{\in} Msg)
+ \ensuremath{ClientPerform(c \.{\in} Client,\, m \.{\in} Msg)
 }}%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 81\hspace{1em}}\@s{16.4} \.{\land}
@@ -1179,8 +1179,8 @@ Interface of a family of \ensuremath{Jupiter} protocols.
  \@x{\makebox[0pt][r]{\scriptsize 82\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} chins}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}} SRevInt ( ServerPerformInt (
- \_ ) ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 84\hspace{1em}} SRevInt ( ServerPerform ( \_
+ ) ) \.{\defeq}}%
 \@y{\@s{0}%
  The \ensuremath{Server} receives and processes a message.
 }%
@@ -1188,9 +1188,9 @@ Interface of a family of \ensuremath{Jupiter} protocols.
  \@x{\makebox[0pt][r]{\scriptsize 85\hspace{1em}}\@s{16.4} \.{\land}\@s{7.84}
  Comm {\bang} SRev}%
  \@x{\makebox[0pt][r]{\scriptsize 86\hspace{1em}}\@s{16.4} \.{\land}\@s{7.84}
- ServerPerformInt ( Head ( sincoming ) )}%
+ ServerPerform ( Head ( sincoming ) )}%
 \@y{\@s{0}%
- \ensuremath{ServerPerformInt(m \.{\in} Msg)
+ \ensuremath{ServerPerform(m \.{\in} Msg)
 }}%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 87\hspace{1em}}\@s{16.4} \.{\land}\@s{7.84}
@@ -1204,8 +1204,8 @@ Interface of a family of \ensuremath{Jupiter} protocols.
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
- \ensuremath{Jan} 03 16:39:10 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Fri}
+ \ensuremath{Jan} 04 11:46:40 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

@@ -31,12 +31,12 @@ xForm(r, cop) ==
         v == u \cup {cop.oid}
         RECURSIVE xFormHelper(_, _, _, _)
         xFormHelper(uh, vh, coph, xcss) == \* xcss: eXtra css created during transformation
-            IF uh = ds[r] THEN [xcss |-> xcss, xcop |-> coph]
-            ELSE LET fedge == \* the first edge
-                        CHOOSE e \in rcss.edge: 
-                            /\ e.from = uh 
-                            /\ \A uhe \in rcss.edge \ {e}: 
-                                (uhe.from = uh) => tb(e.cop.oid, uhe.cop.oid, serial[r])
+            IF uh = ds[r] THEN [xcop |-> coph, xcss |-> xcss]
+            ELSE LET fedge == \* the first outgoing edge from uh
+                       CHOOSE e \in rcss.edge: 
+                         /\ e.from = uh 
+                         /\ \A uhe \in rcss.edge \ {e}: 
+                             (uhe.from = uh) => tb(e.cop.oid, uhe.cop.oid, serial[r])
                      uprime == fedge.to
                      fcop == fedge.cop
                      coph2fcop == COT(coph, fcop)
@@ -49,9 +49,11 @@ xForm(r, cop) ==
      IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
 
 Perform(r, cop) == 
-    LET xform == xForm(r, cop)  \* xform: [xcss, xcop]
+    LET xform == xForm(r, cop)  \* xform: [xcop, xcss]
      IN /\ css' = [css EXCEPT ![r] = @ (+) xform.xcss]
         /\ SetNewAop(r, xform.xcop.op)
+
+ClientPerform(c, cop) == Perform(c, cop)
 
 ServerPerform(cop) ==
     /\ Perform(Server, cop)
@@ -59,7 +61,7 @@ ServerPerform(cop) ==
 -----------------------------------------------------------------------------
 DoOp(c, op) == 
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq[c]], ctx |-> ds[c]]
-     IN /\ Perform(c, cop)
+     IN /\ ClientPerform(c, cop)
         /\ Comm!CSend(cop)
 
 Do(c) == 
@@ -68,7 +70,7 @@ Do(c) ==
     /\ DoSerial(c)
 
 Rev(c) == 
-    /\ RevInt(Perform, c)
+    /\ RevInt(ClientPerform, c)
     /\ RevCtx(c)
     /\ RevSerial(c)
 
@@ -92,5 +94,5 @@ Compactness == \* Compactness of CJupiter: the CSSes at all replicas are the sam
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Thu Jan 03 16:35:20 CST 2019 by hengxin
+\* Last modified Mon Jan 07 13:19:43 CST 2019 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

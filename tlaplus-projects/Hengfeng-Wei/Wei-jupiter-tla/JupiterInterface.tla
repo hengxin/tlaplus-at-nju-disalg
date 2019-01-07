@@ -15,7 +15,7 @@ ASSUME \* We assume that all inserted elements are unique.
     /\ Range(InitState) \cap Char = {}  \* due to the uniqueness requirement
 ----------------------------------------------------------------------
 VARIABLES 
-    aop,    \* op[r]: the actual operation applied at replica r \in Replica
+    aop,    \* aop[r]: the actual operation applied at replica r \in Replica
     state,  \* state[r]: state (the list content) of replica r \in Replica
     cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
     sincoming,  \* incoming channel at the Server    
@@ -70,23 +70,23 @@ DoDel(DoOp(_, _), c) == \* Client c \in Client generates and processes a "Del" o
         /\ DoOp(c, del)
         /\ UNCHANGED chins
 
-DoInt(DoOp(_, _), c) == \* Client c \in Client issues an operation.
+DoInt(DoOp(_, _), c) == \* Client c \in Client generates an operation.
     /\ \/ DoIns(DoOp, c)\* DoOp(c \in Client, op \in Op) 
        \/ DoDel(DoOp, c)
     /\ ApplyNewAop(c)
     
-RevInt(ClientPerformInt(_, _), c) == \* Client c \in Client receives and processes a message.
+RevInt(ClientPerform(_, _), c) == \* Client c \in Client receives and processes a message.
     /\ Comm!CRev(c)
-    /\ ClientPerformInt(c, Head(cincoming[c])) \* ClientPerformInt(c \in Client, m \in Msg)
+    /\ ClientPerform(c, Head(cincoming[c])) \* ClientPerform(c \in Client, m \in Msg)
     /\ ApplyNewAop(c)
     /\ UNCHANGED chins
 
-SRevInt(ServerPerformInt(_)) == \* The Server receives and processes a message.
+SRevInt(ServerPerform(_)) == \* The Server receives and processes a message.
     /\ Comm!SRev
-    /\ ServerPerformInt(Head(sincoming)) \* ServerPerformInt(m \in Msg)
+    /\ ServerPerform(Head(sincoming)) \* ServerPerform(m \in Msg)
     /\ ApplyNewAop(Server)
     /\ UNCHANGED chins
 =============================================================================
 \* Modification History
-\* Last modified Thu Jan 03 16:39:10 CST 2019 by hengxin
+\* Last modified Fri Jan 04 11:46:40 CST 2019 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin

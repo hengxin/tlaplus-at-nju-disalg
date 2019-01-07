@@ -964,14 +964,14 @@
  \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} cincoming
  ,\,\@s{4.1}}%
 \@y{\@s{0}%
- \ensuremath{cincoming[c]}: incoming channel at client \ensuremath{c \.{\in}
- Client
+ \ensuremath{cincoming[c]}: incoming \ensuremath{FIFO} channel at client
+ \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4}
  sincoming\@s{10.72}}%
 \@y{\@s{0}%
- incoming channel at the \ensuremath{Server
+ incoming \ensuremath{FIFO} channel at the \ensuremath{Server
 }}%
 \@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}}\midbar\@xx{}%
@@ -1027,8 +1027,8 @@
  \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} SSend ( c ,\, cmsg )
  \.{\defeq}}%
 \@y{\@s{0}%
- The \ensuremath{Server} sents a message \ensuremath{cmsg} to each client
- other than \ensuremath{c \.{\in} Client}.
+ The \ensuremath{Server} sents a message \ensuremath{cmsg[cl]} to client
+ \ensuremath{cl} (other than \ensuremath{c}).
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land} cincoming
@@ -1042,7 +1042,7 @@
  \.{\defeq}}%
 \@y{\@s{0}%
  The \ensuremath{Server} broadcasts the message \ensuremath{msg} to all
- clients other than \ensuremath{c \.{\in} Client}.
+ clients other than \ensuremath{c}.
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\land} SSend ( c
@@ -1054,8 +1054,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Thu}
- \ensuremath{Jan} 03 13:27:34 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jan} 05
+ 13:23:29 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
