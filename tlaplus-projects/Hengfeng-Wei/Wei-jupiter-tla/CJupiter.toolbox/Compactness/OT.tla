@@ -58,16 +58,13 @@ XformOpOpsX(xform(_, _), op, ops) == \* Transform an operation op against an ope
 XformOpsOp(xform(_, _), ops, op) == \* Transform an operation sequence ops against an operation op.
     LET opX == XformOpOpsX(xform, op, ops)
     IN  [i \in 1 .. Len(ops) |-> xform(ops[i], opX[i])]
-(*
-Transforms an operation sequence ops1 against another operation sequence ops2;                               
-see Definition 2.13 of the paper "Imine@TCS06".
-*)
-RECURSIVE XformOpsOps(_, _,_)
-XformOpsOps(xform(_, _), ops1, ops2) == 
+
+RECURSIVE XformOpsOps(_, _,_)    \* Transforms an operation sequence ops1 against another one ops2;
+XformOpsOps(xform(_, _), ops1, ops2) == \* see Definition 2.13 of the paper "Imine@TCS06".
     IF ops2 = <<>>
     THEN ops1
     ELSE XformOpsOps(xform, XformOpsOp(xform, ops1, Head(ops2)), Tail(ops2))
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 14:26:19 CST 2019 by hengxin
+\* Last modified Thu Jan 03 16:43:14 CST 2019 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin

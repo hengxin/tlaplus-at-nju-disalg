@@ -21,43 +21,28 @@ Init ==
     /\ InitSerial
     /\ css = [r \in Replica |-> EmptySS]
 -----------------------------------------------------------------------------
-(*
-Iteratively transform cop with a path in the css 
-at replica r \in Replica, following the first edges.
-*)
-xForm(r, cop) ==
-    LET rcss == css[r]
+NextEdge(r, u, ss) == \* Return the first outgoing edge from u in ss at replica r.
+    CHOOSE e \in ss.edge: 
+        /\ e.from = u 
+        /\ \A ue \in ss.edge \ {e}: 
+            (ue.from = u) => tb(e.cop.oid, ue.cop.oid, serial[r])
+    
+xForm(r, cop) == \* Iteratively transform cop with a path in the state space at replica r, 
+    LET rcss == css[r]  \* following the first edges.
         u == Locate(cop, rcss)
-        v == u \cup {cop.oid}
-        RECURSIVE xFormHelper(_, _, _, _)
-        xFormHelper(uh, vh, coph, xcss) == \* xcss: eXtra css created during transformation
-            IF uh = ds[r] THEN [xcop |-> coph, xcss |-> xcss]
-            ELSE LET fedge == \* the first outgoing edge from uh
-                       CHOOSE e \in rcss.edge: 
-                         /\ e.from = uh 
-                         /\ \A uhe \in rcss.edge \ {e}: 
-                             (uhe.from = uh) => tb(e.cop.oid, uhe.cop.oid, serial[r])
-                     uprime == fedge.to
-                     fcop == fedge.cop
-                     coph2fcop == COT(coph, fcop)
-                     fcop2coph == COT(fcop, coph)
-                     vprime == vh \cup {fcop.oid}
-                  IN xFormHelper(uprime, vprime, coph2fcop,
-                        xcss (+) [node |-> {vprime},
-                                  edge |-> {[from |-> vh, to |-> vprime, cop |-> fcop2coph],
-                                            [from |-> uprime, to |-> vprime, cop |-> coph2fcop]}])
-     IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
+        cops == ExtractCopSeq(NextEdge, r, u, rcss)
+    IN  xFormCopCopsSS(cop, cops)
 
 Perform(r, cop) == 
-    LET xform == xForm(r, cop)  \* xform: [xcop, xcss]
-     IN /\ css' = [css EXCEPT ![r] = @ (+) xform.xcss]
+    LET xform == xForm(r, cop)  \* xform: [xcop, xss, lss]
+    IN  /\ css' = [css EXCEPT ![r] = @ (+) xform.xss]
         /\ SetNewAop(r, xform.xcop.op)
 
 ClientPerform(c, cop) == Perform(c, cop)
 
 ServerPerform(cop) ==
     /\ Perform(Server, cop)
-    /\ Comm!SSendSame(ClientOf(cop), cop)  \* broadcast the original operation
+    /\ Comm!SSendSame(ClientOf(cop), cop)  \* broadcast the original cop 
 -----------------------------------------------------------------------------
 DoOp(c, op) == 
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq[c]], ctx |-> ds[c]]
@@ -94,5 +79,5 @@ Compactness == \* Compactness of CJupiter: the CSSes at all replicas are the sam
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Mon Jan 07 13:19:43 CST 2019 by hengxin
+\* Last modified Tue Jan 08 14:03:12 CST 2019 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

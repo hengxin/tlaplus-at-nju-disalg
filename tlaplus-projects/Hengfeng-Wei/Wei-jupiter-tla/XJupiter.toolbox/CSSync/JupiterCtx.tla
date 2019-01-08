@@ -6,7 +6,7 @@ EXTENDS JupiterInterface
 -----------------------------------------------------------------------------
 VARIABLES
     cseq,  \* cseq[c]: local sequence number at client c \in Client
-    ds     \* ds[r]: document state (a set of Oids) of replica r \in Replica
+    ds     \* ds[r]: document state (i.e., a set of Oids) of replica r \in Replica
 
 ctxVars == <<cseq, ds>>
 -----------------------------------------------------------------------------
@@ -15,7 +15,7 @@ Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid] \* contexted-based op
 
 ClientOf(cop) == cop.oid.c
 
-COT(lcop, rcop) == \* OT of two Cop(s)                                 
+COT(lcop, rcop) == \* OT of lcop \in Cop against rcop \in Cop
     [lcop EXCEPT !.op = Xform(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
 
 UpdateDS(r, oid) == \* update ds[r] to include new oid \in Oid
@@ -31,16 +31,16 @@ InitCtx ==
     
 DoCtx(c) ==
     /\ cseq' = [cseq EXCEPT ![c] = @ + 1]
-    /\ UpdateDS(c, [c |-> c, seq |-> cseq[c]])
+    /\ UpdateDS(c, [c |-> c, seq |-> cseq[c]])  \* oid for newly generated operation
 
 RevCtx(c) ==
-    /\ UpdateDS(c, Head(cincoming[c]).oid)
     /\ UNCHANGED cseq
+    /\ UpdateDS(c, Head(cincoming[c]).oid)
     
 SRevCtx ==
-    /\ UpdateDS(Server, Head(sincoming).oid)
     /\ UNCHANGED cseq
+    /\ UpdateDS(Server, Head(sincoming).oid)
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 20:44:02 CST 2019 by hengxin
+\* Last modified Sat Jan 05 13:45:40 CST 2019 by hengxin
 \* Created Wed Dec 05 20:03:50 CST 2018 by hengxin

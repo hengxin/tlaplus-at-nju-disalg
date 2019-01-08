@@ -943,50 +943,166 @@
  {\MODULE} StateSpace}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- The graph representation of \ensuremath{n}-ary ordered state spaces and
- \ensuremath{2D} state spaces
+ The graph representation of \ensuremath{n}-ary ordered state space and
+ \ensuremath{2D} state space
  used in \ensuremath{CJupiter} and \ensuremath{XJupiter}, respectively.
 \end{cpar}%
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} JupiterCtx ,\,
  GraphsUtil}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-A state space is a directed graph with labeled edges.
- Each node is characterized by its context, a set of operations.
- Each edge is labeled with an operation.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} IsSS ( G ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{20.38} \.{\land} IsGraph
- ( G )}%
- \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{20.38} \.{\land} G . node
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} IsSS ( G ) \.{\defeq}}%
+\@y{\@s{0}%
+ A state space is a digraph with labeled edges.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{20.38} \.{\land} IsGraph (
+ G )}%
+\@y{\@s{0}%
+ It is a digraph (represented by a record).
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{20.38} \.{\land} G . node
  \.{\subseteq} ( {\SUBSET} Oid )}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{20.38} \.{\land} G .
+\@y{\@s{0}%
+ Each node represents a document state, \ensuremath{i.e}., a set of
+ \ensuremath{Oid}.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{20.38} \.{\land} G .
  edge\@s{1.53} \.{\subseteq} [ from \.{:} G . node ,\, to \.{:} G . node ,\,
  cop \.{:} Cop ]}%
+\@y{\@s{0}%
+ Each edge is labeled with a \ensuremath{Cop} operation.
+}%
+\@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} EmptySS \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} EmptySS \.{\defeq}
  EmptyGraph}%
+\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} Locate ( cop ,\, ss )
+ \.{\defeq}}%
+\@y{\@s{0}%
+ Locate the (unique) node in state space \ensuremath{ss} that matches the
+ context of cop.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} {\CHOOSE} n \.{\in}
+ ss . node \.{:} n \.{=} cop . ctx}%
 \@pvspace{8.0pt}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
- Locate the node in a state space that matches the context \ensuremath{ctx} of
- cop.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} Locate ( cop ,\, ss )
- \.{\defeq} {\CHOOSE} n \.{\in} ss . node \.{:} n \.{=} cop . ctx}%
-\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} {\RECURSIVE} ExtractCopSeq (
+ \_ ,\, \_ ,\, \_ ,\, \_ )}%
+\@y{\@s{0}%
+ Extract \ensuremath{Cop} sequences starting with \ensuremath{u} in
+ \ensuremath{ss} at replica \ensuremath{r}.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} ExtractCopSeq ( NextEdge (
+ \_ ,\, \_ ,\, \_ ) ,\, r ,\, u ,\, ss ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} {\IF} u \.{=} ds [
+ r ] \.{\THEN} {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\ELSE} \.{\LET}
+ e \.{\defeq} NextEdge ( r ,\, u ,\, ss )}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{47.71} \.{\IN} {\langle}
+ e . cop {\rangle} \.{\circ} ExtractCopSeq ( NextEdge ,\, r ,\, e . to ,\, ss
+ )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} xFormCopCopsSS ( cop ,\,
+ cops ) \.{\defeq}}%
+\@y{\@s{0}%
+ Transform cop against cops (a sequence of \ensuremath{Cop}) on state space.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\LET}
+ {\RECURSIVE} xFormCopCopsSSHelper ( \_ ,\, \_ ,\, \_ )}%
+\@y{\@s{0}%
+ Return the extra state space.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{40.89}
+ xFormCopCopsSSHelper ( coph ,\, copsh ,\, xss ) \.{\defeq}}%
+\@y{\@s{0}%
+ \ensuremath{xss}: the \ensuremath{eXtra} state space
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{57.29} \.{\LET} u
+ \.{\defeq} coph . ctx}%
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{77.69} v\@s{0.45}
+ \.{\defeq} u \.{\cup} \{ coph . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{61.39} uvSS\@s{0.02}
+ \.{\defeq} [ node \.{\mapsto} \{ u ,\, v \} ,\, edge \.{\mapsto} \{ [ from
+ \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto} coph ] \} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{61.39} \.{\IN} {\IF}
+ copsh \.{=} {\langle} {\rangle} \.{\THEN} [ xcop \.{\mapsto} coph ,\, xss
+ \.{\mapsto} xss \.{\oplus} uvSS ,\, lss \.{\mapsto} uvSS ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{81.79} \.{\ELSE} \.{\LET}
+ copprimeh \.{\defeq} Head ( copsh )}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{145.81} uprime\@s{1.77}
+ \.{\defeq} u \.{\cup} \{ copprimeh . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{145.81} vprime\@s{2.53}
+ \.{\defeq} u \.{\cup} \{ coph . oid ,\, copprimeh . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{133.51}
+ coph2copprimeh\@s{4.10} \.{\defeq} COT ( coph ,\, copprimeh )}%
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{137.61} copprimeh2coph
+ \.{\defeq} COT ( copprimeh ,\, coph )}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{117.21} \.{\IN}
+ xFormCopCopsSSHelper ( coph2copprimeh ,\, Tail ( copsh ) ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{149.91} xss \.{\oplus} [
+ node \.{\mapsto} \{ u ,\, v \} ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{178.54} edge\@s{1.53}
+ \.{\mapsto} \{ [ from \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto}
+ coph ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{219.78} [ from
+ \.{\mapsto} u ,\, to \.{\mapsto} uprime ,\, cop \.{\mapsto} copprimeh ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{219.78} [ from
+ \.{\mapsto} v ,\, to\@s{0.45} \.{\mapsto} vprime ,\, cop\@s{0.76}
+ \.{\mapsto} copprimeh2coph ] \} ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} \.{\IN}\@s{4.09}
+ xFormCopCopsSSHelper ( cop ,\, cops ,\, EmptySS )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}} xFormSS ( cop ,\, copprime )
+ \.{\defeq}}%
+\@y{\@s{0}%
+ Transform cop against \ensuremath{copprime} on state space.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\LET} u
+ \.{\defeq} cop . ctx\@s{34.99}}%
+\@y{\@s{0}%
+ Return the extra state space.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{36.79} v\@s{0.45}
+ \.{\defeq} u \.{\cup} \{ cop . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{36.79} uprime \.{\defeq}
+ u \.{\cup} \{ copprime . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{36.79} vprime\@s{0.76}
+ \.{\defeq} u \.{\cup} \{ cop . oid ,\, copprime . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{36.79}
+ cop2copprime\@s{4.09} \.{\defeq} COT ( cop ,\, copprime )}%
+ \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{40.89} copprime2cop
+ \.{\defeq} COT ( copprime ,\, cop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} \.{\IN}\@s{4.09} [
+ node \.{\mapsto} \{ u ,\, v ,\, uprime ,\, vprime \} ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{43.67} edge\@s{1.53}
+ \.{\mapsto} \{ [ from \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto}
+ cop ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{84.91} [ from \.{\mapsto}
+ u ,\, to \.{\mapsto} uprime ,\, cop \.{\mapsto} copprime ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{84.91} [ from \.{\mapsto}
+ v ,\, to\@s{0.45} \.{\mapsto} vprime ,\, cop\@s{0.76} \.{\mapsto}
+ copprime2cop ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{84.91} [ from \.{\mapsto}
+ uprime ,\, to \.{\mapsto} vprime ,\, cop \.{\mapsto} cop2copprime ] \} ]}%
+\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
- \ensuremath{Dec} 19 18:35:13 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
+ \ensuremath{Jan} 08 14:33:51 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

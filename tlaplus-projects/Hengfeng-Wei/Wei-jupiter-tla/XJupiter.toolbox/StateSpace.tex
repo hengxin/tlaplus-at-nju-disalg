@@ -991,15 +991,16 @@
  ss . node \.{:} n \.{=} cop . ctx}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} {\RECURSIVE} ExtractCopSeq (
- \_ ,\, \_ ,\, \_ )}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} ExtractCopSeq ( u ,\, ss ,\,
- cur ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} {\IF} u \.{=} cur
- \.{\THEN} {\langle} {\rangle}}%
+ \_ ,\, \_ ,\, \_ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} ExtractCopSeq ( NextEdge (
+ \_ ,\, \_ ,\, \_ ) ,\, r ,\, u ,\, ss ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} {\IF} u \.{=} ds [
+ r ] \.{\THEN} {\langle} {\rangle}}%
  \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\ELSE} \.{\LET}
- e \.{\defeq} {\CHOOSE} e \.{\in} ss . edge \.{:} e . from \.{=} u}%
+ e \.{\defeq} NextEdge ( r ,\, u ,\, ss )}%
  \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{47.71} \.{\IN} {\langle}
- e . cop {\rangle} \.{\circ} ExtractCopSeq ( e . to ,\, ss ,\, cur )}%
+ e . cop {\rangle} \.{\circ} ExtractCopSeq ( NextEdge ,\, r ,\, e . to ,\, ss
+ )}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} xFormSS ( cop ,\, copprime )
  \.{\defeq}}%
@@ -1062,8 +1063,8 @@
  \.{\defeq} [ node \.{\mapsto} \{ u ,\, v \} ,\, edge \.{\mapsto} \{ [ from
  \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto} coph ] \} ]}%
  \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{61.39} \.{\IN} {\IF}
- copsh \.{=} {\langle} {\rangle} \.{\THEN} [ lss \.{\mapsto} uvSS ,\, xss
- \.{\mapsto} xss \.{\oplus} uvSS ]}%
+ copsh \.{=} {\langle} {\rangle} \.{\THEN} [ xcop \.{\mapsto} coph ,\, xss
+ \.{\mapsto} xss \.{\oplus} uvSS ,\, lss \.{\mapsto} uvSS ]}%
  \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{81.79} \.{\ELSE} \.{\LET}
  copprimeh \.{\defeq} Head ( copsh )}%
  \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{145.81} uprime\@s{1.77}
@@ -1096,7 +1097,7 @@
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
- \ensuremath{Jan} 08 07:15:01 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{Jan} 08 13:47:19 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
