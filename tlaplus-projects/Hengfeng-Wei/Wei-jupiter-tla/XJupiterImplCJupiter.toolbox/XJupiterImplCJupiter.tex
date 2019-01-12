@@ -978,7 +978,7 @@
  \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land}
  op2ss\@s{2.50} \.{=} {\langle} {\rangle}}%
  \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\land} c2ssX
- \.{=} [ c \.{\in} Client \.{\mapsto} EmptyGraph ]}%
+ \.{=} [ c \.{\in} Client \.{\mapsto} EmptySS ]}%
 \@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} DoImpl ( c ) \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\land} DoEx ( c
@@ -1004,7 +1004,7 @@
  \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{56.11} c\@s{1.57}
  \.{\defeq} ClientOf ( cop )}%
  \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{35.71} xform\@s{1.16}
- \.{\defeq} xForm ( cop ,\, s2ss [ c ] ,\, ds [ Server ] )\@s{4.1}}%
+ \.{\defeq} xForm ( NextEdge ,\, Server ,\, cop ,\, s2ss [ c ] )\@s{4.1}}%
 \@y{\@s{0}%
  \ensuremath{TODO}: performance\.{!!}!
 }%
@@ -1023,8 +1023,8 @@
 \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\lor} SRevImpl}%
 \@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}} FairnessImpl \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{16.4} \.{\land} {\WF}_{
- varsImpl} ( SRevImpl \.{\lor} \E\, c \.{\in} Client \.{:} RevImpl ( c ) )}%
+ \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{16.4} {\WF}_{ varsImpl} (
+ SRevImpl \.{\lor} \E\, c \.{\in} Client \.{:} RevImpl ( c ) )}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}} SpecImpl \.{\defeq} InitImpl
  \.{\land} {\Box} [ NextImpl ]_{ varsImpl}}%
@@ -1059,8 +1059,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
- \ensuremath{Jan} 02 21:15:54 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jan} 12
+ 15:56:20 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

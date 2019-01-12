@@ -1,8 +1,8 @@
 ------------------------------ MODULE AJupiter ------------------------------
 (* 
-Specification of the Jupiter protocol presented by Hagit Attiya and others.
+Specification of the Jupiter protocol presented by Attiya et al.
 *)
-EXTENDS JupiterInterface
+EXTENDS JupiterInterface, BufferStateSpace
 -----------------------------------------------------------------------------
 VARIABLES
     cbuf,    \* cbuf[c]: buffer for locally generated operations at client c \in Client
@@ -33,24 +33,18 @@ Init ==
     /\ srec = [c \in Client |-> 0]
 -----------------------------------------------------------------------------
 ClientPerform(c, m) == 
-    LET cBuf == cbuf[c]  
-        cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))  
-        xop == XformOpOps(Xform, m.op, cShiftedBuf) 
-        xcBuf == XformOpsOp(Xform, cShiftedBuf, m.op)
-    IN  /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
+    LET xform == xFormShift(OT, m.op, cbuf[c], m.ack + 1) \* [xop, xops]
+    IN  /\ cbuf' = [cbuf EXCEPT ![c] = xform.xops]
         /\ crec' = [crec EXCEPT ![c] = @ + 1]
-        /\ SetNewAop(c, xop)
+        /\ SetNewAop(c, xform.xop)
 
 ServerPerform(m) == 
-    LET c == m.c             
-        cBuf == sbuf[c]      
-        cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))
-        xop == XformOpOps(Xform, m.op, cShiftedBuf) 
-        xcBuf == XformOpsOp(Xform, cShiftedBuf, m.op) 
-    IN  /\ srec' = [cl \in Client |-> 
-                          IF cl = c THEN srec[cl] + 1 ELSE 0] 
+    LET     c == m.c             
+        xform == xFormShift(OT, m.op, sbuf[c], m.ack + 1) \* [xop, xops]
+          xop == xform.xop
+    IN  /\ srec' = [cl \in Client |-> IF cl = c THEN srec[cl] + 1 ELSE 0] 
         /\ sbuf' = [cl \in Client |->
-                         IF cl = c THEN xcBuf ELSE Append(sbuf[cl], xop)] 
+                         IF cl = c THEN xform.xops ELSE Append(sbuf[cl], xop)] 
         /\ SetNewAop(Server, xop)
         /\ Comm!SSend(c, [cl \in Client |-> [ack |-> srec[cl], op |-> xop]])
 -----------------------------------------------------------------------------
@@ -87,5 +81,5 @@ QC == \* Quiescent Consistency
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 21:35:34 CST 2019 by hengxin
+\* Last modified Sat Jan 12 21:02:28 CST 2019 by hengxin
 \* Created Satchins,  Jun 23 17:14:18 CST 2018 by hengxin

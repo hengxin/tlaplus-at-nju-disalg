@@ -27,14 +27,8 @@ NextEdge(r, u, ss) == \* Return the first outgoing edge from u in ss at replica 
         /\ \A ue \in ss.edge \ {e}: 
             (ue.from = u) => tb(e.cop.oid, ue.cop.oid, serial[r])
     
-xForm(r, cop) == \* Iteratively transform cop with a path in the state space at replica r, 
-    LET rcss == css[r]  \* following the first edges.
-        u == Locate(cop, rcss)
-        cops == ExtractCopSeq(NextEdge, r, u, rcss)
-    IN  xFormCopCopsSS(cop, cops)
-
 Perform(r, cop) == 
-    LET xform == xForm(r, cop)  \* xform: [xcop, xss, lss]
+    LET xform == xForm(NextEdge, r, cop, css[r])  \* xform: [xcop, xss]
     IN  /\ css' = [css EXCEPT ![r] = @ (+) xform.xss]
         /\ SetNewAop(r, xform.xcop.op)
 
@@ -79,5 +73,5 @@ Compactness == \* Compactness of CJupiter: the CSSes at all replicas are the sam
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Tue Jan 08 14:03:12 CST 2019 by hengxin
+\* Last modified Wed Jan 09 14:19:00 CST 2019 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

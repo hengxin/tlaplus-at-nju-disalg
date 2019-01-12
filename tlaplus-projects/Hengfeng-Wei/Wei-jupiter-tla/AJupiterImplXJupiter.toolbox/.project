@@ -26,6 +26,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/AJupiterImplXJupiter.tla</locationURI>
 		</link>
 		<link>
+			<name>BufferStateSpace.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/BufferStateSpace.tla</location>
+		</link>
+		<link>
 			<name>CSComm.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/CSComm.tla</locationURI>
@@ -34,6 +39,11 @@
 			<name>FunctionUtils.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/FunctionUtils.tla</locationURI>
+		</link>
+		<link>
+			<name>GraphStateSpace.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/GraphStateSpace.tla</location>
 		</link>
 		<link>
 			<name>GraphsUtil.tla</name>

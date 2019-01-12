@@ -2,7 +2,7 @@
 (*
 Specification of the Jupiter protocol described in CSCW'2014 by Xu, Sun, and Li.
 *)
-EXTENDS StateSpace
+EXTENDS GraphStateSpace
 -----------------------------------------------------------------------------
 VARIABLES
     c2ss,  \* c2ss[c]: the 2D state space (2ss, for short) at client c \in Client
@@ -21,22 +21,17 @@ Init ==
     /\ c2ss = [c \in Client |-> EmptySS]
     /\ s2ss = [c \in Client |-> EmptySS]
 -----------------------------------------------------------------------------
-NextEdge(r, u, ss) == \* Return the (unique) outgoing edge from u in 2D state space ss.
-    CHOOSE e \in ss.edge: e.from = u
-
-xForm(r, cop, ss) == \* Transform cop with an operation sequence in 2D state space ss.
-    LET u == Locate(cop, ss)
-     cops == ExtractCopSeq(NextEdge, r, u, ss)
-    IN  xFormCopCopsSS(cop, cops)
+NextEdge(r, u, ss) == \* Return the unique outgoing edge from u in 2D state space ss
+    CHOOSE e \in ss.edge: e.from = u \* before a transformation at u (r is not used).
 
 ClientPerform(c, cop) == 
-    LET xform == xForm(c, cop, c2ss[c]) \* xform: [xcop, xss, lss]
+    LET xform == xForm(NextEdge, c, cop, c2ss[c]) \* xform: [xcop, xss, lss]
     IN  /\ c2ss' = [c2ss EXCEPT ![c] = @ (+) xform.xss]
         /\ SetNewAop(c, xform.xcop.op)
 
 ServerPerform(cop) == 
     LET c == ClientOf(cop)
-    xform == xForm(Server, cop, s2ss[c]) \* xform: [xcop, xss, lss]
+    xform == xForm(NextEdge, Server, cop, s2ss[c]) \* xform: [xcop, xss, lss]
      xcop == xform.xcop
     IN  /\ s2ss' = [cl \in Client |-> IF cl = c 
                                       THEN s2ss[cl] (+) xform.xss 
@@ -79,5 +74,5 @@ CSSync == \* Each client c \in Client is synchonized with the Server.
 THEOREM Spec => []CSSync
 =============================================================================
 \* Modification History
-\* Last modified Tue Jan 08 14:28:48 CST 2019 by hengxin
+\* Last modified Sat Jan 12 15:57:05 CST 2019 by hengxin
 \* Created Tue Oct 09 16:33:18 CST 2018 by hengxin

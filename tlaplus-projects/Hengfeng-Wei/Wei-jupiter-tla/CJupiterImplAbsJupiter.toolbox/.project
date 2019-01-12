@@ -41,6 +41,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/FunctionUtils.tla</locationURI>
 		</link>
 		<link>
+			<name>GraphStateSpace.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/GraphStateSpace.tla</location>
+		</link>
+		<link>
 			<name>GraphsUtil.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/GraphsUtil.tla</locationURI>
@@ -74,6 +79,11 @@
 			<name>SequenceUtils.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/SequenceUtils.tla</locationURI>
+		</link>
+		<link>
+			<name>SetStateSpace.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/SetStateSpace.tla</location>
 		</link>
 		<link>
 			<name>SetUtils.tla</name>

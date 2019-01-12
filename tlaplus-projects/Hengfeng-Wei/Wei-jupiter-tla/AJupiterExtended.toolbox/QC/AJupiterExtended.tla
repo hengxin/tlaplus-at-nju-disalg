@@ -2,17 +2,14 @@
 (*
 AJupiter extended with JupiterCtx. This is used to show that AJupiter implements XJupiter.
 *)
-EXTENDS JupiterCtx \* TODO: To extend AJupiter
+EXTENDS JupiterCtx, BufferStateSpace \* TODO: To extend AJupiter
 -----------------------------------------------------------------------------
 VARIABLES cbuf, crec, sbuf, srec, cincomingXJ, sincomingXJ
-
-commXJ == INSTANCE CSComm WITH Msg <- Seq(Cop),
-                cincoming <- cincomingXJ, sincoming <- sincomingXJ
-
-commXJVars == <<cincomingXJ, sincomingXJ>>
-varsEx == <<intVars, ctxVars, cbuf, crec, sbuf, srec, commXJVars>>
+varsEx == <<intVars, ctxVars, cbuf, crec, sbuf, srec, cincomingXJ, sincomingXJ>>
 
 AJMsgEx == [ack: Nat, cop: Cop, oid: Oid] 
+commXJ == INSTANCE CSComm WITH Msg <- Seq(Cop),
+                cincoming <- cincomingXJ, sincoming <- sincomingXJ
 -----------------------------------------------------------------------------
 TypeOKEx == 
     /\ TypeOKInt
@@ -32,29 +29,6 @@ InitEx ==
     /\ cbuf = [c \in Client |-> <<>>]
     /\ sbuf = [c \in Client |-> <<>>]
 -----------------------------------------------------------------------------
-ClientPerformEx(c, m) == 
-    LET cBuf == cbuf[c]  
-        cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))  
-        xcop == XformOpOps(COT, m.cop, cShiftedBuf) 
-        xcBuf == XformOpsOp(COT, cShiftedBuf, m.cop) 
-    IN  /\ cbuf' = [cbuf EXCEPT ![c] = xcBuf]
-        /\ crec' = [crec EXCEPT ![c] = @ + 1]
-        /\ SetNewAop(c, xcop.op)
-
-ServerPerformEx(m) == 
-    LET c == ClientOf(m.cop)
-        cBuf == sbuf[c]      
-        cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf)) 
-        xcop == XformOpOps(COT, m.cop, cShiftedBuf) 
-        xcBuf == XformOpsOp(COT, cShiftedBuf, m.cop) 
-    IN  /\ srec' = [cl \in Client |-> 
-                        IF cl = c THEN srec[cl] + 1 ELSE 0] 
-        /\ sbuf' = [cl \in Client |-> 
-                        IF cl = c THEN xcBuf ELSE Append(sbuf[cl], xcop)] 
-        /\ SetNewAop(Server, xcop.op)
-        /\ Comm!SSend(c, [cl \in Client |-> [ack |-> srec[cl], cop |-> xcop, oid |-> xcop.oid]])
-        /\ commXJ!SSendSame(c, xcop)
------------------------------------------------------------------------------
 DoOpEx(c, op) == 
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq[c]], ctx |-> ds[c]]
     IN /\ crec' = [crec EXCEPT ![c] = 0] 
@@ -63,6 +37,22 @@ DoOpEx(c, op) ==
        /\ Comm!CSend([ack |-> crec[c], cop |-> cop, oid |-> cop.oid])
        /\ commXJ!CSend(cop)
 
+ClientPerformEx(c, m) == 
+    LET xform == xFormShift(COT, m.cop, cbuf[c], m.ack + 1)
+    IN  /\ cbuf' = [cbuf EXCEPT ![c] = xform.xops]
+        /\ crec' = [crec EXCEPT ![c] = @ + 1]
+        /\ SetNewAop(c, xform.xop.op)
+
+ServerPerformEx(m) == 
+    LET c == ClientOf(m.cop)
+        xform == xFormShift(COT, m.cop, sbuf[c], m.ack + 1)
+        xcop == xform.xop
+    IN  /\ srec' = [cl \in Client |-> IF cl = c THEN srec[cl] + 1 ELSE 0] 
+        /\ sbuf' = [cl \in Client |-> IF cl = c THEN xform.xops ELSE Append(sbuf[cl], xcop)] 
+        /\ SetNewAop(Server, xcop.op)
+        /\ Comm!SSend(c, [cl \in Client |-> [ack |-> srec[cl], cop |-> xcop, oid |-> xcop.oid]])
+        /\ commXJ!SSendSame(c, xcop)
+-----------------------------------------------------------------------------
 DoEx(c) == 
     /\ DoInt(DoOpEx, c)
     /\ DoCtx(c)
@@ -84,7 +74,7 @@ NextEx ==
     \/ \E c \in Client: DoEx(c) \/ RevEx(c)
     \/ SRevEx
 
-FairnessEx == \* There is no requirement that the clients ever generate operations.
+FairnessEx == 
     WF_varsEx(SRevEx \/ \E c \in Client: RevEx(c))
     
 SpecEx == InitEx /\ [][NextEx]_varsEx \* /\ FairnessEx
@@ -95,5 +85,5 @@ QC == \* Quiescent Consistency
 THEOREM SpecEx => []QC
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 21:48:17 CST 2019 by hengxin
+\* Last modified Sat Jan 12 21:08:20 CST 2019 by hengxin
 \* Created Thu Dec 27 21:15:09 CST 2018 by hengxin

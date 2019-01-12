@@ -942,13 +942,13 @@
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
  {\MODULE} AJupiterImplXJupiter}\moduleRightDash\@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 2\hspace{1em}} {\EXTENDS} AJupiterExtended
- ,\, StateSpace}%
+ ,\, GraphStateSpace}%
 \@x{\makebox[0pt][r]{\scriptsize 3\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 4\hspace{1em}} {\VARIABLES} c2ss ,\, s2ss}%
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} varsImpl \.{\defeq} {\langle}
  varsEx ,\, c2ss ,\, s2ss {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
+\@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} TypeOKImpl \.{\defeq}}%
 \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} \.{\land} TypeOKEx}%
  \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} \.{\land} \A\, c
@@ -960,7 +960,7 @@
  \.{=} [ c \.{\in} Client \.{\mapsto} EmptySS ]}%
  \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land}
  s2ss\@s{0.25} \.{=} [ c \.{\in} Client \.{\mapsto} EmptySS ]}%
-\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}}\midbar\@xx{}%
+\@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} DoOpImpl ( c ,\, op )
  \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land} DoOpEx (
@@ -1000,9 +1000,9 @@
  \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{57.11} cShiftedBuf
  \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
  \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{61.21} xform \.{\defeq}
- xFormCopCopsSS ( m . cop ,\, cShiftedBuf )}%
+ xFormCopCops ( m . cop ,\, cShiftedBuf )}%
 \@y{\@s{0}%
- [\ensuremath{lss}, \ensuremath{xss}]
+ [\ensuremath{xcop}, \ensuremath{xss}, \ensuremath{lss}]
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{36.71} \.{\IN}\@s{4.09}
@@ -1022,9 +1022,9 @@
  \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{47.91} cShiftedBuf
  \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
  \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{52.01} xform \.{\defeq}
- xFormCopCopsSS ( m . cop ,\, cShiftedBuf )}%
+ xFormCopCops ( m . cop ,\, cShiftedBuf )}%
 \@y{\@s{0}%
- [\ensuremath{lss}, \ensuremath{xss}]
+ [\ensuremath{xcop}, \ensuremath{xss}, \ensuremath{lss}]
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{27.51} \.{\IN}\@s{4.09}
@@ -1065,8 +1065,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
- \ensuremath{Jan} 02 22:05:18 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jan} 12
+ 21:10:50 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

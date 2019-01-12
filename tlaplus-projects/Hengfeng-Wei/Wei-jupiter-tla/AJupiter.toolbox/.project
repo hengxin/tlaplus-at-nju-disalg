@@ -21,6 +21,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/AJupiter.tla</locationURI>
 		</link>
 		<link>
+			<name>BufferStateSpace.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/BufferStateSpace.tla</location>
+		</link>
+		<link>
 			<name>CSComm.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/CSComm.tla</locationURI>

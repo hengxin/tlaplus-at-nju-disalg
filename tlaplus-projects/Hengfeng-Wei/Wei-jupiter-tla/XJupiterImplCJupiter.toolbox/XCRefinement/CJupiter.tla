@@ -2,7 +2,7 @@
 (*
 Specification of our own CJupiter protocol; see Wei@OPODIS'2018.
 *)
-EXTENDS StateSpace, JupiterSerial
+EXTENDS JupiterSerial, GraphStateSpace 
 -----------------------------------------------------------------------------
 VARIABLES
     css    \* css[r]: the n-ary ordered state space at replica r \in Replica
@@ -21,45 +21,26 @@ Init ==
     /\ InitSerial
     /\ css = [r \in Replica |-> EmptySS]
 -----------------------------------------------------------------------------
-(*
-Iteratively transform cop with a path in the css 
-at replica r \in Replica, following the first edges.
-*)
-xForm(r, cop) ==
-    LET rcss == css[r]
-        u == Locate(cop, rcss)
-        v == u \cup {cop.oid}
-        RECURSIVE xFormHelper(_, _, _, _)
-        xFormHelper(uh, vh, coph, xcss) == \* xcss: eXtra css created during transformation
-            IF uh = ds[r] THEN [xcss |-> xcss, xcop |-> coph]
-            ELSE LET fedge == \* the first edge
-                        CHOOSE e \in rcss.edge: 
-                            /\ e.from = uh 
-                            /\ \A uhe \in rcss.edge \ {e}: 
-                                (uhe.from = uh) => tb(e.cop.oid, uhe.cop.oid, serial[r])
-                     uprime == fedge.to
-                     fcop == fedge.cop
-                     coph2fcop == COT(coph, fcop)
-                     fcop2coph == COT(fcop, coph)
-                     vprime == vh \cup {fcop.oid}
-                  IN xFormHelper(uprime, vprime, coph2fcop,
-                        xcss (+) [node |-> {vprime},
-                                  edge |-> {[from |-> vh, to |-> vprime, cop |-> fcop2coph],
-                                            [from |-> uprime, to |-> vprime, cop |-> coph2fcop]}])
-     IN xFormHelper(u, v, cop, [node |-> {v}, edge |-> {[from |-> u, to |-> v, cop |-> cop]}])
-
+NextEdge(r, u, ss) ==     \* Return the first outgoing edge from u 
+    CHOOSE e \in ss.edge: \* in n-ary ordered space ss at replica r.
+        /\ e.from = u 
+        /\ \A ue \in ss.edge \ {e}: 
+            (ue.from = u) => tb(e.cop.oid, ue.cop.oid, serial[r])
+    
 Perform(r, cop) == 
-    LET xform == xForm(r, cop)  \* xform: [xcss, xcop]
-     IN /\ css' = [css EXCEPT ![r] = @ (+) xform.xcss]
+    LET xform == xForm(NextEdge, r, cop, css[r])  \* xform: [xcop, xss, lss]
+    IN  /\ css' = [css EXCEPT ![r] = @ (+) xform.xss]
         /\ SetNewAop(r, xform.xcop.op)
+
+ClientPerform(c, cop) == Perform(c, cop)
 
 ServerPerform(cop) ==
     /\ Perform(Server, cop)
-    /\ Comm!SSendSame(ClientOf(cop), cop)  \* broadcast the original operation
+    /\ Comm!SSendSame(ClientOf(cop), cop)  \* broadcast the original cop 
 -----------------------------------------------------------------------------
 DoOp(c, op) == 
     LET cop == [op |-> op, oid |-> [c |-> c, seq |-> cseq[c]], ctx |-> ds[c]]
-     IN /\ Perform(c, cop)
+     IN /\ ClientPerform(c, cop)
         /\ Comm!CSend(cop)
 
 Do(c) == 
@@ -68,7 +49,7 @@ Do(c) ==
     /\ DoSerial(c)
 
 Rev(c) == 
-    /\ RevInt(Perform, c)
+    /\ RevInt(ClientPerform, c)
     /\ RevCtx(c)
     /\ RevSerial(c)
 
@@ -81,7 +62,7 @@ Next ==
     \/ \E c \in Client: Do(c) \/ Rev(c)
     \/ SRev
 
-Fairness == \* There is no requirement that the clients ever generate operations.
+Fairness == 
     WF_vars(SRev \/ \E c \in Client: Rev(c))
 
 Spec == Init /\ [][Next]_vars \* /\ Fairness
@@ -92,5 +73,5 @@ Compactness == \* Compactness of CJupiter: the CSSes at all replicas are the sam
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 21:01:46 CST 2019 by hengxin
+\* Last modified Sat Jan 12 15:11:38 CST 2019 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

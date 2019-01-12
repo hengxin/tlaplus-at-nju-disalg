@@ -4,9 +4,8 @@ XJupiter extended with serial views. This is used to show that XJupiter implemen
 *)
 EXTENDS XJupiter, JupiterSerial
 -----------------------------------------------------------------------------
-VARIABLES   \* Simulate the behavior of propagating original operations in CJupiter.
+VARIABLES \* Simulate the behavior of propagating original operations in CJupiter.
     cincomingCJ, \* cincoming for CJupiter which contains original operations 
-                 \* instead of transformed ones in XJupiter
     sincomingCJ  \* (not used)
 
 commCJVars == <<cincomingCJ, sincomingCJ>>
@@ -17,13 +16,13 @@ commCJ == INSTANCE CSComm WITH Msg <- Seq(Cop),
 -----------------------------------------------------------------------------
 TypeOKEx == 
     /\ TypeOK
-    /\ commCJ!TypeOK
     /\ TypeOKSerial
+    /\ commCJ!TypeOK
 
 InitEx == 
     /\ Init
-    /\ commCJ!Init
     /\ InitSerial
+    /\ commCJ!Init
 
 DoEx(c) == 
     /\ Do(c)
@@ -32,14 +31,14 @@ DoEx(c) ==
 
 RevEx(c) == 
     /\ Rev(c)
-    /\ commCJ!CRev(c)
     /\ RevSerial(c)
+    /\ commCJ!CRev(c)
 
 SRevEx == 
     /\ SRev
-    /\ LET cop == Head(sincoming)
-        IN /\ commCJ!SSendSame(ClientOf(cop), cop)
     /\ SRevSerial
+    /\ LET cop == Head(sincoming)
+       IN  commCJ!SSendSame(ClientOf(cop), cop)
     /\ UNCHANGED sincomingCJ
 -----------------------------------------------------------------------------
 NextEx == 
@@ -47,10 +46,10 @@ NextEx ==
     \/ SRevEx
 
 FairnessEx ==
-    /\ WF_varsEx(SRevEx \/ \E c \in Client: RevEx(c))
+    WF_varsEx(SRevEx \/ \E c \in Client: RevEx(c))
 
 SpecEx == InitEx /\ [][NextEx]_varsEx \* /\ FairnessEx
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 21:13:58 CST 2019 by hengxin
+\* Last modified Sat Jan 12 15:56:59 CST 2019 by hengxin
 \* Created Tue Oct 30 20:32:27 CST 2018 by hengxin

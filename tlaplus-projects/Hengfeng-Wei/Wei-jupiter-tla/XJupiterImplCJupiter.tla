@@ -16,7 +16,7 @@ TypeOKImpl ==
 InitImpl ==
     /\ InitEx
     /\ op2ss = <<>>
-    /\ c2ssX = [c \in Client |-> EmptyGraph]
+    /\ c2ssX = [c \in Client |-> EmptySS]
 
 DoImpl(c) ==
     /\ DoEx(c)
@@ -32,7 +32,7 @@ SRevImpl ==
     /\ SRevEx
     /\ LET cop == Head(sincoming)
              c == ClientOf(cop)
-         xform == xForm(cop, s2ss[c], ds[Server])  \* TODO: performance!!!
+         xform == xForm(NextEdge, Server, cop, s2ss[c])  \* TODO: performance!!!
             ss == xform.xss
        IN op2ss' = op2ss @@ (cop.oid :> [node |-> ss.node, edge |-> ss.edge])
     /\ UNCHANGED c2ssX
@@ -42,7 +42,7 @@ NextImpl ==
     \/ SRevImpl
     
 FairnessImpl ==
-    /\ WF_varsImpl(SRevImpl \/ \E c \in Client: RevImpl(c)) 
+    WF_varsImpl(SRevImpl \/ \E c \in Client: RevImpl(c)) 
 
 SpecImpl == InitImpl /\ [][NextImpl]_varsImpl \* /\ FairnessImpl
 -----------------------------------------------------------------------------
@@ -56,5 +56,5 @@ CJ == INSTANCE CJupiter
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Wed Jan 02 21:15:54 CST 2019 by hengxin
+\* Last modified Sat Jan 12 15:56:20 CST 2019 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

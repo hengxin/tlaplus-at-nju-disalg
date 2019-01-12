@@ -983,126 +983,283 @@
  \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} Locate ( cop ,\, ss )
  \.{\defeq}}%
 \@y{\@s{0}%
- Locate the (unique) node in state space \ensuremath{ss} that matches the
- context of cop.
+ Locate the node in state space \ensuremath{ss} that matches the context of
+ cop.
 }%
 \@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} {\CHOOSE} n \.{\in}
  ss . node \.{:} n \.{=} cop . ctx}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} {\RECURSIVE} ExtractCopSeq (
- \_ ,\, \_ ,\, \_ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} xForm ( NextEdge ( \_ ,\, \_
+ ,\, \_ ) ,\, r ,\, cop ,\, ss ) \.{\defeq}}%
 \@y{\@s{0}%
- Extract \ensuremath{Cop} sequences starting with \ensuremath{u} in
- \ensuremath{ss} at replica \ensuremath{r}.
+ Transform cop with an operation sequence
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} ExtractCopSeq ( NextEdge (
- \_ ,\, \_ ,\, \_ ) ,\, r ,\, u ,\, ss ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} {\IF} u \.{=} ds [
- r ] \.{\THEN} {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\ELSE} \.{\LET}
- e \.{\defeq} NextEdge ( r ,\, u ,\, ss )}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{47.71} \.{\IN} {\langle}
- e . cop {\rangle} \.{\circ} ExtractCopSeq ( NextEdge ,\, r ,\, e . to ,\, ss
- )}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} xFormCopCopsSS ( cop ,\,
- cops ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\LET} u
+ \.{\defeq} Locate ( cop ,\, ss )\@s{50.35}}%
 \@y{\@s{0}%
+ in state space \ensuremath{ss} at replica \ensuremath{r}.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{36.79} v\@s{0.45}
+ \.{\defeq} u \.{\cup} \{ cop . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{36.79} {\RECURSIVE}
+ xFormHelper ( \_ ,\, \_ ,\, \_ ,\, \_ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{40.89} xFormHelper ( uh
+ ,\, vh ,\, coph ,\, xss ) \.{\defeq}}%
+\@y{\@s{0}%
+ \ensuremath{xss}: \ensuremath{eXtra} \ensuremath{ss} created during
+ transformation
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{57.29} {\IF} uh \.{=} ds
+ [ r ] \.{\THEN} [ xcop \.{\mapsto} coph ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{148.99} xss \.{\mapsto}
+ xss ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{148.99} lss\@s{2.08}
+ \.{\mapsto} [ node \.{\mapsto} \{ vh \} ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{180.96} edge\@s{1.53}
+ \.{\mapsto} \{ [ from \.{\mapsto} uh ,\, to \.{\mapsto} vh ,\, cop
+ \.{\mapsto} coph ] \} ] ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{57.29} \.{\ELSE} \.{\LET}
+ e \.{\defeq} NextEdge ( r ,\, uh ,\, ss )}%
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{109.01} copprime
+ \.{\defeq} e . cop}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{109.01} uprime \.{\defeq}
+ e . to}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{109.01} vprime\@s{0.76}
+ \.{\defeq} vh \.{\cup} \{ copprime . oid \}}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{113.11} coph2copprime
+ \.{\defeq} COT ( coph ,\, copprime )}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{113.11} copprime2coph
+ \.{\defeq} COT ( copprime ,\, coph )}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{88.61} \.{\IN}\@s{4.09}
+ xFormHelper ( uprime ,\, vprime ,\, coph2copprime ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{125.41} xss \.{\oplus} [
+ node \.{\mapsto} \{ vprime \} ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{154.04} edge\@s{1.53}
+ \.{\mapsto} \{ [ from \.{\mapsto} vh ,\, to \.{\mapsto} vprime ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{202.16} cop\@s{1.78}
+ \.{\mapsto} copprime2coph ] ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{195.28} [ from
+ \.{\mapsto} uprime ,\, to \.{\mapsto} vprime ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{202.16} cop\@s{1.78}
+ \.{\mapsto} coph2copprime ] \} ] )}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{16.4} \.{\IN}\@s{4.09}
+ xFormHelper ( u ,\, v ,\, cop ,\, [ node \.{\mapsto} \{ v \} ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{149.63} edge\@s{1.53}
+ \.{\mapsto} \{ [ from \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto}
+ cop ] \} ] )}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}}%
+\@y{%
+ \ensuremath{{\RECURSIVE}} \ensuremath{ExtractCopSeq(\_,\, \_,\, \_,\, \_)
+ \.{\,\backslash\,}}* Extract a \ensuremath{Cop} sequence starting with
+ \ensuremath{u} in \ensuremath{ss} at replica \ensuremath{r}.
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}}%
+\@y{%
+ \ensuremath{ExtractCopSeq(NextEdge(\_,\, \_,\, \_),\, r,\, u,\, ss)
+ \.{\defeq}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}}%
+\@y{\@s{7.5}%
+ \ensuremath{{\IF}} \ensuremath{u \.{=} ds[r] \.{\THEN} {\langle}{\rangle}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}}%
+\@y{\@s{7.5}%
+ \ensuremath{\.{\ELSE} \.{\LET} e \.{\defeq} NextEdge(r,\, u,\, ss)
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}}%
+\@y{\@s{20.0}%
+ \ensuremath{\.{\IN} {\langle}e.cop{\rangle} \.{\circ}
+ ExtractCopSeq(NextEdge,\, r,\, e.to,\, ss)
+}}%
+\@xx{}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}}%
+\@y{%
+ \ensuremath{xFormCopCopsSS(cop,\, cops) \.{\defeq} \.{\,\backslash\,}}*
  Transform cop against cops (a sequence of \ensuremath{Cop}) on state space.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\LET}
- {\RECURSIVE} xFormCopCopsSSHelper ( \_ ,\, \_ ,\, \_ )}%
-\@y{\@s{0}%
- Return the extra state space.
+\@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}}%
+\@y{\@s{7.5}%
+ \ensuremath{\.{\LET} {\RECURSIVE}} \ensuremath{xFormCopCopsSSHelper(\_,\,
+ \_,\, \_)
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}}%
+\@y{\@s{17.5}%
+ \ensuremath{xFormCopCopsSSHelper(coph,\, copsh,\, xss) \.{\defeq}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}}%
+\@y{\@s{27.5}%
+ \ensuremath{\.{\LET} u \.{\defeq} coph.ctx
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}}%
+\@y{\@s{37.5}%
+ \ensuremath{v \.{\defeq} u \.{\cup} \{coph.oid\}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}}%
+\@y{\@s{30.0}%
+ \ensuremath{uvSS \.{\defeq}} [\ensuremath{node \.{\mapsto} \{u,\, v\}},
+ \ensuremath{edge \.{\mapsto} \{[from \.{\mapsto} u,\, to \.{\mapsto} v,\,
+ cop \.{\mapsto} coph]\}}]
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{40.89}
- xFormCopCopsSSHelper ( coph ,\, copsh ,\, xss ) \.{\defeq}}%
-\@y{\@s{0}%
- \ensuremath{xss}: the \ensuremath{eXtra} state space
+\@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}}%
+\@y{\@s{30.0}%
+ \ensuremath{\.{\IN} {\IF}} \ensuremath{copsh \.{=} {\langle}{\rangle}
+ \.{\THEN}} [\ensuremath{xcop \.{\mapsto} coph}, \ensuremath{xss \.{\mapsto}
+ xss \.{\oplus} uvSS}, \ensuremath{lss \.{\mapsto} uvSS}]
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{57.29} \.{\LET} u
- \.{\defeq} coph . ctx}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{77.69} v\@s{0.45}
- \.{\defeq} u \.{\cup} \{ coph . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{61.39} uvSS\@s{0.02}
- \.{\defeq} [ node \.{\mapsto} \{ u ,\, v \} ,\, edge \.{\mapsto} \{ [ from
- \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto} coph ] \} ]}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{61.39} \.{\IN} {\IF}
- copsh \.{=} {\langle} {\rangle} \.{\THEN} [ xcop \.{\mapsto} coph ,\, xss
- \.{\mapsto} xss \.{\oplus} uvSS ,\, lss \.{\mapsto} uvSS ]}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{81.79} \.{\ELSE} \.{\LET}
- copprimeh \.{\defeq} Head ( copsh )}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{145.81} uprime\@s{1.77}
- \.{\defeq} u \.{\cup} \{ copprimeh . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{145.81} vprime\@s{2.53}
- \.{\defeq} u \.{\cup} \{ coph . oid ,\, copprimeh . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{133.51}
- coph2copprimeh\@s{4.10} \.{\defeq} COT ( coph ,\, copprimeh )}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{137.61} copprimeh2coph
- \.{\defeq} COT ( copprimeh ,\, coph )}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{117.21} \.{\IN}
- xFormCopCopsSSHelper ( coph2copprimeh ,\, Tail ( copsh ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{149.91} xss \.{\oplus} [
- node \.{\mapsto} \{ u ,\, v \} ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{178.54} edge\@s{1.53}
- \.{\mapsto} \{ [ from \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto}
- coph ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{219.78} [ from
- \.{\mapsto} u ,\, to \.{\mapsto} uprime ,\, cop \.{\mapsto} copprimeh ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{219.78} [ from
- \.{\mapsto} v ,\, to\@s{0.45} \.{\mapsto} vprime ,\, cop\@s{0.76}
- \.{\mapsto} copprimeh2coph ] \} ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} \.{\IN}\@s{4.09}
- xFormCopCopsSSHelper ( cop ,\, cops ,\, EmptySS )}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}} xFormSS ( cop ,\, copprime )
- \.{\defeq}}%
-\@y{\@s{0}%
+\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}}%
+\@y{\@s{37.5}%
+ \ensuremath{\.{\ELSE} \.{\LET} copprimeh \.{\defeq} Head(copsh)
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}}%
+\@y{\@s{67.5}%
+ \ensuremath{uprime \.{\defeq} u \.{\cup} \{copprimeh.oid\}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 57\hspace{1em}}}%
+\@y{\@s{67.5}%
+ \ensuremath{vprime \.{\defeq} u \.{\cup} \{coph.oid,\, copprimeh.oid\}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 58\hspace{1em}}}%
+\@y{\@s{60.0}%
+ \ensuremath{coph2copprimeh \.{\defeq} COT(coph,\, copprimeh)
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 59\hspace{1em}}}%
+\@y{\@s{60.0}%
+ \ensuremath{copprimeh2coph \.{\defeq} COT(copprimeh,\, coph)
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 60\hspace{1em}}}%
+\@y{\@s{52.5}%
+ \ensuremath{\.{\IN} xFormCopCopsSSHelper(coph2copprimeh,\, Tail(copsh),\,
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 61\hspace{1em}}}%
+\@y{\@s{67.5}%
+ \ensuremath{xss \.{\oplus}} [\ensuremath{node \.{\mapsto} \{u,\, v\}},
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 62\hspace{1em}}}%
+\@y{\@s{90.0}%
+ \ensuremath{edge \.{\mapsto} \{[from \.{\mapsto} u,\, to \.{\mapsto} v,\,
+ cop \.{\mapsto} coph],\,
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 63\hspace{1em}}}%
+\@y{\@s{115.0}%
+ [\ensuremath{from \.{\mapsto} u}, \ensuremath{to \.{\mapsto} uprime},
+ \ensuremath{cop \.{\mapsto} copprimeh}],
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 64\hspace{1em}}}%
+\@y{\@s{115.0}%
+ [\ensuremath{from \.{\mapsto} v}, \ensuremath{to \.{\mapsto} vprime},
+ \ensuremath{cop \.{\mapsto} copprimeh2coph}]\ensuremath{\}}])
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 65\hspace{1em}}}%
+\@y{\@s{7.5}%
+ \ensuremath{\.{\IN} xFormCopCopsSSHelper(cop,\, cops,\, EmptySS)
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 66\hspace{1em}}}%
+\@y{}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 67\hspace{1em}}}%
+\@y{%
+ \ensuremath{xFormSS(cop,\, copprime) \.{\defeq} \.{\,\backslash\,}}*
  Transform cop against \ensuremath{copprime} on state space.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\LET} u
- \.{\defeq} cop . ctx\@s{34.99}}%
-\@y{\@s{0}%
+\@x{\makebox[0pt][r]{\scriptsize 68\hspace{1em}}}%
+\@y{\@s{7.5}%
+ \ensuremath{\.{\LET} u \.{\defeq} cop.ctx\@s{15.0}\.{\,\backslash\,}}*
  Return the extra state space.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{36.79} v\@s{0.45}
- \.{\defeq} u \.{\cup} \{ cop . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{36.79} uprime \.{\defeq}
- u \.{\cup} \{ copprime . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{36.79} vprime\@s{0.76}
- \.{\defeq} u \.{\cup} \{ cop . oid ,\, copprime . oid \}}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{36.79}
- cop2copprime\@s{4.09} \.{\defeq} COT ( cop ,\, copprime )}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{40.89} copprime2cop
- \.{\defeq} COT ( copprime ,\, cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{16.4} \.{\IN}\@s{4.09} [
- node \.{\mapsto} \{ u ,\, v ,\, uprime ,\, vprime \} ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{43.67} edge\@s{1.53}
- \.{\mapsto} \{ [ from \.{\mapsto} u ,\, to \.{\mapsto} v ,\, cop \.{\mapsto}
- cop ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{84.91} [ from \.{\mapsto}
- u ,\, to \.{\mapsto} uprime ,\, cop \.{\mapsto} copprime ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{84.91} [ from \.{\mapsto}
- v ,\, to\@s{0.45} \.{\mapsto} vprime ,\, cop\@s{0.76} \.{\mapsto}
- copprime2cop ] ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}}\@s{84.91} [ from \.{\mapsto}
- uprime ,\, to \.{\mapsto} vprime ,\, cop \.{\mapsto} cop2copprime ] \} ]}%
-\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 69\hspace{1em}}}%
+\@y{\@s{17.5}%
+ \ensuremath{v \.{\defeq} u \.{\cup} \{cop.oid\}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 70\hspace{1em}}}%
+\@y{\@s{17.5}%
+ \ensuremath{uprime \.{\defeq} u \.{\cup} \{copprime.oid\}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 71\hspace{1em}}}%
+\@y{\@s{17.5}%
+ \ensuremath{vprime \.{\defeq} u \.{\cup} \{cop.oid,\, copprime.oid\}
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 72\hspace{1em}}}%
+\@y{\@s{17.5}%
+ \ensuremath{cop2copprime \.{\defeq} COT(cop,\, copprime)
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 73\hspace{1em}}}%
+\@y{\@s{17.5}%
+ \ensuremath{copprime2cop \.{\defeq} COT(copprime,\, cop)
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 74\hspace{1em}}}%
+\@y{\@s{7.5}%
+ \ensuremath{\.{\IN}} [\ensuremath{node \.{\mapsto} \{u,\, v,\, uprime,\,
+ vprime\}},
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 75\hspace{1em}}}%
+\@y{\@s{20.0}%
+ \ensuremath{edge \.{\mapsto} \{[from \.{\mapsto} u,\, to \.{\mapsto} v,\,
+ cop \.{\mapsto} cop],\,
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 76\hspace{1em}}}%
+\@y{\@s{45.0}%
+ [\ensuremath{from \.{\mapsto} u}, \ensuremath{to \.{\mapsto} uprime},
+ \ensuremath{cop \.{\mapsto} copprime}],
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 77\hspace{1em}}}%
+\@y{\@s{45.0}%
+ [\ensuremath{from \.{\mapsto} v}, \ensuremath{to \.{\mapsto} vprime},
+ \ensuremath{cop \.{\mapsto} copprime2cop}],
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 78\hspace{1em}}}%
+\@y{\@s{45.0}%
+ [\ensuremath{from \.{\mapsto} uprime}, \ensuremath{to \.{\mapsto} vprime},
+ \ensuremath{cop \.{\mapsto} cop2copprime}]\ensuremath{\}}]
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 79\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Tue}
- \ensuremath{Jan} 08 14:33:51 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Wed}
+ \ensuremath{Jan} 09 16:00:02 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
