@@ -940,103 +940,66 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} JupiterCtx}\moduleRightDash\@xx{}%
+ {\MODULE} Op}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- Definitions for context-based \ensuremath{Jupiter} protocols, including
- \ensuremath{AbsJupiter}, \ensuremath{CJupiter}, and \ensuremath{XJupiter}.
+Definition and operator for list operations.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} JupiterInterface
- ,\, OT}%
+\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} SystemModel}%
 \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\VARIABLES}}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} cseq ,\,\@s{4.1}}%
+ \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} Rd \.{\defeq} [ type \.{:}
+ \{\@w{Rd} \} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} Del \.{\defeq} [ type \.{:}
+ \{\@w{Del} \} ,\, pos \.{:} 1 \.{\dotdot} MaxLen ]}%
 \@y{\@s{0}%
- \ensuremath{cseq[c]}: local sequence number at client \ensuremath{c \.{\in}
- Client
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} ds\@s{18.45}}%
-\@y{\@s{0}%
- \ensuremath{ds[r]}: document state (\ensuremath{i.e}., a set of
- \ensuremath{Oids}) of replica \ensuremath{r \.{\in} Replica
-}}%
-\@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}} ctxVars \.{\defeq} {\langle}
- cseq ,\, ds {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} Oid\@s{1.13} \.{\defeq} [ c
- \.{:} Client ,\, seq \.{:} Nat ]\@s{4.1}}%
-\@y{\@s{0}%
- operation identifier
+ The positions (\ensuremath{pos}) are indexed from 1.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} Cop \.{\defeq} [ op \.{:} Op
- \.{\cup} \{ Nop \} ,\, oid \.{:} Oid ,\, ctx \.{:} {\SUBSET} Oid ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} Ins\@s{1.35} \.{\defeq} [
+ type \.{:} \{\@w{Ins} \} ,\, pos\@s{2.27} \.{:} 1 \.{\dotdot} ( MaxLen \.{+}
+ 1 ) ,\, ch \.{:} Char ,\, pr \.{:} 1 \.{\dotdot} ClientNum ]}%
 \@y{\@s{0}%
- contexted-based \ensuremath{op
-}}%
-\@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} ClientOf ( cop ) \.{\defeq}
- cop . oid . c}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} COT ( lcop ,\, rcop )
- \.{\defeq}}%
-\@y{\@s{0}%
- \ensuremath{OT} of \ensuremath{lcop \.{\in} Cop} against \ensuremath{rcop
- \.{\in} Cop
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{27.19} [ lcop {\EXCEPT}
- {\bang} . op \.{=} OT ( lcop . op ,\, rcop . op ) ,\, {\bang} . ctx \.{=} @
- \.{\cup} \{ rcop . oid \} ]}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} UpdateDS ( r ,\, oid )
- \.{\defeq}}%
-\@y{\@s{0}%
- update \ensuremath{ds[r]} to include new \ensuremath{oid \.{\in} Oid
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} ds \.{'} \.{=} [ ds
- {\EXCEPT} {\bang} [ r ] \.{=} @ \.{\cup} \{ oid \} ]}%
-\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} TypeOKCtx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{\in} [ Client \.{\rightarrow} Nat ]}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\land} ds
- \.{\in} [ Replica \.{\rightarrow} {\SUBSET} Oid ]}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} InitCtx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{=} [ c \.{\in} Client \.{\mapsto} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land} ds \.{=}
- [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} DoCtx ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{'} \.{=} [ cseq {\EXCEPT} {\bang} [ c ] \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land} UpdateDS
- ( c ,\, [ c \.{\mapsto} c ,\, seq \.{\mapsto} cseq [ c ] ] )\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{oid} for newly generated operation
+ \ensuremath{pr}: priority
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} RevCtx ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} cseq}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{16.4} \.{\land} UpdateDS
- ( c ,\, Head ( cincoming [ c ] ) . oid )}%
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}} Op \.{\defeq} Ins \.{\cup}
+ Del\@s{4.1}}%
+\@y{\@s{0}%
+ The set of all operations (now we don\mbox{'}t consider \ensuremath{Rd}
+ operations).
+}%
+\@xx{}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} SRevCtx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} cseq}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\land} UpdateDS
- ( Server ,\, Head ( sincoming ) . oid )}%
-\@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} Nop \.{\defeq} PickNone ( Op
+ )}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} Apply ( op ,\, l )
+ \.{\defeq}}%
+\@y{\@s{0}%
+ Apply operation \ensuremath{op} on list \ensuremath{l}.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} {\CASE} op \.{=}
+ Nop \.{\rightarrow} l}%
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{24.59} {\Box}\@s{10.30}
+ op . type \.{=}\@w{Rd} \.{\rightarrow} l}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{24.59} {\Box}\@s{10.30}
+ op . type \.{=}\@w{Del} \.{\rightarrow} DeleteElement ( l ,\, op . pos )}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{24.59} {\Box}\@s{10.30}
+ op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} InsertElement ( l ,\, op .
+ ch ,\, op . pos )}%
+\@y{\@s{0}%
+ append to the end
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{265.34}}%
+\@y{\@s{0}%
+ if \ensuremath{op.pos \.{=} Len(l) \.{+} 1
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1044,12 +1007,12 @@
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jan} 13
- 10:13:17 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ 10:06:16 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Wed} \ensuremath{Dec} 05
- 20:03:50 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Tue} \ensuremath{Aug} 28
+ 14:58:54 \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>OpOperators</name>
+	<name>SystemModel</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -21,11 +21,6 @@
 			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/FunctionUtils.tla</location>
 		</link>
 		<link>
-			<name>OpOperators.tla</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/OpOperators.tla</locationURI>
-		</link>
-		<link>
 			<name>SequenceUtils.tla</name>
 			<type>1</type>
 			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/SequenceUtils.tla</location>
@@ -34,6 +29,11 @@
 			<name>SetUtils.tla</name>
 			<type>1</type>
 			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/SetUtils.tla</location>
+		</link>
+		<link>
+			<name>SystemModel.tla</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/SystemModel.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

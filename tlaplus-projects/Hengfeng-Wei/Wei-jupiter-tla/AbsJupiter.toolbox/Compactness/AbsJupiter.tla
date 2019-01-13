@@ -21,24 +21,7 @@ Init ==
     /\ InitSerial
     /\ copss = [r \in Replica |-> {}]
 -----------------------------------------------------------------------------
-\*RECURSIVE xForm(_, _)   \* Transform cop at replica r \in Replica.
-\*xForm(r, cop) ==        \* Return the transformed cop and copss[r] after transformation.
-\*    LET ctxDiff == ds[r] \ cop.ctx  \* THEOREM: cop.ctx \subseteq ds[r]
-\*        RECURSIVE xFormHelper(_, _, _)
-\*        xFormHelper(coph, ctxDiffh, copssr) == 
-\*            IF ctxDiffh = {} THEN [xcop |-> coph, xcopss |-> copssr]
-\*            ELSE LET foph == CHOOSE op \in ctxDiffh: \* the first op in serial
-\*                                \A opprime \in ctxDiffh \ {op}: 
-\*                                    tb(op, opprime, serial[r])
-\*                     fcoph == CHOOSE op \in copssr: \* THEOREM: Existence of fcoph
-\*                                op.oid = foph /\ op.ctx = coph.ctx 
-\*                     xcoph == COT(coph, fcoph)
-\*                    xfcoph == COT(fcoph, coph)
-\*                 IN  xFormHelper(xcoph, ctxDiffh \ {foph}, 
-\*                                        copssr \cup {xcoph, xfcoph})
-\*    IN  xFormHelper(cop, ctxDiff, copss[r] \cup {cop}) 
-
-NextCop(r, cop, ss, ctx) == 
+NextCop(r, cop, ss, ctx) == \* Return the next fcop \in Cop against which cop is to be transformed.
     LET foid == CHOOSE oid \in ctx: \* the first oid in ctx according to serial[r]
                     \A id \in ctx \ {oid}: tb(oid, id, serial[r])
     IN  CHOOSE fcop \in ss: \* THEOREM: Existence of fcop
@@ -90,5 +73,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Thu Jan 10 08:24:06 CST 2019 by hengxin
+\* Last modified Thu Jan 10 08:34:12 CST 2019 by hengxin
 \* Created Wed Dec 05 19:55:52 CST 2018 by hengxin

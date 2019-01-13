@@ -940,103 +940,96 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} JupiterCtx}\moduleRightDash\@xx{}%
+ {\MODULE} OT}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- Definitions for context-based \ensuremath{Jupiter} protocols, including
- \ensuremath{AbsJupiter}, \ensuremath{CJupiter}, and \ensuremath{XJupiter}.
+Specification of \ensuremath{OT} (Operational Transformation) functions.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} JupiterInterface
- ,\, OT}%
+\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} Op}%
 \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\VARIABLES}}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} cseq ,\,\@s{4.1}}%
-\@y{\@s{0}%
- \ensuremath{cseq[c]}: local sequence number at client \ensuremath{c \.{\in}
- Client
-}}%
-\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} ds\@s{18.45}}%
-\@y{\@s{0}%
- \ensuremath{ds[r]}: document state (\ensuremath{i.e}., a set of
- \ensuremath{Oids}) of replica \ensuremath{r \.{\in} Replica
-}}%
-\@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}} ctxVars \.{\defeq} {\langle}
- cseq ,\, ds {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} Oid\@s{1.13} \.{\defeq} [ c
- \.{:} Client ,\, seq \.{:} Nat ]\@s{4.1}}%
-\@y{\@s{0}%
- operation identifier
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} Cop \.{\defeq} [ op \.{:} Op
- \.{\cup} \{ Nop \} ,\, oid \.{:} Oid ,\, ctx \.{:} {\SUBSET} Oid ]}%
-\@y{\@s{0}%
- contexted-based \ensuremath{op
-}}%
-\@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} ClientOf ( cop ) \.{\defeq}
- cop . oid . c}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} COT ( lcop ,\, rcop )
+ \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} OTII ( lins ,\, rins )
  \.{\defeq}}%
 \@y{\@s{0}%
- \ensuremath{OT} of \ensuremath{lcop \.{\in} Cop} against \ensuremath{rcop
- \.{\in} Cop
+ \ensuremath{lins} is transformed against \ensuremath{rins
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{27.19} [ lcop {\EXCEPT}
- {\bang} . op \.{=} OT ( lcop . op ,\, rcop . op ) ,\, {\bang} . ctx \.{=} @
- \.{\cup} \{ rcop . oid \} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{24.11} {\IF} lins . pos
+ \.{<} rins . pos}%
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{24.11} \.{\THEN} lins}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{24.11} \.{\ELSE} {\IF}
+ lins . pos \.{>} rins . pos}%
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{55.42} \.{\THEN} [ lins
+ {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{55.42} \.{\ELSE} {\IF}
+ lins . ch \.{=} rins . ch}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{86.73} \.{\THEN} Nop}%
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{86.73} \.{\ELSE} {\IF}
+ lins . pr \.{>} rins . pr}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{118.04} \.{\THEN} [ lins
+ {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{118.04} \.{\ELSE} lins}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} UpdateDS ( r ,\, oid )
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} OTID ( ins ,\, del )
  \.{\defeq}}%
 \@y{\@s{0}%
- update \ensuremath{ds[r]} to include new \ensuremath{oid \.{\in} Oid
+ \ensuremath{ins} is transformed against \ensuremath{del
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} ds \.{'} \.{=} [ ds
- {\EXCEPT} {\bang} [ r ] \.{=} @ \.{\cup} \{ oid \} ]}%
-\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} TypeOKCtx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{\in} [ Client \.{\rightarrow} Nat ]}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\land} ds
- \.{\in} [ Replica \.{\rightarrow} {\SUBSET} Oid ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{27.16} {\IF} ins . pos
+ \.{\leq} del . pos}%
+\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{27.16} \.{\THEN} ins}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{27.16} \.{\ELSE} [ ins
+ {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} InitCtx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{=} [ c \.{\in} Client \.{\mapsto} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\land} ds \.{=}
- [ r \.{\in} Replica \.{\mapsto} \{ \} ]}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} DoCtx ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\land} cseq
- \.{'} \.{=} [ cseq {\EXCEPT} {\bang} [ c ] \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land} UpdateDS
- ( c ,\, [ c \.{\mapsto} c ,\, seq \.{\mapsto} cseq [ c ] ] )\@s{4.1}}%
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} OTDI ( del ,\, ins )
+ \.{\defeq}}%
 \@y{\@s{0}%
- \ensuremath{oid} for newly generated operation
-}%
+ \ensuremath{del} is transformed against \ensuremath{ins
+}}%
 \@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{27.80} {\IF} del . pos
+ \.{<} ins . pos}%
+\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{27.80} \.{\THEN} del}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{27.80} \.{\ELSE} [ del
+ {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} RevCtx ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} cseq}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{16.4} \.{\land} UpdateDS
- ( c ,\, Head ( cincoming [ c ] ) . oid )}%
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} OTDD ( ldel ,\, rdel )
+ \.{\defeq}}%
+\@y{\@s{0}%
+ \ensuremath{ldel} is transformed against \ensuremath{rdel
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{30.86} {\IF} ldel . pos
+ \.{<} rdel . pos}%
+\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{30.86} \.{\THEN} ldel}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{30.86} \.{\ELSE} {\IF}
+ ldel . pos \.{>} rdel . pos}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{62.17} \.{\THEN} [ ldel
+ {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
+\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{62.17} \.{\ELSE} Nop}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} SRevCtx \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} cseq}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\land} UpdateDS
- ( Server ,\, Head ( sincoming ) . oid )}%
-\@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} OT ( lop ,\, rop )
+ \.{\defeq}}%
+\@y{\@s{0}%
+ \ensuremath{lop} is transformed against \ensuremath{rop
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{24.14} {\CASE} lop \.{=}
+ Nop \.{\lor} rop \.{=} Nop \.{\rightarrow} lop}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{36.44} {\Box}\@s{4.1} lop
+ . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
+ \.{\rightarrow} OTII ( lop ,\, rop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
+ lop . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Del}
+ \.{\rightarrow} OTID ( lop ,\, rop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
+ lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
+ \.{\rightarrow} OTDI ( lop ,\, rop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
+ lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Del} \.{\rightarrow}
+ OTDD ( lop ,\, rop )}%
+\@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1044,12 +1037,12 @@
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jan} 13
- 10:13:17 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ 10:02:58 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Wed} \ensuremath{Dec} 05
- 20:03:50 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jun} 24 15:57:48
+ \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%

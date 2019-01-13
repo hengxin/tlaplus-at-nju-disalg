@@ -1,7 +1,16 @@
----------------------------- MODULE OpOperators ----------------------------
-EXTENDS Naturals, SequenceUtils
+---------------------------- MODULE Op ----------------------------
+(*
+Definition and operator for list operations.
+*)
+EXTENDS SystemModel
 -----------------------------------------------------------------------------
-Nop == PickNone(Nat)
+Rd == [type: {"Rd"}]
+Del == [type: {"Del"}, pos: 1 .. MaxLen] \* The positions (pos) are indexed from 1.
+Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
+
+Op == Ins \cup Del  \* The set of all operations (now we don't consider Rd operations).
+
+Nop == PickNone(Op)
 
 Apply(op, l) == \* Apply operation op on list l.
     CASE op = Nop -> l
@@ -11,5 +20,5 @@ Apply(op, l) == \* Apply operation op on list l.
                                                             \* if op.pos = Len(l) + 1
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 21:41:22 CST 2019 by hengxin
+\* Last modified Sun Jan 13 10:06:16 CST 2019 by hengxin
 \* Created Tue Aug 28 14:58:54 CST 2018 by hengxin

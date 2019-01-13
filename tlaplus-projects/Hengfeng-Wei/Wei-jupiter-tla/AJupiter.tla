@@ -2,7 +2,7 @@
 (* 
 Specification of the Jupiter protocol presented by Attiya et al.
 *)
-EXTENDS JupiterInterface, BufferStateSpace
+EXTENDS JupiterInterface, OT, BufferStateSpace
 -----------------------------------------------------------------------------
 VARIABLES
     cbuf,    \* cbuf[c]: buffer for locally generated operations at client c \in Client
@@ -81,5 +81,5 @@ QC == \* Quiescent Consistency
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 21:02:28 CST 2019 by hengxin
+\* Last modified Sun Jan 13 10:14:41 CST 2019 by hengxin
 \* Created Satchins,  Jun 23 17:14:18 CST 2018 by hengxin

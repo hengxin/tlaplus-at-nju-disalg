@@ -46,6 +46,11 @@
 			<locationURI>PARENT-1-PROJECT_LOC/OT.tla</locationURI>
 		</link>
 		<link>
+			<name>Op.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/Op.tla</location>
+		</link>
+		<link>
 			<name>OpOperators.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/OpOperators.tla</locationURI>
@@ -59,6 +64,11 @@
 			<name>SetUtils.tla</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/SetUtils.tla</locationURI>
+		</link>
+		<link>
+			<name>SystemModel.tla</name>
+			<type>1</type>
+			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/SystemModel.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>

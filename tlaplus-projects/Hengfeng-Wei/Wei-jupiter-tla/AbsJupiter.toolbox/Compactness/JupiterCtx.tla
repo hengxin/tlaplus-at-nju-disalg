@@ -2,7 +2,7 @@
 (*
 Definitions for context-based Jupiter protocols, including AbsJupiter, CJupiter, and XJupiter.
 *)
-EXTENDS JupiterInterface
+EXTENDS JupiterInterface, OT
 -----------------------------------------------------------------------------
 VARIABLES
     cseq,  \* cseq[c]: local sequence number at client c \in Client
@@ -16,7 +16,7 @@ Cop == [op: Op \cup {Nop}, oid: Oid, ctx: SUBSET Oid] \* contexted-based op
 ClientOf(cop) == cop.oid.c
 
 COT(lcop, rcop) == \* OT of lcop \in Cop against rcop \in Cop
-    [lcop EXCEPT !.op = Xform(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
+    [lcop EXCEPT !.op = OT(lcop.op, rcop.op), !.ctx = @ \cup {rcop.oid}]
 
 UpdateDS(r, oid) == \* update ds[r] to include new oid \in Oid
     ds' = [ds EXCEPT ![r] = @ \cup {oid}]
@@ -42,5 +42,5 @@ SRevCtx ==
     /\ UpdateDS(Server, Head(sincoming).oid)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 05 13:45:40 CST 2019 by hengxin
+\* Last modified Sun Jan 13 10:13:17 CST 2019 by hengxin
 \* Created Wed Dec 05 20:03:50 CST 2018 by hengxin

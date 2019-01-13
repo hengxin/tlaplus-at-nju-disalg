@@ -2,7 +2,7 @@
 (*
 Specification of OT (Operational Transformation) functions.
 *)
-EXTENDS OpOperators, SetUtils
+EXTENDS Op
 -----------------------------------------------------------------------------
 OTII(lins, rins) == \* lins is transformed against rins
     IF lins.pos < rins.pos
@@ -40,5 +40,5 @@ OT(lop, rop) == \* lop is transformed against rop
        []  lop.type = "Del" /\ rop.type = "Del" -> OTDD(lop, rop)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 20:23:45 CST 2019 by hengxin
+\* Last modified Sun Jan 13 10:02:58 CST 2019 by hengxin
 \* Created Sun Jun 24 15:57:48 CST 2018 by hengxin

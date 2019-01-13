@@ -2,7 +2,7 @@
 (*
 Definitions for context-based Jupiter protocols, including AbsJupiter, CJupiter, and XJupiter.
 *)
-EXTENDS JupiterInterface
+EXTENDS JupiterInterface, OT
 -----------------------------------------------------------------------------
 VARIABLES
     cseq,  \* cseq[c]: local sequence number at client c \in Client
@@ -42,5 +42,5 @@ SRevCtx ==
     /\ UpdateDS(Server, Head(sincoming).oid)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 20:20:08 CST 2019 by hengxin
+\* Last modified Sun Jan 13 10:13:17 CST 2019 by hengxin
 \* Created Wed Dec 05 20:03:50 CST 2018 by hengxin

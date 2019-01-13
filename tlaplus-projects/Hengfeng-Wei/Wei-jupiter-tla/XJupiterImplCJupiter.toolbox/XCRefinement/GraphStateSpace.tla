@@ -38,7 +38,26 @@ xForm(NextEdge(_, _, _), r, cop, ss) == \* Transform cop with an operation seque
                                              cop |-> coph2copprime]}])
     IN  xFormHelper(u, v, cop, [node |-> {v}, 
                                 edge |-> {[from |-> u, to |-> v, cop |-> cop]}])  
+
+xFormCopCops(cop, cops) == \* Transform cop against cops (a sequence of Cop) on state space.
+    LET RECURSIVE xFormCopCopsSSHelper(_, _, _) 
+        xFormCopCopsSSHelper(coph, copsh, xss) == 
+            LET u == coph.ctx
+                v == u \cup {coph.oid}
+             uvSS == [node |-> {u, v}, edge |-> {[from |-> u, to |-> v, cop |-> coph]}]
+             IN IF copsh = <<>> THEN [xcop |-> coph, xss |-> xss (+) uvSS, lss |-> uvSS]
+                ELSE LET copprimeh == Head(copsh)
+                            uprime == u \cup {copprimeh.oid}
+                            vprime == u \cup {coph.oid, copprimeh.oid}
+                         coph2copprimeh == COT(coph, copprimeh)
+                         copprimeh2coph == COT(copprimeh, coph)
+                      IN xFormCopCopsSSHelper(coph2copprimeh, Tail(copsh),
+                            xss (+) [node |-> {u, v}, 
+                                     edge |-> {[from |-> u, to |-> v, cop |-> coph],
+                                               [from |-> u, to |-> uprime, cop |-> copprimeh],
+                                               [from |-> v, to |-> vprime, cop |-> copprimeh2coph]}])
+    IN  xFormCopCopsSSHelper(cop, cops, EmptySS)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 15:08:41 CST 2019 by hengxin
+\* Last modified Sat Jan 12 20:44:08 CST 2019 by hengxin
 \* Created Wed Dec 19 18:15:25 CST 2018 by hengxin

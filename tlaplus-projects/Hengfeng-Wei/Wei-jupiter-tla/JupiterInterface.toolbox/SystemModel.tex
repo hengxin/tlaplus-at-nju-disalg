@@ -940,51 +940,92 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} OpOperators}\moduleRightDash\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 2\hspace{1em}} {\EXTENDS} Naturals ,\,
+ {\MODULE} SystemModel}\moduleRightDash\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ Constants and related definitions describing the system model of
+ \ensuremath{Jupiter} protocols.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} Naturals ,\,
  SequenceUtils}%
-\@x{\makebox[0pt][r]{\scriptsize 3\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 4\hspace{1em}} Nop \.{\defeq} PickNone ( Nat
- )}%
+\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\CONSTANTS}}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} Client ,\,\@s{16.4}}%
+\@y{\@s{0}%
+ the set of client replicas
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Server
+ ,\,\@s{14.73}}%
+\@y{\@s{0}%
+ the (unique) server replica
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Msg ,\,\@s{25.13}}%
+\@y{\@s{0}%
+ the set of messages
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} Char ,\,\@s{20.99}}%
+\@y{\@s{0}%
+ the set of characters
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4}
+ InitState\@s{11.18}}%
+\@y{\@s{0}%
+ the initial state of each replica
+}%
+\@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} Apply ( op ,\, l )
- \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} {\ASSUME}}%
 \@y{\@s{0}%
- Apply operation \ensuremath{op} on list \ensuremath{l}.
+ We assume that all inserted elements are unique.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}\@s{16.4} {\CASE} op \.{=} Nop
- \.{\rightarrow} l}%
- \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{24.59} {\Box}\@s{10.30} op
- . type \.{=}\@w{Rd} \.{\rightarrow} l}%
- \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{24.59} {\Box}\@s{10.30} op
- . type \.{=}\@w{Del} \.{\rightarrow} DeleteElement ( l ,\, op . pos )}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{24.59} {\Box}\@s{10.30}
- op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} InsertElement ( l ,\, op .
- ch ,\, op . pos )}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land}\@s{10.73}
+ Range ( InitState ) \.{\cap} Char \.{=} \{ \}\@s{4.1}}%
 \@y{\@s{0}%
- append to the end
+ due to the uniqueness requirement
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{265.34}}%
+\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} Replica \.{\defeq} Client
+ \.{\cup} \{ Server \}}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} List \.{\defeq} Seq ( Char
+ \.{\cup} Range ( InitState ) )\@s{42.53}}%
 \@y{\@s{0}%
- if \ensuremath{op.pos \.{=} Len(l)} + 1
+ all possible lists
 }%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} MaxLen \.{\defeq}
+ Cardinality ( Char ) \.{+} Len ( InitState )}%
+\@y{\@s{0}%
+ the max length of lists in any state
+}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} ClientNum \.{\defeq}
+ Cardinality ( Client )}%
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} Priority \.{\defeq}
+ {\CHOOSE} f \.{\in} [ Client \.{\rightarrow} 1 \.{\dotdot} ClientNum ] \.{:}
+ Injective ( f )}%
+\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jan} 12
- 21:41:22 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jan} 13
+ 09:55:59 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Tue} \ensuremath{Aug} 28
- 14:58:54 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jan} 13 09:51:52
+ \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%
