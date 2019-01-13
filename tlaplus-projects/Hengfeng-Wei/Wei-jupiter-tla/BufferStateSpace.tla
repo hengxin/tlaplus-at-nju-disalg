@@ -3,7 +3,7 @@
 The buffer (i.e., sequence) representation of state space used in AJupiter.
 This module defines generalized OT functions on operation sequences.
 *)
-EXTENDS Integers, Sequences
+EXTENDS Naturals, Sequences
 -----------------------------------------------------------------------------
 RECURSIVE xFormOpOps(_, _, _) \* Transform op against an operation sequence ops.
 xFormOpOps(xform(_,_), op, ops) == 
@@ -27,5 +27,5 @@ xFormShift(xform(_, _), op, ops, shift) ==
         xops |-> xFormOpsOp(xform, shiftedOps, op)]
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 20:53:57 CST 2019 by hengxin
+\* Last modified Sat Jan 12 21:34:37 CST 2019 by hengxin
 \* Created Sat Jan 12 14:55:34 CST 2019 by hengxin

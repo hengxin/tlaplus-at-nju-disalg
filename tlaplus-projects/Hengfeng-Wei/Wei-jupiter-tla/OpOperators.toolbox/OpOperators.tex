@@ -941,63 +941,45 @@
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
  {\MODULE} OpOperators}\moduleRightDash\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Operators for \ensuremath{Op}.
-\end{cpar}%
-\end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} Naturals ,\,
- Sequences ,\, SequenceUtils}%
-\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} Nop \.{\defeq} PickNone ( Nat
+ \@x{\makebox[0pt][r]{\scriptsize 2\hspace{1em}} {\EXTENDS} Naturals ,\,
+ SequenceUtils}%
+\@x{\makebox[0pt][r]{\scriptsize 3\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 4\hspace{1em}} Nop \.{\defeq} PickNone ( Nat
  )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} Apply ( op ,\, l )
+ \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} Apply ( op ,\, l )
  \.{\defeq}}%
 \@y{\@s{0}%
- Apply an operation \ensuremath{op} on the list \ensuremath{l}.
+ Apply operation \ensuremath{op} on list \ensuremath{l}.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} {\CASE} op \.{=}
- Nop \.{\rightarrow} l}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{20.5} {\Box}\@s{14.40} op
+ \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}\@s{16.4} {\CASE} op \.{=} Nop
+ \.{\rightarrow} l}%
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{24.59} {\Box}\@s{10.30} op
  . type \.{=}\@w{Rd} \.{\rightarrow} l}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{20.5} {\Box}\@s{14.40} op
+ \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{24.59} {\Box}\@s{10.30} op
  . type \.{=}\@w{Del} \.{\rightarrow} DeleteElement ( l ,\, op . pos )}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{24.59} {\Box}\@s{10.30}
+ op . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} InsertElement ( l ,\, op .
+ ch ,\, op . pos )}%
 \@y{\@s{0}%
- \ensuremath{Last(l)} is deleted if \ensuremath{pos \.{>} Len(l)
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{20.5} {\Box}\@s{14.40} op
- . type \.{=}\@w{Ins}\@s{2.27} \.{\rightarrow} InsertElement ( l ,\, op . ch
- ,\, op . pos )}%
-\@y{\@s{0}%
- \ensuremath{Append(l,\, ch)} if \ensuremath{pos \.{>} Len(l)
-}}%
-\@xx{}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} {\RECURSIVE} ApplyOps ( \_
- ,\, \_ )}%
-\@y{\@s{0}%
- Apply an operation sequence \ensuremath{ops} on the list \ensuremath{l}.
+ append to the end
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}} ApplyOps ( ops ,\, l )
- \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
- {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\THEN} l}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\ELSE} Apply (
- Last ( ops ) ,\, ApplyOps ( AllButLast ( ops ) ,\, l ) )}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{265.34}}%
+\@y{\@s{0}%
+ if \ensuremath{op.pos \.{=} Len(l)} + 1
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Mon}
- \ensuremath{Dec} 31 19:21:16 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jan} 12
+ 21:41:22 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
