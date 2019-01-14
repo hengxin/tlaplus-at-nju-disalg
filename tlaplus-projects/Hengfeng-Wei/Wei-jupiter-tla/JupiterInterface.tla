@@ -7,11 +7,8 @@ EXTENDS Op
 VARIABLES 
     aop,    \* aop[r]: the actual operation applied at replica r \in Replica
     state,  \* state[r]: state (the list content) of replica r \in Replica
-    cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
-    sincoming,  \* incoming channel at the Server    
     chins   \* a set of chars allowed to insert; this is for model checking
 
-Comm == INSTANCE CSComm
 intVars == <<aop, state, cincoming, sincoming, chins>>
 -----------------------------------------------------------------------------
 SetNewAop(r, aopr) ==
@@ -64,5 +61,5 @@ SRevInt(ServerPerform(_)) == \* The Server receives and processes a message.
     /\ UNCHANGED chins
 =============================================================================
 \* Modification History
-\* Last modified Sun Jan 13 10:04:18 CST 2019 by hengxin
+\* Last modified Sun Jan 13 10:53:07 CST 2019 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin

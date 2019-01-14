@@ -991,28 +991,46 @@
 }%
 \@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} Replica \.{\defeq} Client
+\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} {\VARIABLES}}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} cincoming
+ ,\,\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{cincoming[c]}: incoming channel at the client \ensuremath{c
+ \.{\in} Client
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4}
+ sincoming\@s{10.72}}%
+\@y{\@s{0}%
+ incoming channel at the \ensuremath{Server
+}}%
+\@xx{}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} Comm \.{\defeq} {\INSTANCE}
+ CSComm}%
+\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} Replica \.{\defeq} Client
  \.{\cup} \{ Server \}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} List \.{\defeq} Seq ( Char
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} List \.{\defeq} Seq ( Char
  \.{\cup} Range ( InitState ) )\@s{42.53}}%
 \@y{\@s{0}%
  all possible lists
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} MaxLen \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}} MaxLen \.{\defeq}
  Cardinality ( Char ) \.{+} Len ( InitState )}%
 \@y{\@s{0}%
  the max length of lists in any state
 }%
 \@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}} ClientNum \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} ClientNum \.{\defeq}
  Cardinality ( Client )}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} Priority \.{\defeq}
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}} Priority \.{\defeq}
  {\CHOOSE} f \.{\in} [ Client \.{\rightarrow} 1 \.{\dotdot} ClientNum ] \.{:}
  Injective ( f )}%
-\@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -1020,7 +1038,7 @@
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jan} 13
- 09:55:59 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ 10:52:53 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

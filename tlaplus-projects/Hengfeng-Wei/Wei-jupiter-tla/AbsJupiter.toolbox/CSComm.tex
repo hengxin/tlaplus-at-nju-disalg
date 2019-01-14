@@ -940,108 +940,125 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} OT}\moduleRightDash\@xx{}%
-\begin{lcom}{0}%
-\begin{cpar}{0}{F}{F}{0}{0}{}%
-Specification of \ensuremath{OT} (Operational Transformation) functions.
-\end{cpar}%
-\end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} Op}%
-\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} OTII ( lins ,\, rins )
- \.{\defeq}}%
+ {\MODULE} CSComm}\moduleRightDash\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 2\hspace{1em}} {\EXTENDS} SequenceUtils}%
+\@x{\makebox[0pt][r]{\scriptsize 3\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 4\hspace{1em}} {\CONSTANTS}}%
+\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}}\@s{16.4} Client ,\,\@s{1.66}}%
 \@y{\@s{0}%
- \ensuremath{lins} is transformed against \ensuremath{rins
+ the set of clients
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}\@s{16.4} Server ,\,}%
+\@y{\@s{0}%
+ the (unique) server
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}\@s{16.4} Msg\@s{16.50}}%
+\@y{\@s{0}%
+ the set of messages
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} {\VARIABLES}}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} cincoming
+ ,\,\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{cincoming[c]}: incoming \ensuremath{FIFO} channel at client
+ \ensuremath{c \.{\in} Client
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{24.11} {\IF} lins . pos
- \.{<} rins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{24.11} \.{\THEN} lins}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{24.11} \.{\ELSE} {\IF}
- lins . pos \.{>} rins . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{55.42} \.{\THEN} [ lins
- {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{55.42} \.{\ELSE} {\IF}
- lins . ch \.{=} rins . ch}%
-\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{86.73} \.{\THEN} Nop}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{86.73} \.{\ELSE} {\IF}
- lins . pr \.{<} rins . pr}%
-\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{118.04} \.{\THEN} lins}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{118.04} \.{\ELSE} [ lins
- {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4}
+ sincoming\@s{10.72}}%
+\@y{\@s{0}%
+ incoming \ensuremath{FIFO} channel at the \ensuremath{Server
+}}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} TypeOK \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ cincoming \.{\in} [ Client \.{\rightarrow} Seq ( Msg ) ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land}\@s{9.74}
+ sincoming\@s{0.51} \.{\in} Seq ( Msg )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} OTID ( ins ,\, del )
- \.{\defeq}}%
-\@y{\@s{0}%
- \ensuremath{ins} is transformed against \ensuremath{del
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{27.16} {\IF} ins . pos
- \.{\leq} del . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{27.16} \.{\THEN} ins}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{27.16} \.{\ELSE} [ ins
- {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
+\@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} Init \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land} cincoming
+ \.{=} [ c \.{\in} Client \.{\mapsto} {\langle} {\rangle} ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} \.{\land}
+ sincoming\@s{0.51} \.{=} {\langle} {\rangle}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} OTDI ( del ,\, ins )
- \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} EmptyChannel \.{\defeq}
+ Init}%
+\@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} CSend ( msg ) \.{\defeq}}%
 \@y{\@s{0}%
- \ensuremath{del} is transformed against \ensuremath{ins
-}}%
+ A client sends a message \ensuremath{msg} to the \ensuremath{Server}.
+}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{27.80} {\IF} del . pos
- \.{<} ins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{27.80} \.{\THEN} del}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{27.80} \.{\ELSE} [ del
- {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} \.{\land} sincoming
+ \.{'} \.{=} Append ( sincoming ,\, msg )}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\land}
+ {\UNCHANGED} cincoming}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} OTDD ( ldel ,\, rdel )
- \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}} CRev ( c ) \.{\defeq}}%
 \@y{\@s{0}%
- \ensuremath{ldel} is transformed against \ensuremath{rdel
-}}%
+ Client \ensuremath{c} receives and consumes a message from the
+ \ensuremath{Server}.
+}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{30.86} {\IF} ldel . pos
- \.{<} rdel . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{30.86} \.{\THEN} ldel}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{30.86} \.{\ELSE} {\IF}
- ldel . pos \.{>} rdel . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{62.17} \.{\THEN} [ ldel
- {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{62.17} \.{\ELSE} Nop}%
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{24.21} \.{\land}
+ cincoming [ c ] \.{\neq} {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{24.21} \.{\land}
+ cincoming \.{'} \.{=} [ cincoming {\EXCEPT} {\bang} [ c ] \.{=} Tail ( @ )
+ ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{24.21} \.{\land}
+ {\UNCHANGED} sincoming}%
+\@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}} SRev \.{\defeq}}%
+\@y{\@s{0}%
+ The \ensuremath{Server} receives and consumes a message.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{16.4} \.{\land} sincoming
+ \.{\neq} {\langle} {\rangle}}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{16.4} \.{\land} sincoming
+ \.{'} \.{=} Tail ( sincoming )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} OT ( lop ,\, rop )
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}} SSend ( c ,\, cmsg )
  \.{\defeq}}%
 \@y{\@s{0}%
- \ensuremath{lop} is transformed against \ensuremath{rop
-}}%
+ The \ensuremath{Server} sents a message \ensuremath{cmsg[cl]} to client
+ \ensuremath{cl} (other than \ensuremath{c}).
+}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{24.14} {\CASE} lop \.{=}
- Nop \.{\lor} rop \.{=} Nop \.{\rightarrow} lop}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{36.44} {\Box}\@s{4.1} lop
- . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
- \.{\rightarrow} OTII ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
- lop . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Del}
- \.{\rightarrow} OTID ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
- lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
- \.{\rightarrow} OTDI ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
- lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Del} \.{\rightarrow}
- OTDD ( lop ,\, rop )}%
-\@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} cincoming \.{'}
+ \.{=} [ cl \.{\in} Client \.{\mapsto} {\IF} cl \.{=} c \.{\THEN} cincoming [
+ cl ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{144.50} \.{\ELSE} Append
+ ( cincoming [ cl ] ,\, cmsg [ cl ] ) ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} SSendSame ( c ,\, msg )
+ \.{\defeq}}%
+\@y{\@s{0}%
+ The \ensuremath{Server} broadcasts the message \ensuremath{msg} to all
+ clients other than \ensuremath{c}.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} SSend ( c ,\, [ cl
+ \.{\in} Client \.{\mapsto} msg ] )}%
+\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jan} 13
- 10:41:55 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Jan} 14 13:16:12 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jun} 24 15:57:48
+ \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jun} 24 10:25:34
  \ensuremath{CST} 2018 by \ensuremath{hengxin
 }%
 \end{cpar}%

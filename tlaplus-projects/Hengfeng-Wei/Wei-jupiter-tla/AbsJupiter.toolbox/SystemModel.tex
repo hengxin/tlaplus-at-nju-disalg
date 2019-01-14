@@ -940,109 +940,98 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} OT}\moduleRightDash\@xx{}%
+ {\MODULE} SystemModel}\moduleRightDash\@xx{}%
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
-Specification of \ensuremath{OT} (Operational Transformation) functions.
+ Constants and related definitions describing the system model of
+ \ensuremath{Jupiter} protocols.
 \end{cpar}%
 \end{lcom}%
-\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} Op}%
+ \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} Naturals ,\,
+ SequenceUtils}%
 \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} OTII ( lins ,\, rins )
- \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\CONSTANTS}}%
+\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} Client ,\,\@s{16.4}}%
 \@y{\@s{0}%
- \ensuremath{lins} is transformed against \ensuremath{rins
-}}%
+ the set of client replicas
+}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{24.11} {\IF} lins . pos
- \.{<} rins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{24.11} \.{\THEN} lins}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{24.11} \.{\ELSE} {\IF}
- lins . pos \.{>} rins . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{55.42} \.{\THEN} [ lins
- {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{55.42} \.{\ELSE} {\IF}
- lins . ch \.{=} rins . ch}%
-\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{86.73} \.{\THEN} Nop}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{86.73} \.{\ELSE} {\IF}
- lins . pr \.{<} rins . pr}%
-\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{118.04} \.{\THEN} lins}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{118.04} \.{\ELSE} [ lins
- {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} Server
+ ,\,\@s{14.73}}%
+\@y{\@s{0}%
+ the (unique) server replica
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} Msg ,\,\@s{25.13}}%
+\@y{\@s{0}%
+ the set of messages
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} Char ,\,\@s{20.99}}%
+\@y{\@s{0}%
+ the set of characters
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4}
+ InitState\@s{11.18}}%
+\@y{\@s{0}%
+ the initial state of each replica
+}%
+\@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} OTID ( ins ,\, del )
- \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} {\ASSUME}}%
 \@y{\@s{0}%
- \ensuremath{ins} is transformed against \ensuremath{del
-}}%
+ We assume that all inserted elements are unique.
+}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{27.16} {\IF} ins . pos
- \.{\leq} del . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{27.16} \.{\THEN} ins}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{27.16} \.{\ELSE} [ ins
- {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land}\@s{10.73}
+ Range ( InitState ) \.{\cap} Char \.{=} \{ \}\@s{4.1}}%
+\@y{\@s{0}%
+ due to the uniqueness requirement
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} Replica \.{\defeq} Client
+ \.{\cup} \{ Server \}}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} OTDI ( del ,\, ins )
- \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}} List \.{\defeq} Seq ( Char
+ \.{\cup} Range ( InitState ) )\@s{6.11}}%
 \@y{\@s{0}%
- \ensuremath{del} is transformed against \ensuremath{ins
+ all possible lists
+}%
+\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} {\VARIABLES}}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} cincoming
+ ,\,\@s{4.1}}%
+\@y{\@s{0}%
+ \ensuremath{cincoming[c]}: incoming channel at the client \ensuremath{c
+ \.{\in} Client
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{27.80} {\IF} del . pos
- \.{<} ins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{27.80} \.{\THEN} del}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{27.80} \.{\ELSE} [ del
- {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4}
+ sincoming\@s{10.72}}%
+\@y{\@s{0}%
+ incoming channel at the \ensuremath{Server
+}}%
+\@xx{}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} OTDD ( ldel ,\, rdel )
- \.{\defeq}}%
-\@y{\@s{0}%
- \ensuremath{ldel} is transformed against \ensuremath{rdel
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{30.86} {\IF} ldel . pos
- \.{<} rdel . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{30.86} \.{\THEN} ldel}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{30.86} \.{\ELSE} {\IF}
- ldel . pos \.{>} rdel . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{62.17} \.{\THEN} [ ldel
- {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{62.17} \.{\ELSE} Nop}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} OT ( lop ,\, rop )
- \.{\defeq}}%
-\@y{\@s{0}%
- \ensuremath{lop} is transformed against \ensuremath{rop
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{24.14} {\CASE} lop \.{=}
- Nop \.{\lor} rop \.{=} Nop \.{\rightarrow} lop}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{36.44} {\Box}\@s{4.1} lop
- . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
- \.{\rightarrow} OTII ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
- lop . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Del}
- \.{\rightarrow} OTID ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
- lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
- \.{\rightarrow} OTDI ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
- lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Del} \.{\rightarrow}
- OTDD ( lop ,\, rop )}%
-\@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} Comm \.{\defeq} {\INSTANCE}
+ CSComm}%
+\@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jan} 13
- 10:41:55 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Mon}
+ \ensuremath{Jan} 14 17:24:11 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jun} 24 15:57:48
- \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created Sun \ensuremath{Jan} 13 09:51:52
+ \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%

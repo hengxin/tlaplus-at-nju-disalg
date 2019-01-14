@@ -34,13 +34,12 @@ SRev == \* The Server receives and consumes a message.
     /\ sincoming' = Tail(sincoming)
 
 SSend(c, cmsg) == \* The Server sents a message cmsg[cl] to client cl (other than c).
-    /\ cincoming' = [cl \in Client |-> IF cl = c 
-                                       THEN cincoming[cl] 
-                                       ELSE Append(cincoming[cl], cmsg[cl])]
+    cincoming' = [cl \in Client |-> IF cl = c THEN cincoming[cl] 
+                                    ELSE Append(cincoming[cl], cmsg[cl])]
 
 SSendSame(c, msg) == \* The Server broadcasts the message msg to all clients other than c.
-    /\ SSend(c, [cl \in Client |-> msg])
+    SSend(c, [cl \in Client |-> msg])
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 05 13:23:29 CST 2019 by hengxin
+\* Last modified Mon Jan 14 13:16:12 CST 2019 by hengxin
 \* Created Sun Jun 24 10:25:34 CST 2018 by hengxin

@@ -946,90 +946,89 @@
 Specification of \ensuremath{OT} (Operational Transformation) functions.
 \end{cpar}%
 \end{lcom}%
- \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} OpOperators ,\,
- SetUtils}%
+\@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} Op}%
 \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} xFormII ( lins ,\, rins )
+ \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} OTII ( lins ,\, rins )
  \.{\defeq}}%
 \@y{\@s{0}%
  \ensuremath{lins} is transformed against \ensuremath{rins
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} {\IF} lins . pos
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{24.11} {\IF} lins . pos
  \.{<} rins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} \.{\THEN} lins}%
- \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} \.{\ELSE} {\IF}
+\@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{24.11} \.{\THEN} lins}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{24.11} \.{\ELSE} {\IF}
  lins . pos \.{>} rins . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{47.71} \.{\THEN} [ lins
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{55.42} \.{\THEN} [ lins
  {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{47.71} \.{\ELSE} {\IF}
+ \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{55.42} \.{\ELSE} {\IF}
  lins . ch \.{=} rins . ch}%
-\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{79.02} \.{\THEN} Nop}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{79.02} \.{\ELSE} {\IF}
- lins . pr \.{>} rins . pr}%
- \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{110.33} \.{\THEN} [ lins
+\@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{86.73} \.{\THEN} Nop}%
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{86.73} \.{\ELSE} {\IF}
+ lins . pr \.{<} rins . pr}%
+\@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{118.04} \.{\THEN} lins}%
+ \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{118.04} \.{\ELSE} [ lins
  {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
-\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{110.33} \.{\ELSE} lins}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} xFormID ( ins ,\, del )
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}} OTID ( ins ,\, del )
  \.{\defeq}}%
 \@y{\@s{0}%
  \ensuremath{ins} is transformed against \ensuremath{del
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} {\IF} ins . pos
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{27.16} {\IF} ins . pos
  \.{\leq} del . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{16.4} \.{\THEN} ins}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\ELSE} [ ins
+\@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}}\@s{27.16} \.{\THEN} ins}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{27.16} \.{\ELSE} [ ins
  {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} xFormDI ( del ,\, ins )
+ \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}} OTDI ( del ,\, ins )
  \.{\defeq}}%
 \@y{\@s{0}%
  \ensuremath{del} is transformed against \ensuremath{ins
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{16.4} {\IF} del . pos
+ \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}}\@s{27.80} {\IF} del . pos
  \.{<} ins . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\THEN} del}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\ELSE} [ del
+\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{27.80} \.{\THEN} del}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{27.80} \.{\ELSE} [ del
  {\EXCEPT} {\bang} . pos \.{=} @ \.{+} 1 ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} xFormDD ( ldel ,\, rdel )
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}} OTDD ( ldel ,\, rdel )
  \.{\defeq}}%
 \@y{\@s{0}%
  \ensuremath{ldel} is transformed against \ensuremath{rdel
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{16.4} {\IF} ldel . pos
+ \@x{\makebox[0pt][r]{\scriptsize 29\hspace{1em}}\@s{30.86} {\IF} ldel . pos
  \.{<} rdel . pos}%
-\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{16.4} \.{\THEN} ldel}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\ELSE} {\IF}
+\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}}\@s{30.86} \.{\THEN} ldel}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{30.86} \.{\ELSE} {\IF}
  ldel . pos \.{>} rdel . pos}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{47.71} \.{\THEN} [ ldel
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{62.17} \.{\THEN} [ ldel
  {\EXCEPT} {\bang} . pos \.{=} @ \.{-} 1 ]}%
-\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{47.71} \.{\ELSE} Nop}%
+\@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{62.17} \.{\ELSE} Nop}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} xForm ( lop ,\, rop )
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} OT ( lop ,\, rop )
  \.{\defeq}}%
 \@y{\@s{0}%
  \ensuremath{lop} is transformed against \ensuremath{rop
 }}%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{16.4} {\CASE} lop \.{=}
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{24.14} {\CASE} lop \.{=}
  Nop \.{\lor} rop \.{=} Nop \.{\rightarrow} lop}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{28.69} {\Box}\@s{4.1} lop
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{36.44} {\Box}\@s{4.1} lop
  . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
- \.{\rightarrow} xFormII ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
+ \.{\rightarrow} OTII ( lop ,\, rop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
  lop . type \.{=}\@w{Ins}\@s{2.27} \.{\land} rop . type \.{=}\@w{Del}
- \.{\rightarrow} xFormID ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
+ \.{\rightarrow} OTID ( lop ,\, rop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
  lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Ins}\@s{2.27}
- \.{\rightarrow} xFormDI ( lop ,\, rop )}%
- \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{28.69} {\Box}\@s{4.10}
+ \.{\rightarrow} OTDI ( lop ,\, rop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{36.44} {\Box}\@s{4.09}
  lop . type \.{=}\@w{Del} \.{\land} rop . type \.{=}\@w{Del} \.{\rightarrow}
- xFormDD ( lop ,\, rop )}%
+ OTDD ( lop ,\, rop )}%
 \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
@@ -1037,8 +1036,8 @@ Specification of \ensuremath{OT} (Operational Transformation) functions.
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jan} 12
- 20:14:40 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sun \ensuremath{Jan} 13
+ 10:41:55 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
