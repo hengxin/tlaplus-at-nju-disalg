@@ -38,19 +38,21 @@ DoOpEx(c, op) ==
        /\ commXJ!CSend(cop)
 
 ClientPerformEx(c, m) == 
-    LET xform == xFormShift(COT, m.cop, cbuf[c], m.ack + 1)
+    LET xform == xFormShift(COT, m.cop, cbuf[c], m.ack)
     IN  /\ cbuf' = [cbuf EXCEPT ![c] = xform.xops]
         /\ crec' = [crec EXCEPT ![c] = @ + 1]
         /\ SetNewAop(c, xform.xop.op)
 
 ServerPerformEx(m) == 
-    LET c == ClientOf(m.cop)
-        xform == xFormShift(COT, m.cop, sbuf[c], m.ack + 1)
-        xcop == xform.xop
+    LET     c == ClientOf(m.cop)
+        xform == xFormShift(COT, m.cop, sbuf[c], m.ack)
+         xcop == xform.xop
     IN  /\ srec' = [cl \in Client |-> IF cl = c THEN srec[cl] + 1 ELSE 0] 
-        /\ sbuf' = [cl \in Client |-> IF cl = c THEN xform.xops ELSE Append(sbuf[cl], xcop)] 
+        /\ sbuf' = [cl \in Client |-> IF cl = c THEN xform.xops 
+                                                ELSE Append(sbuf[cl], xcop)] 
         /\ SetNewAop(Server, xcop.op)
-        /\ Comm!SSend(c, [cl \in Client |-> [ack |-> srec[cl], cop |-> xcop, oid |-> xcop.oid]])
+        /\ Comm!SSend(c, [cl \in Client |-> 
+                            [ack |-> srec[cl], cop |-> xcop, oid |-> xcop.oid]])
         /\ commXJ!SSendSame(c, xcop)
 -----------------------------------------------------------------------------
 DoEx(c) == 
@@ -85,5 +87,5 @@ QC == \* Quiescent Consistency
 THEOREM SpecEx => []QC
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 21:08:20 CST 2019 by hengxin
+\* Last modified Thu Jan 17 10:38:50 CST 2019 by hengxin
 \* Created Thu Dec 27 21:15:09 CST 2018 by hengxin

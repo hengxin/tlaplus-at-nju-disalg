@@ -2,42 +2,15 @@
 (*
 Interface of a family of Jupiter protocols.
 *)
-EXTENDS SequenceUtils, OT
+EXTENDS Op
 -----------------------------------------------------------------------------
-CONSTANTS
-    Client,     \* the set of client replicas
-    Server,     \* the (unique) server replica
-    Msg,        \* the set of messages
-    Char,       \* the set of characters
-    InitState   \* the initial state of each replica
-
-ASSUME \* We assume that all inserted elements are unique.
-    /\ Range(InitState) \cap Char = {}  \* due to the uniqueness requirement
-----------------------------------------------------------------------
 VARIABLES 
     aop,    \* aop[r]: the actual operation applied at replica r \in Replica
     state,  \* state[r]: state (the list content) of replica r \in Replica
-    cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
-    sincoming,  \* incoming channel at the Server    
     chins   \* a set of chars allowed to insert; this is for model checking
 
-Comm == INSTANCE CSComm
 intVars == <<aop, state, cincoming, sincoming, chins>>
-----------------------------------------------------------------------
-Replica == Client \cup {Server}
-
-List == Seq(Char \cup Range(InitState))      \* all possible lists
-MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any state
-
-ClientNum == Cardinality(Client)
-Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
 -----------------------------------------------------------------------------
-Rd == [type: {"Rd"}]
-Del == [type: {"Del"}, pos: 1 .. MaxLen] \* The positions (pos) are indexed from 1.
-Ins == [type: {"Ins"}, pos: 1 .. (MaxLen + 1), ch: Char, pr: 1 .. ClientNum] \* pr: priority
-
-Op == Ins \cup Del  \* The set of all operations (now we don't consider Rd operations).
-
 SetNewAop(r, aopr) ==
     aop' = [aop EXCEPT ![r] = aopr]
 
@@ -88,5 +61,5 @@ SRevInt(ServerPerform(_)) == \* The Server receives and processes a message.
     /\ UNCHANGED chins
 =============================================================================
 \* Modification History
-\* Last modified Fri Jan 04 11:46:40 CST 2019 by hengxin
+\* Last modified Sun Jan 13 10:53:07 CST 2019 by hengxin
 \* Created Tue Dec 04 19:01:01 CST 2018 by hengxin

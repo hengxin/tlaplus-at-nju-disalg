@@ -32,7 +32,7 @@ RevImpl(c) ==
     /\ LET m == Head(cincoming[c])
            cBuf == cbuf[c]
            cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))  
-           xform == xFormCopCops(m.cop, cShiftedBuf) \* [lss, xss]
+           xform == xFormCopCops(m.cop, cShiftedBuf) \* [xcop, xss, lss]
        IN  c2ss' = [c2ss EXCEPT ![c] = @ (+) xform.xss]
     /\ UNCHANGED s2ss
 
@@ -42,7 +42,7 @@ SRevImpl ==
            c == ClientOf(m.cop)
            cBuf == sbuf[c]
            cShiftedBuf == SubSeq(cBuf, m.ack + 1, Len(cBuf))  
-           xform == xFormCopCops(m.cop, cShiftedBuf) \* [lss, xss]
+           xform == xFormCopCops(m.cop, cShiftedBuf) \* [xcop, xss, lss]
        IN  s2ss' = [cl \in Client |->
                         IF cl = c THEN s2ss[cl] (+) xform.xss ELSE s2ss[cl] (+) xform.lss]
     /\ UNCHANGED c2ss
@@ -62,5 +62,5 @@ XJ == INSTANCE XJupiter WITH Msg <- Cop,
 THEOREM SpecImpl => XJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 20:47:26 CST 2019 by hengxin
+\* Last modified Sat Jan 12 21:10:50 CST 2019 by hengxin
 \* Created Sat Dec 29 18:36:51 CST 2018 by hengxin

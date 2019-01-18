@@ -33,18 +33,18 @@ Init ==
     /\ srec = [c \in Client |-> 0]
 -----------------------------------------------------------------------------
 ClientPerform(c, m) == 
-    LET xform == xFormShift(OT, m.op, cbuf[c], m.ack + 1) \* [xop, xops]
+    LET xform == xFormShift(OT, m.op, cbuf[c], m.ack) \* [xop, xops]
     IN  /\ cbuf' = [cbuf EXCEPT ![c] = xform.xops]
         /\ crec' = [crec EXCEPT ![c] = @ + 1]
         /\ SetNewAop(c, xform.xop)
 
 ServerPerform(m) == 
     LET     c == m.c             
-        xform == xFormShift(OT, m.op, sbuf[c], m.ack + 1) \* [xop, xops]
+        xform == xFormShift(OT, m.op, sbuf[c], m.ack) \* [xop, xops]
           xop == xform.xop
     IN  /\ srec' = [cl \in Client |-> IF cl = c THEN srec[cl] + 1 ELSE 0] 
-        /\ sbuf' = [cl \in Client |->
-                         IF cl = c THEN xform.xops ELSE Append(sbuf[cl], xop)] 
+        /\ sbuf' = [cl \in Client |-> IF cl = c THEN xform.xops 
+                                                ELSE Append(sbuf[cl], xop)] 
         /\ SetNewAop(Server, xop)
         /\ Comm!SSend(c, [cl \in Client |-> [ack |-> srec[cl], op |-> xop]])
 -----------------------------------------------------------------------------
@@ -81,5 +81,5 @@ QC == \* Quiescent Consistency
 THEOREM Spec => []QC
 =============================================================================
 \* Modification History
-\* Last modified Sun Jan 13 10:14:41 CST 2019 by hengxin
+\* Last modified Thu Jan 17 10:30:39 CST 2019 by hengxin
 \* Created Satchins,  Jun 23 17:14:18 CST 2018 by hengxin

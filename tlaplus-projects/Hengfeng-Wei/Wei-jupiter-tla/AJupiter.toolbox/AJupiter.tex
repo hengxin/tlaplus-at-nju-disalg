@@ -948,7 +948,7 @@
 \end{cpar}%
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}} {\EXTENDS} JupiterInterface
- ,\, BufferStateSpace}%
+ ,\, OT ,\, BufferStateSpace}%
 \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\VARIABLES}}%
 \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}\@s{16.4} cbuf ,\,\@s{12.29}}%
@@ -1032,8 +1032,7 @@
  \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}} ClientPerform ( c ,\, m )
  \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{16.4} \.{\LET} xform
- \.{\defeq} xFormShift ( OT ,\, m . op ,\, cbuf [ c ] ,\, m . ack \.{+} 1
- )\@s{3.58}}%
+ \.{\defeq} xFormShift ( OT ,\, m . op ,\, cbuf [ c ] ,\, m . ack )\@s{3.58}}%
 \@y{\@s{0}%
  [\ensuremath{xop}, \ensuremath{xops}]
 }%
@@ -1051,7 +1050,7 @@
  \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\LET}\@s{16.4}
  c\@s{8.51} \.{\defeq} m . c}%
  \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{40.89} xform \.{\defeq}
- xFormShift ( OT ,\, m . op ,\, sbuf [ c ] ,\, m . ack \.{+} 1 )}%
+ xFormShift ( OT ,\, m . op ,\, sbuf [ c ] ,\, m . ack )}%
 \@y{\@s{0}%
  [\ensuremath{xop}, \ensuremath{xops}]
 }%
@@ -1062,9 +1061,10 @@
  \.{\land} srec \.{'}\@s{2.19} \.{=} [ cl \.{\in} Client \.{\mapsto} {\IF} cl
  \.{=} c \.{\THEN} srec [ cl ] \.{+} 1 \.{\ELSE} 0 ]}%
  \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{40.89} \.{\land} sbuf
- \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{106.55} {\IF} cl \.{=} c
- \.{\THEN} xform . xops \.{\ELSE} Append ( sbuf [ cl ] ,\, xop ) ]}%
+ \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto} {\IF} cl \.{=} c \.{\THEN} xform
+ . xops}%
+ \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{193.35} \.{\ELSE} Append
+ ( sbuf [ cl ] ,\, xop ) ]}%
  \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{40.89} \.{\land}
  SetNewAop ( Server ,\, xop )}%
  \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{40.89} \.{\land} Comm
@@ -1134,8 +1134,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jan} 12
- 21:02:28 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Thu}
+ \ensuremath{Jan} 17 10:30:39 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

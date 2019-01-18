@@ -940,18 +940,63 @@
 \tlatex
 \setboolean{shading}{true}
  \@x{\makebox[0pt][r]{\scriptsize 1\hspace{1em}}}\moduleLeftDash\@xx{
- {\MODULE} CJupiterImplAbsJupiter}\moduleRightDash\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 2\hspace{1em}} {\EXTENDS} CJupiter}%
-\@x{\makebox[0pt][r]{\scriptsize 3\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 4\hspace{1em}} AbsJ \.{\defeq} {\INSTANCE}
- AbsJupiter}%
- \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}}\@s{57.80} {\WITH} copss
- \.{\leftarrow} [ r \.{\in} Replica \.{\mapsto} \{ e . cop \.{:} e \.{\in}
- css [ r ] . edge \} ]}%
+ {\MODULE} BufferStateSpace}\moduleRightDash\@xx{}%
+\begin{lcom}{0}%
+\begin{cpar}{0}{F}{F}{0}{0}{}%
+ The buffer (\ensuremath{i.e}., sequence) representation of state space used
+ in \ensuremath{AJupiter}.
+ This module defines generalized \ensuremath{OT} functions on operation
+ sequences.
+\end{cpar}%
+\end{lcom}%
+ \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} Naturals ,\,
+ SequenceUtils}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\RECURSIVE} xFormOpOps ( \_
+ ,\, \_ ,\, \_ )}%
+\@y{\@s{0}%
+ Transform \ensuremath{op} against an operation sequence \ensuremath{ops}.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} xFormOpOps ( xform ( \_ ,\,
+ \_ ) ,\, op ,\, ops ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
+ {\langle} {\rangle} \.{\THEN} {\langle} op {\rangle}}%
+\@y{\@s{0}%
+ Maintain and return the intermediate transformed operations.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} \.{\ELSE} {\langle}
+ op {\rangle} \.{\circ} xFormOpOps ( xform ,\, xform ( op ,\, Head ( ops ) )
+ ,\, Tail ( ops ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}} {\THEOREM} Spec \.{\implies}
- AbsJ {\bang} Spec}%
-\@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}}}\bottombar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} xFormOpsOp ( xform ( \_ ,\,
+ \_ ) ,\, ops ,\, op ) \.{\defeq}}%
+\@y{\@s{0}%
+ Transform an operation sequence \ensuremath{ops} against \ensuremath{op}.
+}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} \.{\LET} opX
+ \.{\defeq} xFormOpOps ( xform ,\, op ,\, ops )}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\IN} [ i \.{\in}
+ 1 \.{\dotdot} Len ( ops ) \.{\mapsto} xform ( ops [ i ] ,\, opX [ i ] ) ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} xFormFull ( xform ( \_ ,\,
+ \_ ) ,\, op ,\, ops ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} [ xop\@s{1.50}
+ \.{\mapsto} Last ( xFormOpOps ( xform ,\, op ,\, ops ) ) ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} xops \.{\mapsto}
+ xFormOpsOp ( xform ,\, ops ,\, op ) ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} xFormShift ( xform ( \_ ,\,
+ \_ ) ,\, op ,\, ops ,\, shift ) \.{\defeq}}%
+\@y{\@s{0}%
+ shift of \ensuremath{ops
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} xFormFull ( xform
+ ,\, op ,\, SubSeq ( ops ,\, shift ,\, Len ( ops ) ) )}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
@@ -959,12 +1004,12 @@
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
  \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Wed}
- \ensuremath{Jan} 02 21:04:52 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{Jan} 16 17:05:53 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Created \ensuremath{Fri} \ensuremath{Dec} 14
- 21:10:31 \ensuremath{CST} 2018 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Created Sat \ensuremath{Jan} 12 14:55:34
+ \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \end{lcom}%

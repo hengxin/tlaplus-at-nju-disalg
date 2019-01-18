@@ -2,7 +2,7 @@
 EXTENDS XJupiterExtended
 -----------------------------------------------------------------------------
 VARIABLES
-    op2ss,  \* a function from an operation (represented by its Oid) 
+    op2ss,  \* a function from an operation (identifier) 
             \* to the part of 2D state space produced while the operation is transformed
     c2ssX   \* c2ssX[c]: redundant (eXtra) 2D state space maintained for client c \in Client
 
@@ -48,13 +48,12 @@ SpecImpl == InitImpl /\ [][NextImpl]_varsImpl \* /\ FairnessImpl
 -----------------------------------------------------------------------------
 CJ == INSTANCE CJupiter 
         WITH cincoming <- cincomingCJ, \* sincoming needs no substitution
-             css <- [r \in Replica |-> 
-                        IF r = Server 
-                        THEN SetReduce((+), Range(s2ss), EmptyGraph)
-                        ELSE c2ss[r] (+) c2ssX[r]]
+             css <- [r \in Replica |-> IF r = Server 
+                                       THEN SetReduce((+), Range(s2ss), EmptySS)
+                                       ELSE c2ss[r] (+) c2ssX[r]]
 
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 15:56:20 CST 2019 by hengxin
+\* Last modified Thu Jan 17 20:20:52 CST 2019 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

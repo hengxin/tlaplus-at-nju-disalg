@@ -20,10 +20,11 @@ xForm(NextEdge(_, _, _), r, cop, ss) == \* Transform cop with an operation seque
         v == u \cup {cop.oid}
         RECURSIVE xFormHelper(_, _, _, _)
         xFormHelper(uh, vh, coph, xss) == \* xss: eXtra ss created during transformation
-            IF uh = ds[r] THEN [xcop |-> coph, 
-                                xss |-> xss,
-                                lss |-> [node |-> {vh}, 
-                                         edge |-> {[from |-> uh, to |-> vh, cop |-> coph]}]]
+            IF uh = ds[r] 
+            THEN [xcop |-> coph, 
+                  xss |-> xss, 
+                  lss |-> [node |-> {vh}, 
+                           edge |-> {[from |-> uh, to |-> vh, cop |-> coph]}]]
             ELSE LET e == NextEdge(r, uh, ss)
                      copprime == e.cop
                      uprime == e.to
@@ -59,5 +60,5 @@ xFormCopCops(cop, cops) == \* Transform cop against cops (a sequence of Cop) on 
     IN  xFormCopCopsSSHelper(cop, cops, EmptySS)
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 20:44:08 CST 2019 by hengxin
+\* Last modified Tue Jan 15 20:46:21 CST 2019 by hengxin
 \* Created Wed Dec 19 18:15:25 CST 2018 by hengxin

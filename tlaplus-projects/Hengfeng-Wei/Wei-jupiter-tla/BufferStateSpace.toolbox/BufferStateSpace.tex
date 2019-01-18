@@ -950,7 +950,7 @@
 \end{cpar}%
 \end{lcom}%
  \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} {\EXTENDS} Naturals ,\,
- Sequences}%
+ SequenceUtils}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} {\RECURSIVE} xFormOpOps ( \_
  ,\, \_ ,\, \_ )}%
@@ -961,59 +961,50 @@
  \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}} xFormOpOps ( xform ( \_ ,\,
  \_ ) ,\, op ,\, ops ) \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
- {\langle} {\rangle}}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} \.{\THEN} op}%
- \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}}\@s{16.4} \.{\ELSE}
- xFormOpOps ( xform ,\, xform ( op ,\, Head ( ops ) ) ,\, Tail ( ops ) )}%
-\@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}} {\RECURSIVE} xFormOpOpsX (
- \_ ,\, \_ ,\, \_ )}%
-\@y{\@s{0}%
- Transform \ensuremath{op} against an operation sequence \ensuremath{ops}.
-}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}} xFormOpOpsX ( xform ( \_ ,\,
- \_ ) ,\, op ,\, ops ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}\@s{16.4} {\IF} ops \.{=}
- {\langle} {\rangle}}%
- \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}}\@s{16.4} \.{\THEN} {\langle}
- op {\rangle}}%
+ {\langle} {\rangle} \.{\THEN} {\langle} op {\rangle}}%
 \@y{\@s{0}%
  Maintain and return the intermediate transformed operations.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\ELSE} {\langle}
- op {\rangle} \.{\circ} xFormOpOpsX ( xform ,\, xform ( op ,\, Head ( ops ) )
+ \@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}\@s{16.4} \.{\ELSE} {\langle}
+ op {\rangle} \.{\circ} xFormOpOps ( xform ,\, xform ( op ,\, Head ( ops ) )
  ,\, Tail ( ops ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 20\hspace{1em}} xFormOpsOp ( xform ( \_ ,\,
+ \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}} xFormOpsOp ( xform ( \_ ,\,
  \_ ) ,\, ops ,\, op ) \.{\defeq}}%
 \@y{\@s{0}%
  Transform an operation sequence \ensuremath{ops} against \ensuremath{op}.
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}}\@s{16.4} \.{\LET} opX
- \.{\defeq} xFormOpOpsX ( xform ,\, op ,\, ops )}%
- \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} \.{\IN} [ i \.{\in}
+ \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} \.{\LET} opX
+ \.{\defeq} xFormOpOps ( xform ,\, op ,\, ops )}%
+ \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\IN} [ i \.{\in}
  1 \.{\dotdot} Len ( ops ) \.{\mapsto} xform ( ops [ i ] ,\, opX [ i ] ) ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 24\hspace{1em}} xFormShift ( xform ( \_ ,\,
+ \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} xFormFull ( xform ( \_ ,\,
+ \_ ) ,\, op ,\, ops ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} [ xop\@s{1.50}
+ \.{\mapsto} Last ( xFormOpOps ( xform ,\, op ,\, ops ) ) ,\,}%
+ \@x{\makebox[0pt][r]{\scriptsize 19\hspace{1em}}\@s{16.4} xops \.{\mapsto}
+ xFormOpsOp ( xform ,\, ops ,\, op ) ]}%
+\@pvspace{8.0pt}%
+ \@x{\makebox[0pt][r]{\scriptsize 21\hspace{1em}} xFormShift ( xform ( \_ ,\,
  \_ ) ,\, op ,\, ops ,\, shift ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}}\@s{16.4} \.{\LET} shiftedOps
- \.{\defeq} SubSeq ( ops ,\, shift ,\, Len ( ops ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\IN} [
- xop\@s{1.50} \.{\mapsto} xFormOpOps ( xform ,\, op ,\, shiftedOps ) ,\,}%
- \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{36.79} xops \.{\mapsto}
- xFormOpsOp ( xform ,\, shiftedOps ,\, op ) ]}%
-\@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}}\bottombar\@xx{}%
+\@y{\@s{0}%
+ shift of \ensuremath{ops
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 22\hspace{1em}}\@s{16.4} xFormFull ( xform
+ ,\, op ,\, SubSeq ( ops ,\, shift \.{+} 1 ,\, Len ( ops ) ) )}%
+\@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jan} 12
- 21:34:37 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Thu}
+ \ensuremath{Jan} 17 10:30:18 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
