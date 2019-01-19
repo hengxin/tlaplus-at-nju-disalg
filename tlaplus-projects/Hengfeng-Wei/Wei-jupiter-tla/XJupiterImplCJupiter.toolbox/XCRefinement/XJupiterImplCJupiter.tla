@@ -2,8 +2,8 @@
 EXTENDS XJupiterExtended
 -----------------------------------------------------------------------------
 VARIABLES
-    op2ss,  \* a function from an operation (represented by its Oid) 
-            \* to the part of 2D state space produced while the operation is transformed
+    op2ss,  \* a function mapping an operation (identifier) 
+            \* to the part of 2D state space created during it is transformed
     c2ssX   \* c2ssX[c]: redundant (eXtra) 2D state space maintained for client c \in Client
 
 varsImpl == <<varsEx, op2ss, c2ssX>>
@@ -33,8 +33,7 @@ SRevImpl ==
     /\ LET cop == Head(sincoming)
              c == ClientOf(cop)
          xform == xForm(NextEdge, Server, cop, s2ss[c])  \* TODO: performance!!!
-            ss == xform.xss
-       IN op2ss' = op2ss @@ (cop.oid :> [node |-> ss.node, edge |-> ss.edge])
+       IN op2ss' = op2ss @@ cop.oid :> xform.xss
     /\ UNCHANGED c2ssX
 -----------------------------------------------------------------------------
 NextImpl ==
@@ -48,13 +47,12 @@ SpecImpl == InitImpl /\ [][NextImpl]_varsImpl \* /\ FairnessImpl
 -----------------------------------------------------------------------------
 CJ == INSTANCE CJupiter 
         WITH cincoming <- cincomingCJ, \* sincoming needs no substitution
-             css <- [r \in Replica |-> 
-                        IF r = Server 
-                        THEN SetReduce((+), Range(s2ss), EmptyGraph)
-                        ELSE c2ss[r] (+) c2ssX[r]]
+             css <- [r \in Replica |-> IF r = Server 
+                                       THEN SetReduce((+), Range(s2ss), EmptySS)
+                                       ELSE c2ss[r] (+) c2ssX[r]]
 
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Sat Jan 12 15:56:20 CST 2019 by hengxin
+\* Last modified Fri Jan 18 11:22:09 CST 2019 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin

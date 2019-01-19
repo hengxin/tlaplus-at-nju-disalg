@@ -948,19 +948,19 @@
 \@pvspace{8.0pt}%
  \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}} varsImpl \.{\defeq} {\langle}
  varsEx ,\, c2ss ,\, s2ss {\rangle}}%
-\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 8\hspace{1em}} TypeOKImpl \.{\defeq}}%
 \@x{\makebox[0pt][r]{\scriptsize 9\hspace{1em}}\@s{16.4} \.{\land} TypeOKEx}%
  \@x{\makebox[0pt][r]{\scriptsize 10\hspace{1em}}\@s{16.4} \.{\land} \A\, c
  \.{\in} Client \.{:} IsSS ( c2ss [ c ] ) \.{\land} IsSS ( s2ss [ c ] )}%
-\@x{\makebox[0pt][r]{\scriptsize 11\hspace{1em}}}\midbar\@xx{}%
+\@pvspace{8.0pt}%
 \@x{\makebox[0pt][r]{\scriptsize 12\hspace{1em}} InitImpl \.{\defeq}}%
 \@x{\makebox[0pt][r]{\scriptsize 13\hspace{1em}}\@s{16.4} \.{\land} InitEx}%
  \@x{\makebox[0pt][r]{\scriptsize 14\hspace{1em}}\@s{16.4} \.{\land} c2ss
  \.{=} [ c \.{\in} Client \.{\mapsto} EmptySS ]}%
  \@x{\makebox[0pt][r]{\scriptsize 15\hspace{1em}}\@s{16.4} \.{\land}
  s2ss\@s{0.25} \.{=} [ c \.{\in} Client \.{\mapsto} EmptySS ]}%
-\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 16\hspace{1em}}}\midbar\@xx{}%
  \@x{\makebox[0pt][r]{\scriptsize 17\hspace{1em}} DoOpImpl ( c ,\, op )
  \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 18\hspace{1em}}\@s{16.4} \.{\land} DoOpEx (
@@ -978,62 +978,61 @@
  \@x{\makebox[0pt][r]{\scriptsize 23\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} s2ss}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} DoImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\land} DoCtx ( c
- )}%
- \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{16.4} \.{\land} DoInt (
- DoOpImpl ,\, c )}%
-\@y{\@s{0}%
- \ensuremath{TODO}: refactor to use \ensuremath{DoEx(c)
-}}%
-\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{16.4} \.{\land}
- {\UNCHANGED} {\langle} sbuf ,\, srec {\rangle}}%
-\@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} RevImpl ( c ) \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
- RevEx ( c )}%
- \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
- \.{\LET} m \.{\defeq} Head ( cincoming [ c ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{57.11} cBuf \.{\defeq}
- cbuf [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{57.11} cShiftedBuf
- \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{61.21} xform \.{\defeq}
- xFormCopCops ( m . cop ,\, cShiftedBuf )}%
+ \@x{\makebox[0pt][r]{\scriptsize 25\hspace{1em}} ClientPerformImpl ( c ,\, m
+ ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 26\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
+ xform \.{\defeq} xFormCopCopsShift ( m . cop ,\, cbuf [ c ] ,\, m . ack
+ )\@s{3.58}}%
 \@y{\@s{0}%
  [\ensuremath{xcop}, \ensuremath{xss}, \ensuremath{lss}]
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{36.71} \.{\IN}\@s{4.09}
- c2ss \.{'} \.{=} [ c2ss {\EXCEPT} {\bang} [ c ] \.{=} @ \.{\oplus} xform .
- xss ]}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
+ \@x{\makebox[0pt][r]{\scriptsize 27\hspace{1em}}\@s{27.51} \.{\IN} c2ss \.{'}
+ \.{=} [ c2ss {\EXCEPT} {\bang} [ c ] \.{=} @ \.{\oplus} xform . xss ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 28\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} s2ss}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}} SRevImpl \.{\defeq}}%
-\@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land} SRevEx}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
- m \.{\defeq} Head ( sincoming )}%
- \@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{47.91} c\@s{3.77}
- \.{\defeq} ClientOf ( m . cop )}%
- \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{47.91} cBuf \.{\defeq}
- sbuf [ c ]}%
- \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{47.91} cShiftedBuf
- \.{\defeq} SubSeq ( cBuf ,\, m . ack \.{+} 1 ,\, Len ( cBuf ) )}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{52.01} xform \.{\defeq}
- xFormCopCops ( m . cop ,\, cShiftedBuf )}%
+ \@x{\makebox[0pt][r]{\scriptsize 30\hspace{1em}} ServerPerformImpl ( m )
+ \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 31\hspace{1em}}\@s{16.4} \.{\land} \.{\LET}
+ c \.{\defeq} ClientOf ( m . cop )}%
+ \@x{\makebox[0pt][r]{\scriptsize 32\hspace{1em}}\@s{52.01} xform \.{\defeq}
+ xFormCopCopsShift ( m . cop ,\, sbuf [ c ] ,\, m . ack )}%
 \@y{\@s{0}%
  [\ensuremath{xcop}, \ensuremath{xss}, \ensuremath{lss}]
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}}\@s{27.51} \.{\IN}\@s{4.09}
- s2ss \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto}}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{102.12} {\IF} cl \.{=} c
- \.{\THEN} s2ss [ cl ] \.{\oplus} xform . xss \.{\ELSE} s2ss [ cl ]
- \.{\oplus} xform . lss ]}%
- \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 33\hspace{1em}}\@s{27.51} \.{\IN}\@s{4.09}
+ s2ss \.{'} \.{=} [ cl \.{\in} Client \.{\mapsto} {\IF} cl \.{=} c \.{\THEN}
+ s2ss [ cl ] \.{\oplus} xform . xss}%
+ \@x{\makebox[0pt][r]{\scriptsize 34\hspace{1em}}\@s{193.02} \.{\ELSE} s2ss [
+ cl ] \.{\oplus} xform . lss ]}%
+ \@x{\makebox[0pt][r]{\scriptsize 35\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} c2ss}%
+\@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}} DoImpl ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{16.4} \.{\land} DoCtx ( c
+ )}%
+ \@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}\@s{16.4} \.{\land} DoInt (
+ DoOpImpl ,\, c )}%
+\@y{\@s{0}%
+ \ensuremath{TODO}: refactor to use \ensuremath{DoEx(c)}; cannot use two
+ \ensuremath{DoInt
+}}%
+\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\land}
+ {\UNCHANGED} {\langle} sbuf ,\, srec {\rangle}}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}} RevImpl ( c ) \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
+ RevEx ( c )}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} \.{\land}\@s{9.20}
+ RevInt ( ClientPerformImpl ,\, c )}%
+\@pvspace{8.0pt}%
+\@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} SRevImpl \.{\defeq}}%
+\@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}\@s{16.4} \.{\land} SRevEx}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}\@s{16.4} \.{\land} SRevInt (
+ ServerPerformImpl )}%
 \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}}\midbar\@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}} NextImpl \.{\defeq}}%
  \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
@@ -1065,8 +1064,8 @@
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified Sat
- \ensuremath{Jan} 12 21:10:50 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified Sat \ensuremath{Jan} 19
+ 10:54:42 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

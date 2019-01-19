@@ -946,13 +946,12 @@
 \@x{\makebox[0pt][r]{\scriptsize 4\hspace{1em}} {\VARIABLES}}%
 \@x{\makebox[0pt][r]{\scriptsize 5\hspace{1em}}\@s{16.4} op2ss ,\,\@s{4.1}}%
 \@y{\@s{0}%
- a function from an operation (identifier)
+ a function mapping an operation (identifier)
 }%
 \@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 6\hspace{1em}}\@s{51.95}}%
 \@y{\@s{0}%
- to the part of \ensuremath{2D} state space produced while the operation is
- transformed
+ to the \ensuremath{2D} state space created during it is transformed
 }%
 \@xx{}%
 \@x{\makebox[0pt][r]{\scriptsize 7\hspace{1em}}\@s{16.4} c2ssX\@s{7.70}}%
@@ -1009,56 +1008,53 @@
  \ensuremath{TODO}: performance\.{!!}!
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{48.01} ss\@s{5.84}
- \.{\defeq} xform . xss}%
- \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{27.51} \.{\IN} op2ss
- \.{'} \.{=} op2ss \.{\,@@\,} ( cop . oid \.{\colongt} [ node \.{\mapsto} ss
- . node ,\, edge \.{\mapsto} ss . edge ] )}%
- \@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}\@s{16.4} \.{\land}
+ \@x{\makebox[0pt][r]{\scriptsize 36\hspace{1em}}\@s{27.51} \.{\IN} op2ss
+ \.{'} \.{=} op2ss \.{\,@@\,} cop . oid \.{\colongt} xform . xss}%
+ \@x{\makebox[0pt][r]{\scriptsize 37\hspace{1em}}\@s{16.4} \.{\land}
  {\UNCHANGED} c2ssX}%
-\@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}}}\midbar\@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}} NextImpl \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
+\@x{\makebox[0pt][r]{\scriptsize 38\hspace{1em}}}\midbar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 39\hspace{1em}} NextImpl \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 40\hspace{1em}}\@s{16.4} \.{\lor} \E\, c
  \.{\in} Client \.{:} DoImpl ( c ) \.{\lor} RevImpl ( c )}%
-\@x{\makebox[0pt][r]{\scriptsize 42\hspace{1em}}\@s{16.4} \.{\lor} SRevImpl}%
+\@x{\makebox[0pt][r]{\scriptsize 41\hspace{1em}}\@s{16.4} \.{\lor} SRevImpl}%
 \@pvspace{8.0pt}%
-\@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}} FairnessImpl \.{\defeq}}%
- \@x{\makebox[0pt][r]{\scriptsize 45\hspace{1em}}\@s{16.4} {\WF}_{ varsImpl} (
+\@x{\makebox[0pt][r]{\scriptsize 43\hspace{1em}} FairnessImpl \.{\defeq}}%
+ \@x{\makebox[0pt][r]{\scriptsize 44\hspace{1em}}\@s{16.4} {\WF}_{ varsImpl} (
  SRevImpl \.{\lor} \E\, c \.{\in} Client \.{:} RevImpl ( c ) )}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}} SpecImpl \.{\defeq} InitImpl
+ \@x{\makebox[0pt][r]{\scriptsize 46\hspace{1em}} SpecImpl \.{\defeq} InitImpl
  \.{\land} {\Box} [ NextImpl ]_{ varsImpl}}%
 \@y{\@s{0}%
  \ensuremath{\.{\land} FairnessImpl
 }}%
 \@xx{}%
-\@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}}}\midbar\@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}} CJ \.{\defeq} {\INSTANCE}
+\@x{\makebox[0pt][r]{\scriptsize 47\hspace{1em}}}\midbar\@xx{}%
+ \@x{\makebox[0pt][r]{\scriptsize 48\hspace{1em}} CJ \.{\defeq} {\INSTANCE}
  CJupiter}%
- \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{40.89} {\WITH} cincoming
+ \@x{\makebox[0pt][r]{\scriptsize 49\hspace{1em}}\@s{40.89} {\WITH} cincoming
  \.{\leftarrow} cincomingCJ ,\,}%
 \@y{\@s{0}%
  \ensuremath{sincoming} needs no substitution
 }%
 \@xx{}%
- \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{71.87} css \.{\leftarrow}
+ \@x{\makebox[0pt][r]{\scriptsize 50\hspace{1em}}\@s{71.87} css \.{\leftarrow}
  [ r \.{\in} Replica \.{\mapsto} {\IF} r \.{=} Server}%
- \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{170.07} \.{\THEN}
+ \@x{\makebox[0pt][r]{\scriptsize 51\hspace{1em}}\@s{170.07} \.{\THEN}
  SetReduce ( \.{\oplus} ,\, Range ( s2ss ) ,\, EmptySS )}%
- \@x{\makebox[0pt][r]{\scriptsize 53\hspace{1em}}\@s{170.07} \.{\ELSE} c2ss [
+ \@x{\makebox[0pt][r]{\scriptsize 52\hspace{1em}}\@s{170.07} \.{\ELSE} c2ss [
  r ] \.{\oplus} c2ssX [ r ] ]}%
 \@pvspace{8.0pt}%
- \@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}} {\THEOREM} SpecImpl
+ \@x{\makebox[0pt][r]{\scriptsize 54\hspace{1em}} {\THEOREM} SpecImpl
  \.{\implies} CJ {\bang} Spec}%
-\@x{\makebox[0pt][r]{\scriptsize 56\hspace{1em}}}\bottombar\@xx{}%
+\@x{\makebox[0pt][r]{\scriptsize 55\hspace{1em}}}\bottombar\@xx{}%
 \setboolean{shading}{false}
 \begin{lcom}{0}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
 \ensuremath{\.{\,\backslash\,}}* Modification History
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%
- \ensuremath{\.{\,\backslash\,}}* \ensuremath{Last} modified \ensuremath{Thu}
- \ensuremath{Jan} 17 20:20:52 \ensuremath{CST} 2019 by \ensuremath{hengxin
+ \ensuremath{\.{\,\backslash\,}}* Last modified \ensuremath{Fri}
+ \ensuremath{Jan} 18 11:27:25 \ensuremath{CST} 2019 by \ensuremath{hengxin
 }%
 \end{cpar}%
 \begin{cpar}{0}{F}{F}{0}{0}{}%

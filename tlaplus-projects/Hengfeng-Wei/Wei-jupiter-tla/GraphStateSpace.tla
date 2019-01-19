@@ -58,7 +58,10 @@ xFormCopCops(cop, cops) == \* Transform cop against cops (a sequence of Cop) on 
                                                [from |-> u, to |-> uprime, cop |-> copprimeh],
                                                [from |-> v, to |-> vprime, cop |-> copprimeh2coph]}])
     IN  xFormCopCopsSSHelper(cop, cops, EmptySS)
+
+xFormCopCopsShift(cop, cops, shift) == \* shifting the first shift elements out of cops
+    xFormCopCops(cop, SubSeq(cops, shift + 1, Len(cops)))
 =============================================================================
 \* Modification History
-\* Last modified Tue Jan 15 20:46:21 CST 2019 by hengxin
+\* Last modified Sat Jan 19 10:49:59 CST 2019 by hengxin
 \* Created Wed Dec 19 18:15:25 CST 2018 by hengxin

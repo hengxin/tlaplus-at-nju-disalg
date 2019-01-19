@@ -16,12 +16,14 @@ ASSUME \* We assume that all inserted elements are unique.
 ----------------------------------------------------------------------
 Replica == Client \cup {Server}
 
-List == Seq(Char \cup Range(InitState))      \* all possible lists
-MaxLen == Cardinality(Char) + Len(InitState) \* the max length of lists in any state
+List == Seq(Char \cup Range(InitState)) \* all possible lists
+----------------------------------------------------------------------
+VARIABLES 
+    cincoming,  \* cincoming[c]: incoming channel at the client c \in Client
+    sincoming   \* incoming channel at the Server    
 
-ClientNum == Cardinality(Client)
-Priority == CHOOSE f \in [Client -> 1 .. ClientNum] : Injective(f)
+Comm == INSTANCE CSComm
 =============================================================================
 \* Modification History
-\* Last modified Sun Jan 13 09:55:59 CST 2019 by hengxin
+\* Last modified Mon Jan 14 17:24:11 CST 2019 by hengxin
 \* Created Sun Jan 13 09:51:52 CST 2019 by hengxin

@@ -2,8 +2,8 @@
 EXTENDS XJupiterExtended
 -----------------------------------------------------------------------------
 VARIABLES
-    op2ss,  \* a function from an operation (identifier) 
-            \* to the part of 2D state space produced while the operation is transformed
+    op2ss,  \* a function mapping an operation (identifier) 
+            \* to the 2D state space created during it is transformed
     c2ssX   \* c2ssX[c]: redundant (eXtra) 2D state space maintained for client c \in Client
 
 varsImpl == <<varsEx, op2ss, c2ssX>>
@@ -33,8 +33,7 @@ SRevImpl ==
     /\ LET cop == Head(sincoming)
              c == ClientOf(cop)
          xform == xForm(NextEdge, Server, cop, s2ss[c])  \* TODO: performance!!!
-            ss == xform.xss
-       IN op2ss' = op2ss @@ (cop.oid :> [node |-> ss.node, edge |-> ss.edge])
+       IN op2ss' = op2ss @@ cop.oid :> xform.xss
     /\ UNCHANGED c2ssX
 -----------------------------------------------------------------------------
 NextImpl ==
@@ -55,5 +54,5 @@ CJ == INSTANCE CJupiter
 THEOREM SpecImpl => CJ!Spec
 =============================================================================
 \* Modification History
-\* Last modified Thu Jan 17 20:20:52 CST 2019 by hengxin
+\* Last modified Fri Jan 18 11:27:25 CST 2019 by hengxin
 \* Created Fri Oct 26 15:00:19 CST 2018 by hengxin
