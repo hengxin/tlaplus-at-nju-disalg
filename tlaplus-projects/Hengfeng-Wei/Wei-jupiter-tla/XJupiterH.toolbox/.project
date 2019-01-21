@@ -28,12 +28,12 @@
 		<link>
 			<name>GraphStateSpace.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/GraphStateSpace.tla</location>
+			<location>PARENT-1-PROJECT_LOC/GraphStateSpace.tla</location>
 		</link>
 		<link>
 			<name>GraphsUtil.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/GraphsUtil.tla</location>
+			<location>PARENT-1-PROJECT_LOC/GraphsUtil.tla</location>
 		</link>
 		<link>
 			<name>JupiterCtx.tla</name>
@@ -53,7 +53,7 @@
 		<link>
 			<name>Op.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/Op.tla</location>
+			<location>PARENT-1-PROJECT_LOC/Op.tla</location>
 		</link>
 		<link>
 			<name>OpOperators.tla</name>
@@ -73,12 +73,12 @@
 		<link>
 			<name>StateSpace.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/StateSpace.tla</location>
+			<location>PARENT-1-PROJECT_LOC/StateSpace.tla</location>
 		</link>
 		<link>
 			<name>SystemModel.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/SystemModel.tla</location>
+			<location>PARENT-1-PROJECT_LOC/SystemModel.tla</location>
 		</link>
 		<link>
 			<name>TLCUtils.tla</name>

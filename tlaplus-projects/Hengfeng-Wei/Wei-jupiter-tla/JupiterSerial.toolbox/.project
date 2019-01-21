@@ -48,7 +48,7 @@
 		<link>
 			<name>Op.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/Op.tla</location>
+			<location>PARENT-1-PROJECT_LOC/Op.tla</location>
 		</link>
 		<link>
 			<name>OpOperators.tla</name>
@@ -68,7 +68,7 @@
 		<link>
 			<name>SystemModel.tla</name>
 			<type>1</type>
-			<location>/home/hengxin/Git-Projects/github-projects/tlaplus-lamport-projects/tlaplus-projects/Hengfeng-Wei/Wei-jupiter-tla/SystemModel.tla</location>
+			<location>PARENT-1-PROJECT_LOC/SystemModel.tla</location>
 		</link>
 	</linkedResources>
 </projectDescription>
