@@ -30,6 +30,7 @@
 | 17		| Refinement (3)	|	易星辰		| 2018-11-06 (周二)  	| Auxiliary Variables in TLA+ (Section 4) |		|
 | 18		| RGA protocol的TLA表达和验证 |	纪业 		| 2018-12-18 (周二)  	|  |		|
 | 19		| TLAPLUS Proof System 	|	唐瑞泽		| 2018-12-25 (周二)	|  HB Chapter 10, 11		|		|
+| 20		| TLA+ Proofs		|	易星辰		| 2019-01-15 (周二)	|  Paper: TLA+ Proofs (2012)	|		|
 | | Composing Specifications |	| 2018-xx-XX   	|  Paper |		|
 | | Animation Module    |	| 2018-xx-XX   	|  Paper |		|
 | | The TLA+ Language	|	| 2018-xx-XX   	|  Paper |		|
