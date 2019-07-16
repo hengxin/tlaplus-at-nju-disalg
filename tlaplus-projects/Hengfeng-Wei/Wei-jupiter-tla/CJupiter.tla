@@ -1,6 +1,6 @@
 ------------------------------ MODULE CJupiter ------------------------------
 (*
-Model of our own CJupiter protocol.
+Specification of CJupiter; see Wei@OPODIS'18.
 *)
 EXTENDS StateSpace, JupiterSerial
 -----------------------------------------------------------------------------
@@ -123,5 +123,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Fri Dec 28 11:06:01 CST 2018 by hengxin
+\* Last modified Tue Feb 05 10:55:47 CST 2019 by hengxin
 \* Created Sat Sep 01 11:08:00 CST 2018 by hengxin

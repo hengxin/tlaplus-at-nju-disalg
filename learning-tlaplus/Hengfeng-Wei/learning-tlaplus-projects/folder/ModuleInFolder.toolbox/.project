@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>MinMax2</name>
+	<name>ModuleInFolder</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -10,20 +10,15 @@
 			<arguments>
 			</arguments>
 		</buildCommand>
-		<buildCommand>
-			<name>toolbox.builder.PCalAlgorithmSearchingBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
 	</buildSpec>
 	<natures>
 		<nature>toolbox.natures.TLANature</nature>
 	</natures>
 	<linkedResources>
 		<link>
-			<name>MinMax2.tla</name>
+			<name>ModuleInFolder.tla</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MinMax2.tla</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/ModuleInFolder.tla</locationURI>
 		</link>
 	</linkedResources>
 </projectDescription>

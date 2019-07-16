@@ -1,7 +1,7 @@
 ----------------------------- MODULE AbsJupiter -----------------------------
 (*
 Abstract Jupiter, inspired by the COT algorithm proposed by Sun and Sun.
-See their paper published on TPDS'2009.
+See Sun@TPDS'2009.
 *)
 EXTENDS JupiterSerial
 -----------------------------------------------------------------------------
@@ -103,5 +103,5 @@ Compactness ==
 THEOREM Spec => Compactness
 =============================================================================
 \* Modification History
-\* Last modified Fri Dec 28 10:57:04 CST 2018 by hengxin
+\* Last modified Tue Feb 05 10:56:25 CST 2019 by hengxin
 \* Created Wed Dec 05 19:55:52 CST 2018 by hengxin
