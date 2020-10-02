@@ -13,6 +13,13 @@
 - [The Temporal Logic of Actions; 1994](http://lamport.azurewebsites.net/pubs/lamport-actions.pdf)
 - [Model Checking TLA+ Specifications; 1999](http://lamport.azurewebsites.net/pubs/yuanyu-model-checking.pdf)
 
+强烈推荐的系列博客 
+([Video: TLA+ in Practice and Theory (pressron)](https://pron.github.io/posts/tlaplus-curryon-talk)):
+- [Part 1: The Principles of TLA+](https://pron.github.io/posts/tlaplus_part1)
+- [Part 2: The + in TLA+](https://pron.github.io/posts/tlaplus_part2)
+- [Part 3: The (Temporal) Logic of Actions](https://pron.github.io/posts/tlaplus_part3)
+- [Part 4: Order in TLA+](https://pron.github.io/posts/tlaplus_part4)
+
 最终希望能读懂论文：
 - [Hiding, Refinement, and Auxiliary Variables; 2019](https://lamport.azurewebsites.net/tla/hiding-and-refinement.pdf)
 - [Auxiliary Variables in TLA+; 2017](http://lamport.azurewebsites.net/pubs/auxiliary.pdf)

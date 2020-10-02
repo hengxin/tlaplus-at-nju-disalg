@@ -7,6 +7,8 @@ including, for example, [The TLA+ Hyperbook](http://research.microsoft.com/en-us
 [The TLA+ Video Course](http://lamport.azurewebsites.net/video/videos.html),
 and many research papers on TLA+.
 
+> See [roadmap](https://github.com/Disalg-ICS-NJU/tlaplus-lamport-projects/blob/master/roadmap.md).
+
 It includes:
 
 - [tlaplus-seminar](https://github.com/Disalg-ICS-NJU/tlaplus-lamport-projects/tree/master/tlaplus-seminar)
