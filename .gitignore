@@ -316,3 +316,5 @@ doc/tags
 *.pyc
 
 *.dot
+
+.history/
